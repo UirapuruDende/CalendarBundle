@@ -1,5 +1,5 @@
 {
-    "name": "Dende/CalendarBundle",
+    "name": "dende/calendar-bundle",
     "require": {
         "symfony/symfony": "^2.7",
         "twig/twig": "^1.22",
