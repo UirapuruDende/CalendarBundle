@@ -18,5 +18,6 @@
     ],
     "autoload": {
         "psr-4": { "Dende\\CalendarBundle\\": "" }
-    }
+    },
+    "target-dir": "Dende/CalendarBundle"
 }
