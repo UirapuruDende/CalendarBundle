@@ -1,0 +1,15 @@
+framework:
+    secret: "Three can keep a secret, if two of them are dead."
+    test: ~
+    router:
+        resource: "%kernel.root_dir%/routing.yml"
+        strict_requirements: ~
+    templating:
+        engines: ['twig']
+
+monolog:
+  handlers:
+    main:
+      type: stream
+      path: "%kernel.logs_dir%/%kernel.environment%.log"
+      level: ERROR

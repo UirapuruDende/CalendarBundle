@@ -2,14 +2,25 @@
     "name": "dende/calendar-bundle",
     "require": {
         "symfony/symfony": "^2.7",
-        "twig/twig": "^1.22",
         "doctrine/doctrine-bundle": "^1.5",
-        "dende/calendar" : "dev-master"
+        "dende/calendar" : "dev-master",
+        "symfony/http-kernel" : "2.7.5",
+        "jms/serializer-bundle": "dev-master",
+        "willdurand/hateoas-bundle": "@stable",
+        "friendsofsymfony/jsrouting-bundle": "1.5.*",
+        "friendsofsymfony/rest-bundle": "1.6.*",
+        "sensio/framework-extra-bundle": "~3.0"
+
     },
     "require-dev": {
+        "symfony/framework-bundle" : "2.7.5",
         "phpunit/phpunit": "^5.0",
         "mockery/mockery": "^0.9.4",
-        "behat/behat": "^3.0"
+        "fabpot/php-cs-fixer": "2.0.*@dev",
+        "behat/behat": "^3.0",
+        "phing/phing": "*",
+        "twig/extensions": "1.2.*@dev",
+        "symfony/monolog-bundle": "2.7.*"
     },
     "authors": [
         {
@@ -19,5 +30,8 @@
     ],
     "autoload": {
         "psr-4": { "Dende\\CalendarBundle\\": "" }
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }

@@ -1,18 +1,22 @@
 <?php
 namespace Dende\CalendarBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller
+/**
+ * Class DefaultController
+ * @package Dende\CalendarBundle\Controller
+ */
+final class DefaultController extends Controller
 {
     /**
-     * @Route("/hello/{name}")
      * @Template()
+     * @return Response
      */
-    public function indexAction($name)
+    public function indexAction()
     {
-        return ['name' => $name];
+        return [];
     }
 }

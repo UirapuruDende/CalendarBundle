@@ -1,0 +1,3 @@
+dende_calendar_index:
+  path:   /calendar/index
+  defaults: { _controller: DendeCalendarBundle:Default:index }
