@@ -1,0 +1,9 @@
+event-001:
+  id:           ~
+  calendar:     calendar-001
+  title:        Test event number 01
+  repetitions:  [1, 2, 3]
+  type:         weekly
+  duration:     90
+  startDate:    "2015-09-01 12:00:00"
+  endDate:      "2015-09-30 13:30:00"

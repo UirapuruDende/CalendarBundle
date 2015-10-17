@@ -18,7 +18,8 @@ class AppKernel extends Kernel
             new Dende\CalendarBundle\DendeCalendarBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle()
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
     }
 

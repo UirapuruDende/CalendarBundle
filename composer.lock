@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4fa0fbc6d9dc9ed65a4c3d14b0164f2c",
+    "hash": "e7c109bc81e37378dbaaa0bac73f5c8f",
     "packages": [
         {
             "name": "dende/calendar",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "2031cf762af9dbd59e23cb040ae9d90b7e5ef506"
+                "reference": "d18fbefa322615dc4903e738d2a96cf7ce4a1f26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/2031cf762af9dbd59e23cb040ae9d90b7e5ef506",
-                "reference": "2031cf762af9dbd59e23cb040ae9d90b7e5ef506",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/d18fbefa322615dc4903e738d2a96cf7ce4a1f26",
+                "reference": "d18fbefa322615dc4903e738d2a96cf7ce4a1f26",
                 "shasum": ""
             },
             "require": {
@@ -47,7 +47,75 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2015-10-14 23:25:37"
+            "time": "2015-10-17 23:16:09"
+        },
+        {
+            "name": "dende/common-bundle",
+            "version": "0.0.7",
+            "target-dir": "Dende/CommonBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UirapuruDende/CommonBundle.git",
+                "reference": "e80a4c532d4ff7ed561a6c80a575f2181a6e4319"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UirapuruDende/CommonBundle/zipball/e80a4c532d4ff7ed561a6c80a575f2181a6e4319",
+                "reference": "e80a4c532d4ff7ed561a6c80a575f2181a6e4319",
+                "shasum": ""
+            },
+            "require": {
+                "phing/phing": "~2.9",
+                "php": ">=5.4",
+                "raven/raven": "0.8.*@dev"
+            },
+            "require-dev": {
+                "behat/behat": "~3.0",
+                "behat/common-formatters": "~1.2",
+                "behat/mink-browserkit-driver": "~1.2",
+                "behat/mink-extension": "~2.0",
+                "behat/mink-selenium2-driver": "~1.2",
+                "behat/mink-zombie-driver": "~1.2",
+                "behat/symfony2-extension": "2.0.*@dev",
+                "evert/phpdoc-md": "dev-master",
+                "fabpot/php-cs-fixer": "2.0.*@dev",
+                "hasbridge/json-schema-validator": "dev-master",
+                "liip/functional-test-bundle": "~1.2",
+                "mayflower/php-codebrowser": "~1.1",
+                "mockery/mockery": "0.9.*",
+                "pdepend/pdepend": "2.0.*",
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phploc/phploc": "2.1.*@dev",
+                "phpmd/phpmd": "dev-master",
+                "phpunit/phpunit": "*",
+                "sebastian/phpcpd": "2.0.*@dev",
+                "squizlabs/php_codesniffer": "2.0.*@dev",
+                "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
+                "webignition/json-pretty-print": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Dende\\CommonBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grzegorz 'Uirapuru' Kaszuba",
+                    "email": "uirapuruadg@gmail.com"
+                }
+            ],
+            "description": "Common stuff for various projects",
+            "keywords": [
+                "Symfony2",
+                "bundle",
+                "public"
+            ],
+            "time": "2015-05-20 22:13:02"
         },
         {
             "name": "doctrine/annotations",
@@ -1450,6 +1518,98 @@
             "time": "2015-06-25 04:19:39"
         },
         {
+            "name": "phing/phing",
+            "version": "2.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phingofficial/phing.git",
+                "reference": "63a495a1f619b60404687a0a059039c5046677df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/63a495a1f619b60404687a0a059039c5046677df",
+                "reference": "63a495a1f619b60404687a0a059039c5046677df",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "ext-pdo_sqlite": "*",
+                "lastcraft/simpletest": "@dev",
+                "pdepend/pdepend": "2.x",
+                "pear-pear.php.net/console_getopt": "~1.3.0",
+                "pear-pear.php.net/http_request2": "2.2.x",
+                "pear-pear.php.net/net_growl": "2.7.x",
+                "pear-pear.php.net/pear_packagefilemanager": "1.7.x",
+                "pear-pear.php.net/pear_packagefilemanager2": "1.0.x",
+                "pear-pear.php.net/xml_serializer": "0.20.x",
+                "pear/pear_exception": "~1.0",
+                "pear/versioncontrol_git": "@dev",
+                "pear/versioncontrol_svn": "~0.5",
+                "phpdocumentor/phpdocumentor": "2.x",
+                "phploc/phploc": "~2.0.6",
+                "phpmd/phpmd": "~2.2",
+                "phpunit/phpunit": ">=3.7",
+                "sebastian/git": "~1.0",
+                "sebastian/phpcpd": "2.x",
+                "squizlabs/php_codesniffer": "~2.2"
+            },
+            "suggest": {
+                "pdepend/pdepend": "PHP version of JDepend",
+                "pear/archive_tar": "Tar file management class",
+                "pear/versioncontrol_git": "A library that provides OO interface to handle Git repository",
+                "pear/versioncontrol_svn": "A simple OO-style interface for Subversion, the free/open-source version control system",
+                "phpdocumentor/phpdocumentor": "Documentation Generator for PHP",
+                "phploc/phploc": "A tool for quickly measuring the size of a PHP project",
+                "phpmd/phpmd": "PHP version of PMD tool",
+                "phpunit/php-code-coverage": "Library that provides collection, processing, and rendering functionality for PHP code coverage information",
+                "phpunit/phpunit": "The PHP Unit Testing Framework",
+                "sebastian/phpcpd": "Copy/Paste Detector (CPD) for PHP code",
+                "tedivm/jshrink": "Javascript Minifier built in PHP"
+            },
+            "bin": [
+                "bin/phing"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.11.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "classes/phing/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "classes"
+            ],
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Michiel Rook",
+                    "email": "mrook@php.net"
+                },
+                {
+                    "name": "Phing Community",
+                    "homepage": "https://www.phing.info/trac/wiki/Development/Contributors"
+                }
+            ],
+            "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
+            "homepage": "https://www.phing.info/",
+            "keywords": [
+                "build",
+                "phing",
+                "task",
+                "tool"
+            ],
+            "time": "2015-08-24 21:02:12"
+        },
+        {
             "name": "phpcollection/phpcollection",
             "version": "0.4.0",
             "source": {
@@ -1586,6 +1746,58 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "raven/raven",
+            "version": "0.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/getsentry/raven-php.git",
+                "reference": "d4b741736125f2b892e07903cd40450b53479290"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/getsentry/raven-php/zipball/d4b741736125f2b892e07903cd40450b53479290",
+                "reference": "d4b741736125f2b892e07903cd40450b53479290",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "bin": [
+                "bin/raven"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Raven_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "David Cramer",
+                    "email": "dcramer@gmail.com"
+                }
+            ],
+            "description": "A PHP client for Sentry (http://getsentry.com)",
+            "homepage": "http://getsentry.com",
+            "keywords": [
+                "log",
+                "logging"
+            ],
+            "time": "2013-12-03 10:27:59"
         },
         {
             "name": "sebastian/diff",
@@ -2492,98 +2704,6 @@
                 "object graph"
             ],
             "time": "2015-10-05 15:07:09"
-        },
-        {
-            "name": "phing/phing",
-            "version": "2.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phingofficial/phing.git",
-                "reference": "63a495a1f619b60404687a0a059039c5046677df"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/63a495a1f619b60404687a0a059039c5046677df",
-                "reference": "63a495a1f619b60404687a0a059039c5046677df",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "require-dev": {
-                "ext-pdo_sqlite": "*",
-                "lastcraft/simpletest": "@dev",
-                "pdepend/pdepend": "2.x",
-                "pear-pear.php.net/console_getopt": "~1.3.0",
-                "pear-pear.php.net/http_request2": "2.2.x",
-                "pear-pear.php.net/net_growl": "2.7.x",
-                "pear-pear.php.net/pear_packagefilemanager": "1.7.x",
-                "pear-pear.php.net/pear_packagefilemanager2": "1.0.x",
-                "pear-pear.php.net/xml_serializer": "0.20.x",
-                "pear/pear_exception": "~1.0",
-                "pear/versioncontrol_git": "@dev",
-                "pear/versioncontrol_svn": "~0.5",
-                "phpdocumentor/phpdocumentor": "2.x",
-                "phploc/phploc": "~2.0.6",
-                "phpmd/phpmd": "~2.2",
-                "phpunit/phpunit": ">=3.7",
-                "sebastian/git": "~1.0",
-                "sebastian/phpcpd": "2.x",
-                "squizlabs/php_codesniffer": "~2.2"
-            },
-            "suggest": {
-                "pdepend/pdepend": "PHP version of JDepend",
-                "pear/archive_tar": "Tar file management class",
-                "pear/versioncontrol_git": "A library that provides OO interface to handle Git repository",
-                "pear/versioncontrol_svn": "A simple OO-style interface for Subversion, the free/open-source version control system",
-                "phpdocumentor/phpdocumentor": "Documentation Generator for PHP",
-                "phploc/phploc": "A tool for quickly measuring the size of a PHP project",
-                "phpmd/phpmd": "PHP version of PMD tool",
-                "phpunit/php-code-coverage": "Library that provides collection, processing, and rendering functionality for PHP code coverage information",
-                "phpunit/phpunit": "The PHP Unit Testing Framework",
-                "sebastian/phpcpd": "Copy/Paste Detector (CPD) for PHP code",
-                "tedivm/jshrink": "Javascript Minifier built in PHP"
-            },
-            "bin": [
-                "bin/phing"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.11.x-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "classes/phing/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                "classes"
-            ],
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Michiel Rook",
-                    "email": "mrook@php.net"
-                },
-                {
-                    "name": "Phing Community",
-                    "homepage": "https://www.phing.info/trac/wiki/Development/Contributors"
-                }
-            ],
-            "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
-            "homepage": "https://www.phing.info/",
-            "keywords": [
-                "build",
-                "phing",
-                "task",
-                "tool"
-            ],
-            "time": "2015-08-24 21:02:12"
         },
         {
             "name": "phpdocumentor/reflection-docblock",

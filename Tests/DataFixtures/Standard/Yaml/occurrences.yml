@@ -1,0 +1,64 @@
+occurrence-001:
+  startDate: "2015-09-02 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-002:
+  startDate: "2015-09-04 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-003:
+  startDate: "2015-09-07 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-004:
+  startDate: "2015-09-09 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-005:
+  startDate: "2015-09-11 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-006:
+  startDate: "2015-09-14 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-007:
+  startDate: "2015-09-16 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-008:
+  startDate: "2015-09-18 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-009:
+  startDate: "2015-09-21 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-010:
+  startDate: "2015-09-23 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-011:
+  startDate: "2015-09-25 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-012:
+  startDate: "2015-09-28 12:00:00"
+  duration: 90
+  event: event-001
+
+occurrence-013:
+  startDate: "2015-09-30 12:00:00"
+  duration: 90
+  event: event-001

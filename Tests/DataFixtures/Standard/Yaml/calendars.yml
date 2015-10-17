@@ -1,0 +1,6 @@
+calendar-001:
+  id: calendar-001
+  name: some-test-name
+calendar-002:
+  id: ~
+  name: some-test-name-02

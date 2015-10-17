@@ -2,10 +2,12 @@ Dende\Calendar\Domain\Calendar:
   type: entity
   table: calendars
 
-  embedded:
+  id:
     id:
       class: Dende\Calendar\Domain\Calendar\CalendarId
       columnPrefix: ~
+      type: guid
+      generator: { strategy: UUID }
 
   fields:
     name:

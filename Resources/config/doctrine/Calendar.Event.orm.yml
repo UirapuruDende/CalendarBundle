@@ -2,11 +2,14 @@ Dende\Calendar\Domain\Calendar\Event:
   type: entity
   table: events
 
-  embedded:
+  id:
     id:
       class: Dende\Calendar\Domain\Calendar\Event\EventId
       columnPrefix: ~
+      type: guid
+      generator: { strategy: UUID }
 
+  embedded:
     type:
       class: Dende\Calendar\Domain\Calendar\Event\EventType
       columnPrefix: ~
