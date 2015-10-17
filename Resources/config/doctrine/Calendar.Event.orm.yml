@@ -1,0 +1,46 @@
+Dende\Calendar\Domain\Calendar\Event:
+  type: entity
+  table: events
+
+  embedded:
+    id:
+      class: Dende\Calendar\Domain\Calendar\Event\EventId
+      columnPrefix: ~
+
+    type:
+      class: Dende\Calendar\Domain\Calendar\Event\EventType
+      columnPrefix: ~
+
+    repetitions:
+      class: Dende\Calendar\Domain\Calendar\Event\Repetitions
+      columnPrefix: ~
+
+    duration:
+      class: Dende\Calendar\Domain\Calendar\Event\Duration
+      columnPrefix: ~
+
+  manyToOne:
+    calendar:
+      targetEntity: Dende\Calendar\Domain\Calendar
+      inversedBy: events
+      cascade: ["all"]
+
+  oneToMany:
+    occurrences:
+      targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence
+      mappedBy: event
+      cascade: ["all"]
+
+  fields:
+    startDate:
+      type: datetime
+      nullable: false
+
+    endDate:
+      type: datetime
+      nullable: false
+
+    title:
+      type: string
+      nullable: false
+      length: 255

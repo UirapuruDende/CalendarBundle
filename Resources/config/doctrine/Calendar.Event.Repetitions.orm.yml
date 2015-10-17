@@ -1,0 +1,6 @@
+Dende\Calendar\Domain\Calendar\Event\Repetitions:
+  type:   embeddable
+
+  fields:
+    weekdays:
+      type: json_array

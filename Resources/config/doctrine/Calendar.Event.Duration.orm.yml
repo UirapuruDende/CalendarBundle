@@ -1,0 +1,6 @@
+Dende\Calendar\Domain\Calendar\Event\Duration:
+  type:   embeddable
+
+  fields:
+    minutes:
+      type: integer

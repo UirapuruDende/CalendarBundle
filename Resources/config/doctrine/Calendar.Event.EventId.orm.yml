@@ -1,0 +1,7 @@
+Dende\Calendar\Domain\Calendar\Event\EventId:
+  type:   embeddable
+
+  id:
+    id:
+      type: guid
+      generator: { strategy: UUID }

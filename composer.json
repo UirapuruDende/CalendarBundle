@@ -3,6 +3,8 @@
     "require": {
         "symfony/symfony": "^2.7",
         "doctrine/doctrine-bundle": "^1.5",
+        "doctrine/orm": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
         "dende/calendar" : "dev-master",
         "symfony/http-kernel" : "2.7.5",
         "jms/serializer-bundle": "dev-master",

@@ -1,0 +1,34 @@
+Dende\Calendar\Domain\Calendar\Event\Occurrence:
+  type: entity
+  table: occurrences
+
+  embedded:
+    id:
+
+      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId
+      columnPrefix: ~
+
+    duration:
+      class: Dende\Calendar\Domain\Calendar\Event\Duration
+      columnPrefix: ~
+
+  manyToOne:
+    event:
+      targetEntity: Dende\Calendar\Domain\Calendar\Event
+      mappedBy: occurrences
+      cascade: ["all"]
+      inversedBy: occurrences
+
+  fields:
+    startDate:
+      type: datetime
+      nullable: false
+
+    endDate:
+      type: datetime
+      nullable: false
+
+    modified:
+      type: boolean
+
+

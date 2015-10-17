@@ -13,3 +13,32 @@ monolog:
       type: stream
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: ERROR
+
+doctrine:
+    dbal:
+      default_connection: default
+      connections:
+        default:
+          driver:   pdo_mysql
+          host:     localhost
+          dbname:   calendar_bundle_test
+          user:     root
+          password: root
+          charset:  UTF8
+          server_version: "5.6"
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        default_entity_manager:   default
+
+        entity_managers:
+          default:
+            auto_mapping: false
+            connection: default
+            mappings:
+              Calendar:
+                type: yml
+                prefix: Dende\Calendar\Domain
+                dir: %kernel.root_dir%/../../Resources/config/doctrine
+                is_bundle: false
+                alias: Calendar
