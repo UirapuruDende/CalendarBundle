@@ -7,7 +7,15 @@ framework:
     templating:
         engines: ['twig']
     session:
-        storage_id: session.storage.mock_file
+        storage_id: session.storage.filesystem
+    profiler:
+        collect: true
+        only_exceptions: false
+
+#web_profiler:
+#    toolbar: false
+#    intercept_redirects: false
+
 monolog:
   handlers:
     main:
@@ -23,17 +31,17 @@ liip_functional_test:
 
 doctrine:
     dbal:
-      default_connection: sqlite
+      default_connection: default
       connections:
+#        default:
+#          driver:   pdo_mysql
+#          host:     localhost
+#          dbname:   calendar_bundle_test
+#          user:     root
+#          password: root
+#          charset:  UTF8
+#          server_version: "5.6"
         default:
-          driver:   pdo_mysql
-          host:     localhost
-          dbname:   calendar_bundle_test
-          user:     root
-          password: root
-          charset:  UTF8
-          server_version: "5.6"
-        sqlite:
           driver:   pdo_sqlite
           dbname:   calendar_bundle_test
           path:     %kernel.cache_dir%/database.db
@@ -42,17 +50,17 @@ doctrine:
         default_entity_manager:   default
 
         entity_managers:
+#          default:
+#            auto_mapping: false
+#            connection: default
+#            mappings:
+#              Calendar:
+#                type: yml
+#                prefix: Dende\Calendar\Domain
+#                dir: %kernel.root_dir%/../../Resources/config/doctrine
+#                is_bundle: false
+#                alias: Calendar
           default:
-            auto_mapping: false
-            connection: default
-            mappings:
-              Calendar:
-                type: yml
-                prefix: Dende\Calendar\Domain
-                dir: %kernel.root_dir%/../../Resources/config/doctrine
-                is_bundle: false
-                alias: Calendar
-          sqlite:
             auto_mapping: false
             connection: default
             mappings:

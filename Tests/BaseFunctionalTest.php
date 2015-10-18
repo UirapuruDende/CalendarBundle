@@ -13,7 +13,7 @@ abstract class BaseFunctionalTest extends BaseTest
             "Dende\\CalendarBundle\\Tests\\DataFixtures\\Standard\\ORM\\CalendarsData",
             "Dende\\CalendarBundle\\Tests\\DataFixtures\\Standard\\ORM\\EventsData",
             "Dende\\CalendarBundle\\Tests\\DataFixtures\\Standard\\ORM\\OccurrencesData"
-        ], 'sqlite');
+        ], 'default');
 
     }
 }
