@@ -6,7 +6,8 @@ framework:
         strict_requirements: ~
     templating:
         engines: ['twig']
-
+    session:
+        storage_id: session.storage.mock_file
 monolog:
   handlers:
     main:
@@ -14,9 +15,15 @@ monolog:
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: ERROR
 
+liip_functional_test:
+  cache_sqlite_db: true
+  authentication:
+    username: admin
+    password: admin
+
 doctrine:
     dbal:
-      default_connection: default
+      default_connection: sqlite
       connections:
         default:
           driver:   pdo_mysql
@@ -26,13 +33,26 @@ doctrine:
           password: root
           charset:  UTF8
           server_version: "5.6"
-
+        sqlite:
+          driver:   pdo_sqlite
+          dbname:   calendar_bundle_test
+          path:     %kernel.cache_dir%/database.db
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         default_entity_manager:   default
 
         entity_managers:
           default:
+            auto_mapping: false
+            connection: default
+            mappings:
+              Calendar:
+                type: yml
+                prefix: Dende\Calendar\Domain
+                dir: %kernel.root_dir%/../../Resources/config/doctrine
+                is_bundle: false
+                alias: Calendar
+          sqlite:
             auto_mapping: false
             connection: default
             mappings:

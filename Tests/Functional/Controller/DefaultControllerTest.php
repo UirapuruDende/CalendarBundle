@@ -2,26 +2,21 @@
 namespace Dende\CalendarBundle\Tests\Functional\Controller;
 
 use AppKernel;
+use Dende\CalendarBundle\Tests\BaseFunctionalTest;
+use Mockery;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\BrowserKit\Client;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Class DefaultControllerTest
  * @package Dende\CalendarBundle\Tests\Functional\Controller
  */
-final class DefaultControllerTest extends PHPUnit_Framework_TestCase
+final class DefaultControllerTest extends BaseFunctionalTest
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
-    protected function setUp()
+    public function tearDown()
     {
-        $kernel = new AppKernel('test', true);
-        $kernel->boot();
-
-        $this->client = $kernel->getContainer()->get('test.client');
+        Mockery::close();
     }
 
     public function testItRunsSuccessfully()
@@ -31,19 +26,7 @@ final class DefaultControllerTest extends PHPUnit_Framework_TestCase
 
         $crawler = $this->client->request('GET', '/calendar/index', [], [], $headers, $content);
 
-
         $this->assertEquals(200, $this->getStatusCode());
         $this->assertEquals("Works!", $this->getContent());
-    }
-
-    private function getContent()
-    {
-        return $this->client->getResponse()->getContent();
-    }
-
-
-    private function getStatusCode()
-    {
-        return $this->client->getResponse()->getStatusCode();
     }
 }
