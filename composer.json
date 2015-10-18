@@ -7,10 +7,10 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "dende/calendar" : "dev-master",
         "symfony/http-kernel" : "2.7.5",
-        "jms/serializer-bundle": "dev-master",
+        "jms/serializer-bundle": "^1.0",
         "willdurand/hateoas-bundle": "@stable",
         "friendsofsymfony/jsrouting-bundle": "1.5.*",
-        "friendsofsymfony/rest-bundle": "1.6.*",
+        "friendsofsymfony/rest-bundle": "^1.7",
         "sensio/framework-extra-bundle": "~3.0",
         "dende/common-bundle": "^0.0.7"
 
