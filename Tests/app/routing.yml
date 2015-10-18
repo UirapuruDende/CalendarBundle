@@ -1,9 +1,9 @@
-dende_calendar_index:
-  path:   /calendar/index
-  defaults: { _controller: DendeCalendarBundle:Default:index }
+dende_calendar_rest:
+  type: annotation
+  resource: @DendeCalendarBundle/Controller/RestController.php
+  prefix: api
 
-dende_calendar_rest_calendar_get:
-  path:   /api/calendar
-  defaults: { _controller: DendeCalendarBundle:Rest:getCalendars }
-  methods:
-    - GET
+dende_calendar:
+  type: annotation
+  resource: @DendeCalendarBundle/Controller/DefaultController.php
+  prefix: calendar

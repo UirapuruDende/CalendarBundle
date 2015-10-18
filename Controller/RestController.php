@@ -15,14 +15,19 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class RestController extends FOSRestController
 {
+
     /**
      * @Rest\View()
+     *
+     * @Rest\Route("calendar")
+     * @Method({"GET"})
+     * @return View
      */
     public function getCalendarsAction()
     {
-        $events = $this->getDoctrine()->getRepository("Calendar:Calendar")->findAll();
+        $calendars = $this->getDoctrine()->getRepository("Calendar:Calendar")->findAll();
 
-        return $this->createView($events, 200);
+        return $this->handleView($this->createView($calendars, 200));
     }
 
     /**

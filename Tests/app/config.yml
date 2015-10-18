@@ -12,9 +12,13 @@ framework:
         collect: true
         only_exceptions: false
 
-#web_profiler:
-#    toolbar: false
-#    intercept_redirects: false
+jms_serializer:
+  metadata:
+    auto_detection: true
+    directories:
+      Domain:
+        namespace_prefix: "Dende\\Calendar\\Domain"
+        path: "%kernel.root_dir%/../../Resources/config/serializer/"
 
 monolog:
   handlers:

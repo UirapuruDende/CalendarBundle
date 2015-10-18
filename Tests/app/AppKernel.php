@@ -13,9 +13,10 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         return array(
+            new Dende\CalendarBundle\DendeCalendarBundle(),
+
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Dende\CalendarBundle\DendeCalendarBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

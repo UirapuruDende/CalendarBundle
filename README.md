@@ -9,12 +9,12 @@ creating database in mysql:
 creating schema:
 
     cd calendar-bundle/
-    php ./Tests/app/console.php doctrine:schema:create
+    ./console doctrine:schema:create
     
 loading test fixtures:
 
     cd calendar-bundle/
-    php ./Tests/app/console.php doctrine:fixtures:load --fixtures="Tests/DataFixtures/Standard"
+    ./console doctrine:fixtures:load --fixtures="Tests/DataFixtures/Standard"
     
 resetting db:
 
