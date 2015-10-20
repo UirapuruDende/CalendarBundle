@@ -12,13 +12,39 @@ framework:
         collect: true
         only_exceptions: false
 
+fos_rest:
+  param_fetcher_listener: true
+  body_listener:
+    decoders:
+      json: fos_rest.decoder.jsontoform
+  format_listener: true
+  view:
+    view_response_listener: force
+    serialize_null: true
+    failed_validation: 422
+
+
+sensio_framework_extra:
+    view: { annotations: false }
+
+
 jms_serializer:
+  handlers:
+    datetime:
+      default_format: "Y-m-d H:i:s"
+      default_timezone: "Europe/Warsaw"
   metadata:
     auto_detection: true
     directories:
       Domain:
         namespace_prefix: "Dende\\Calendar\\Domain"
         path: "%kernel.root_dir%/../../Resources/config/serializer/"
+
+bazinga_hateoas:
+  metadata:
+    cache:                file
+    file_cache:
+      dir:              %kernel.cache_dir%/hateoas
 
 monolog:
   handlers:
@@ -45,10 +71,10 @@ doctrine:
           password: root
           charset:  UTF8
           server_version: "5.6"
-        sqlite:
-          driver:   pdo_sqlite
-          dbname:   calendar_bundle_test
-          path:     %kernel.cache_dir%/database.db
+#        sqlite:
+#          driver:   pdo_sqlite
+#          dbname:   calendar_bundle_test
+#          path:     %kernel.cache_dir%/database.db
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         default_entity_manager:   default
@@ -64,13 +90,23 @@ doctrine:
                 dir: %kernel.root_dir%/../../Resources/config/doctrine
                 is_bundle: false
                 alias: Calendar
-          sqlite:
+          view_model:
             auto_mapping: false
-            connection: sqlite
+            connection: default
             mappings:
-              Calendar:
+              ViewModel:
                 type: yml
                 prefix: Dende\Calendar\Domain
-                dir: %kernel.root_dir%/../../Resources/config/doctrine
+                dir: %kernel.root_dir%/../../Resources/config/doctrine-viewmodel
                 is_bundle: false
-                alias: Calendar
+                alias: ViewModel
+#          sqlite:
+#            auto_mapping: false
+#            connection: sqlite
+#            mappings:
+#              Calendar:
+#                type: yml
+#                prefix: Dende\Calendar\Domain
+#                dir: %kernel.root_dir%/../../Resources/config/doctrine
+#                is_bundle: false
+#                alias: Calendar

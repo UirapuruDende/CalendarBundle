@@ -1,0 +1,7 @@
+Dende\Calendar\Domain\Calendar\Event\Repetitions:
+  exclusion_policy: ALL
+  properties:
+    weekdays:
+      expose: true
+    availableWeekdays:
+      expose: false

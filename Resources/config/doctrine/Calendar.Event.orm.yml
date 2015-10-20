@@ -5,22 +5,22 @@ Dende\Calendar\Domain\Calendar\Event:
   id:
     id:
       class: Dende\Calendar\Domain\Calendar\Event\EventId
-      columnPrefix: ~
+      columnPrefix: false
       type: guid
       generator: { strategy: UUID }
 
   embedded:
     type:
       class: Dende\Calendar\Domain\Calendar\Event\EventType
-      columnPrefix: ~
+      columnPrefix: false
 
     repetitions:
       class: Dende\Calendar\Domain\Calendar\Event\Repetitions
-      columnPrefix: ~
+      columnPrefix: false
 
     duration:
       class: Dende\Calendar\Domain\Calendar\Event\Duration
-      columnPrefix: ~
+      columnPrefix: false
 
   manyToOne:
     calendar:

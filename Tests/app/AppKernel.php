@@ -23,7 +23,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Liip\FunctionalTestBundle\LiipFunctionalTestBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle()
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
         );
     }
 

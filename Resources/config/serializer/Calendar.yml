@@ -1,5 +1,5 @@
 Dende\Calendar\Domain\Calendar:
-#  exclusion_policy: ALL
+  exclusion_policy: ALL
   properties:
     id:
       expose: true
