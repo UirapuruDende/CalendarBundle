@@ -23,10 +23,8 @@ fos_rest:
     serialize_null: true
     failed_validation: 422
 
-
 sensio_framework_extra:
     view: { annotations: false }
-
 
 jms_serializer:
   handlers:

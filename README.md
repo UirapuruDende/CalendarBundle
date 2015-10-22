@@ -56,11 +56,18 @@ class AppKernel extends Kernel
 ## todo list
 
  - [x] doctrine entity mapping
- - [x] configured test application
- - [x] REST/HATEOAS api for frontend
- - [ ] registering application services
- - [ ] frontend view based on javascript library
+ - [x] configured test application (Tests/app)
+ - [ ] REST/HATEOAS api for frontend (entry point: /api/calendar/)
+    - [ ] tests
+    - [x] GET methods
+    - [ ] filtering by date, weeks, calendar, event
+    - [ ] POST methods
+    - [ ] PUT methods
+    - [ ] forms
  - [ ] automatically registering view entity manager
  - [ ] automatically adding mapping for default entity manager
+ - [ ] autoconfiguration (as less instalation needed and configuring as needed)
+ - [ ] registering application services
+ - [ ] frontend view based on javascript library
  - [ ] using sql/mongo by switching it in bundle config
  - [ ] full documentation  

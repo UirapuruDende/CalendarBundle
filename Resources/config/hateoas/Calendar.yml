@@ -1,6 +1,0 @@
-Dende\Calendar\Domain\Calendar:
-    relations:
-        -
-            rel: self
-            href:
-                route: dende_calendar_rest_getcalendars

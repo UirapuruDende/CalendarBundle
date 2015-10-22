@@ -12,7 +12,7 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
   embedded:
     duration:
       class: Dende\Calendar\Domain\Calendar\Event\Duration
-      columnPrefix: ~
+      columnPrefix: false
 
   manyToOne:
     event:

@@ -17,4 +17,26 @@ Dende\Calendar\Domain\Calendar\Event:
       expose: true
     calendar:
       expose: false
-      exclude: true
+
+  relations:
+    -
+      href:
+        absolute: true
+        parameters:
+          id: expr(object.id())
+        route: get_event
+      rel: self
+    -
+      href:
+        absolute: true
+        parameters:
+          id: expr(object.id())
+        route: get_event_occurrences
+      rel: occurrences
+    -
+      href:
+        absolute: true
+        parameters:
+          id: expr(object.calendar().id())
+        route: get_calendar
+      rel: calendar

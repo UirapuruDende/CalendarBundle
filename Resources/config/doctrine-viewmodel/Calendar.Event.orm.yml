@@ -31,3 +31,10 @@ Dende\Calendar\Domain\Calendar\Event:
     duration:
       column: minutes
       type: integer
+
+  manyToOne:
+    calendar:
+      targetEntity: Dende\Calendar\Domain\Calendar
+      mappedBy: calendar
+      cascade: ["all"]
+      inversedBy: events

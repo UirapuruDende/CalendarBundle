@@ -1,7 +1,8 @@
 dende_calendar_rest:
   type: rest
   resource: @DendeCalendarBundle/Controller/RestController.php
-  prefix: api
+  prefix: api/calendar
+
   defaults:
     _format: json
 

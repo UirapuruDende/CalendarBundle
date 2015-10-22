@@ -1,25 +1,27 @@
----
-Dende\Calendar\Domain\Calendar:
+Dende\Calendar\Domain\Calendar\Event\Occurrence:
   exclusion_policy: ALL
   properties:
     id:
       expose: true
-    name:
+    startDate:
       expose: true
-    events:
-      expose: false
+    endDate:
+      expose: true
+    duration:
+      expose: true
+
   relations:
     -
       href:
         absolute: true
         parameters:
           id: expr(object.id())
-        route: get_calendar
+        route: get_occurrence
       rel: self
     -
       href:
         absolute: true
         parameters:
-          id: expr(object.id())
-        route: get_calendar_events
-      rel: events
+          id: expr(object.event().id())
+        route: get_event
+      rel: event
