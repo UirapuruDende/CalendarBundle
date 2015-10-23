@@ -73,14 +73,10 @@ final class OccurrencesProvider
      */
     public function convert(Occurrence $occurrence) {
 
-        $eventId = $occurrence->event();
+        $eventId = $occurrence->event()->id();
 
-        die(var_dump($eventId));
+        $id = (int) ($eventId instanceof EventId ? $eventId->id() : $eventId);
 
-
-        $id = (int) $eventId instanceof EventId ? $eventId->id() : $eventId->id();
-
-        die(var_dump($id));
         return [
             "title" => $occurrence->event()->title(),
             "start" => $occurrence->startDate()->format("Y-m-d H:i:s"),
