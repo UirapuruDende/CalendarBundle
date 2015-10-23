@@ -6,4 +6,5 @@
 /Tests/app/cache/*
 !/Tests/app/cache/.gitkeep
 !/Tests/app/logs/.gitkeep
+/Tests/app/bundles
 /bin/

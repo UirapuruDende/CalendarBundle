@@ -1,4 +1,0 @@
-dende_calendar:
-  resource: "@DendeCalendarBundle/Controller/"
-  type:     annotation
-  prefix:   /calendar

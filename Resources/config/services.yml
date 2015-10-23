@@ -1,0 +1,16 @@
+---
+services:
+  dende_calendar.occurrences_repository:
+    class: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
+    factory_service: doctrine.orm.entity_manager
+    factory_method: "getRepository"
+    arguments: ["Calendar:Calendar\Event\Occurrence"]
+
+  dende_calendar.occurrences_provider:
+    class: "Dende\CalendarBundle\Service\OccurrencesProvider"
+    arguments:
+      - @dende_calendar.occurrences_repository
+      - @router.default
+      - 'dende_calendar_default_updateevent'
+
+

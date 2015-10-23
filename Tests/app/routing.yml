@@ -2,7 +2,6 @@ dende_calendar_rest:
   type: rest
   resource: @DendeCalendarBundle/Controller/RestController.php
   prefix: api/calendar
-
   defaults:
     _format: json
 
@@ -10,3 +9,6 @@ dende_calendar:
   type: annotation
   resource: @DendeCalendarBundle/Controller/DefaultController.php
   prefix: calendar
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

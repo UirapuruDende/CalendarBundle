@@ -1,11 +1,12 @@
 Dende\Calendar\Domain\Calendar\Event\Occurrence:
   type: entity
   table: occurrences
+  repositoryClass: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
 
   id:
     id:
       class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId
-      columnPrefix: ~
+      columnPrefix: false
       type: guid
       generator: { strategy: UUID }
 

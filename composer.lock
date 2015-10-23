@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5738a8529c8238ce23588338d9609ea7",
+    "hash": "cd024ae3f6f9d23166e965de49004868",
+    "content-hash": "5a0934af38cc10593b44932ef7566523",
     "packages": [
         {
             "name": "dende/calendar",
@@ -926,7 +927,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/290dc8989db9b7508775138167a7eeeb7ddb925a",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/b1451cda5253f34bf2eca146bbfabd7c6448da1c",
                 "reference": "290dc8989db9b7508775138167a7eeeb7ddb925a",
                 "shasum": ""
             },

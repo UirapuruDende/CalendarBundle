@@ -43,6 +43,10 @@ class AppKernel extends Kernel
 
     cd calendar-bundle/
     ./reset-db.sh
+
+## install assets:
+
+    ./console.sh assets:install Tests/app
     
 ## running localhost server:
 
@@ -64,10 +68,11 @@ class AppKernel extends Kernel
     - [ ] POST methods
     - [ ] PUT methods
     - [ ] forms
+ - [ ] php wrapper for fullcalendar configuration
  - [ ] automatically registering view entity manager
  - [ ] automatically adding mapping for default entity manager
  - [ ] autoconfiguration (as less instalation needed and configuring as needed)
  - [ ] registering application services
  - [ ] frontend view based on javascript library
  - [ ] using sql/mongo by switching it in bundle config
- - [ ] full documentation  
+ - [ ] full documentation

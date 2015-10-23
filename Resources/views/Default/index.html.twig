@@ -1,1 +1,47 @@
-Works!
+<html>
+<head>
+    <title>FullCalendar with Dende/CalendarBundle demo</title>
+
+{% block javascripts %}
+    {% set lang = calendarLang is defined ? calendarLang : 'pl' %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script src='{{ asset("bundles/dendecalendar/js/jquery.min.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/moment.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/fullcalendar.js") }}'></script>
+    <script src='{{ asset("bundles/dendecalendar/js/lang/" ~ lang ~ ".js") }}'></script>
+
+    <script>
+        $(document).ready(function() {
+            var eventClickHandler = function() {
+                // alert("Edit tu będzie")
+            };
+
+            $('#calendar').fullCalendar({
+                defaultView: 'agendaWeek',
+                allDaySlot: false,
+                slotDuration: '00:30:00',
+                minTime: '06:00:00',
+                maxTime: '24:00:00',
+                timeZone: '{{ calendarTimezone is defined ? calendarTimezone : 'Europe/Warsaw' }}',
+                slotLabelFormat: 'H:00',
+                snapDuration: '00:15:00',
+                selectable: true,
+                lang: '{{ lang }}',
+                eventClick: eventClickHandler,
+                events: Routing.generate('dende_calendar_default_getevents', {calendar: '{{ calendarId }}' })
+            })
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/fullcalendar.css') }}" />
+{% endblock stylesheets %}
+</head>
+
+<body>
+    <div id='calendar'></div>
+</body>
+</html>
