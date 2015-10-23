@@ -23,8 +23,6 @@ final class OccurrencesProvider
         'light-blue'
     ];
 
-
-
     /**
      * @var OccurrenceRepositoryInterface
      */
@@ -61,6 +59,19 @@ final class OccurrencesProvider
     public function get(Calendar $calendar, DateTime $start, DateTime $end)
     {
         $collection = $this->occurrenceRepository->findByCalendar($calendar, $start, $end);
+
+        $collection = array_map([$this, 'convert'], $collection);
+
+        return $collection;
+    }
+
+    /**
+     * @param DateTime $start
+     * @param DateTime $end
+     */
+    public function getAll(DateTime $start, DateTime $end)
+    {
+        $collection = $this->occurrenceRepository->findByPeriod($start, $end);
 
         $collection = array_map([$this, 'convert'], $collection);
 

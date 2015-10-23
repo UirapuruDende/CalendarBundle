@@ -45,6 +45,32 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         return $query->getResult();
     }
 
+    /**
+     * @param DateTime $start
+     * @param DateTime $end
+     * @return array|ArrayCollection|Occurrence[]
+     */
+    public function findByPeriod(DateTime $start, DateTime $end)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $expr = $queryBuilder->expr();
+
+        $queryBuilder
+            ->innerJoin('o.event', 'e')
+            ->where($expr->andX(
+                $expr->gt("o.startDate", ':start'),
+                $expr->lt("o.endDate", ':end')
+            ))
+            ->setParameters([
+                'start' => $start,
+                'end' => $end->add(new DateInterval('P1D')), // so we include last day of period also
+            ]);
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
+
     public function insert(Occurrence $occurrence)
     {
         // TODO: Implement insert() method.

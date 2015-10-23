@@ -13,4 +13,21 @@ services:
       - @router.default
       - 'dende_calendar_default_updateevent'
 
+  dende_calendar.id_generator:
+    class: Dende\CalendarBundle\Service\IdGenerator
+    arguments: [@doctrine.orm.entity_manager]
 
+  dende_calendar.factory.calendar:
+    class: Dende\CalendarBundle\Entity\Factory\CalendarFactory
+    arguments:
+      - @dende_calendar.id_generator
+
+  dende_calendar.form_type.create_event:
+    class: Dende\CalendarBundle\Form\Type\CreateEventType
+    tags:
+      - {name: form.type, alias: create_event}
+
+  dende_calendar.form_type.update_event:
+    class: Dende\CalendarBundle\Form\Type\UpdateEventType
+    tags:
+      - {name: form.type, alias: update_event}

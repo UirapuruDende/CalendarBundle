@@ -14,8 +14,17 @@
 
     <script>
         $(document).ready(function() {
-            var eventClickHandler = function() {
-                // alert("Edit tu będzie")
+            var eventClickHandler = function() {};
+
+            var newSelectionHandler = function(start, end) {
+                var message = "Dodać nowe wydarzenie?\n\nPoczątek:\t"
+                        +start.format("YYYY.MM.DD [o] HH:mm")
+                        +"\nKoniec:\t"
+                        +end.format("YYYY.MM.DD [o] HH:mm");
+
+                if(confirm(message)) {
+                    window.location = Routing.generate('dende_calendar_default_addevent')
+                }
             };
 
             $('#calendar').fullCalendar({
@@ -28,9 +37,10 @@
                 slotLabelFormat: 'H:00',
                 snapDuration: '00:15:00',
                 selectable: true,
+                select: newSelectionHandler,
                 lang: '{{ lang }}',
                 eventClick: eventClickHandler,
-                events: Routing.generate('dende_calendar_default_getevents', {calendar: '{{ calendarId }}' })
+                events: Routing.generate('dende_calendar_default_getevents')
             })
         });
     </script>

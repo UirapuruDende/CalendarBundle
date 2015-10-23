@@ -2,7 +2,10 @@
 namespace Dende\CalendarBundle\Controller;
 
 use Carbon\Carbon;
+use Dende\Calendar\Application\Command\CreateEventCommand;
+use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Domain\Calendar;
+use Dende\Calendar\Domain\Calendar\CalendarId;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -26,37 +29,53 @@ final class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $calendars = $this->getDoctrine()->getRepository("Calendar:Calendar")->findAll();
+
+        $calendars = array_map(function(Calendar $calendar){
+            return $calendar->id()->id();
+        }, $calendars);
+
         return [
-            'calendarId' => "79ead9b9-775c-11e5-8d7d-1c6f658c64a2"
+            'calendars' => $calendars
         ];
     }
 
     /**
-     * @Route("/{calendar}/events", options={"expose"=true})
-     * @ParamConverter("calendar", class="Calendar:Calendar")
+     * @Route("/events", options={"expose"=true})
      * @Method({"GET"})
-     * @return string
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function getEventsAction(Calendar $calendar, Request $request)
+    public function getEventsAction(Request $request)
     {
         $start = Carbon::parse($request->get('start'));
         $end = Carbon::parse($request->get('end'));
 
-        $events = $this->get('dende_calendar.occurrences_provider')->get($calendar, $start, $end);
+        $events = $this->get('dende_calendar.occurrences_provider')->getAll($start, $end);
 
         return new JsonResponse($events);
     }
 
+    /**
+     * @Route("/occurrence/new", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     * @Template()
+     * @return string
+     */
+    public function createEventAction()
+    {
+        $form = $this->createForm('dende_calendar.form_type.create_event', new CreateEventCommand());
+    }
 
     /**
      * @Route("/occurrence/{occurrence}", options={"expose"=true})
      * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
-     * @Method({"GET"})
+     * @Method({"GET", "POST"})
      * @Template()
      * @return string
      */
     public function updateEventAction(Occurrence $occurrence)
     {
-
+        $form = $this->createForm('dende_calendar.form_type.update_event', new UpdateEventCommand());
     }
 }
