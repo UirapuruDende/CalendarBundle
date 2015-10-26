@@ -1,6 +1,7 @@
 framework:
     secret: "Three can keep a secret, if two of them are dead."
     test: ~
+    form: ~
     router:
         resource: "%kernel.root_dir%/routing.yml"
         strict_requirements: ~

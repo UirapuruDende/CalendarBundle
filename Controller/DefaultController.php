@@ -62,9 +62,34 @@ final class DefaultController extends Controller
      * @Template()
      * @return string
      */
-    public function createEventAction()
+    public function createEventAction(Request $request)
     {
-        $form = $this->createForm('dende_calendar.form_type.create_event', new CreateEventCommand());
+        $command = new CreateEventCommand();
+
+        if($request->isMethod("GET") && !is_null($request->get('startDate')) && !is_null($request->get('endDate'))) {
+            $command->startDate = Carbon::createFromFormat("YmdHi", $request->get('startDate'));
+            $command->endDate = Carbon::createFromFormat("YmdHi", $request->get('endDate'));
+
+            $command->duration = $command->startDate->diffInMinutes($command->endDate);
+            $command->repetitionDays = [
+                $command->startDate->dayOfWeek
+            ];
+        }
+
+        $form = $this->createForm('create_event', $command);
+
+        if($request->isMethod("POST")) {
+            $form->handleRequest($request);
+
+            if($form->isValid())
+            {
+                die(var_dump($form->getData()));
+            }
+        }
+
+        return [
+            "form" => $form->createView()
+        ];
     }
 
     /**
