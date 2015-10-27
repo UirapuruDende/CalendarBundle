@@ -6,12 +6,6 @@ Dende\Calendar\Domain\Calendar:
     id:
       class: Dende\Calendar\Domain\Calendar\CalendarId
       columnPrefix: false
-#  id:
-#    id:
-#      class: Dende\Calendar\Domain\Calendar\CalendarId
-#      columnPrefix: ~
-#      type: guid
-#      generator: { strategy: UUID }
 
   fields:
     name:

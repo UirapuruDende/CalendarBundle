@@ -83,7 +83,7 @@ final class DefaultController extends Controller
 
             if($form->isValid())
             {
-                die(var_dump($form->getData()));
+                die(var_dump("posted!", $form->getData()));
             }
         }
 

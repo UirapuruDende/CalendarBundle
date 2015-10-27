@@ -31,3 +31,8 @@ services:
     class: Dende\CalendarBundle\Form\Type\UpdateEventType
     tags:
       - {name: form.type, alias: update_event}
+
+  dende_calendar.form_type.calendar:
+    class: Dende\CalendarBundle\Form\Type\CalendarType
+    tags:
+      - {name: form.type, alias: calendar}
