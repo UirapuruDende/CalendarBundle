@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "d18fbefa322615dc4903e738d2a96cf7ce4a1f26"
+                "reference": "9da9a592256b0d435da14fac8415a579f43e14b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/d18fbefa322615dc4903e738d2a96cf7ce4a1f26",
-                "reference": "d18fbefa322615dc4903e738d2a96cf7ce4a1f26",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/9da9a592256b0d435da14fac8415a579f43e14b4",
+                "reference": "9da9a592256b0d435da14fac8415a579f43e14b4",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,7 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2015-10-17 23:16:09"
+            "time": "2015-10-27 09:25:01"
         },
         {
             "name": "dende/common-bundle",
@@ -923,12 +923,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "290dc8989db9b7508775138167a7eeeb7ddb925a"
+                "reference": "b1451cda5253f34bf2eca146bbfabd7c6448da1c"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/b1451cda5253f34bf2eca146bbfabd7c6448da1c",
-                "reference": "290dc8989db9b7508775138167a7eeeb7ddb925a",
+                "reference": "b1451cda5253f34bf2eca146bbfabd7c6448da1c",
                 "shasum": ""
             },
             "require": {
@@ -992,7 +992,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-10-11 19:49:07"
+            "time": "2015-10-22 07:38:06"
         },
         {
             "name": "fabpot/php-cs-fixer",
@@ -1000,12 +1000,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "03a4316be7956507763a7ff36ae14a26cba1b918"
+                "reference": "0082b466d58884fd72061ba4640fd0b2c9ac88d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/03a4316be7956507763a7ff36ae14a26cba1b918",
-                "reference": "03a4316be7956507763a7ff36ae14a26cba1b918",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/0082b466d58884fd72061ba4640fd0b2c9ac88d6",
+                "reference": "0082b466d58884fd72061ba4640fd0b2c9ac88d6",
                 "shasum": ""
             },
             "require": {
@@ -1051,7 +1051,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2015-10-15 20:08:30"
+            "time": "2015-10-27 15:47:15"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -3115,16 +3115,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.0.6",
+            "version": "5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d2656ec378c88e036b3fc14fb4262ee1a25498c9"
+                "reference": "97fb2503cf8caca9d768fde3cca2ab147b9e7030"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d2656ec378c88e036b3fc14fb4262ee1a25498c9",
-                "reference": "d2656ec378c88e036b3fc14fb4262ee1a25498c9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/97fb2503cf8caca9d768fde3cca2ab147b9e7030",
+                "reference": "97fb2503cf8caca9d768fde3cca2ab147b9e7030",
                 "shasum": ""
             },
             "require": {
@@ -3185,7 +3185,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-14 13:51:20"
+            "time": "2015-10-23 06:50:01"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
