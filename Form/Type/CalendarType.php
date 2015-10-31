@@ -7,7 +7,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 final class CalendarType extends AbstractType
 {
-
     /**
      * @inheritDoc
      */
@@ -40,5 +39,4 @@ final class CalendarType extends AbstractType
             'data_class' => 'Dende\Calendar\Domain\Calendar'
         ));
     }
-
 }

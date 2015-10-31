@@ -24,7 +24,8 @@ final class OccurrenceProviderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_maps_occurrence_collection_to_array() {
+    public function it_maps_occurrence_collection_to_array()
+    {
         $calendar = m::mock('Dende\Calendar\Domain\Calendar');
         $start = new DateTime("now");
         $end = new DateTime("+1 hour");

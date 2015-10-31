@@ -31,7 +31,7 @@ final class CalendarFactory
         $newId = array_key_exists("id", $array) ? $array["id"] : $this->idGenerator->generateId();
 
         return BaseCalendarFactory::createFromArray([
-            "id" => new CalendarId($newId),
+            "id" => $newId,
             "title" => $array["title"]
         ]);
     }

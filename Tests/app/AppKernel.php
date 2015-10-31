@@ -43,5 +43,4 @@ class AppKernel extends Kernel
         $logger = $this->container->get('logger');
         \Monolog\ErrorHandler::register($logger);
     }
-
 }

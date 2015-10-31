@@ -18,7 +18,7 @@ final class CalendarFactory
     public static function createFromArray($array)
     {
         $template = [
-            'id'                     => new CalendarId(),
+            'id'                     => '',
             'title'                  => '',
         ];
 

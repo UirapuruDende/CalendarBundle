@@ -1,3 +1,4 @@
+/.php_cs.cache
 /vendor/
 /.idea/
 /node_modules/
@@ -8,3 +9,4 @@
 !/Tests/app/logs/.gitkeep
 /Tests/app/bundles
 /bin/
+tmp*

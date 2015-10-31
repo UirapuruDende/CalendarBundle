@@ -16,11 +16,12 @@ final class RestController extends FOSRestController
      * @Route("/")
      * @return array
      */
-    public function linksAction(){
+    public function linksAction()
+    {
         return [
             "calendars" => ["href" => $this->generateUrl("get_calendars", [], true)],
-            "events" => ["href" => $this->generateUrl("get_events", [],  true)],
-            "occurrences" => ["href" => $this->generateUrl("get_occurrences", [],  true)]
+            "events" => ["href" => $this->generateUrl("get_events", [], true)],
+            "occurrences" => ["href" => $this->generateUrl("get_occurrences", [], true)]
         ];
     }
 
@@ -41,7 +42,7 @@ final class RestController extends FOSRestController
      */
     public function getCalendarAction($id)
     {
-        $calendar = $this->getDoctrine()->getRepository("Calendar:Calendar")->findOneById(new CalendarId($id));
+        $calendar = $this->getDoctrine()->getRepository("Calendar:Calendar")->findOneById($id);
 
         return $calendar;
     }
@@ -53,7 +54,7 @@ final class RestController extends FOSRestController
      */
     public function getCalendarEventsAction($id)
     {
-        $calendar = $this->getDoctrine()->getRepository("Calendar:Calendar")->findOneById(new CalendarId($id));
+        $calendar = $this->getDoctrine()->getRepository("Calendar:Calendar")->findOneById($id);
 
         $events = $this->getDoctrine()->getManager("view_model")->getRepository("ViewModel:Calendar\Event")->findByCalendar($calendar);
 

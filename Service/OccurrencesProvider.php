@@ -82,8 +82,8 @@ final class OccurrencesProvider
      * @param Occurrence $occurrence
      * @return array
      */
-    public function convert(Occurrence $occurrence) {
-
+    public function convert(Occurrence $occurrence)
+    {
         $eventId = $occurrence->event()->id();
 
         $id = (int) ($eventId instanceof EventId ? $eventId->id() : $eventId);

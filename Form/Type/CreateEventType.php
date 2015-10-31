@@ -11,7 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 final class CreateEventType extends AbstractType
 {
-
     /**
      * @inheritDoc
      */
@@ -54,5 +53,4 @@ final class CreateEventType extends AbstractType
             'data_class' => 'Dende\Calendar\Application\Command\CreateEventCommand'
         ));
     }
-
 }

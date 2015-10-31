@@ -94,4 +94,10 @@ return Symfony\CS\Config\Config::create()
 //    'strict_param',
     ])
     ->setUsingCache(true)
-    ->finder(Symfony\CS\Finder\DefaultFinder::create()->in(__DIR__."/src"));
+    ->finder(
+        Symfony\CS\Finder\DefaultFinder::create()->in(__DIR__."/")->exclude([
+            __DIR__."/vendor",
+            __DIR__."/Tests/app/cache",
+            __DIR__."/Tests/app/logs",
+        ])
+    );

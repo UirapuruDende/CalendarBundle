@@ -31,7 +31,7 @@ final class DefaultController extends Controller
     {
         $calendars = $this->getDoctrine()->getRepository("Calendar:Calendar")->findAll();
 
-        $calendars = array_map(function(Calendar $calendar){
+        $calendars = array_map(function (Calendar $calendar) {
             return $calendar->id()->id();
         }, $calendars);
 
@@ -66,7 +66,7 @@ final class DefaultController extends Controller
     {
         $command = new CreateEventCommand();
 
-        if($request->isMethod("GET") && !is_null($request->get('startDate')) && !is_null($request->get('endDate'))) {
+        if ($request->isMethod("GET") && !is_null($request->get('startDate')) && !is_null($request->get('endDate'))) {
             $command->startDate = Carbon::createFromFormat("YmdHi", $request->get('startDate'));
             $command->endDate = Carbon::createFromFormat("YmdHi", $request->get('endDate'));
 
@@ -78,11 +78,10 @@ final class DefaultController extends Controller
 
         $form = $this->createForm('create_event', $command);
 
-        if($request->isMethod("POST")) {
+        if ($request->isMethod("POST")) {
             $form->handleRequest($request);
 
-            if($form->isValid())
-            {
+            if ($form->isValid()) {
                 die(var_dump("posted!", $form->getData()));
             }
         }
