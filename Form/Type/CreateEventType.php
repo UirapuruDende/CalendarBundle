@@ -4,7 +4,6 @@ namespace Dende\CalendarBundle\Form\Type;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -23,7 +22,7 @@ final class CreateEventType extends AbstractType
 ////                "placeholder" => "Choose calendar",
             ])
             ->add("type", "choice", [
-                "choices" => EventType::$availableTypes,
+                "choices" => array_combine(EventType::$availableTypes, EventType::$availableTypes),
 //                "placeholder" => "Choose event type"
             ])
             ->add("startDate", "datetime")

@@ -5,16 +5,24 @@ use DateTime;
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Factory\EventFactory;
 use Dende\Calendar\Domain\Calendar;
+use Dende\Calendar\Domain\Calendar\Event;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class EventsData
  * @package Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM
  */
-final class EventsData extends BaseFixture
+final class EventsData extends BaseFixture implements ContainerAwareInterface
 {
     /** @var string $dir */
     protected $dir = __DIR__;
+
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
 
     /**
      * @return int
@@ -26,7 +34,7 @@ final class EventsData extends BaseFixture
 
     /**
      * @param $params
-     * @return Calendar\Event
+     * @return Event
      */
     public function insert($params)
     {
@@ -39,8 +47,28 @@ final class EventsData extends BaseFixture
         $command->title = $params["title"];
         $command->type = $params["type"];
 
-        $event = EventFactory::createFromCommand($command);
+        $event = $this->getContainer()->get('dende_calendar.factory.event')->createFromCommand($command);
 
         return $event;
+    }
+
+    /**
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container A ContainerInterface instance or null
+     *
+     * @api
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * @return ContainerInterface
+     */
+    public function getContainer()
+    {
+        return $this->container;
     }
 }

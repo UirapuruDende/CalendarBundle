@@ -3,7 +3,6 @@ namespace Dende\CalendarBundle\Service;
 
 use DateTime;
 use Dende\Calendar\Domain\Calendar;
-use Dende\Calendar\Domain\Calendar\Event\EventId;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -84,9 +83,7 @@ final class OccurrencesProvider
      */
     public function convert(Occurrence $occurrence)
     {
-        $eventId = $occurrence->event()->id();
-
-        $id = (int) ($eventId instanceof EventId ? $eventId->id() : $eventId);
+        $id = $occurrence->event()->id();
 
         return [
             "title" => $occurrence->event()->title(),

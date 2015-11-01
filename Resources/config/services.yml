@@ -6,6 +6,12 @@ services:
     factory_method: "getRepository"
     arguments: ["Calendar:Calendar\Event\Occurrence"]
 
+  dende_calendar.event_repository:
+    class: Dende\CalendarBundle\Repository\ORM\EventRepository
+    factory_service: doctrine.orm.entity_manager
+    factory_method: "getRepository"
+    arguments: ["Calendar:Calendar\Event"]
+
   dende_calendar.occurrences_provider:
     class: "Dende\CalendarBundle\Service\OccurrencesProvider"
     arguments:
@@ -14,11 +20,21 @@ services:
       - 'dende_calendar_default_updateevent'
 
   dende_calendar.id_generator:
-    class: Dende\CalendarBundle\Service\IdGenerator
+    class: Dende\Calendar\Application\Generator\Doctrine\IdGenerator
     arguments: [@doctrine.orm.entity_manager]
 
   dende_calendar.factory.calendar:
-    class: Dende\CalendarBundle\Entity\Factory\CalendarFactory
+    class: Dende\Calendar\Application\Factory\CalendarFactory
+    arguments:
+      - @dende_calendar.id_generator
+
+  dende_calendar.factory.event:
+    class: Dende\Calendar\Application\Factory\EventFactory
+    arguments:
+      - @dende_calendar.id_generator
+
+  dende_calendar.factory.occurrence:
+    class: Dende\Calendar\Application\Factory\OccurrenceFactory
     arguments:
       - @dende_calendar.id_generator
 
@@ -36,3 +52,11 @@ services:
     class: Dende\CalendarBundle\Form\Type\CalendarType
     tags:
       - {name: form.type, alias: calendar}
+
+  dende_calendar.handler.create_event:
+    class: Dende\Calendar\Application\Handler\CreateEventHandler
+    arguments:
+      - @dende_calendar.event_repository
+      - @dende_calendar.occurrences_repository
+      - @dende_calendar.factory.event
+      - @dende_calendar.factory.occurrence

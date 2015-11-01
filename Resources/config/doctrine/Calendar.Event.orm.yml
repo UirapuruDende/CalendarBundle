@@ -1,11 +1,14 @@
 Dende\Calendar\Domain\Calendar\Event:
   type: entity
   table: events
+  repositoryClass: Dende\CalendarBundle\Repository\ORM\EventRepository
+
+  id:
+    id:
+      type: guid
+      generator: { strategy: UUID }
 
   embedded:
-    id:
-      class: Dende\Calendar\Domain\Calendar\Event\EventId
-      columnPrefix: false
     type:
       class: Dende\Calendar\Domain\Calendar\Event\EventType
       columnPrefix: false

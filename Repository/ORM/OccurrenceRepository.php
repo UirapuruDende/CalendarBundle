@@ -73,7 +73,10 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
 
     public function insert(Occurrence $occurrence)
     {
-        // TODO: Implement insert() method.
+        $em = $this->getEntityManager();
+
+        $em->persist($occurrence);
+        $em->flush();
     }
 
     public function findAllByEvent(Event $event)

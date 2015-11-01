@@ -5,8 +5,6 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
 
   id:
     id:
-      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId
-      columnPrefix: false
       type: guid
       generator: { strategy: UUID }
 

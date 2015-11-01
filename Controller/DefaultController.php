@@ -32,7 +32,7 @@ final class DefaultController extends Controller
         $calendars = $this->getDoctrine()->getRepository("Calendar:Calendar")->findAll();
 
         $calendars = array_map(function (Calendar $calendar) {
-            return $calendar->id()->id();
+            return $calendar->id();
         }, $calendars);
 
         return [
@@ -82,7 +82,9 @@ final class DefaultController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                die(var_dump("posted!", $form->getData()));
+                $command = $form->getData();
+                $this->get("dende_calendar.handler.create_event")->handle($command);
+                return $this->redirectToRoute("dende_calendar_default_index");
             }
         }
 
