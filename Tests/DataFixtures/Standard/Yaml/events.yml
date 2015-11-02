@@ -17,3 +17,13 @@ event-002:
   duration:     90
   startDate:    "2015-09-01 12:00:00"
   endDate:      "2015-09-30 13:30:00"
+
+event-003: # events for testing, please leave this or tests will fail - temporary
+  id:           ~
+  calendar:     calendar-003
+  title:        "some-single-test-event"
+  repetitions:  [2]
+  type:         single
+  duration:     90
+  startDate:    "2015-09-01 12:00:00"
+  endDate:      "2015-09-01 13:30:00"

@@ -8,10 +8,24 @@ framework:
     templating:
         engines: ['twig']
     session:
-        storage_id: session.storage.filesystem
+        cookie_lifetime:  3600
+        gc_maxlifetime: 1800
+        handler_id:  ~
     profiler:
         collect: true
         only_exceptions: false
+        enabled: true
+
+    fragments:       ~
+    http_method_override: true
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+twig:
+    debug:            true
+    strict_variables: true
 
 fos_rest:
   param_fetcher_listener: true
@@ -52,11 +66,11 @@ monolog:
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: ERROR
 
-liip_functional_test:
-  cache_sqlite_db: true
-  authentication:
-    username: admin
-    password: admin
+liip_functional_test: ~
+#  cache_sqlite_db: true
+#  authentication:
+#    username: admin
+#    password: admin
 
 doctrine:
     dbal:

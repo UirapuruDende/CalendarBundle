@@ -73,11 +73,14 @@ class AppKernel extends Kernel
  - [ ] automatically adding mapping for default entity manager
  - [ ] autoconfiguration (as less instalation needed and configuring as needed)
  - [x] registering application services
+ - [ ] utilize some datetimepicker for event forms
  - [ ] frontend view based on javascript library
  - [ ] using sql/mongo by switching it in bundle config
+ - [ ] printing/saving to pdf
  - [ ] full documentation
+ - [ ] filtering in view by calendars
  
 ## bugs
 
-    - adding new event from frontend creates only single occurrence
+ - adding new event from frontend creates only single occurrence
     

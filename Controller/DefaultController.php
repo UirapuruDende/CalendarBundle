@@ -64,6 +64,7 @@ final class DefaultController extends Controller
      */
     public function createEventAction(Request $request)
     {
+        $response = new Response();
         $command = new CreateEventCommand();
 
         if ($request->isMethod("GET") && !is_null($request->get('startDate')) && !is_null($request->get('endDate'))) {
@@ -85,12 +86,14 @@ final class DefaultController extends Controller
                 $command = $form->getData();
                 $this->get("dende_calendar.handler.create_event")->handle($command);
                 return $this->redirectToRoute("dende_calendar_default_index");
+            } else {
+                $response->setStatusCode(400);
             }
         }
 
-        return [
+        return $response->setContent($this->renderView("DendeCalendarBundle:Default:createEvent.html.twig", [
             "form" => $form->createView()
-        ];
+        ]));
     }
 
     /**
@@ -102,6 +105,7 @@ final class DefaultController extends Controller
      */
     public function updateEventAction(Request $request, Occurrence $occurrence)
     {
+        $response = new Response();
         $command = new UpdateEventCommand();
         $command->occurrence = $occurrence;
 
@@ -122,6 +126,7 @@ final class DefaultController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+
                 if ($form->get("delete_event")->isClicked()) {
                     $this->get('dende_calendar.handler.remove_event')->remove($occurrence->event());
                     return $this->redirectToRoute("dende_calendar_default_index");
@@ -133,11 +138,13 @@ final class DefaultController extends Controller
                     $this->get("dende_calendar.handler.update_event")->handle($command);
                     return $this->redirectToRoute("dende_calendar_default_index");
                 }
+            } else {
+                $response->setStatusCode(400);
             }
         }
 
-        return [
+        return $response->setContent($this->renderView("DendeCalendarBundle:Default:createEvent.html.twig", [
             "form" => $form->createView()
-        ];
+        ]));
     }
 }

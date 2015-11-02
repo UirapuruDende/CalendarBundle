@@ -4,6 +4,7 @@ namespace Dende\CalendarBundle\Tests\Unit\Service;
 use DateTime;
 use Dende\Calendar\Application\Factory\EventFactory;
 use Dende\Calendar\Application\Factory\OccurrenceFactory;
+use Dende\Calendar\Application\Generator\InMemory\IdGenerator;
 use Dende\Calendar\Domain\Calendar\Event\Duration;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
 use Dende\CalendarBundle\Service\OccurrencesProvider;
@@ -30,7 +31,7 @@ final class OccurrenceProviderTest extends \PHPUnit_Framework_TestCase
         $start = new DateTime("now");
         $end = new DateTime("+1 hour");
 
-        $event = EventFactory::createFromArray([
+        $event = (new EventFactory(new IdGenerator()))->createFromArray([
             "title" => "Event Title",
             "start" => new DateTime("now"),
             "end" => new DateTime("+1 hour"),
@@ -38,8 +39,8 @@ final class OccurrenceProviderTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $collection = [
-            OccurrenceFactory::createFromArray([
-                "id" => new OccurrenceId("123"),
+            (new OccurrenceFactory(new IdGenerator()))->createFromArray([
+                "id" => "123",
                 "startDate" => new DateTime("now"),
                 "duration" => new Duration(60),
                 "event" => $event

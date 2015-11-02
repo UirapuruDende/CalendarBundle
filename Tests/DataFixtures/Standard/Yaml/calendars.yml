@@ -4,3 +4,6 @@ calendar-001:
 calendar-002:
   id: ~
   name: some-test-name-02
+calendar-003:
+  id: ~
+  name: "calendar-for-functional-tests"

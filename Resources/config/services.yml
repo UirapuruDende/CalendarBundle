@@ -1,4 +1,7 @@
 ---
+parameters:
+  dende_calendar.id_generator_class: Dende\Calendar\Application\Generator\Doctrine\IdGenerator
+
 services:
   dende_calendar.occurrences_repository:
     class: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
@@ -20,7 +23,7 @@ services:
       - 'dende_calendar_default_updateevent'
 
   dende_calendar.id_generator:
-    class: Dende\Calendar\Application\Generator\Doctrine\IdGenerator
+    class: %dende_calendar.id_generator_class%
     arguments: [@doctrine.orm.entity_manager]
 
   dende_calendar.factory.calendar:

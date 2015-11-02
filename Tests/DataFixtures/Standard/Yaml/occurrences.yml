@@ -127,3 +127,8 @@ occurrence-02-13:
   startDate: "2015-09-30 12:00:00"
   duration: 90
   event: event-002
+
+occurrence-03-01: #occurrence for testing, please leave or test will fail - temporary
+  startDate: "2015-09-01 12:00:00"
+  duration: 90
+  event: event-003

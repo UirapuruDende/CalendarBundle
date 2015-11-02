@@ -17,7 +17,6 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
     event:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
       mappedBy: occurrences
-      cascade: ["all"]
       inversedBy: occurrences
 
   fields:

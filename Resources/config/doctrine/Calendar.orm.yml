@@ -17,4 +17,3 @@ Dende\Calendar\Domain\Calendar:
     events:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
       mappedBy: calendar
-      cascade: ["all"]

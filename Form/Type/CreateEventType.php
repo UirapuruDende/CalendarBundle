@@ -32,7 +32,7 @@ final class CreateEventType extends AbstractType
             ->add("repetitionDays", "choice", [
                 "choices" => Repetitions::$availableWeekdays,
                 "multiple" => true,
-                "expanded" => true
+                "expanded" => true,
             ])
             ->add("submit", "submit")
         ;
