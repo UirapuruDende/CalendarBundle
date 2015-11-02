@@ -1,9 +1,5 @@
-{% block stylesheets %}
+{% extends 'DendeCalendarBundle::layout.html.twig' %}
 
-{% endblock %}
-
-{% block javascripts %}
-
-{% endblock %}
-
-{{ form(form) }}
+{% block content %}
+    {{ form(form, {attr: {class: "form"}}) }}
+{% endblock content %}

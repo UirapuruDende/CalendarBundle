@@ -25,8 +25,8 @@ final class CreateEventType extends AbstractType
                 "choices" => array_combine(EventType::$availableTypes, EventType::$availableTypes),
 //                "placeholder" => "Choose event type"
             ])
-            ->add("startDate", "datetime")
-            ->add("endDate", "datetime")
+            ->add("startDate", "datetime", ['widget' => 'single_text', 'with_seconds' => false, 'format' => 'Y-M-dd HH:mm' ])
+            ->add("endDate", "datetime", ['widget' => 'single_text', 'with_seconds' => false, 'format' => 'Y-M-dd HH:mm'])
             ->add("duration", "integer")
             ->add("title", "text")
             ->add("repetitionDays", "choice", [

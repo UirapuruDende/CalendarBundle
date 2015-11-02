@@ -23,8 +23,8 @@ final class UpdateEventType extends AbstractType
             ->add("type", "choice", [
                 "choices" => array_combine(EventType::$availableTypes, EventType::$availableTypes),
             ])
-            ->add("startDate", "datetime")
-            ->add("endDate", "datetime")
+            ->add("startDate", "datetime", ['widget' => 'single_text', 'with_seconds' => false, 'format' => 'Y-M-dd HH:mm' ])
+            ->add("endDate", "datetime", ['widget' => 'single_text', 'with_seconds' => false, 'format' => 'Y-M-dd HH:mm' ])
             ->add("duration", "integer")
             ->add("title", "text")
             ->add("method", "hidden", [
@@ -36,10 +36,16 @@ final class UpdateEventType extends AbstractType
                 "expanded" => true
             ])
             ->add("delete_event", "submit", [
-                "label" => "Delete whole event"
+                "label" => "Delete whole event",
+                "attr" => [
+                    "class" => "pull-right"
+                ]
             ])
             ->add("delete_occurrence", "submit", [
-                "label" => "Delete only this occurrence"
+                "label" => "Delete only this occurrence",
+                "attr" => [
+                    "class" => "pull-right"
+                ]
             ])
             ->add("submit", "submit", [
                 "label" => "Update event"

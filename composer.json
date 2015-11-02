@@ -12,7 +12,8 @@
         "friendsofsymfony/rest-bundle": "^1.7",
         "sensio/framework-extra-bundle": "~3.0",
         "dende/common-bundle": "^0.0.7",
-        "willdurand/hateoas-bundle": "~1.0"
+        "willdurand/hateoas-bundle": "~1.0",
+        "braincrafted/bootstrap-bundle": "dev-master"
 
     },
     "require-dev": {
