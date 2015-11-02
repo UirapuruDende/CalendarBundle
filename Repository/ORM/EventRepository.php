@@ -26,6 +26,17 @@ class EventRepository extends EntityRepository implements EventRepositoryInterfa
 
     public function update($event)
     {
-        // TODO: Implement update() method.
+        $em = $this->getEntityManager();
+
+        $em->persist($event);
+        $em->flush();
+    }
+
+    public function remove($event)
+    {
+        $em = $this->getEntityManager();
+
+        $em->remove($event);
+        $em->flush();
     }
 }

@@ -60,3 +60,34 @@ services:
       - @dende_calendar.occurrences_repository
       - @dende_calendar.factory.event
       - @dende_calendar.factory.occurrence
+
+
+  dende_calendar.handler.remove_event:
+    class: Dende\Calendar\Application\Handler\RemoveEventHandler
+    arguments:
+      - @dende_calendar.event_repository
+  dende_calendar.handler.remove_occurrence:
+    class: Dende\Calendar\Application\Handler\RemoveOccurrenceHandler
+    arguments:
+      - @dende_calendar.occurrences_repository
+
+  dende_calendar.handler.update_event:
+    class: Dende\Calendar\Application\Handler\UpdateEventHandler
+    calls: # move to compiler pass
+      - [addStrategy, ['single', @dende_calendar.update_strategy.single]]
+      - [addStrategy, ['overwrite', @dende_calendar.update_strategy.overwrite]]
+    arguments:
+      - @dende_calendar.event_repository
+      - @dende_calendar.occurrences_repository
+      - @dende_calendar.factory.event
+      - @dende_calendar.factory.occurrence
+
+  dende_calendar.update_strategy.single: # move to compiler pass
+    class: Dende\Calendar\Application\Handler\UpdateStrategy\Single
+    tags:
+      - {name: dende_calendar.update_strategy }
+
+  dende_calendar.update_strategy.overwrite: # move to compiler pass
+    class: Dende\Calendar\Application\Handler\UpdateStrategy\Overwrite
+    tags:
+      - {name: dende_calendar.update_strategy }

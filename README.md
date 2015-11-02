@@ -72,7 +72,12 @@ class AppKernel extends Kernel
  - [ ] automatically registering view entity manager
  - [ ] automatically adding mapping for default entity manager
  - [ ] autoconfiguration (as less instalation needed and configuring as needed)
- - [ ] registering application services
+ - [x] registering application services
  - [ ] frontend view based on javascript library
  - [ ] using sql/mongo by switching it in bundle config
  - [ ] full documentation
+ 
+## bugs
+
+    - adding new event from frontend creates only single occurrence
+    

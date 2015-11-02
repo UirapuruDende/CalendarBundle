@@ -101,6 +101,8 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
 
     public function remove(Occurrence $occurrence)
     {
-        // TODO: Implement remove() method.
+        $em = $this->getEntityManager();
+        $em->remove($occurrence);
+        $em->flush();
     }
 }

@@ -4,8 +4,8 @@ namespace Dende\CalendarBundle\Controller;
 use Carbon\Carbon;
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Command\UpdateEventCommand;
+use Dende\Calendar\Application\Handler\UpdateEventHandler;
 use Dende\Calendar\Domain\Calendar;
-use Dende\Calendar\Domain\Calendar\CalendarId;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -100,8 +100,44 @@ final class DefaultController extends Controller
      * @Template()
      * @return string
      */
-    public function updateEventAction(Occurrence $occurrence)
+    public function updateEventAction(Request $request, Occurrence $occurrence)
     {
-        $form = $this->createForm('dende_calendar.form_type.update_event', new UpdateEventCommand());
+        $command = new UpdateEventCommand();
+        $command->occurrence = $occurrence;
+
+        if ($request->isMethod("GET")) {
+            $event = $occurrence->event();
+            $command->calendar = $event->calendar();
+            $command->startDate = $event->startDate();
+            $command->endDate = $event->endDate();
+            $command->duration = $event->duration()->minutes();
+            $command->title = $event->title();
+            $command->repetitionDays = $event->repetitions()->weekly();
+            $command->type = $event->type()->type();
+        }
+
+        $form = $this->createForm('update_event', $command);
+
+        if ($request->isMethod("POST")) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                if ($form->get("delete_event")->isClicked()) {
+                    $this->get('dende_calendar.handler.remove_event')->remove($occurrence->event());
+                    return $this->redirectToRoute("dende_calendar_default_index");
+                } elseif ($form->get("delete_occurrence")->isClicked()) {
+                    $this->get('dende_calendar.handler.remove_occurrence')->remove($occurrence);
+                    return $this->redirectToRoute("dende_calendar_default_index");
+                } else {
+                    $command = $form->getData();
+                    $this->get("dende_calendar.handler.update_event")->handle($command);
+                    return $this->redirectToRoute("dende_calendar_default_index");
+                }
+            }
+        }
+
+        return [
+            "form" => $form->createView()
+        ];
     }
 }

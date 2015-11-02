@@ -28,7 +28,7 @@ final class CreateEventType extends AbstractType
             ->add("startDate", "datetime")
             ->add("endDate", "datetime")
             ->add("duration", "integer")
-            ->add("title", "text", ["data" => 'test'])
+            ->add("title", "text")
             ->add("repetitionDays", "choice", [
                 "choices" => Repetitions::$availableWeekdays,
                 "multiple" => true,
