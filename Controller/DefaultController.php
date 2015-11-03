@@ -29,7 +29,7 @@ final class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $calendars = $this->getDoctrine()->getRepository("Calendar:Calendar")->findAll();
+        $calendars = $this->get("dende_calendar.entity_manager")->getRepository("Calendar:Calendar")->findAll();
 
         $calendars = array_map(function (Calendar $calendar) {
             return $calendar->id();

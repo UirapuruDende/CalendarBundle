@@ -25,6 +25,7 @@ Dende\Calendar\Domain\Calendar\Event:
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
       inversedBy: events
+      cascade: ["persist"]
 
   oneToMany:
     occurrences:

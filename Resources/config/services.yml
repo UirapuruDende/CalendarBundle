@@ -3,15 +3,22 @@ parameters:
   dende_calendar.id_generator_class: Dende\Calendar\Application\Generator\Doctrine\IdGenerator
 
 services:
+  dende_calendar.entity_manager:
+    class: Doctrine\ORM\EntityManager
+    factory_service: doctrine
+    factory_method: getManager
+    arguments:
+     - %dende_calendar.entity_manager_name%
+
   dende_calendar.occurrences_repository:
     class: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
-    factory_service: doctrine.orm.entity_manager
+    factory_service: dende_calendar.entity_manager
     factory_method: "getRepository"
     arguments: ["Calendar:Calendar\Event\Occurrence"]
 
   dende_calendar.event_repository:
     class: Dende\CalendarBundle\Repository\ORM\EventRepository
-    factory_service: doctrine.orm.entity_manager
+    factory_service: dende_calendar.entity_manager
     factory_method: "getRepository"
     arguments: ["Calendar:Calendar\Event"]
 
@@ -24,7 +31,7 @@ services:
 
   dende_calendar.id_generator:
     class: %dende_calendar.id_generator_class%
-    arguments: [@doctrine.orm.entity_manager]
+    arguments: [@dende_calendar.entity_manager]
 
   dende_calendar.factory.calendar:
     class: Dende\Calendar\Application\Factory\CalendarFactory
