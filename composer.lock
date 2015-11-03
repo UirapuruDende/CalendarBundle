@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3fa59d4b629e651074b038900fd8b47c",
-    "content-hash": "1f4efaeb4904ab483bebc0e9b004a14d",
+    "hash": "9f7ccce7ffee18d631f2b8c5ab7e1372",
+    "content-hash": "e03a68d89a72cfb9d8bb057bb5f740f7",
     "packages": [
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -112,7 +112,7 @@
         },
         {
             "name": "dende/common-bundle",
-            "version": "0.0.7",
+            "version": "dev-master",
             "target-dir": "Dende/CommonBundle",
             "source": {
                 "type": "git",
@@ -3949,6 +3949,7 @@
         "doctrine/orm": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "dende/calendar": 20,
+        "dende/common-bundle": 20,
         "braincrafted/bootstrap-bundle": 20,
         "fabpot/php-cs-fixer": 20,
         "twig/extensions": 20

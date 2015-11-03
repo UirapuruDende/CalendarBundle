@@ -11,11 +11,10 @@
         "friendsofsymfony/jsrouting-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^1.7",
         "sensio/framework-extra-bundle": "~3.0",
-        "dende/common-bundle": "^0.0.7",
+        "dende/common-bundle": "dev-master",
         "willdurand/hateoas-bundle": "~1.0",
         "braincrafted/bootstrap-bundle": "dev-master",
         "liip/functional-test-bundle": "^1.2"
-
     },
     "require-dev": {
         "symfony/framework-bundle" : "2.7.5",
