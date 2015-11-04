@@ -21,7 +21,8 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('entity_manager')->defaultValue('default')->end()
+                ->scalarNode('model_manager_name')->defaultValue('default')->end()
+                ->scalarNode('backend_type')->defaultValue('ORM')->end()
             ->end()
         ;
 

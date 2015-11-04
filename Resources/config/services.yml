@@ -8,7 +8,7 @@ services:
     factory_service: doctrine
     factory_method: getManager
     arguments:
-     - %dende_calendar.entity_manager_name%
+     - %dende_calendar.model_manager_name%
 
   dende_calendar.occurrences_repository:
     class: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
