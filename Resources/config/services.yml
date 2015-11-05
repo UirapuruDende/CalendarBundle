@@ -1,25 +1,37 @@
 ---
 parameters:
-  dende_calendar.id_generator_class: Dende\Calendar\Application\Generator\Doctrine\IdGenerator
+  dende_calendar.id_generator.class:            Dende\Calendar\Application\Generator\Doctrine\IdGenerator
+  dende_calendar.event_repository.class:        Dende\CalendarBundle\Repository\ORM\EventRepository
+  dende_calendar.occurrences_repository.class:  Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
 
 services:
+
+#model managers
+
   dende_calendar.entity_manager:
-    class: Doctrine\ORM\EntityManager
+    class: %doctrine.orm.entity_manager.class%
     factory_service: doctrine
     factory_method: getManager
     arguments:
      - %dende_calendar.model_manager_name%
 
+  dende_calendar.viewmodel_entity_manager:
+    class: %doctrine.orm.entity_manager.class%
+    factory_service: doctrine
+    factory_method: getManager
+    arguments:
+     - %dende_calendar.viewmodel_manager_name%
+
 # repositories
 
   dende_calendar.event_repository:
-    class: Dende\CalendarBundle\Repository\ORM\EventRepository
+    class: %dende_calendar.event_repository.class%
     factory_service: dende_calendar.entity_manager
     factory_method: "getRepository"
     arguments: ["Calendar:Calendar\Event"]
 
   dende_calendar.occurrences_repository:
-    class: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
+    class: %dende_calendar.occurrences_repository.class%
     factory_service: dende_calendar.entity_manager
     factory_method: "getRepository"
     arguments: ["Calendar:Calendar\Event\Occurrence"]
@@ -27,14 +39,14 @@ services:
 # custom services
 
   dende_calendar.occurrences_provider:
-    class: "Dende\CalendarBundle\Service\OccurrencesProvider"
+    class: Dende\CalendarBundle\Service\OccurrencesProvider
     arguments:
       - @dende_calendar.occurrences_repository
       - @router.default
       - 'dende_calendar_default_updateevent'
 
   dende_calendar.id_generator:
-    class: %dende_calendar.id_generator_class%
+    class: %dende_calendar.id_generator.class%
     arguments: [@dende_calendar.entity_manager]
 
 #forms

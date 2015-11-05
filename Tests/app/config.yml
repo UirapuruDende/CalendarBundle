@@ -96,23 +96,11 @@ doctrine:
           default:
             auto_mapping: false
             connection: default
-            mappings:
-              Calendar:
-                type: yml
-                prefix: Dende\Calendar\Domain
-                dir: %kernel.root_dir%/../../Resources/config/doctrine
-                is_bundle: false
-                alias: Calendar
-          view_model:
+            mappings: ~
+          viewmodel_default:
             auto_mapping: false
             connection: default
-            mappings:
-              ViewModel:
-                type: yml
-                prefix: Dende\Calendar\Domain
-                dir: %kernel.root_dir%/../../Resources/config/doctrine-viewmodel
-                is_bundle: false
-                alias: ViewModel
+            mappings: ~
 #          sqlite:
 #            auto_mapping: false
 #            connection: sqlite

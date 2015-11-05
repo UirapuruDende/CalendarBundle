@@ -22,6 +22,7 @@ class DendeCalendarExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter("dende_calendar.model_manager_name", $config["model_manager_name"]);
+        $container->setParameter("dende_calendar.viewmodel_manager_name", sprintf("viewmodel_%s", $config["model_manager_name"]));
 
         if ($config["backend_type"] === "ORM")
         {
