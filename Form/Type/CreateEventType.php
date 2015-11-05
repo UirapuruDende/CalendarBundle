@@ -17,13 +17,12 @@ final class CreateEventType extends AbstractType
     {
         $builder
             ->add("calendar", "entity", [
-                "class" => "Dende\Calendar\Domain\Calendar",
+                "class" => "Calendar:Calendar",
                 "choice_label" => "name",
-////                "placeholder" => "Choose calendar",
+                "em" => $options["model_manager_name"]
             ])
             ->add("type", "choice", [
                 "choices" => array_combine(EventType::$availableTypes, EventType::$availableTypes),
-//                "placeholder" => "Choose event type"
             ])
             ->add("startDate", "datetime", ['widget' => 'single_text', 'with_seconds' => false, 'format' => 'Y-M-dd HH:mm' ])
             ->add("endDate", "datetime", ['widget' => 'single_text', 'with_seconds' => false, 'format' => 'Y-M-dd HH:mm'])
@@ -48,8 +47,13 @@ final class CreateEventType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Dende\Calendar\Application\Command\CreateEventCommand'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Dende\Calendar\Application\Command\CreateEventCommand',
+            'model_manager_name' => 'default'
+        ]);
+
+        $resolver->setAllowedTypes([
+            'model_manager_name' => 'string',
+        ]);
     }
 }

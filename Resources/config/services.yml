@@ -10,17 +10,21 @@ services:
     arguments:
      - %dende_calendar.model_manager_name%
 
-  dende_calendar.occurrences_repository:
-    class: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
-    factory_service: dende_calendar.entity_manager
-    factory_method: "getRepository"
-    arguments: ["Calendar:Calendar\Event\Occurrence"]
+# repositories
 
   dende_calendar.event_repository:
     class: Dende\CalendarBundle\Repository\ORM\EventRepository
     factory_service: dende_calendar.entity_manager
     factory_method: "getRepository"
     arguments: ["Calendar:Calendar\Event"]
+
+  dende_calendar.occurrences_repository:
+    class: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
+    factory_service: dende_calendar.entity_manager
+    factory_method: "getRepository"
+    arguments: ["Calendar:Calendar\Event\Occurrence"]
+
+# custom services
 
   dende_calendar.occurrences_provider:
     class: "Dende\CalendarBundle\Service\OccurrencesProvider"
@@ -33,20 +37,7 @@ services:
     class: %dende_calendar.id_generator_class%
     arguments: [@dende_calendar.entity_manager]
 
-  dende_calendar.factory.calendar:
-    class: Dende\Calendar\Application\Factory\CalendarFactory
-    arguments:
-      - @dende_calendar.id_generator
-
-  dende_calendar.factory.event:
-    class: Dende\Calendar\Application\Factory\EventFactory
-    arguments:
-      - @dende_calendar.id_generator
-
-  dende_calendar.factory.occurrence:
-    class: Dende\Calendar\Application\Factory\OccurrenceFactory
-    arguments:
-      - @dende_calendar.id_generator
+#forms
 
   dende_calendar.form_type.create_event:
     class: Dende\CalendarBundle\Form\Type\CreateEventType
@@ -58,10 +49,7 @@ services:
     tags:
       - {name: form.type, alias: update_event}
 
-  dende_calendar.form_type.calendar:
-    class: Dende\CalendarBundle\Form\Type\CalendarType
-    tags:
-      - {name: form.type, alias: calendar}
+# handlers
 
   dende_calendar.handler.create_event:
     class: Dende\Calendar\Application\Handler\CreateEventHandler
@@ -101,3 +89,20 @@ services:
     class: Dende\Calendar\Application\Handler\UpdateStrategy\Overwrite
     tags:
       - {name: dende_calendar.update_strategy }
+
+# factories
+
+  dende_calendar.factory.calendar:
+    class: Dende\Calendar\Application\Factory\CalendarFactory
+    arguments:
+      - @dende_calendar.id_generator
+
+  dende_calendar.factory.event:
+    class: Dende\Calendar\Application\Factory\EventFactory
+    arguments:
+      - @dende_calendar.id_generator
+
+  dende_calendar.factory.occurrence:
+    class: Dende\Calendar\Application\Factory\OccurrenceFactory
+    arguments:
+      - @dende_calendar.id_generator

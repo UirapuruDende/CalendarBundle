@@ -77,7 +77,9 @@ final class DefaultController extends Controller
             ];
         }
 
-        $form = $this->createForm('create_event', $command);
+        $form = $this->createForm('create_event', $command, [
+            "model_manager_name" => $this->getParameter("dende_calendar.model_manager_name")
+        ]);
 
         if ($request->isMethod("POST")) {
             $form->handleRequest($request);
@@ -98,13 +100,17 @@ final class DefaultController extends Controller
 
     /**
      * @Route("/occurrence/{occurrence}", options={"expose"=true})
-     * @ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence")
+     * ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence", options={"entity_manager": "club"})
      * @Method({"GET", "POST"})
      * @Template()
      * @return string
      */
-    public function updateEventAction(Request $request, Occurrence $occurrence)
+    public function updateEventAction(Request $request, $occurrence)
     {
+        $occurrence = $this->get("dende_calendar.entity_manager")
+            ->getRepository('Calendar:Calendar\Event\Occurrence')
+            ->find($occurrence);
+
         $response = new Response();
         $command = new UpdateEventCommand();
         $command->occurrence = $occurrence;
@@ -120,7 +126,9 @@ final class DefaultController extends Controller
             $command->type = $event->type()->type();
         }
 
-        $form = $this->createForm('update_event', $command);
+        $form = $this->createForm('update_event', $command, [
+            "model_manager_name" => $this->getParameter("dende_calendar.model_manager_name")
+        ]);
 
         if ($request->isMethod("POST")) {
             $form->handleRequest($request);

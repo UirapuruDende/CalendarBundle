@@ -18,20 +18,19 @@ class DendeCalendarBundle extends Bundle
      */
     private function addRegisterMappingsPass(ContainerBuilder $container)
     {
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine') => 'Dende\Calendar\Domain',
-        );
+        $mappings = [realpath(__DIR__ . '/Resources/config/doctrine') => 'Dende\Calendar\Domain'];
 
-        $registerMappingCompilerPass = DoctrineOrmMappingsPass::createYamlMappingDriver(
-            $mappings,
-            [
-                'dende_calendar.entity_manager',
-                'doctrine.orm.club_entity_manager'
-            ],
-            'dende_calendar.backend_type_orm',
-            ["Calendar" => 'Dende\Calendar\Domain']
-        );
+        $ormCompilerClass = 'Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass';
 
-        $container->addCompilerPass($registerMappingCompilerPass);
+        if (class_exists($ormCompilerClass)) {
+            $registerMappingCompilerPass = DoctrineOrmMappingsPass::createYamlMappingDriver(
+                $mappings,
+                ['dende_calendar.model_manager_name'],
+                'dende_calendar.backend_type_orm',
+                ['Calendar' => 'Dende\Calendar\Domain']
+            );
+
+            $container->addCompilerPass($registerMappingCompilerPass);
+        }
     }
 }

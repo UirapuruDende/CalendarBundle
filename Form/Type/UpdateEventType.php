@@ -17,8 +17,9 @@ final class UpdateEventType extends AbstractType
     {
         $builder
             ->add("calendar", "entity", [
-                "class" => "Dende\Calendar\Domain\Calendar",
+                "class" => "Calendar:Calendar",
                 "choice_label" => "name",
+                "em" => $options["model_manager_name"]
             ])
             ->add("type", "choice", [
                 "choices" => array_combine(EventType::$availableTypes, EventType::$availableTypes),
@@ -58,9 +59,14 @@ final class UpdateEventType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Dende\Calendar\Application\Command\UpdateEventCommand'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Dende\Calendar\Application\Command\UpdateEventCommand',
+            'model_manager_name' => 'default'
+        ]);
+
+        $resolver->setAllowedTypes([
+            'model_manager_name' => 'string',
+        ]);
     }
 
     /**
