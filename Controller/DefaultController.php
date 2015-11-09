@@ -151,7 +151,7 @@ final class DefaultController extends Controller
             }
         }
 
-        return $response->setContent($this->renderView("DendeCalendarBundle:Default:createEvent.html.twig", [
+        return $response->setContent($this->renderView("DendeCalendarBundle:Default:updateEvent.html.twig", [
             "form" => $form->createView()
         ]));
     }

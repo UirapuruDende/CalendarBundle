@@ -70,7 +70,7 @@ class AppKernel extends Kernel
     - [ ] forms
  - [ ] php wrapper for fullcalendar configuration
  - [ ] automatically registering view entity manager
- - [ ] automatically adding mapping for default entity manager
+ - [x] automatically adding mapping for default entity manager
  - [ ] autoconfiguration (as less instalation needed and configuring as needed)
  - [x] registering application services
  - [ ] utilize some datetimepicker for event forms
@@ -79,8 +79,14 @@ class AppKernel extends Kernel
  - [ ] printing/saving to pdf
  - [ ] full documentation
  - [ ] filtering in view by calendars
+ - [ ] validation
  
 ## bugs
 
  - adding new event from frontend creates only single occurrence
     
+    
+## utilizes:
+
+http://www.malot.fr/bootstrap-datetimepicker/demo.php
+http://fullcalendar.io/

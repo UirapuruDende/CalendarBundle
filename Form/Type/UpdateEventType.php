@@ -8,6 +8,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class UpdateEventType
+ * @package Dende\CalendarBundle\Form\Type
+ */
 final class UpdateEventType extends AbstractType
 {
     /**
@@ -24,8 +28,22 @@ final class UpdateEventType extends AbstractType
             ->add("type", "choice", [
                 "choices" => array_combine(EventType::$availableTypes, EventType::$availableTypes),
             ])
-            ->add("startDate", "datetime", ['widget' => 'single_text', 'with_seconds' => false, 'format' => 'Y-M-dd HH:mm' ])
-            ->add("endDate", "datetime", ['widget' => 'single_text', 'with_seconds' => false, 'format' => 'Y-M-dd HH:mm' ])
+            ->add("startDate", "datetime", [
+                'widget' => 'single_text',
+                'with_seconds' => false,
+                'format' => 'Y-M-dd HH:mm',
+                'attr' => [
+                    'class' => 'form_datetime'
+                ]
+            ])
+            ->add("endDate", "datetime", [
+                'widget' => 'single_text',
+                'with_seconds' => false,
+                'format' => 'Y-M-dd HH:mm',
+                'attr' => [
+                    'class' => 'form_datetime'
+                ]
+            ])
             ->add("duration", "integer")
             ->add("title", "text")
             ->add("method", "hidden", [
