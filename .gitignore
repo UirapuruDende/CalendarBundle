@@ -10,3 +10,4 @@
 /Tests/app/bundles
 /bin/
 tmp*
+composer.phar
