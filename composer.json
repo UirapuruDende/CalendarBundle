@@ -13,7 +13,7 @@
         "sensio/framework-extra-bundle": "~3.0",
         "dende/common-bundle": "dev-master",
         "willdurand/hateoas-bundle": "~1.0",
-        "braincrafted/bootstrap-bundle": "dev-master",
+        "braincrafted/bootstrap-bundle": "1.4.2",
         "liip/functional-test-bundle": "^1.2"
     },
     "require-dev": {

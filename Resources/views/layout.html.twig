@@ -13,34 +13,27 @@
         <script src='{{ asset("bundles/dendecalendar/js/fullcalendar.js") }}'></script>
         <script src='{{ asset("bundles/dendecalendar/js/lang/" ~ lang ~ ".js") }}'></script>
         <script src='{{ asset("bundles/dendecalendar/js/dendeCalendar.js") }}'></script>
-        <script src="{{ asset('bundles/dendecalendar/js/locales/bootstrap-datetimepicker.pl.js') }}"></script>
-        <script src="{{ asset('bundles/dendecalendar/js/bootstrap-datetimepicker.min.js') }}"></script>
 
         <script type="text/javascript">
             var eventClickHandler = function() {};
             var dende_calendar_lang = '{{ lang }}';
             var dende_calendar_tz = '{{ calendarTimezone is defined ? calendarTimezone : 'Europe/Warsaw' }}';
-
-            $(function(){
-                $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
-            });
         </script>
     {% endblock javascripts %}
 
     {% block stylesheets %}
         <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/fullcalendar.css') }}" />
         <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap.min.css') }}" />
-        <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap-datetimepicker.min.css') }}" />
     {% endblock stylesheets %}
 </head>
 
 <body>
-<div class="container-fluid">
-    <div class="row-fluid">
-{% block content %}
-
-{% endblock content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span24">
+            {% block content %}{% endblock content %}
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>
