@@ -80,6 +80,7 @@ class AppKernel extends Kernel
  - [ ] full documentation
  - [ ] filtering in view by calendars
  - [ ] validation
+ - [ ] dispatching proper events on actions
  
 ## bugs
 
