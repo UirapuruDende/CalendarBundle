@@ -3,7 +3,6 @@
     <title>FullCalendar with Dende/CalendarBundle demo</title>
 
     {% block javascripts %}
-        {{ parent() }}
         {% set lang = calendarLang is defined ? calendarLang : 'pl' %}
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -29,7 +28,6 @@
     {% endblock javascripts %}
 
     {% block stylesheets %}
-        {{ parent() }}
         <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/fullcalendar.css') }}" />
         <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap.min.css') }}" />
         <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap-datetimepicker.min.css') }}" />
