@@ -81,6 +81,7 @@ class AppKernel extends Kernel
  - [ ] filtering in view by calendars
  - [ ] validation
  - [ ] dispatching proper events on actions
+ - [ ] moving event occurrence up/down and to other days
  
 ## bugs
 
@@ -89,5 +90,5 @@ class AppKernel extends Kernel
     
 ## utilizes:
 
-http://www.malot.fr/bootstrap-datetimepicker/demo.php
-http://fullcalendar.io/
+ - http://www.malot.fr/bootstrap-datetimepicker/demo.php
+ - http://fullcalendar.io/

@@ -25,6 +25,10 @@ final class UpdateEventType extends AbstractType
                 "choice_label" => "name",
                 "em" => $options["model_manager_name"]
             ])
+            ->add("new_calendar_name", "text", [
+                "mapped" => false,
+                "required" => false
+            ])
             ->add("type", "choice", [
                 "choices" => array_combine(EventType::$availableTypes, EventType::$availableTypes),
             ])

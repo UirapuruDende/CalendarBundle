@@ -86,9 +86,12 @@ final class DefaultController extends Controller
 
             if ($form->isValid()) {
                 $command = $form->getData();
+                $this->get("dende_calendar.new_calendar_creation")->handleForm($form, $command);
                 $this->get("dende_calendar.handler.create_event")->handle($command);
+                $this->get("session")->getFlashBag()->add("success", "dende_calendar.flash.event_created_successfully");
                 return $this->redirectToRoute("dende_calendar_default_index");
             } else {
+                $this->get("session")->getFlashBag()->add("error", "dende_calendar.flash.event_creation_error");
                 $response->setStatusCode(400);
             }
         }
@@ -134,7 +137,6 @@ final class DefaultController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-
                 if ($form->get("delete_event")->isClicked()) {
                     $this->get('dende_calendar.handler.remove_event')->remove($occurrence->event());
                     return $this->redirectToRoute("dende_calendar_default_index");
@@ -143,10 +145,13 @@ final class DefaultController extends Controller
                     return $this->redirectToRoute("dende_calendar_default_index");
                 } else {
                     $command = $form->getData();
+                    $this->get("dende_calendar.new_calendar_creation")->handleForm($form, $command);
                     $this->get("dende_calendar.handler.update_event")->handle($command);
+                    $this->get("session")->getFlashBag()->add("success", "dende_calendar.flash.event_updated_successfully");
                     return $this->redirectToRoute("dende_calendar_default_index");
                 }
             } else {
+                $this->get("session")->getFlashBag()->add("error", "dende_calendar.flash.event_update_error");
                 $response->setStatusCode(400);
             }
         }

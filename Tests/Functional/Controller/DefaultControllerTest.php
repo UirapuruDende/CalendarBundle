@@ -7,7 +7,7 @@ use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\CalendarBundle\Tests\BaseFunctionalTest;
 use Doctrine\ORM\EntityManager;
-use Mockery;
+use Mockery as m;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\DependencyInjection\Container;
@@ -37,7 +37,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
 
     public function tearDown()
     {
-        Mockery::close();
+        m::close();
     }
 
     public function testMainPage()
@@ -54,11 +54,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
      */
     public function adding_new_single_event()
     {
-        $headers = array('CONTENT_TYPE' => 'text/html');
-        $content = array('parameter' => 'value');
-
-        $crawler = $this->client->request('GET', '/calendar/occurrence/new', [], [], $headers, $content);
-
+        $crawler = $this->client->request('GET', '/calendar/occurrence/new');
         $this->assertEquals(200, $this->getStatusCode());
 
         $form = $crawler->selectButton('create_event[submit]')->form();
@@ -73,6 +69,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
         ]);
 
         $this->client->submit($form);
+
         $this->assertEquals(200, $this->getStatusCode());
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
@@ -172,6 +169,47 @@ final class DefaultControllerTest extends BaseFunctionalTest
     /**
      * @test
      */
+    public function adding_new_weekly_event_to_a_new_calendar()
+    {
+        $crawler = $this->client->request('GET', '/calendar/occurrence/new');
+
+        $this->assertEquals(200, $this->getStatusCode());
+
+        $form = $crawler->selectButton('create_event[submit]')->form();
+
+        $form->setValues([
+            "create_event[calendar]" => $this->calendar->id(),
+            "create_event[new_calendar_name]" => 'i am new calendar added',
+            "create_event[type]" => Calendar\Event\EventType::TYPE_WEEKLY,
+            "create_event[startDate]" => "2015-09-01 12:00",
+            "create_event[endDate]" => "2015-09-30 13:30",
+            "create_event[duration]" => 90,
+            "create_event[title]" => "Test weekly event for new calendar",
+        ]);
+
+        $form["create_event[repetitionDays]"][0]->tick();
+        $form["create_event[repetitionDays]"][2]->tick();
+        $form["create_event[repetitionDays]"][4]->tick();
+
+        $this->client->submit($form);
+        $this->assertEquals(200, $this->getStatusCode());
+        $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
+
+        $this->em->refresh($this->calendar);
+
+        /** @var Event $event */
+        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('Test weekly event for new calendar');
+
+        $this->assertCount(13, $event->occurrences());
+        $this->assertEquals("2015-09-01 12:00", $event->startDate()->format("Y-m-d H:i"));
+        $this->assertEquals("2015-09-30 13:30", $event->endDate()->format("Y-m-d H:i"));
+
+        $this->assertEquals('i am new calendar added', $event->calendar()->name());
+    }
+
+    /**
+     * @test
+     */
     public function updating_single_event_without_type_change()
     {
         /** @var Event $event */
@@ -215,6 +253,46 @@ final class DefaultControllerTest extends BaseFunctionalTest
         $this->assertEquals("2015-11-05 16:00", $occurrence->startDate()->format("Y-m-d H:i"));
         $this->assertEquals("2015-11-05 17:30", $occurrence->endDate()->format("Y-m-d H:i"));
         $this->assertEquals(90, $occurrence->duration()->minutes());
+    }
+
+
+    /**
+     * @test
+     */
+    public function updating_single_event_with_calendar_creation()
+    {
+        /** @var Event $event */
+        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('some-single-test-event');
+        $this->assertCount(1, $event->occurrences());
+        $occurrence = $event->occurrences()->first();
+
+        $crawler = $this->client->request('GET', '/calendar/occurrence/'.$occurrence->id());
+
+        $this->assertEquals(200, $this->getStatusCode());
+
+        $form = $crawler->selectButton('update_event[submit]')->form();
+
+        $form->setValues([
+            "update_event[calendar]" => $event->calendar()->id(),
+            "update_event[new_calendar_name]" => 'i am some next calendar added',
+            "update_event[type]" => Calendar\Event\EventType::TYPE_SINGLE,
+            "update_event[startDate]" => "2015-11-05 16:00",
+            "update_event[endDate]" => "2015-11-05 17:30",
+            "update_event[duration]" => 90,
+            "update_event[title]" => "some-single-test-event-changed",
+        ]);
+
+        $this->client->submit($form);
+        $this->assertEquals(200, $this->getStatusCode());
+        $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
+
+        $this->em->refresh($event);
+
+        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('some-single-test-event-changed');
+
+        $this->assertCount(1, $event->occurrences());
+        $this->assertEquals('some-single-test-event-changed', $event->title());
+        $this->assertEquals('i am some next calendar added', $event->calendar()->name());
     }
 
     /**
@@ -291,5 +369,21 @@ final class DefaultControllerTest extends BaseFunctionalTest
         $this->assertEquals("2015-09-28 17:00", $event->occurrences()->get(11)->endDate()->format("Y-m-d H:i"));
         $this->assertEquals("2015-09-30 16:00", $event->occurrences()->get(12)->startDate()->format("Y-m-d H:i"));
         $this->assertEquals("2015-09-30 17:00", $event->occurrences()->get(12)->endDate()->format("Y-m-d H:i"));
+    }
+
+    /**
+     * @test
+     */
+    public function deleting_single_occurrence()
+    {
+        $this->markTestIncomplete('incomplete test of deleting occurrence');
+    }
+
+    /**
+     * @test
+     */
+    public function deleting_event()
+    {
+        $this->markTestIncomplete('incomplete test of deleting event');
     }
 }

@@ -1,0 +1,6 @@
+dende_calendar:
+  flash:
+    event_creation_error:         "Błąd przy tworzeniu wydarzenia!"
+    event_update_error:           "Nie udało się zaktualizować wydarzenia."
+    event_created_successfully:   "Wydarzenie utworzone!"
+    event_updated_successfully:   "Wydarzenie zostało zaktualizowane!"

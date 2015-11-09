@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "12ede9b1d0a1a5a0177c2859cbba089f549762e0"
+                "reference": "88d60c8c6238d131c23206a52da066036871480c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/12ede9b1d0a1a5a0177c2859cbba089f549762e0",
-                "reference": "12ede9b1d0a1a5a0177c2859cbba089f549762e0",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/88d60c8c6238d131c23206a52da066036871480c",
+                "reference": "88d60c8c6238d131c23206a52da066036871480c",
                 "shasum": ""
             },
             "require": {
@@ -106,7 +106,7 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2015-11-03 08:19:31"
+            "time": "2015-11-09 23:00:05"
         },
         {
             "name": "dende/common-bundle",
@@ -985,7 +985,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/ada97d55ced7f376700c19bcb50603897f8d66de",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/1187c51a89e14d892191f9147deb4bb9d3b72c3d",
                 "reference": "ada97d55ced7f376700c19bcb50603897f8d66de",
                 "shasum": ""
             },

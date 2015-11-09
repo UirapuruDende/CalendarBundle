@@ -8,9 +8,7 @@ framework:
     templating:
         engines: ['twig']
     session:
-        cookie_lifetime:  3600
-        gc_maxlifetime: 1800
-        handler_id:  ~
+        storage_id: session.storage.filesystem
     profiler:
         collect: true
         only_exceptions: false

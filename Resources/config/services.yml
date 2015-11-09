@@ -1,6 +1,7 @@
 ---
 parameters:
   dende_calendar.id_generator.class:            Dende\Calendar\Application\Generator\Doctrine\IdGenerator
+  dende_calendar.calendar_repository.class:     Dende\CalendarBundle\Repository\ORM\CalendarRepository
   dende_calendar.event_repository.class:        Dende\CalendarBundle\Repository\ORM\EventRepository
   dende_calendar.occurrences_repository.class:  Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
 
@@ -23,6 +24,12 @@ services:
      - %dende_calendar.viewmodel_manager_name%
 
 # repositories
+
+  dende_calendar.calendar_repository:
+    class: %dende_calendar.calendar_repository.class%
+    factory_service: dende_calendar.entity_manager
+    factory_method: "getRepository"
+    arguments: ["Calendar:Calendar"]
 
   dende_calendar.event_repository:
     class: %dende_calendar.event_repository.class%
@@ -48,6 +55,10 @@ services:
   dende_calendar.id_generator:
     class: %dende_calendar.id_generator.class%
     arguments: [@dende_calendar.entity_manager]
+
+  dende_calendar.new_calendar_creation:
+    class: Dende\CalendarBundle\Service\NewCalendarCreationHandler
+    arguments: [@dende_calendar.factory.calendar, @dende_calendar.calendar_repository]
 
 #forms
 

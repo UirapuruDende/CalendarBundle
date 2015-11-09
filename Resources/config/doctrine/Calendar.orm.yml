@@ -1,6 +1,7 @@
 Dende\Calendar\Domain\Calendar:
   type: entity
   table: calendars
+  repositoryClass: Dende\CalendarBundle\Repository\ORM\CalendarRepository
 
   id:
     id:
