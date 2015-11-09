@@ -11,7 +11,8 @@ class DendeCalendarBundle extends Bundle
     {
         parent::build($container);
         $this->addRegisterMappingsPass($container);
-        $this->addRegisterViewModelMappingsPass($container);
+//        $this->addRegisterViewModelMappingsPass($container);
+//        probably needed only for rest api which now we don't need
     }
 
     /**
