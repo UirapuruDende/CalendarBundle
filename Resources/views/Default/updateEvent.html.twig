@@ -1,10 +1,15 @@
 {% extends 'DendeCalendarBundle::layout.html.twig' %}
 
+{% block content %}
+    {{ form(form, {attr: {class: "form form-horizontal"}}) }}
+{% endblock content %}
+
 {% block javascripts %}
     {{ parent() }}
 
     <script src="{{ asset('bundles/dendecalendar/js/locales/bootstrap-datetimepicker.pl.js') }}"></script>
     <script src="{{ asset('bundles/dendecalendar/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('bundles/dendecalendar/js/dendeCalendar.eventForm.js') }}"></script>
 
     <script type="text/javascript">
         $(function(){
@@ -16,8 +21,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/dendeCalendar.eventForm.css') }}" />
 {% endblock stylesheets %}
 
-{% block content %}
-    {{ form(form, {attr: {class: "form form-horizontal"}}) }}
-{% endblock content %}

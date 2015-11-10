@@ -14,6 +14,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 final class UpdateEventType extends AbstractType
 {
+    use UpdateNameTrait;
+
     /**
      * @inheritDoc
      */
@@ -23,14 +25,20 @@ final class UpdateEventType extends AbstractType
             ->add("calendar", "entity", [
                 "class" => "Calendar:Calendar",
                 "choice_label" => "name",
-                "em" => $options["model_manager_name"]
+                "em" => $options["model_manager_name"],
+                "label" => "dende_calendar.form.calendar.label"
             ])
             ->add("new_calendar_name", "text", [
                 "mapped" => false,
-                "required" => false
+                "required" => false,
+                "label" => "dende_calendar.form.new_calendar_name.label"
             ])
             ->add("type", "choice", [
-                "choices" => array_combine(EventType::$availableTypes, EventType::$availableTypes),
+                "choices" => array_combine(
+                    EventType::$availableTypes,
+                    array_map($this->updateNames('type'), EventType::$availableTypes)
+                ),
+                "label" => "dende_calendar.form.type.label"
             ])
             ->add("startDate", "datetime", [
                 'widget' => 'single_text',
@@ -38,7 +46,8 @@ final class UpdateEventType extends AbstractType
                 'format' => 'Y-M-dd HH:mm',
                 'attr' => [
                     'class' => 'form_datetime'
-                ]
+                ],
+                "label" => "dende_calendar.form.start_date.label"
             ])
             ->add("endDate", "datetime", [
                 'widget' => 'single_text',
@@ -46,32 +55,38 @@ final class UpdateEventType extends AbstractType
                 'format' => 'Y-M-dd HH:mm',
                 'attr' => [
                     'class' => 'form_datetime'
-                ]
+                ],
+                "label" => "dende_calendar.form.end_date.label"
             ])
-            ->add("duration", "integer")
-            ->add("title", "text")
+            ->add("duration", "integer", [
+                "label" => "dende_calendar.form.duration.label"
+            ])
+            ->add("title", "text", [
+                "label" => "dende_calendar.form.title.label"
+            ])
             ->add("method", "hidden", [
                 "data" => UpdateEventHandler::MODE_OVERWRITE
             ])
             ->add("repetitionDays", "choice", [
-                "choices" => Repetitions::$availableWeekdays,
+                "choices" => array_map($this->updateNames('repetition_days'), Repetitions::$availableWeekdays),
                 "multiple" => true,
-                "expanded" => true
+                "expanded" => true,
+                "label" => "dende_calendar.form.repetition_days.label"
             ])
             ->add("delete_event", "submit", [
-                "label" => "Delete whole event",
+                "label" => "dende_calendar.form.delete_event.label",
                 "attr" => [
                     "class" => "pull-right"
                 ]
             ])
             ->add("delete_occurrence", "submit", [
-                "label" => "Delete only this occurrence",
+                "label" => "dende_calendar.form.delete_occurrence.label",
                 "attr" => [
                     "class" => "pull-right"
                 ]
             ])
             ->add("submit", "submit", [
-                "label" => "Update event"
+                "label" => "dende_calendar.form.submit_update.label"
             ])
         ;
     }

@@ -4,3 +4,38 @@ dende_calendar:
     event_update_error:           "Nie udało się zaktualizować wydarzenia."
     event_created_successfully:   "Wydarzenie utworzone!"
     event_updated_successfully:   "Wydarzenie zostało zaktualizowane!"
+
+  form:
+    calendar:
+      label:                        "Nazwa kalendarza"
+    new_calendar_name:
+      label:                        "Nazwa kalendarza do utworzenia"
+    type:
+      label:                        "Rodzaj wydarzenia"
+      weekly:                       "co tydzień"
+      single:                       "pojedyńcze"
+    start_date:
+      label:                        "Data rozpoczęcia"
+    end_date:
+      label:                        "Data zakończenia"
+    duration:
+      label:                        "Czas trwania (minuty)"
+    title:
+      label:                        "Nazwa (krótki opis)"
+    repetition_days:
+      label:                        "Dni tygodnia, w których wydarzenie się powtarza"
+      monday:                       "poniedziałek"
+      tuesday:                      "wtorek"
+      wednesday:                    "środa"
+      thursday:                     "czwartek"
+      friday:                       "piątek"
+      saturday:                     "sobota"
+      sunday:                       "niedziela"
+    submit:
+      label:                        "Dodaj wydarzenie"
+    submit_update:
+      label:                        "Zaktualizuj wydarzenie"
+    delete_occurrence:
+      label:                        "Usuń tylko to wystąpienie"
+    delete_event:
+      label:                        "Usuń całe wydarzenie"

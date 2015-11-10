@@ -1,6 +1,20 @@
 <html>
 <head>
     <title>FullCalendar with Dende/CalendarBundle demo</title>
+    {% block stylesheets %}
+        <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/fullcalendar.css') }}" />
+        <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap.min.css') }}" />
+    {% endblock stylesheets %}
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span24">
+            {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
 
     {% block javascripts %}
         {% set lang = calendarLang is defined ? calendarLang : 'pl' %}
@@ -20,20 +34,5 @@
             var dende_calendar_tz = '{{ calendarTimezone is defined ? calendarTimezone : 'Europe/Warsaw' }}';
         </script>
     {% endblock javascripts %}
-
-    {% block stylesheets %}
-        <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/fullcalendar.css') }}" />
-        <link rel='stylesheet' href="{{ asset('bundles/dendecalendar/css/bootstrap.min.css') }}" />
-    {% endblock stylesheets %}
-</head>
-
-<body>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span24">
-            {% block content %}{% endblock content %}
-            </div>
-        </div>
-    </div>
 </body>
 </html>

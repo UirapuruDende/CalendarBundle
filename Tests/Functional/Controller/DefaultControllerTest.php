@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\Container;
 /**
  * Class DefaultControllerTest
  * @package Dende\CalendarBundle\Tests\Functional\Controller
+ * @todo test if flash messages appear (without translating - a nulltranslator needed!)
  */
 final class DefaultControllerTest extends BaseFunctionalTest
 {
