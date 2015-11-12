@@ -58,7 +58,10 @@ services:
 
   dende_calendar.new_calendar_creation:
     class: Dende\CalendarBundle\Service\NewCalendarCreationHandler
-    arguments: [@dende_calendar.factory.calendar, @dende_calendar.calendar_repository]
+    arguments:
+      - @dende_calendar.factory.calendar
+      - @dende_calendar.calendar_repository
+      - @event_dispatcher
 
 #forms
 

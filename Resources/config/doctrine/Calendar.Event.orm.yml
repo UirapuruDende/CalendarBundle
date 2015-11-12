@@ -25,13 +25,13 @@ Dende\Calendar\Domain\Calendar\Event:
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
       inversedBy: events
-      cascade: ["persist"]
+      cascade: ["all"]
 
   oneToMany:
     occurrences:
       targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence
       mappedBy: event
-      cascade: ["persist"]
+      cascade: ["all"]
 
   fields:
     startDate:
