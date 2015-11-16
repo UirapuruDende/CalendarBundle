@@ -1,5 +1,5 @@
 <?php
-namespace Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM;
+namespace Dende\CalendarBundle\DataFixtures\ORM;
 
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\CalendarId;

@@ -90,7 +90,7 @@ final class OccurrencesProvider
             "start" => $occurrence->startDate()->format("Y-m-d H:i:s"),
             "end" => $occurrence->endDate()->format("Y-m-d H:i:s"),
             "backgroundColor" => $this->colors[$id%count($this->colors)],
-            "url" => $this->router->generate($this->eventEditRoute, ['occurrence' => $occurrence->id()]),
+            "url" => $this->router->generate($this->eventEditRoute, ['occurrenceId' => $occurrence->id()]),
             "textColor" => 'black',
             "editable" => true
         ];

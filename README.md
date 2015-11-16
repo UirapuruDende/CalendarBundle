@@ -92,3 +92,21 @@ class AppKernel extends Kernel
 
  - http://www.malot.fr/bootstrap-datetimepicker/demo.php
  - http://fullcalendar.io/
+ 
+## about:
+
+ - there could be multiple calendars
+ - calendar can have a multiple events
+ - event can have multiple occurrences of event
+ - if event is serial type (e.g. WEEKLY) it's occurrences can be updated:
+    - singularily without changing event or other occurrences
+    - as a whole with all his occurrences
+ - one occurrence of serial event can be deleted or updated independently without affecting others
+ - if serial occurrences are changed globally, they affect event, but don't affect occurrences changed/deleted in the past
+ - when deleting event, all the occurrences are deleted
+ - when deleting calendar, all it's events are deleted
+ - event without occurrences is deleted
+ - calendar without events can not be deleted
+ - occurrences can be copied/moved to other event
+ - events can be copied/moved to other calendar
+ 

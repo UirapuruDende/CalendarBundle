@@ -25,13 +25,13 @@ Dende\Calendar\Domain\Calendar\Event:
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
       inversedBy: events
-      # don't set cascade here or it will delete calendar also
 
   oneToMany:
     occurrences:
       targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence
       mappedBy: event
-      cascade: ["persist", "remove"]
+      orphanRemoval: true
+      cascade: ["all"] # required, must stay here or exception will be thrown
 
   fields:
     startDate:

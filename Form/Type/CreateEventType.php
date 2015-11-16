@@ -19,6 +19,7 @@ final class CreateEventType extends AbstractType
     {
         $builder
             ->add("calendar", "entity", [
+                "required" => false,
                 "class" => "Calendar:Calendar",
                 "choice_label" => "name",
                 "em" => $options["model_manager_name"],

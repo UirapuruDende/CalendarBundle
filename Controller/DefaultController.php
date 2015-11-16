@@ -104,18 +104,17 @@ final class DefaultController extends Controller
     }
 
     /**
-     * @Route("/occurrence/{occurrence}", options={"expose"=true})
-     * ParamConverter("occurrence", class="Calendar:Calendar\Event\Occurrence", options={"entity_manager": "club"})
+     * @Route("/occurrence/{occurrenceId}", options={"expose"=true})
      * @Method({"GET", "POST"})
      * @Template()
      * @return string
      */
-    public function updateEventAction(Request $request, $occurrence)
+    public function updateEventAction(Request $request, $occurrenceId)
     {
         /** @var Occurrence $occurrence */
         $occurrence = $this->get("dende_calendar.entity_manager")
             ->getRepository('Calendar:Calendar\Event\Occurrence')
-            ->find($occurrence);
+            ->find($occurrenceId);
 
         $response = new Response();
         $command = new UpdateEventCommand();

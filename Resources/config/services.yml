@@ -57,7 +57,7 @@ services:
     arguments: [@dende_calendar.entity_manager]
 
   dende_calendar.new_calendar_creation:
-    class: Dende\CalendarBundle\Service\NewCalendarCreationHandler
+    class: Dende\Calendar\Application\Handler\CreateCalendarHandler
     arguments:
       - @dende_calendar.factory.calendar
       - @dende_calendar.calendar_repository
@@ -95,7 +95,8 @@ services:
   dende_calendar.handler.remove_occurrence:
     class: Dende\Calendar\Application\Handler\RemoveOccurrenceHandler
     arguments:
-      - @dende_calendar.occurrences_repository
+      - @dende_calendar.handler.remove_event
+      - @dende_calendar.event_repository
 
   dende_calendar.handler.update_event:
     class: Dende\Calendar\Application\Handler\UpdateEventHandler

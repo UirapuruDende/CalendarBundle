@@ -1,5 +1,5 @@
 <?php
-namespace Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM;
+namespace Dende\CalendarBundle\DataFixtures\ORM;
 
 use DateTime;
 use Dende\Calendar\Application\Factory\OccurrenceFactory;

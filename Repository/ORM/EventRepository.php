@@ -16,7 +16,7 @@ class EventRepository extends EntityRepository implements EventRepositoryInterfa
     /**
      * @param Event $event
      */
-    public function insert($event)
+    public function insert(Event $event)
     {
         $em = $this->getEntityManager();
 
@@ -24,7 +24,7 @@ class EventRepository extends EntityRepository implements EventRepositoryInterfa
         $em->flush();
     }
 
-    public function update($event)
+    public function update(Event $event)
     {
         $this->getEntityManager()->merge($event);
         $this->getEntityManager()->flush();
@@ -33,7 +33,7 @@ class EventRepository extends EntityRepository implements EventRepositoryInterfa
     /**
      * @param $event
      */
-    public function remove($event)
+    public function remove(Event $event)
     {
         $em = $this->getEntityManager();
         $em->remove($event);
