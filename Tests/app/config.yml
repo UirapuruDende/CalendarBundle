@@ -64,7 +64,12 @@ monolog:
     main:
       type: stream
       path: "%kernel.logs_dir%/%kernel.environment%.log"
-      level: ERROR
+      level: DEBUG
+    doctrine:
+      type: stream
+      path: "%kernel.logs_dir%/doctrine.log"
+      level: DEBUG
+      channels: ["doctrine"]
 
 liip_functional_test: ~
 

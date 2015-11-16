@@ -16,10 +16,17 @@ class CalendarRepository extends EntityRepository
     /**
      * @param Calendar $calendar
      */
-    public function insert($calendar)
+    public function insert(Calendar $calendar)
     {
         $em = $this->getEntityManager();
         $em->persist($calendar);
+        $em->flush();
+    }
+
+    public function remove(Calendar $calendar)
+    {
+        $em = $this->getEntityManager();
+        $em->remove($calendar);
         $em->flush();
     }
 }

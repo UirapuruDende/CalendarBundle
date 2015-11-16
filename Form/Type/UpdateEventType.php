@@ -1,11 +1,14 @@
 <?php
 namespace Dende\CalendarBundle\Form\Type;
 
+use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Application\Handler\UpdateEventHandler;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -79,16 +82,26 @@ final class UpdateEventType extends AbstractType
                     "class" => "pull-right"
                 ]
             ])
-            ->add("delete_occurrence", "submit", [
-                "label" => "dende_calendar.form.delete_occurrence.label",
-                "attr" => [
-                    "class" => "pull-right"
-                ]
-            ])
             ->add("submit", "submit", [
                 "label" => "dende_calendar.form.submit_update.label"
             ])
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            /** @var UpdateEventCommand $command */
+            $command = $event->getData();
+            $form = $event->getForm();
+
+            if($command->occurrence->event()->isType(EventType::TYPE_WEEKLY)) {
+                $form->add("delete_occurrence", "submit", [
+                    "label" => "dende_calendar.form.delete_occurrence.label",
+                    "attr" => [
+                        "class" => "pull-right"
+                    ]
+                ]);
+            }
+
+        });
     }
 
     /**
@@ -97,7 +110,7 @@ final class UpdateEventType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Dende\Calendar\Application\Command\UpdateEventCommand',
+            'data_class' => UpdateEventCommand::class,
             'model_manager_name' => 'default'
         ]);
 

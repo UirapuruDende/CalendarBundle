@@ -30,10 +30,12 @@ class EventRepository extends EntityRepository implements EventRepositoryInterfa
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @param $event
+     */
     public function remove($event)
     {
         $em = $this->getEntityManager();
-
         $em->remove($event);
         $em->flush();
     }

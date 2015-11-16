@@ -33,7 +33,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
     {
         parent::setUp();
         $this->em = $this->container->get("doctrine.orm.entity_manager");
-        $this->calendar = $this->em->getRepository("Calendar:Calendar")->findOneByName('calendar-for-functional-tests');
+        $this->calendar = $this->em->getRepository("Calendar:Calendar")->findOneByName('Brazilian Jiu Jitsu');
     }
 
     public function tearDown()
@@ -375,16 +375,77 @@ final class DefaultControllerTest extends BaseFunctionalTest
     /**
      * @test
      */
-    public function deleting_single_occurrence()
+    public function deleting_single_event_with_his_occurrence()
     {
-        $this->markTestIncomplete('incomplete test of deleting occurrence');
+        /** @var Event $event */
+        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('some-single-test-event');
+        $this->assertCount(1, $event->occurrences());
+        $occurrence = $event->occurrences()->first();
+
+        $calendarId = $event->calendar()->id();
+        $eventId = $event->id();
+        $occurrenceId = $occurrence->id();
+
+        $crawler = $this->client->request('GET', '/calendar/occurrence/'.$occurrenceId);
+        $this->assertEquals(200, $this->getStatusCode());
+
+        $formElement = $crawler->filter('form[name="update_event"]')->first();
+        $this->assertCount(2, $formElement->filter('button'));
+
+        $form = $crawler->selectButton('update_event[delete_event]')->form();
+        $this->client->submit($form);
+        $this->assertEquals(200, $this->getStatusCode());
+        $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
+
+        $this->assertInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->find($calendarId));
+        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->find($eventId));
+        $this->assertNotInstanceOf(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->find($occurrenceId));
     }
 
     /**
      * @test
      */
-    public function deleting_event()
+    public function deleting_weekly_event_with_all_his_occurrences()
     {
-        $this->markTestIncomplete('incomplete test of deleting event');
+        /** @var Event $event */
+        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('Test event number 02');
+        $this->assertCount(13, $event->occurrences());
+        $occurrence = $event->occurrences()->first();
+
+        $calendarId = $event->calendar()->id();
+        $eventId = $event->id();
+        $occurrenceId = $occurrence->id();
+
+        $crawler = $this->client->request('GET', '/calendar/occurrence/'.$occurrenceId);
+        $this->assertEquals(200, $this->getStatusCode());
+
+        $formElement = $crawler->filter('form[name="update_event"]')->first();
+        $this->assertCount(3, $formElement->filter('button'));
+
+        $form = $crawler->selectButton('update_event[delete_event]')->form();
+        $this->client->submit($form);
+        $this->assertEquals(200, $this->getStatusCode());
+        $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
+
+        $this->assertInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->find($calendarId));
+        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->find($eventId));
+        $this->assertNotInstanceOf(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->find($occurrenceId));
+    }
+
+    /**
+     * @test
+     */
+    public function deleting_whole_calendar()
+    {
+        /** @var Event $event */
+        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('Test event number 02');
+        $this->em->getRepository("Calendar:Calendar")->remove($event->calendar());
+
+        $calendarId = $event->calendar()->id();
+        $eventId = $event->id();
+
+        $this->assertNotInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->findById($calendarId));
+        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->findById($eventId));
+        $this->assertCount(0, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->findByEvent($event));
     }
 }

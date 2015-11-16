@@ -90,6 +90,8 @@ services:
     class: Dende\Calendar\Application\Handler\RemoveEventHandler
     arguments:
       - @dende_calendar.event_repository
+      - @dende_calendar.occurrences_repository
+
   dende_calendar.handler.remove_occurrence:
     class: Dende\Calendar\Application\Handler\RemoveOccurrenceHandler
     arguments:

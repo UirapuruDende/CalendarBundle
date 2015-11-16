@@ -114,4 +114,16 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         $em->remove($occurrence);
         $em->flush();
     }
+
+    /**
+     * @param Event $event
+     */
+    public function removeAllForEvent(Event $event)
+    {
+        $em = $this->getEntityManager();
+        foreach($event->occurrences() as $occurrence) {
+            $em->remove($occurrence);
+        }
+        $em->flush();
+    }
 }

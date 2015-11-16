@@ -16,8 +16,8 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
   manyToOne:
     event:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
-      mappedBy: occurrences
       inversedBy: occurrences
+      cascade: ["persist", "remove"]
 
   fields:
     startDate:

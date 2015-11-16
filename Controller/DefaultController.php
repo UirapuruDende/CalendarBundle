@@ -6,6 +6,8 @@ use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Application\Handler\UpdateEventHandler;
 use Dende\Calendar\Domain\Calendar;
+use Dende\Calendar\Domain\Calendar\Event;
+use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -110,6 +112,7 @@ final class DefaultController extends Controller
      */
     public function updateEventAction(Request $request, $occurrence)
     {
+        /** @var Occurrence $occurrence */
         $occurrence = $this->get("dende_calendar.entity_manager")
             ->getRepository('Calendar:Calendar\Event\Occurrence')
             ->find($occurrence);
@@ -119,6 +122,7 @@ final class DefaultController extends Controller
         $command->occurrence = $occurrence;
 
         if ($request->isMethod("GET")) {
+            /** @var Event $event */
             $event = $occurrence->event();
             $command->calendar = $event->calendar();
             $command->startDate = $event->startDate();
@@ -140,7 +144,7 @@ final class DefaultController extends Controller
                 if ($form->get("delete_event")->isClicked()) {
                     $this->get('dende_calendar.handler.remove_event')->remove($occurrence->event());
                     return $this->redirectToRoute("dende_calendar_default_index");
-                } elseif ($form->get("delete_occurrence")->isClicked()) {
+                } elseif ($occurrence->event()->isType(EventType::TYPE_WEEKLY) && $form->get("delete_occurrence")->isClicked()) {
                     $this->get('dende_calendar.handler.remove_occurrence')->remove($occurrence);
                     return $this->redirectToRoute("dende_calendar_default_index");
                 } else {
