@@ -4,6 +4,12 @@ A [Symfony 2](http://symfony.com) bundle for integration of [Dende/Calendar](htt
 
 [![Build Status](https://travis-ci.org/UirapuruDende/CalendarBundle.svg?branch=master)](https://travis-ci.org/UirapuruDende/CalendarBundle)
 
+# Screenshots:
+
+![img1](/docs/img/img_1.png)
+
+![img2](/docs/img/img_2.png)
+
 ## installation:
 
 1. install via composer
