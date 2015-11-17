@@ -437,8 +437,6 @@ final class DefaultControllerTest extends BaseFunctionalTest
      */
     public function deleting_whole_calendar()
     {
-        $this->markTestIncomplete();
-
         /** @var Event $event */
         $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('Test event number 02');
         $this->em->getRepository("Calendar:Calendar")->remove($event->calendar());

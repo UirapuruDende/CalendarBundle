@@ -21,10 +21,16 @@ Dende\Calendar\Domain\Calendar\Event:
       class: Dende\Calendar\Domain\Calendar\Event\Duration
       columnPrefix: false
 
-  manyToOne:
+  manyToOne:  # event is the owning side!
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
       inversedBy: events
+      joinColumns:
+        CalendarId:
+          name: calendar_id
+          referencedColumnName: id
+          onDelete: SET NULL
+          onUpdate: RESTRICT
 
   oneToMany:
     occurrences:
