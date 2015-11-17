@@ -5,6 +5,7 @@ use DateTime;
 use Dende\Calendar\Application\Factory\EventFactory;
 use Dende\Calendar\Application\Factory\OccurrenceFactory;
 use Dende\Calendar\Application\Generator\InMemory\IdGenerator;
+use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Duration;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
 use Dende\CalendarBundle\Service\OccurrencesProvider;
@@ -27,7 +28,7 @@ final class OccurrenceProviderTest extends \PHPUnit_Framework_TestCase
      */
     public function it_maps_occurrence_collection_to_array()
     {
-        $calendar = m::mock('Dende\Calendar\Domain\Calendar');
+        $calendar = m::mock(Calendar::class);
         $start = new DateTime("now");
         $end = new DateTime("+1 hour");
 
@@ -53,7 +54,7 @@ final class OccurrenceProviderTest extends \PHPUnit_Framework_TestCase
         $repository->shouldReceive('findByCalendar')->with($calendar, $start, $end)->once()->andReturn($collection);
 
         $router = m::mock('Symfony\Bundle\FrameworkBundle\Routing\Router');
-        $router->shouldReceive('generate')->with($routeName, ['occurrence' => "123"])->once()->andReturn("url/to/occurrence");
+        $router->shouldReceive('generate')->with($routeName, ['occurrenceId' => "123"])->once()->andReturn("url/to/occurrence");
 
         $this->provider = new OccurrencesProvider($repository, $router, $routeName);
 

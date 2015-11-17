@@ -397,9 +397,9 @@ final class DefaultControllerTest extends BaseFunctionalTest
         $this->assertEquals(200, $this->getStatusCode());
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
-        $this->assertInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->find($calendarId));
-        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->find($eventId));
-        $this->assertNotInstanceOf(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->find($occurrenceId));
+        $this->assertInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->findOneById($calendarId));
+        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->findOneById($eventId));
+        $this->assertNotInstanceOf(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->findOneById($occurrenceId));
     }
 
     /**
@@ -427,9 +427,9 @@ final class DefaultControllerTest extends BaseFunctionalTest
         $this->assertEquals(200, $this->getStatusCode());
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
-        $this->assertInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->find($calendarId));
-        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->find($eventId));
-        $this->assertNotInstanceOf(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->find($occurrenceId));
+        $this->assertInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->findOneById($calendarId));
+        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->findOneById($eventId));
+        $this->assertNotInstanceOf(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->findOneById($occurrenceId));
     }
 
     /**
@@ -437,6 +437,8 @@ final class DefaultControllerTest extends BaseFunctionalTest
      */
     public function deleting_whole_calendar()
     {
+        $this->markTestIncomplete();
+
         /** @var Event $event */
         $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('Test event number 02');
         $this->em->getRepository("Calendar:Calendar")->remove($event->calendar());

@@ -9,6 +9,7 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Doctrine\ORM\EntityNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -115,6 +116,10 @@ final class DefaultController extends Controller
         $occurrence = $this->get("dende_calendar.entity_manager")
             ->getRepository('Calendar:Calendar\Event\Occurrence')
             ->find($occurrenceId);
+
+        if(!$occurrence) {
+            throw new EntityNotFoundException('Occurrence entity not found in database');
+        }
 
         $response = new Response();
         $command = new UpdateEventCommand();

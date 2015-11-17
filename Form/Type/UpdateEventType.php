@@ -14,6 +14,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class UpdateEventType
  * @package Dende\CalendarBundle\Form\Type
+ * @todo setup validation so:
+ * @todo - calendar must be selected or name for new provided
+ * @todo - if event is weekly at least one repetition chosen
  */
 final class UpdateEventType extends AbstractType
 {
@@ -93,7 +96,19 @@ final class UpdateEventType extends AbstractType
             $command = $event->getData();
             $form = $event->getForm();
 
-            if($command->occurrence->event()->isType(EventType::TYPE_WEEKLY)) {
+            $occurrence = $command->occurrence;
+
+            if(!$occurrence) {
+                throw new \Exception("Occurrence is null!");
+            }
+
+            $event = $occurrence->event();
+
+            if(!$event) {
+                throw new \Exception("Event is null!");
+            }
+
+            if($event->isType(EventType::TYPE_WEEKLY)) {
                 $form->add("delete_occurrence", "submit", [
                     "label" => "dende_calendar.form.delete_occurrence.label",
                     "attr" => [
