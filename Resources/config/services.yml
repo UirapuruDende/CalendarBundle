@@ -135,3 +135,15 @@ services:
     class: Dende\Calendar\Application\Factory\OccurrenceFactory
     arguments:
       - @dende_calendar.id_generator
+
+# validation
+
+  validator.calendar_name:
+    class: Dende\CalendarBundle\Validator\CalendarNameValidator
+    tags:
+      - { name: validator.constraint_validator, alias: validator.calendar_name_validator}
+
+  validator.weekdays_selected:
+    class: Dende\CalendarBundle\Validator\SelectWeekdayForSerialValidator
+    tags:
+      - { name: validator.constraint_validator, alias: validator.weekday_for_serial_validator}

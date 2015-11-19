@@ -31,7 +31,7 @@ final class RestController extends FOSRestController
      */
     public function getCalendarsAction()
     {
-        $calendars = $this->getRepo("ViewModel:Calendar")->findAll();
+        $calendars = $this->getRepo("Calendar:Calendar")->findAll();
 
         return $calendars;
     }
@@ -42,7 +42,7 @@ final class RestController extends FOSRestController
      */
     public function getCalendarAction($id)
     {
-        $calendar = $this->getRepo("ViewModel:Calendar")->findOneById($id);
+        $calendar = $this->getRepo("Calendar:Calendar")->findOneById($id);
 
         return $calendar;
     }
@@ -54,9 +54,9 @@ final class RestController extends FOSRestController
      */
     public function getCalendarEventsAction($id)
     {
-        $calendar = $this->getRepo("ViewModel:Calendar")->findOneById($id);
+        $calendar = $this->getRepo("Calendar:Calendar")->findOneById($id);
 
-        $events = $this->getRepo("ViewModel:Calendar\Event")->findByCalendar($calendar);
+        $events = $this->getRepo("Calendar:Calendar\Event")->findByCalendar($calendar);
 
         return $events;
     }
@@ -67,7 +67,7 @@ final class RestController extends FOSRestController
      */
     public function getEventsAction()
     {
-        $events = $this->getRepo("ViewModel:Calendar\Event")->findAll();
+        $events = $this->getRepo("Calendar:Calendar\Event")->findAll();
 
         return $events;
     }
@@ -79,7 +79,7 @@ final class RestController extends FOSRestController
      */
     public function getEventAction($id)
     {
-        $events = $this->getRepo("ViewModel:Calendar\Event")->findOneById($id);
+        $events = $this->getRepo("Calendar:Calendar\Event")->findOneById($id);
 
         return $events;
     }
@@ -90,7 +90,7 @@ final class RestController extends FOSRestController
      */
     public function getOccurrencesAction()
     {
-        $events = $this->getRepo("ViewModel:Calendar\Event\Occurrence")->findAll();
+        $events = $this->getRepo("Calendar:Calendar\Event\Occurrence")->findAll();
 
         return $events;
     }
@@ -102,7 +102,7 @@ final class RestController extends FOSRestController
      */
     public function getOccurrenceAction($id)
     {
-        $occurrence = $this->getRepo("ViewModel:Calendar\Event\Occurrence")->findOneById($id);
+        $occurrence = $this->getRepo("Calendar:Calendar\Event\Occurrence")->findOneById($id);
         return $occurrence;
     }
 
@@ -112,7 +112,7 @@ final class RestController extends FOSRestController
      */
     public function getEventOccurrencesAction($id)
     {
-        $occurrences = $this->getRepo("ViewModel:Calendar\Event\Occurrence")->findByEvent($id);
+        $occurrences = $this->getRepo("Calendar:Calendar\Event\Occurrence")->findByEvent($id);
         return $occurrences;
     }
 
@@ -121,6 +121,6 @@ final class RestController extends FOSRestController
      * @return \Doctrine\ORM\EntityRepository
      */
     private function getRepo($class) {
-        return $this->get("dende_calendar.viewmodel_entity_manager")->getRepository($class);
+        return $this->get("dende_calendar.entity_manager")->getRepository($class);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Dende\CalendarBundle\Form\Type;
 
+use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
@@ -84,7 +85,7 @@ final class CreateEventType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Dende\Calendar\Application\Command\CreateEventCommand',
+            'data_class' => CreateEventCommand::class,
             'model_manager_name' => 'default'
         ]);
 

@@ -1,4 +1,9 @@
 dende_calendar:
+  validation:
+    choose_at_least_one_day_for_weekly: "Dla wydarzenia cotygodniowego musisz zaznaczyć chociaż jeden dzień!"
+    choose_calendar_or_provide_new_name: "Wybierz kalendarz lub podaj nazwę, by utworzyć nowy!"
+    event_title_cant_be_empty: "Podaj nazwę wydarzenia!"
+
   flash:
     event_creation_error:         "Błąd przy tworzeniu wydarzenia!"
     event_update_error:           "Nie udało się zaktualizować wydarzenia."
