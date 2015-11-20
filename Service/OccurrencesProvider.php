@@ -38,6 +38,11 @@ final class OccurrencesProvider
     private $eventEditRoute;
 
     /**
+     * @var bool
+     */
+    private $generateRoutes = true;
+
+    /**
      * OccurrenceProvider constructor.
      * @param OccurrenceRepositoryInterface $occurrenceRepository
      * @param Router $router
@@ -68,8 +73,10 @@ final class OccurrencesProvider
      * @param DateTime $start
      * @param DateTime $end
      */
-    public function getAll(DateTime $start, DateTime $end)
+    public function getAll(DateTime $start, DateTime $end, $generateRoutes = true)
     {
+        $this->generateRoutes = $generateRoutes;
+
         $collection = $this->occurrenceRepository->findByPeriod($start, $end);
 
         $collection = array_map([$this, 'convert'], $collection);
@@ -85,14 +92,19 @@ final class OccurrencesProvider
     {
         $id = $occurrence->event()->id();
 
-        return [
+        $options = [
             "title" => $occurrence->event()->title(),
             "start" => $occurrence->startDate()->format("Y-m-d H:i:s"),
             "end" => $occurrence->endDate()->format("Y-m-d H:i:s"),
-            "backgroundColor" => $this->colors[$id%count($this->colors)],
-            "url" => $this->router->generate($this->eventEditRoute, ['occurrenceId' => $occurrence->id()]),
+            "backgroundColor" => $this->colors[$id % count($this->colors)],
             "textColor" => 'black',
             "editable" => true
         ];
+
+        if ($this->generateRoutes) {
+            $options["url"] = $this->router->generate($this->eventEditRoute, ['occurrenceId' => $occurrence->id()]);
+        }
+
+        return $options;
     }
 }

@@ -54,7 +54,7 @@ final class DefaultController extends Controller
         $start = Carbon::parse($request->get('start'));
         $end = Carbon::parse($request->get('end'));
 
-        $events = $this->get('dende_calendar.occurrences_provider')->getAll($start, $end);
+        $events = $this->get('dende_calendar.occurrences_provider')->getAll($start, $end, !$request->get("noroute", false));
 
         return new JsonResponse($events);
     }
