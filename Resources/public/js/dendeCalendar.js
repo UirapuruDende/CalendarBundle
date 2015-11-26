@@ -22,8 +22,8 @@ $(document).ready(function() {
         defaultView: 'agendaWeek',
         allDaySlot: false,
         slotDuration: '00:30:00',
-        minTime: minTime,
-        maxTime: maxTime,
+        minTime: minTime || "08:00:00",
+        maxTime: maxTime || "16:00:00",
         timeZone: dende_calendar_tz,
         slotLabelFormat: 'H:00',
         snapDuration: '00:15:00',
@@ -31,6 +31,8 @@ $(document).ready(function() {
         select: newSelectionHandler,
         lang: dende_calendar_lang,
         eventClick: eventClickHandler,
-        events: Routing.generate('dende_calendar_default_getevents')
+        events: Routing.generate('dende_calendar_default_getevents'),
+        contentHeight: "auto",
+        height: "auto"
     })
 });
