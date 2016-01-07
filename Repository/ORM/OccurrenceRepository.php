@@ -63,7 +63,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
             ))
             ->setParameters([
                 'start' => $start,
-                'end' => $end->add(new DateInterval('P1D')), // so we include last day of period also
+                'end' => $end,
             ]);
 
         $query = $queryBuilder->getQuery();
