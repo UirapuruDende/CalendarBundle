@@ -61,6 +61,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
                 $expr->gt("o.startDate", ':start'),
                 $expr->lt("o.endDate", ':end')
             ))
+            ->orderBy('o.startDate', 'ASC')
             ->setParameters([
                 'start' => $start,
                 'end' => $end,
