@@ -101,7 +101,7 @@ services:
   dende_calendar.handler.update_event:
     class: Dende\Calendar\Application\Handler\UpdateEventHandler
     calls: # move to compiler pass
-      - [addStrategy, ['single', @dende_calendar.update_strategy.single]]
+#      - [addStrategy, ['single', @dende_calendar.update_strategy.single]]
       - [addStrategy, ['overwrite', @dende_calendar.update_strategy.overwrite]]
     arguments:
       - @dende_calendar.event_repository

@@ -116,8 +116,6 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
 
     public function remove(Occurrence $occurrence)
     {
-        throw new \Exception('Dont remove! User persisting of event instead');
-
         $em = $this->getEntityManager();
         $em->remove($occurrence);
         $em->flush();
@@ -128,8 +126,6 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
      */
     public function removeAllForEvent(Event $event)
     {
-        throw new \Exception('Dont remove! User persisting of event instead');
-
         $em = $this->getEntityManager();
         foreach($event->occurrences() as $occurrence) {
             $em->remove($occurrence);
