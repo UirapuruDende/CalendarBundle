@@ -10,7 +10,7 @@
         "symfony/http-kernel" : "^2.7.5",
         "jms/serializer-bundle": "^1.0",
         "friendsofsymfony/jsrouting-bundle": "^1.5",
-        "friendsofsymfony/rest-bundle": "^1.7",
+        "friendsofsymfony/rest-bundle": "^2.0",
         "sensio/framework-extra-bundle": "~3.0",
         "dende/common-bundle": "dev-master",
         "willdurand/hateoas-bundle": "~1.0",
