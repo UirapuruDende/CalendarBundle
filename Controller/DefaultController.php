@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class DefaultController extends Controller
 {
     /**
-     * @Template()
+     * @Template("DendeCalendarBundle:Default:index.html.twig")
      * @Route("/")
      * @return Response
      */
@@ -62,7 +62,7 @@ final class DefaultController extends Controller
     /**
      * @Route("/occurrence/new", options={"expose"=true})
      * @Method({"GET", "POST"})
-     * @Template()
+     * @Template("DendeCalendarBundle:Default:createEvent.html.twig")
      * @return string
      */
     public function createEventAction(Request $request)
@@ -107,7 +107,7 @@ final class DefaultController extends Controller
     /**
      * @Route("/occurrence/{occurrenceId}", options={"expose"=true})
      * @Method({"GET", "POST"})
-     * @Template()
+     * @Template("DendeCalendarBundle:Default:updateEvent.html.twig")
      * @return string
      */
     public function updateEventAction(Request $request, $occurrenceId)
