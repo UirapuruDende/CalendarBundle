@@ -1,7 +1,6 @@
 <?php
 namespace Dende\CalendarBundle\Repository\ORM;
 
-use DateInterval;
 use DateTime;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
