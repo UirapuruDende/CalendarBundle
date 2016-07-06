@@ -8,6 +8,12 @@ Dende\Calendar\Domain\Calendar\Event:
       type: guid
       generator: { strategy: UUID }
 
+  indexes:
+    index_dende_events_dates:
+      columns:
+        - startDate
+        - endDate
+
   embedded:
     type:
       class: Dende\Calendar\Domain\Calendar\Event\EventType

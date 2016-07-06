@@ -8,6 +8,12 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
       type: guid
       generator: { strategy: UUID }
 
+  indexes:
+    index_dende_occurrences_dates:
+      columns:
+        - startDate
+        - endDate
+
   embedded:
     duration:
       class: Dende\Calendar\Domain\Calendar\Event\Duration
