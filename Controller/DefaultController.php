@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Class DefaultController
  * @package Dende\CalendarBundle\Controller
  */
-final class DefaultController extends Controller
+class DefaultController extends Controller
 {
     /**
      * @Template("DendeCalendarBundle:Default:index.html.twig")

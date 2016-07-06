@@ -29,6 +29,16 @@ class DendeCalendarExtension extends Extension
             $container->setParameter("dende_calendar.backend_type_orm", true);
         }
 
+        $container->setParameter(
+            "dende_calendar.occurrence_repository_service_name",
+            $config["occurrence_repository_service_name"]
+        );
+
+        $container->setParameter(
+            "dende_calendar.occurrence_factory_service_name",
+            $config["occurrence_factory_service_name"]
+        );
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }

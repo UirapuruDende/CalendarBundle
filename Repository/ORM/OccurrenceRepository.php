@@ -8,6 +8,7 @@ use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use Traversable;
 
 /**
  * Class OccurrenceRepository
@@ -72,25 +73,36 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         return $query->getResult();
     }
 
-    public function insert(Occurrence $occurrence)
+    public function insert($occurrences)
     {
-        throw new \Exception('Dont insert! User persisting of event instead');
-
         $em = $this->getEntityManager();
 
-        $em->persist($occurrence);
-        $em->flush();
+        if($occurrences instanceof Occurrence) {
+            $em->persist($occurrences);
+            $em->flush($occurrences);
+
+            return;
+        } elseif(is_array($occurrences) || $occurrences instanceof Traversable) {
+            /** @var Occurrence $occurrence */
+            foreach($occurrences as $occurrence) {
+                $em->persist($occurrence);
+            }
+
+            $em->flush();
+
+            return;
+        }
+
+        throw new \Exception(sprintf(
+            "Argument is unknown type! Should be %s class or collection/array of %s class!",
+            Occurrence::class,
+            Occurrence::class
+        ));
     }
 
     public function insertCollection($occurrenceCollection)
     {
-        throw new \Exception('Dont insert! User persisting of event instead');
-
-        $em = $this->getEntityManager();
-        foreach($occurrenceCollection as $occurrence) {
-            $em->persist($occurrence);
-        }
-        $em->flush();
+        $this->insert($occurrenceCollection);
     }
 
     public function findAllByEvent(Event $event)

@@ -81,10 +81,9 @@ services:
     class: Dende\Calendar\Application\Handler\CreateEventHandler
     arguments:
       - @dende_calendar.event_repository
-      - @dende_calendar.occurrences_repository
+      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
       - @dende_calendar.factory.event
-      - @dende_calendar.factory.occurrence
-
+      - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
 
   dende_calendar.handler.remove_event:
     class: Dende\Calendar\Application\Handler\RemoveEventHandler
@@ -102,7 +101,7 @@ services:
     class: Dende\Calendar\Application\Handler\UpdateEventHandler
     calls: # move to compiler pass
 #      - [addStrategy, ['single', @dende_calendar.update_strategy.single]]
-      - [addStrategy, ['overwrite', @dende_calendar.update_strategy.overwrite]]
+      - [addStrategy, ['overwrite', '@dende_calendar.update_strategy.overwrite']]
     arguments:
       - @dende_calendar.event_repository
       - @dende_calendar.occurrences_repository
