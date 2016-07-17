@@ -58,6 +58,10 @@ class DendeCalendarExtension extends Extension
             $config["occurrence_factory_service_name"]
         );
 
+        $container->setParameter(
+            'dende_calendar.mapping', $config['mapping']
+        );
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }

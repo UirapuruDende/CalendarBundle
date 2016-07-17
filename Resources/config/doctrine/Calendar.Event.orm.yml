@@ -1,5 +1,11 @@
 Dende\Calendar\Domain\Calendar\Event:
   type: entity
+  inheritanceType: SINGLE_TABLE
+  discriminatorColumn:
+    name: discriminator
+    type: string
+  discriminatorMap:
+    bundle: Dende\Calendar\Domain\Calendar\Event
   table: events
   repositoryClass: Dende\CalendarBundle\Repository\ORM\EventRepository
 

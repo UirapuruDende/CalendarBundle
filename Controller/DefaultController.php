@@ -73,8 +73,8 @@ class DefaultController extends Controller
         if ($request->isMethod("GET") && !is_null($request->get('startDate')) && !is_null($request->get('endDate'))) {
             $command->startDate = Carbon::createFromFormat("YmdHi", $request->get('startDate'));
             $command->endDate = Carbon::createFromFormat("YmdHi", $request->get('endDate'));
-
             $command->duration = $command->startDate->diffInMinutes($command->endDate);
+            $command->endDate->addYear();
             $command->repetitionDays = [
                 $command->startDate->dayOfWeek
             ];
@@ -85,6 +85,7 @@ class DefaultController extends Controller
         ]);
 
         if ($request->isMethod("POST")) {
+            
             $form->handleRequest($request);
 
             if ($form->isValid()) {

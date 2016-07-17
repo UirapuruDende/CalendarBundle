@@ -1,6 +1,7 @@
 <?php
 namespace Dende\CalendarBundle;
 
+use Dende\CalendarBundle\DependencyInjection\CompilerPass\UpdateStrategiesPass;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -31,6 +32,8 @@ class DendeCalendarBundle extends Bundle
             );
 
             $container->addCompilerPass($registerMappingCompilerPass);
+
+            $container->addCompilerPass(new UpdateStrategiesPass());
         }
     }
 }

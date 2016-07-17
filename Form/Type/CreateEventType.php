@@ -24,7 +24,8 @@ final class CreateEventType extends AbstractType
                 "class" => "Calendar:Calendar",
                 "choice_label" => "name",
                 "em" => $options["model_manager_name"],
-                "label" => "dende_calendar.form.calendar.label"
+                "label" => "dende_calendar.form.calendar.label",
+                'placeholder'=> "dende_calendar.form.calendar.placeholder"
             ])
             ->add("new_calendar_name", "text", [
                 "mapped" => false,

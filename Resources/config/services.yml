@@ -14,7 +14,7 @@ services:
     factory_service: doctrine
     factory_method: getManager
     arguments:
-     - %dende_calendar.model_manager_name%
+     - '%dende_calendar.model_manager_name%'
 
   dende_calendar.viewmodel_entity_manager:
     class: %doctrine.orm.entity_manager.class%
@@ -48,20 +48,21 @@ services:
   dende_calendar.occurrences_provider:
     class: Dende\CalendarBundle\Service\OccurrencesProvider
     arguments:
-      - @dende_calendar.occurrences_repository
+      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
       - @router.default
       - 'dende_calendar_default_updateevent'
 
   dende_calendar.id_generator:
     class: %dende_calendar.id_generator.class%
-    arguments: [@dende_calendar.entity_manager]
+    arguments:
+      - "@dende_calendar.entity_manager"
 
   dende_calendar.new_calendar_creation:
-    class: Dende\Calendar\Application\Handler\CreateCalendarHandler
+    class: 'Dende\Calendar\Application\Handler\CreateCalendarHandler'
     arguments:
-      - @dende_calendar.factory.calendar
-      - @dende_calendar.calendar_repository
-      - @event_dispatcher
+      - "@=service(parameter('dende_calendar.calendar_factory_service_name'))"
+      - "@=service(parameter('dende_calendar.calendar_repository_service_name'))"
+      - "@event_dispatcher"
 
 #forms
 
@@ -80,40 +81,39 @@ services:
   dende_calendar.handler.create_event:
     class: Dende\Calendar\Application\Handler\CreateEventHandler
     arguments:
-      - @dende_calendar.event_repository
+      - @=service(parameter('dende_calendar.event_repository_service_name'))
       - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
-      - @dende_calendar.factory.event
+      - @=service(parameter('dende_calendar.event_factory_service_name'))
       - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
 
   dende_calendar.handler.remove_event:
     class: Dende\Calendar\Application\Handler\RemoveEventHandler
     arguments:
-      - @dende_calendar.event_repository
-      - @dende_calendar.occurrences_repository
+      - @=service(parameter('dende_calendar.event_repository_service_name'))
+      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
 
   dende_calendar.handler.remove_occurrence:
     class: Dende\Calendar\Application\Handler\RemoveOccurrenceHandler
     arguments:
       - @dende_calendar.handler.remove_event
-      - @dende_calendar.event_repository
+      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
 
   dende_calendar.handler.update_event:
     class: Dende\Calendar\Application\Handler\UpdateEventHandler
-    calls: # move to compiler pass
-#      - [addStrategy, ['single', @dende_calendar.update_strategy.single]]
-      - [addStrategy, ['overwrite', '@dende_calendar.update_strategy.overwrite']]
     arguments:
-      - @dende_calendar.event_repository
-      - @dende_calendar.occurrences_repository
-      - @dende_calendar.factory.event
-      - @dende_calendar.factory.occurrence
+      - @=service(parameter('dende_calendar.event_repository_service_name'))
+      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
+      - @=service(parameter('dende_calendar.event_factory_service_name'))
+      - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
 
-  dende_calendar.update_strategy.single: # move to compiler pass
-    class: Dende\Calendar\Application\Handler\UpdateStrategy\Single
-    tags:
-      - {name: dende_calendar.update_strategy }
+# update strategies
 
-  dende_calendar.update_strategy.overwrite: # move to compiler pass
+#  dende_calendar.update_strategy.single:
+#    class: Dende\Calendar\Application\Handler\UpdateStrategy\Single
+#    tags:
+#      - {name: dende_calendar.update_strategy }
+
+  dende_calendar.update_strategy.overwrite:
     class: Dende\Calendar\Application\Handler\UpdateStrategy\Overwrite
     tags:
       - {name: dende_calendar.update_strategy }
@@ -146,3 +146,11 @@ services:
     class: Dende\CalendarBundle\Validator\SelectWeekdayForSerialValidator
     tags:
       - { name: validator.constraint_validator, alias: validator.weekday_for_serial_validator}
+
+# listeners
+
+  dende_calendar.listener.doctrine_event_listener:
+    class: Dende\CalendarBundle\Listener\DoctrineEventListener
+    arguments: ['%dende_calendar.mapping%']
+    tags:
+      - { name: doctrine.event_listener, event: loadClassMetadata, em: '%dende_calendar.model_manager_name%' }

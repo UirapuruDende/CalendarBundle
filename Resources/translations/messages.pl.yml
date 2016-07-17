@@ -13,6 +13,7 @@ dende_calendar:
   form:
     calendar:
       label:                        "Nazwa kalendarza"
+      placeholder:                  "wybierz kalendarz"
     new_calendar_name:
       label:                        "Nazwa kalendarza do utworzenia"
     type:
