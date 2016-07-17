@@ -6,7 +6,7 @@
         "doctrine/orm": "^2.5",
         "doctrine/data-fixtures": "*",
         "doctrine/doctrine-fixtures-bundle": "*",
-        "dende/calendar" : "dev-master",
+        "dende/calendar" : "1.6",
         "symfony/http-kernel" : "^2.7.5",
         "jms/serializer-bundle": "^1.0",
         "friendsofsymfony/jsrouting-bundle": "^1.5",

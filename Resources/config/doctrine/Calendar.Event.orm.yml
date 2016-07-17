@@ -31,6 +31,7 @@ Dende\Calendar\Domain\Calendar\Event:
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
       inversedBy: events
+      cascade: ["all"]
       joinColumns:
         CalendarId:
           name: calendar_id

@@ -30,6 +30,25 @@ class DendeCalendarExtension extends Extension
         }
 
         $container->setParameter(
+            "dende_calendar.calendar_repository_service_name",
+            $config["calendar_repository_service_name"]
+        );
+
+        $container->setParameter(
+            "dende_calendar.calendar_factory_service_name",
+            $config["calendar_factory_service_name"]
+        );
+        $container->setParameter(
+            "dende_calendar.event_repository_service_name",
+            $config["event_repository_service_name"]
+        );
+
+        $container->setParameter(
+            "dende_calendar.event_factory_service_name",
+            $config["event_factory_service_name"]
+        );
+
+        $container->setParameter(
             "dende_calendar.occurrence_repository_service_name",
             $config["occurrence_repository_service_name"]
         );

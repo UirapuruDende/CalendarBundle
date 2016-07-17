@@ -23,6 +23,7 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
     event:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
       inversedBy: occurrences
+      cascade: ["all"]
       joinColumns:
         EventId:
           name: event_id
