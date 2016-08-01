@@ -10,6 +10,10 @@ dende_calendar:
     event_created_successfully:   "Wydarzenie utworzone!"
     event_updated_successfully:   "Wydarzenie zostało zaktualizowane!"
 
+
+  link:
+    back_to_calendar:             "Powrót do kalendarza"
+
   form:
     calendar:
       label:                        "Nazwa kalendarza"
