@@ -32,7 +32,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $calendars = $this->get("dende_calendar.entity_manager")->getRepository("Calendar:Calendar")->findAll();
+        $calendars = $this->get($this->getParameter("dende_calendar.calendar_repository_service_name"))->findAll();
 
         $calendars = array_map(function (Calendar $calendar) {
             return $calendar->id();
@@ -114,23 +114,29 @@ class DefaultController extends Controller
     public function updateEventAction(Request $request, $occurrenceId)
     {
         /** @var Occurrence $occurrence */
-        $occurrence = $this->get("dende_calendar.entity_manager")
-            ->getRepository('Calendar:Calendar\Event\Occurrence')
-            ->find($occurrenceId);
+        $occurrence = $this->get(
+            $this->getParameter("dende_calendar.occurrence_repository_service_name")
+        )->find($occurrenceId);
 
         if(!$occurrence) {
             throw new EntityNotFoundException('Occurrence entity not found in database');
         }
+
+        $this->get("session")->getFlashBag()->add(
+            "error",
+            sprintf("Uwaga! Wszystkie wystąpienia i powiązane z nimi informacje (obecności) od daty '%s' zostaną usunięte po zapisaniu zmian!", $occurrence->startDate()->format("Y/m/d H:i"))
+        );
 
         $response = new Response();
         $command = new UpdateEventCommand();
         $command->occurrence = $occurrence;
 
         if ($request->isMethod("GET")) {
+
             /** @var Event $event */
             $event = $occurrence->event();
             $command->calendar = $event->calendar();
-            $command->startDate = $event->startDate();
+            $command->startDate = $occurrence->startDate();
             $command->endDate = $event->endDate();
             $command->duration = $event->duration()->minutes();
             $command->title = $event->title();

@@ -50,7 +50,7 @@ final class UpdateEventType extends AbstractType
             ->add("startDate", "datetime", [
                 'widget' => 'single_text',
                 'with_seconds' => false,
-                'format' => 'Y-M-dd HH:mm',
+                'format' => 'Y-MM-dd HH:mm',
                 'attr' => [
                     'class' => 'form_datetime'
                 ],
@@ -59,7 +59,7 @@ final class UpdateEventType extends AbstractType
             ->add("endDate", "datetime", [
                 'widget' => 'single_text',
                 'with_seconds' => false,
-                'format' => 'Y-M-dd HH:mm',
+                'format' => 'Y-MM-dd HH:mm',
                 'attr' => [
                     'class' => 'form_datetime'
                 ],
@@ -72,7 +72,7 @@ final class UpdateEventType extends AbstractType
                 "label" => "dende_calendar.form.title.label"
             ])
             ->add("method", "hidden", [
-                "data" => UpdateEventHandler::MODE_OVERWRITE
+                "data" => UpdateEventHandler::MODE_NEXT_INCLUSIVE
             ])
             ->add("repetitionDays", "choice", [
                 "choices" => array_map($this->updateNames('repetition_days'), Repetitions::$availableWeekdays),
@@ -88,8 +88,7 @@ final class UpdateEventType extends AbstractType
             ])
             ->add("submit", "submit", [
                 "label" => "dende_calendar.form.submit_update.label"
-            ])
-        ;
+            ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             /** @var UpdateEventCommand $command */
@@ -98,17 +97,17 @@ final class UpdateEventType extends AbstractType
 
             $occurrence = $command->occurrence;
 
-            if(!$occurrence) {
+            if (!$occurrence) {
                 throw new \Exception("Occurrence is null!");
             }
 
             $event = $occurrence->event();
 
-            if(!$event) {
+            if (!$event) {
                 throw new \Exception("Event is null!");
             }
 
-            if($event->isType(EventType::TYPE_WEEKLY)) {
+            if ($event->isType(EventType::TYPE_WEEKLY)) {
                 $form->add("delete_occurrence", "submit", [
                     "label" => "dende_calendar.form.delete_occurrence.label",
                     "attr" => [
