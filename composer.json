@@ -18,7 +18,6 @@
         "liip/functional-test-bundle": "^1.2"
     },
     "require-dev": {
-        "symfony/framework-bundle" : "2.7.5",
         "phpunit/phpunit": "^5.0",
         "mockery/mockery": "^0.9.4",
         "fabpot/php-cs-fixer": "2.0.*@dev",

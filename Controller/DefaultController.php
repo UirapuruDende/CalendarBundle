@@ -9,6 +9,8 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\CalendarBundle\Form\Type\CreateEventType;
+use Dende\CalendarBundle\Form\Type\UpdateEventType;
 use Doctrine\ORM\EntityNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -28,7 +30,7 @@ class DefaultController extends Controller
     /**
      * @Template("DendeCalendarBundle:Default:index.html.twig")
      * @Route("/")
-     * @return Response
+     * @return array
      */
     public function indexAction()
     {
@@ -80,7 +82,7 @@ class DefaultController extends Controller
             ];
         }
 
-        $form = $this->createForm('create_event', $command, [
+        $form = $this->createForm(CreateEventType::class, $command, [
             "model_manager_name" => $this->getParameter("dende_calendar.model_manager_name")
         ]);
 
@@ -144,7 +146,7 @@ class DefaultController extends Controller
             $command->type = $event->type()->type();
         }
 
-        $form = $this->createForm('update_event', $command, [
+        $form = $this->createForm(UpdateEventType::class, $command, [
             "model_manager_name" => $this->getParameter("dende_calendar.model_manager_name")
         ]);
 

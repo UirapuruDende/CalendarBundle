@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @todo - calendar must be selected or name for new provided
  * @todo - if event is weekly at least one repetition chosen
  */
-final class UpdateEventType extends AbstractType
+class UpdateEventType extends AbstractType
 {
     use UpdateNameTrait;
 

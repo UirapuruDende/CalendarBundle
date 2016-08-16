@@ -1,11 +1,10 @@
 <?php
-namespace Dende\CalendarBundle\DataFixtures\ORM;
+namespace Dende\CalendarBundle\Tests\DataFixtures\ORM;
 
 use DateTime;
-use Dende\Calendar\Application\Factory\OccurrenceFactory;
-use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Duration;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\CalendarBundle\Tests\Factory\OccurrenceFactory;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -40,7 +39,10 @@ final class OccurrencesData extends BaseFixture implements ContainerAwareInterfa
      */
     public function insert($params)
     {
-        $occurrence = $this->getContainer()->get('dende_calendar.factory.occurrence')->createFromArray([
+        $idGenerator = $this->getContainer()->get("dende_calendar.id_generator");
+        $factory = new OccurrenceFactory($idGenerator);
+
+        $occurrence = $factory->createFromArray([
             'startDate' => new DateTime($params["startDate"]),
             'duration'  => new Duration($params["duration"]),
             'event'     => $this->getReference($params["event"]),

@@ -1,5 +1,5 @@
 <?php
-namespace Dende\CalendarBundle\DataFixtures\ORM;
+namespace Dende\CalendarBundle\Tests\DataFixtures\ORM;
 
 use DateTime;
 use Dende\Calendar\Application\Command\CreateEventCommand;
