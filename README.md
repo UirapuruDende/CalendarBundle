@@ -6,9 +6,9 @@ A [Symfony 2](http://symfony.com) bundle for integration of [Dende/Calendar](htt
 
 # Screenshots:
 
-![img1](/docs/img/img_1.png)
+![img1](/Resources/docs/img/img_1.png)
 
-![img2](/docs/img/img_2.png)
+![img2](/Resources/docs/img/img_2.png)
 
 ## installation:
 

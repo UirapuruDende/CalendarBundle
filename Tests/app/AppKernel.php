@@ -27,7 +27,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle()
+            new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle(),
         );
     }
 

@@ -1,21 +1,28 @@
 framework:
+    ide: "phpstorm://%%f:%%l"
     secret: "Three can keep a secret, if two of them are dead."
     translator:
       fallback: pl
     test: ~
-    form: ~
+    form:
+      enabled: true
     router:
         resource: "%kernel.root_dir%/routing.yml"
         strict_requirements: ~
     templating:
         engines: ['twig']
+    csrf_protection:
+      enabled: true
     session:
+#        cookie_lifetime:  %session_lifetime%
+#        gc_maxlifetime: 1800
+#        handler_id:  ~
         storage_id: session.storage.filesystem
     profiler:
         collect: true
         only_exceptions: false
         enabled: true
-
+    validation:      { enabled: true, enable_annotations: true }
     fragments:       ~
     http_method_override: true
 
@@ -39,7 +46,12 @@ fos_rest:
     failed_validation: 422
 
 sensio_framework_extra:
-    view: { annotations: false }
+    router:      { annotations: true }
+    request:     { converters: true, auto_convert: true }
+    view:        { annotations: true }
+    cache:       { annotations: true }
+    security:    { annotations: true }
+    psr_message: { enabled: false }
 
 jms_serializer:
   handlers:
@@ -64,11 +76,11 @@ monolog:
     main:
       type: stream
       path: "%kernel.logs_dir%/%kernel.environment%.log"
-      level: DEBUG
+      level: INFO
     doctrine:
       type: stream
       path: "%kernel.logs_dir%/doctrine.log"
-      level: DEBUG
+      level: INFO
       channels: ["doctrine"]
 
 liip_functional_test: ~
@@ -93,8 +105,38 @@ doctrine:
           default:
             auto_mapping: false
             connection: default
-            mappings: ~
-          viewmodel_default:
-            auto_mapping: false
-            connection: default
-            mappings: ~
+            mappings:
+              DendeCalendarBundle:
+                mapping:    true
+                dir:        Resources/config/doctrine
+                prefix:     Dende\Calendar\Domain
+                alias:      Calendar
+                is_bundle:  true
+              Test:
+                type:       annotation
+                mapping:    true
+                dir:        "%kernel.root_dir%/../../Tests/Entity"
+                prefix:     Dende\CalendarBundle\Tests\Entity
+                alias:      Test
+                is_bundle:  false
+
+dende_calendar: ~
+#  model_manager_name:                   'tenant'
+#  backend_type:                         'ORM'
+#  calendar_repository_service_name:     'gyman.calendar.repository'
+#  calendar_factory_service_name:        'gyman.calendar.factory'
+#  event_repository_service_name:        'gyman.event.repository'
+#  event_factory_service_name:           'gyman.event.factory'
+#  occurrence_repository_service_name:   'gyman.occurrence.repository'
+#  occurrence_factory_service_name:      'gyman.occurrence.factory'
+#  mapping:
+#    event:
+#      entity:                             Dende\Calendar\Domain\Calendar\Event
+#      map:
+#        bundle:                           Dende\Calendar\Domain\Calendar\Event
+#        app:                              Gyman\Domain\Calendar\Event
+#    calendar:
+#      entity:                             Dende\Calendar\Domain\Calendar
+#      map:
+#        bundle:                           Dende\Calendar\Domain\Calendar
+#        app:                              Gyman\Domain\Calendar

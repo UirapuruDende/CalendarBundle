@@ -7,6 +7,6 @@ php composer.phar install
 php ./Tests/app/console.php cache:clear --env=test
 php ./Tests/app/console.php doctrine:schema:drop --force
 php ./Tests/app/console.php doctrine:schema:create
-php ./Tests/app/console.php doctrine:fixtures:load -n -vvv
+php ./Tests/app/console.php doctrine:fixtures:load -n -vvv --fixtures=./Tests/DataFixtures/ORM
 
 php -S localhost:8080 -t Tests/app/
