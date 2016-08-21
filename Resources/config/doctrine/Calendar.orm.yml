@@ -10,6 +10,12 @@ Dende\Calendar\Domain\Calendar:
   table: calendars
   repositoryClass: Dende\CalendarBundle\Repository\ORM\CalendarRepository
 
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+      time_aware: false
+
+
   id:
     id:
       type: guid
@@ -20,6 +26,10 @@ Dende\Calendar\Domain\Calendar:
       type: string
       nullable: false
       length: 255
+
+    deletedAt:
+      type: date
+      nullable: true
 
   oneToMany:
     events:

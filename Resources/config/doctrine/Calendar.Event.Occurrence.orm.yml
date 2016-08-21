@@ -3,6 +3,11 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
   table: occurrences
   repositoryClass: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
 
+  gedmo:
+    soft_deleteable:
+      field_name: deletedAt
+      time_aware: false
+
   id:
     id:
       type: guid
@@ -16,7 +21,7 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
 
   embedded:
     duration:
-      class: Dende\Calendar\Domain\Calendar\Event\Duration
+      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\Duration
       columnPrefix: false
 
   manyToOne: # occurrence is the owning side!
@@ -42,4 +47,6 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
     modified:
       type: boolean
 
-
+    deletedAt:
+      type: date
+      nullable: true

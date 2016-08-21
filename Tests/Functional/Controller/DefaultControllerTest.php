@@ -91,6 +91,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
 
         $this->assertEquals("2015-11-02 12:00", $occurrence->startDate()->format("Y-m-d H:i"));
         $this->assertEquals("2015-11-02 13:30", $occurrence->endDate()->format("Y-m-d H:i"));
+
         $this->assertEquals(90, $occurrence->duration()->minutes());
     }
 
@@ -408,7 +409,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
     public function deleting_weekly_event_with_all_his_occurrences()
     {
         /** @var Event $event */
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('Test event number 02');
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('Test event number 02');
         $this->assertCount(13, $event->occurrences());
         $occurrence = $event->occurrences()->first();
 
@@ -427,9 +428,9 @@ final class DefaultControllerTest extends BaseFunctionalTest
         $this->assertEquals(200, $this->getStatusCode());
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
-        $this->assertInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->findOneById($calendarId));
-        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->findOneById($eventId));
-        $this->assertNotInstanceOf(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->findOneById($occurrenceId));
+        $this->assertNotNull(Calendar::class, $this->em->getRepository("Calendar:Calendar")->findOneById($calendarId));
+        $this->assertNull($this->em->getRepository("Calendar:Calendar\Event")->findOneById($eventId));
+        $this->assertNull(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->findOneById($occurrenceId));
     }
 
     /**

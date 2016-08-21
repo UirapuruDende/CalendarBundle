@@ -60,10 +60,12 @@ class CreateEventType extends AbstractType
                 'attr' => [
                     'class' => 'form_datetime'
                 ],
-                "label" => "dende_calendar.form.end_date.label"
+                "label" => "dende_calendar.form.end_date.label",
+                "required" => false,
             ])
             ->add("duration", IntegerType::class, [
-                "label" => "dende_calendar.form.duration.label"
+                "label" => "dende_calendar.form.duration.label",
+                "required" => true
             ])
             ->add("title", "text", [
                 "label" => "dende_calendar.form.title.label"

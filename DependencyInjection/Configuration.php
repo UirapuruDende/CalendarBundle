@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('backend_type')->defaultValue('ORM')->end()
                 ->scalarNode('calendar_repository_service_name')->defaultValue('dende_calendar.calendar_repository')->end()
                 ->scalarNode('calendar_factory_service_name')->defaultValue('dende_calendar.factory.calendar')->end()
-                ->scalarNode('event_repository_service_name')->defaultValue('dende_calendar.events_repository')->end()
+                ->scalarNode('event_repository_service_name')->defaultValue('dende_calendar.event_repository')->end()
                 ->scalarNode('event_factory_service_name')->defaultValue('dende_calendar.factory.event')->end()
                 ->scalarNode('occurrence_repository_service_name')->defaultValue('dende_calendar.occurrences_repository')->end()
                 ->scalarNode('occurrence_factory_service_name')->defaultValue('dende_calendar.factory.occurrence')->end()
