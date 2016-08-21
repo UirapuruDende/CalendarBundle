@@ -12,7 +12,7 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        return array(
+        return [
             new Dende\CalendarBundle\DendeCalendarBundle(),
 
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -28,7 +28,8 @@ class AppKernel extends Kernel
             new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle(),
-        );
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+        ];
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)

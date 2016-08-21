@@ -33,7 +33,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
     {
         parent::setUp();
         $this->em = $this->container->get("doctrine.orm.entity_manager");
-        $this->calendar = $this->em->getRepository("Calendar:Calendar")->findOneByName('Brazilian Jiu Jitsu');
+        $this->calendar = $this->em->getRepository(Calendar::class)->findOneByName('Brazilian Jiu Jitsu');
     }
 
     public function tearDown()
@@ -126,7 +126,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
         $this->em->refresh($this->calendar);
 
         /** @var Event $event */
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('Test weekly event 1');
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('Test weekly event 1');
 
         $this->assertCount(2, $this->calendar->events());
         $this->assertCount(13, $event->occurrences());
@@ -200,7 +200,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
         $this->em->refresh($this->calendar);
 
         /** @var Event $event */
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('Test weekly event for new calendar');
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('Test weekly event for new calendar');
 
         $this->assertCount(13, $event->occurrences());
         $this->assertEquals("2015-09-01 12:00", $event->startDate()->format("Y-m-d H:i"));
@@ -215,7 +215,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
     public function updating_single_event_without_type_change()
     {
         /** @var Event $event */
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('some-single-test-event');
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event');
         $this->assertCount(1, $event->occurrences());
         $occurrence = $event->occurrences()->first();
 
@@ -240,7 +240,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
 
         $this->em->refresh($event);
 
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('some-single-test-event-changed');
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event-changed');
 
         /** @var Occurrence $occurrence */
         $occurrence = $event->occurrences()->first();
@@ -264,7 +264,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
     public function updating_single_event_with_calendar_creation()
     {
         /** @var Event $event */
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('some-single-test-event');
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event');
         $this->assertCount(1, $event->occurrences());
         $occurrence = $event->occurrences()->first();
 
@@ -290,7 +290,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
 
         $this->em->refresh($event);
 
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('some-single-test-event-changed');
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event-changed');
 
         $this->assertCount(1, $event->occurrences());
         $this->assertEquals('some-single-test-event-changed', $event->title());
@@ -303,7 +303,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
     public function updating_single_event_to_weekly_event()
     {
         /** @var Event $event */
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('some-single-test-event');
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event');
         $this->assertCount(1, $event->occurrences());
         $occurrence = $event->occurrences()->first();
 
@@ -379,7 +379,7 @@ final class DefaultControllerTest extends BaseFunctionalTest
     public function deleting_single_event_with_his_occurrence()
     {
         /** @var Event $event */
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('some-single-test-event');
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event');
         $this->assertCount(1, $event->occurrences());
         $occurrence = $event->occurrences()->first();
 
@@ -398,9 +398,9 @@ final class DefaultControllerTest extends BaseFunctionalTest
         $this->assertEquals(200, $this->getStatusCode());
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
-        $this->assertInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->findOneById($calendarId));
-        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->findOneById($eventId));
-        $this->assertNotInstanceOf(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->findOneById($occurrenceId));
+        $this->assertInstanceOf(Calendar::class, $this->em->getRepository(Calendar::class)->findOneById($calendarId));
+        $this->assertNotInstanceOf(Event::class, $this->em->getRepository(Event::class)->findOneById($eventId));
+        $this->assertNotInstanceOf(Occurrence::class, $this->em->getRepository(Occurrence::class)->findOneById($occurrenceId));
     }
 
     /**
@@ -428,9 +428,10 @@ final class DefaultControllerTest extends BaseFunctionalTest
         $this->assertEquals(200, $this->getStatusCode());
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
-        $this->assertNotNull(Calendar::class, $this->em->getRepository("Calendar:Calendar")->findOneById($calendarId));
-        $this->assertNull($this->em->getRepository("Calendar:Calendar\Event")->findOneById($eventId));
-        $this->assertNull(Occurrence::class, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->findOneById($occurrenceId));
+        $this->assertNotNull(Calendar::class, $this->em->getRepository(Calendar::class)->findOneById($calendarId));
+        $this->assertNull($this->em->getRepository(Event::class)->findOneById($eventId));
+        $this->assertCount(13, $this->em->getRepository(Occurrence::class)->findAllByEvent($event));
+        $this->assertInstanceOf(Occurrence::class, $this->em->getRepository(Occurrence::class)->findOneById($occurrenceId));
     }
 
     /**
@@ -439,14 +440,14 @@ final class DefaultControllerTest extends BaseFunctionalTest
     public function deleting_whole_calendar()
     {
         /** @var Event $event */
-        $event = $this->em->getRepository("Calendar:Calendar\Event")->findOneByTitle('Test event number 02');
-        $this->em->getRepository("Calendar:Calendar")->remove($event->calendar());
+        $event = $this->em->getRepository(Event::class)->findOneByTitle('Test event number 02');
+        $this->em->getRepository(Calendar::class)->remove($event->calendar());
 
         $calendarId = $event->calendar()->id();
         $eventId = $event->id();
 
-        $this->assertNotInstanceOf(Calendar::class, $this->em->getRepository("Calendar:Calendar")->findById($calendarId));
-        $this->assertNotInstanceOf(Event::class, $this->em->getRepository("Calendar:Calendar\Event")->findById($eventId));
-        $this->assertCount(0, $this->em->getRepository("Calendar:Calendar\Event\Occurrence")->findByEvent($event));
+        $this->assertNotInstanceOf(Calendar::class, $this->em->getRepository(Calendar::class)->findById($calendarId));
+        $this->assertNotInstanceOf(Event::class, $this->em->getRepository(Event::class)->findById($eventId));
+        $this->assertCount(0, $this->em->getRepository(Occurrence::class)->findByEvent($event));
     }
 }

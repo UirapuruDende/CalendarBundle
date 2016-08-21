@@ -105,6 +105,10 @@ doctrine:
           default:
             auto_mapping: false
             connection: default
+            filters:
+              softdeleteable:
+                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                enabled: true
             mappings:
               DendeCalendarBundle:
                 mapping:    true
@@ -140,3 +144,9 @@ dende_calendar: ~
 #      map:
 #        bundle:                           Dende\Calendar\Domain\Calendar
 #        app:                              Gyman\Domain\Calendar
+
+stof_doctrine_extensions:
+  default_locale: en_US
+  orm:
+    default:
+      softdeleteable: true

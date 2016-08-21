@@ -28,7 +28,7 @@ Dende\Calendar\Domain\Calendar:
       length: 255
 
     deletedAt:
-      type: date
+      type: datetime
       nullable: true
 
   oneToMany:

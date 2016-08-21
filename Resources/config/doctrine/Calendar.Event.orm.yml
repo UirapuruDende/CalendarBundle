@@ -82,5 +82,5 @@ Dende\Calendar\Domain\Calendar\Event:
       length: 255
 
     deletedAt:
-      type: date
+      type: datetime
       nullable: true
