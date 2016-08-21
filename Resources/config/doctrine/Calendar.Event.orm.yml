@@ -55,10 +55,13 @@ Dende\Calendar\Domain\Calendar\Event:
   oneToOne:
     previousEvent:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
-      mappedBy: previousEvent
-      orphanRemoval: true
-      cascade: ["all"] # required, must stay here or exception will be thrown
-
+      referencedBy: previousEvent
+      joinColumns:
+        previousEvent:
+          name: previous_event_id
+          referencedColumnName: id
+          onDelete: SET NULL
+          onUpdate: RESTRICT
   fields:
     startDate:
       type: datetime

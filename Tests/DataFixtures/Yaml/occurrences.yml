@@ -132,3 +132,56 @@ occurrence-03-01: #occurrence for testing, please leave or test will fail - temp
   startDate: "2015-09-01 12:00:00"
   duration: 90
   event: event-003
+
+#test with previous event relation
+
+occurrence-05-01:
+  startDate: "2015-09-02 12:00:00"
+  duration: 90
+  event: event-005
+
+occurrence-05-02:
+  startDate: "2015-09-04 12:00:00"
+  duration: 90
+  event: event-005
+
+occurrence-05-03:
+  startDate: "2015-09-07 12:00:00"
+  duration: 90
+  event: event-005
+
+occurrence-05-04:
+  startDate: "2015-09-09 12:00:00"
+  duration: 90
+  event: event-005
+
+occurrence-05-05:
+  startDate: "2015-09-11 12:00:00"
+  duration: 90
+  event: event-005
+
+
+occurrence-06-01:
+  startDate: "2015-09-15 12:00:00"
+  duration: 90
+  event: event-006
+
+occurrence-06-02:
+  startDate: "2015-09-17 12:00:00"
+  duration: 90
+  event: event-006
+
+occurrence-06-03:
+  startDate: "2015-09-22 12:00:00"
+  duration: 90
+  event: event-006
+
+occurrence-06-04:
+  startDate: "2015-09-24 12:00:00"
+  duration: 90
+  event: event-006
+
+occurrence-06-05:
+  startDate: "2015-09-29 12:00:00"
+  duration: 90
+  event: event-006

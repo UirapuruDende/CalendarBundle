@@ -6,6 +6,8 @@ use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Factory\EventFactory;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
+use Dende\Calendar\Domain\Calendar\Event\Duration;
+use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -38,16 +40,18 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
      */
     public function insert($params)
     {
-        $command = new CreateEventCommand();
-        $command->calendar = $this->getReference($params["calendar"]);
-        $command->duration = $params["duration"];
-        $command->startDate = new DateTime($params["startDate"]);
-        $command->endDate = new DateTime($params["endDate"]);
-        $command->repetitionDays = $params["repetitions"];
-        $command->title = $params["title"];
-        $command->type = $params["type"];
+        $array = [
+            "calendar" => $this->getReference($params["calendar"]),
+            "duration" => new Duration($params["duration"]),
+            "startDate" => new DateTime($params["startDate"]),
+            "endDate" => new DateTime($params["endDate"]),
+            "repetitions" => new Event\Repetitions($params["repetitions"]),
+            "title" => $params["title"],
+            "type" => new EventType($params["type"]),
+            "previousEvent" => isset($params["previousEvent"]) ? $this->getReference($params["previousEvent"]) : null,
+        ];
 
-        $event = $this->getContainer()->get('dende_calendar.factory.event')->createFromCommand($command);
+        $event = $this->getContainer()->get('dende_calendar.factory.event')->createFromArray($array);
 
         return $event;
     }
