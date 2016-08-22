@@ -125,11 +125,36 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         // TODO: Implement findAllByEventUnmodified() method.
     }
 
-    public function remove(Occurrence $occurrence)
+    /**
+     * @param Occurrence|Occurrence[]|ArrayCollection $occurrences
+     * @throws \Exception
+     */
+    public function remove($occurrences)
     {
         $em = $this->getEntityManager();
-        $em->remove($occurrence);
-        $em->flush();
+
+        if($occurrences instanceof Occurrence) {
+            $em->remove($occurrences);
+            $em->flush($occurrences);
+
+            return;
+        } elseif(is_array($occurrences) || $occurrences instanceof Traversable) {
+            /** @var Occurrence $occurrence */
+            foreach($occurrences as $occurrence) {
+                $em->remove($occurrence);
+            }
+
+            $em->flush();
+
+            return;
+        }
+
+        throw new \Exception(sprintf(
+            "Argument is unknown type! Should be %s class or collection/array of %s class!",
+            Occurrence::class,
+            Occurrence::class
+        ));
+
     }
 
     /**

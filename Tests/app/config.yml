@@ -76,11 +76,11 @@ monolog:
     main:
       type: stream
       path: "%kernel.logs_dir%/%kernel.environment%.log"
-      level: INFO
+      level: DEBUG
     doctrine:
       type: stream
       path: "%kernel.logs_dir%/doctrine.log"
-      level: INFO
+      level: DEBUG
       channels: ["doctrine"]
 
 liip_functional_test: ~
@@ -106,7 +106,7 @@ doctrine:
             auto_mapping: false
             connection: default
             filters:
-              softdeleteable:
+              soft_deleteable:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                 enabled: true
             mappings:
@@ -146,7 +146,6 @@ dende_calendar: ~
 #        app:                              Gyman\Domain\Calendar
 
 stof_doctrine_extensions:
-  default_locale: en_US
   orm:
     default:
       softdeleteable: true

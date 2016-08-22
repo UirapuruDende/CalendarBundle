@@ -28,13 +28,11 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
     event:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
       inversedBy: occurrences
-      cascade: ["all"]
       joinColumns:
         EventId:
           name: event_id
           referencedColumnName: id
-          onDelete: SET NULL
-          onUpdate: RESTRICT
+
   fields:
     startDate:
       type: datetime

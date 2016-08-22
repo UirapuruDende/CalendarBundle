@@ -32,8 +32,8 @@ class DendeCalendarBundle extends Bundle
             );
 
             $container->addCompilerPass($registerMappingCompilerPass);
-
-            $container->addCompilerPass(new UpdateStrategiesPass());
         }
+
+        $container->addCompilerPass(new UpdateStrategiesPass());
     }
 }

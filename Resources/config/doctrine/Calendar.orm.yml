@@ -15,7 +15,6 @@ Dende\Calendar\Domain\Calendar:
       field_name: deletedAt
       time_aware: false
 
-
   id:
     id:
       type: guid
@@ -35,5 +34,4 @@ Dende\Calendar\Domain\Calendar:
     events:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
       mappedBy: calendar
-      orphanRemoval: true
-      cascade: ["all"]
+      cascade: []

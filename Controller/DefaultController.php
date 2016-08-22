@@ -78,7 +78,7 @@ class DefaultController extends Controller
             $command->duration = $command->startDate->diffInMinutes($command->endDate);
             $command->endDate->addYear();
             $command->repetitionDays = [
-                $command->startDate->dayOfWeek
+                intval($command->startDate->format("N"))
             ];
         }
 

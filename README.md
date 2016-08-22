@@ -31,6 +31,9 @@ class AppKernel extends Kernel
 }
 ```
 
+3. Install and enable stof/doctrine-extensions-bundle for calendar entities
+(also add gedmo: ~ config to entity mapping!)
+
 ## creating test database in mysql:
 
     mysql -u user -ppassword -e "CREATE DATABASE `calendar_bundle_test`;"

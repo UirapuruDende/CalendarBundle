@@ -42,31 +42,29 @@ Dende\Calendar\Domain\Calendar\Event:
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
       inversedBy: events
-      cascade: ["all"]
+      cascade: []
       joinColumns:
         CalendarId:
           name: calendar_id
           referencedColumnName: id
           onDelete: SET NULL
-          onUpdate: RESTRICT
 
   oneToMany:
     occurrences:
       targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence
       mappedBy: event
-      orphanRemoval: true
       cascade: ["all"] # required, must stay here or exception will be thrown
 
   oneToOne:
     previousEvent:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
       referencedBy: previousEvent
+      cascade: [persist, remove]
       joinColumns:
         previousEvent:
           name: previous_event_id
           referencedColumnName: id
-          onDelete: SET NULL
-          onUpdate: RESTRICT
+
   fields:
     startDate:
       type: datetime
