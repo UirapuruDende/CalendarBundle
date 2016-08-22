@@ -139,6 +139,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
 
             return;
         } elseif(is_array($occurrences) || $occurrences instanceof Traversable) {
+
             /** @var Occurrence $occurrence */
             foreach($occurrences as $occurrence) {
                 $em->remove($occurrence);

@@ -53,7 +53,7 @@ Dende\Calendar\Domain\Calendar\Event:
     occurrences:
       targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence
       mappedBy: event
-      cascade: ["all"] # required, must stay here or exception will be thrown
+      cascade: [all] # required, must stay here or exception will be thrown
 
   oneToOne:
     previousEvent:
