@@ -42,7 +42,7 @@ Dende\Calendar\Domain\Calendar\Event:
     calendar:
       targetEntity: Dende\Calendar\Domain\Calendar
       inversedBy: events
-      cascade: []
+      cascade: [all]
       joinColumns:
         CalendarId:
           name: calendar_id
@@ -59,7 +59,7 @@ Dende\Calendar\Domain\Calendar\Event:
     previousEvent:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
       referencedBy: previousEvent
-      cascade: [persist, remove]
+      cascade: [all]
       joinColumns:
         previousEvent:
           name: previous_event_id

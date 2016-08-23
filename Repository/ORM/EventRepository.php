@@ -35,8 +35,8 @@ class EventRepository extends EntityRepository implements EventRepositoryInterfa
      */
     public function remove(Event $event)
     {
+        $event->setDeletedAt(new \DateTime("now"));
         $em = $this->getEntityManager();
-        $em->remove($event);
-        $em->flush();
+        $em->flush($event);
     }
 }

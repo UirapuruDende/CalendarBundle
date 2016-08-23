@@ -134,15 +134,16 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         $em = $this->getEntityManager();
 
         if($occurrences instanceof Occurrence) {
-            $em->remove($occurrences);
+            $occurrences->setDeletedAt(new \DateTime("now"));
             $em->flush($occurrences);
 
             return;
         } elseif(is_array($occurrences) || $occurrences instanceof Traversable) {
+            $date = new \DateTime("now");
 
             /** @var Occurrence $occurrence */
             foreach($occurrences as $occurrence) {
-                $em->remove($occurrence);
+                $occurrence->setDeletedAt($date);
             }
 
             $em->flush();

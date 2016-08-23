@@ -2,7 +2,6 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
   type: mappedSuperclass
   table: occurrences
   repositoryClass: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
-
   gedmo:
     soft_deleteable:
       field_name: deletedAt
@@ -28,6 +27,7 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
     event:
       targetEntity: Dende\Calendar\Domain\Calendar\Event
       inversedBy: occurrences
+      cascade: [all]
       joinColumns:
         EventId:
           name: event_id
