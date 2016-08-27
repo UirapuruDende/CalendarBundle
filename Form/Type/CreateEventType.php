@@ -42,6 +42,8 @@ class CreateEventType extends AbstractType
                     EventType::$availableTypes,
                     array_map($this->updateNames('type'), EventType::$availableTypes)
                 ),
+//                'expanded' => true,
+//                'data' => EventType::TYPE_SINGLE,
                 "label" => "dende_calendar.form.type.label"
             ])
             ->add("startDate", DateTimeType::class, [
