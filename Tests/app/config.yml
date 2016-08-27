@@ -151,3 +151,9 @@ services:
     arguments: [@annotation_reader]
     tags:
       - { name: doctrine.event_subscriber, connection: default }
+
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+          softdeleteable: true

@@ -34,6 +34,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
                 $expr->lt("o.endDate", ':end'),
                 $expr->eq('e.calendar', ':calendar')
             ))
+            ->andWhere('o.deletedAt is NULL')
             ->orderBy("o.startDate", "ASC")
             ->setParameters([
                 'calendar' => $calendar,
@@ -62,6 +63,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
                 $expr->gt("o.startDate", ':start'),
                 $expr->lt("o.endDate", ':end')
             ))
+            ->andWhere('o.deletedAt is NULL')
             ->orderBy('o.startDate', 'ASC')
             ->setParameters([
                 'start' => $start,
@@ -115,9 +117,35 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         // TODO: Implement findOneByDateAndCalendar() method.
     }
 
-    public function update(Occurrence $occurrence)
+    /**
+     * @param Occurrence|Occurrence[] $occurrences
+     * @throws \Exception
+     */
+    public function update($occurrences)
     {
-        // TODO: Implement update() method.
+        $em = $this->getEntityManager();
+
+        if($occurrences instanceof Occurrence) {
+            $em->merge($occurrences);
+            $em->flush($occurrences);
+
+            return;
+        } elseif(is_array($occurrences) || $occurrences instanceof Traversable) {
+            /** @var Occurrence $occurrence */
+            foreach($occurrences as $occurrence) {
+                $em->merge($occurrence);
+            }
+
+            $em->flush();
+
+            return;
+        }
+
+        throw new \Exception(sprintf(
+            "Argument is unknown type! Should be %s class or collection/array of %s class!",
+            Occurrence::class,
+            Occurrence::class
+        ));
     }
 
     public function findAllByEventUnmodified(Event $event)

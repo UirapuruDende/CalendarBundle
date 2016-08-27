@@ -142,7 +142,7 @@ class DefaultController extends Controller
             $command->endDate = $event->endDate();
             $command->duration = $event->duration()->minutes();
             $command->title = $event->title();
-            $command->repetitionDays = $event->repetitions()->weekly();
+            $command->repetitionDays = $event->repetitions()->weekdays();
             $command->type = $event->type()->type();
         }
 
