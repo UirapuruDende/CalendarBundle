@@ -64,7 +64,14 @@ Dende\Calendar\Domain\Calendar\Event:
         previousEvent:
           name: previous_event_id
           referencedColumnName: id
-
+    nextEvent:
+      targetEntity: Dende\Calendar\Domain\Calendar\Event
+      referencedBy: nextEvent
+      cascade: [all]
+      joinColumns:
+        nextEvent:
+          name: next_event_id
+          referencedColumnName: id
   fields:
     startDate:
       type: datetime
