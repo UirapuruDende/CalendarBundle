@@ -38,6 +38,7 @@
         "psr-4": { "Dende\\CalendarBundle\\": "" }
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "preferred-install": "source"
     }
 }
