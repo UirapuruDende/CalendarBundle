@@ -3,22 +3,21 @@ namespace Dende\CalendarBundle\Form\Type;
 
 use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Application\Handler\UpdateEventHandler;
+use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
-use Dende\Calendar\Domain\Calendar\Event\Repetitions;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class UpdateEventType
  * @package Dende\CalendarBundle\Form\Type
- * @todo setup validation so:
- * @todo - calendar must be selected or name for new provided
- * @todo - if event is weekly at least one repetition chosen
  */
-class UpdateEventType extends AbstractType
+class UpdateEventType extends AbstractEventType
 {
     use UpdateNameTrait;
 
@@ -27,68 +26,16 @@ class UpdateEventType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $builder
-            ->add("calendar", "entity", [
-                "required" => false,
-                "class" => "Calendar:Calendar",
-                "choice_label" => "name",
-                "em" => $options["model_manager_name"],
-                "label" => "dende_calendar.form.calendar.label"
-            ])
-            ->add("new_calendar_name", "text", [
-                "mapped" => false,
-                "required" => false,
-                "label" => "dende_calendar.form.new_calendar_name.label"
-            ])
-            ->add("type", "choice", [
-                "choices" => array_combine(
-                    EventType::$availableTypes,
-                    array_map($this->updateNames('type'), EventType::$availableTypes)
-                ),
-                "label" => "dende_calendar.form.type.label"
-            ])
-            ->add("startDate", "datetime", [
-                'widget' => 'single_text',
-                'with_seconds' => false,
-                'format' => 'Y-MM-dd HH:mm',
-                'attr' => [
-                    'class' => 'form_datetime'
-                ],
-                "label" => "dende_calendar.form.start_date.label"
-            ])
-            ->add("endDate", "datetime", [
-                'widget' => 'single_text',
-                'with_seconds' => false,
-                'format' => 'Y-MM-dd HH:mm',
-                'attr' => [
-                    'class' => 'form_datetime'
-                ],
-                "label" => "dende_calendar.form.end_date.label"
-            ])
-            ->add("duration", "integer", [
-                "label" => "dende_calendar.form.duration.label"
-            ])
-            ->add("title", "text", [
-                "label" => "dende_calendar.form.title.label"
-            ])
-            ->add("method", "hidden", [
-                "data" => UpdateEventHandler::MODE_NEXT_INCLUSIVE
-            ])
-            ->add("repetitionDays", "choice", [
-                "choices" => array_map($this->updateNames('repetition_days'), Repetitions::$availableWeekdays),
-                "multiple" => true,
-                "expanded" => true,
-                "label" => "dende_calendar.form.repetition_days.label"
-            ])
-            ->add("delete_event", "submit", [
+            ->add("delete_event", SubmitType::class, [
                 "label" => "dende_calendar.form.delete_event.label",
                 "attr" => [
                     "class" => "pull-right"
                 ]
             ])
-            ->add("submit", "submit", [
-                "label" => "dende_calendar.form.submit_update.label"
-            ]);
+        ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             /** @var UpdateEventCommand $command */
@@ -101,6 +48,7 @@ class UpdateEventType extends AbstractType
                 throw new \Exception("Occurrence is null!");
             }
 
+            /** @var Event $event */
             $event = $occurrence->event();
 
             if (!$event) {
@@ -116,21 +64,30 @@ class UpdateEventType extends AbstractType
                 ]);
             }
 
+            if ($event->isType(EventType::TYPE_SINGLE)) {
+                $form->add("method", HiddenType::class, [
+                    'data' => 'single'
+                ]);
+            } else if ($event->isType(EventType::TYPE_WEEKLY)) {
+                $form->add("method", ChoiceType::class, [
+                    "label" => "dende_calendar.form.method.label",
+                    'choices' => array_combine(UpdateEventHandler::$availableModes, array_map(function($mode) {
+                        return sprintf('dende_calendar.form.method.choice.%s', $mode);
+                    }, UpdateEventHandler::$availableModes))
+                ]);
+            }
         });
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'data_class' => UpdateEventCommand::class,
-            'model_manager_name' => 'default'
-        ]);
-
-        $resolver->setAllowedTypes([
-            'model_manager_name' => 'string',
         ]);
     }
 

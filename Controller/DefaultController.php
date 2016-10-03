@@ -91,8 +91,13 @@ class DefaultController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                /** @var UpdateEventCommand|CreateEventCommand $command */
                 $command = $form->getData();
-                $this->get("dende_calendar.new_calendar_creation")->handleForm($form, $command);
+
+                if($command->newCalendarName) {
+                    $this->get("dende_calendar.new_calendar_creation")->handle($command);
+                }
+
                 $this->get("dende_calendar.handler.create_event")->handle($command);
                 $this->get("session")->getFlashBag()->add("success", "dende_calendar.flash.event_created_successfully");
                 return $this->redirectToRoute("dende_calendar_default_index");
@@ -102,9 +107,9 @@ class DefaultController extends Controller
             }
         }
 
-        return $response->setContent($this->renderView("DendeCalendarBundle:Default:createEvent.html.twig", [
+        return $this->render("DendeCalendarBundle:Default:createEvent.html.twig", [
             "form" => $form->createView()
-        ]));
+        ], $response);
     }
 
     /**
@@ -123,11 +128,6 @@ class DefaultController extends Controller
         if(!$occurrence) {
             throw new EntityNotFoundException('Occurrence entity not found in database');
         }
-
-        $this->get("session")->getFlashBag()->add(
-            "error",
-            sprintf("Uwaga! Wszystkie wystąpienia i powiązane z nimi informacje (obecności) od daty '%s' zostaną usunięte po zapisaniu zmian!", $occurrence->startDate()->format("Y/m/d H:i"))
-        );
 
         $response = new Response();
         $command = new UpdateEventCommand();
@@ -161,8 +161,13 @@ class DefaultController extends Controller
                     $this->get('dende_calendar.handler.remove_occurrence')->remove($occurrence);
                     return $this->redirectToRoute("dende_calendar_default_index");
                 } else {
+                    /** @var UpdateEventCommand|CreateEventCommand $command */
                     $command = $form->getData();
-                    $this->get("dende_calendar.new_calendar_creation")->handleForm($form, $command);
+
+                    if($command->newCalendarName) {
+                        $this->get("dende_calendar.new_calendar_creation")->handle($command);
+                    }
+
                     $this->get("dende_calendar.handler.update_event")->handle($command);
                     $this->get("session")->getFlashBag()->add("success", "dende_calendar.flash.event_updated_successfully");
                     return $this->redirectToRoute("dende_calendar_default_index");
@@ -173,8 +178,8 @@ class DefaultController extends Controller
             }
         }
 
-        return $response->setContent($this->renderView("DendeCalendarBundle:Default:updateEvent.html.twig", [
+        return $this->render("DendeCalendarBundle:Default:updateEvent.html.twig", [
             "form" => $form->createView()
-        ]));
+        ], $response);
     }
 }

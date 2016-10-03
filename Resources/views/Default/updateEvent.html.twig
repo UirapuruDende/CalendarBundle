@@ -1,7 +1,30 @@
 {% extends 'DendeCalendarBundle::layout.html.twig' %}
 
 {% block content %}
-    {{ form(form, {attr: {class: "form form-horizontal"}}) }}
+    {{ form_start(form) }}
+
+        {% if form.method is defined %}
+            {{ form_row(form.method) }}
+        {% endif %}
+
+        {{ form_row(form.calendar) }}
+        {{ form_row(form.newCalendarName) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.startDate) }}
+        {{ form_row(form.endDate) }}
+        {{ form_row(form.duration) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.repetitionDays) }}
+        {{ form_row(form.delete_event) }}
+
+        {% if form.delete_occurrence is defined %}
+            {{ form_row(form.delete_event) }}
+        {% endif %}
+
+        {{ form_rest(form) }}
+
+        <button>{{ 'dende_calendar.form.submit_update.label'|trans }}</button>
+    {{ form_end(form) }}
 {% endblock content %}
 
 {% block javascripts %}

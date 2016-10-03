@@ -58,14 +58,19 @@ services:
       - "@event_dispatcher"
 
 #forms
+  dende_calendar.form_type.abstract_event:
+    class: Dende\CalendarBundle\Form\Type\AbstractEventType
+    abstract: true
 
   dende_calendar.form_type.create_event:
     class: Dende\CalendarBundle\Form\Type\CreateEventType
+    parent: dende_calendar.form_type.abstract_event
     tags:
       - {name: form.type, alias: create_event}
 
   dende_calendar.form_type.update_event:
     class: Dende\CalendarBundle\Form\Type\UpdateEventType
+    parent: dende_calendar.form_type.abstract_event
     tags:
       - {name: form.type, alias: update_event}
 
@@ -79,18 +84,6 @@ services:
       - @=service(parameter('dende_calendar.event_factory_service_name'))
       - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
 
-  dende_calendar.handler.remove_event:
-    class: Dende\Calendar\Application\Handler\RemoveEventHandler
-    arguments:
-      - @=service(parameter('dende_calendar.event_repository_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
-
-  dende_calendar.handler.remove_occurrence:
-    class: Dende\Calendar\Application\Handler\RemoveOccurrenceHandler
-    arguments:
-      - @dende_calendar.handler.remove_event
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
-
   dende_calendar.handler.update_event:
     class: Dende\Calendar\Application\Handler\UpdateEventHandler
     arguments:
@@ -100,6 +93,11 @@ services:
       - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
 
 # update strategies
+
+  dende_calendar.update_strategy.single:
+    class: Dende\Calendar\Application\Handler\UpdateStrategy\Single
+    tags:
+      - {name: dende_calendar.update_strategy }
 
   dende_calendar.update_strategy.overwrite:
     class: Dende\Calendar\Application\Handler\UpdateStrategy\Overwrite
@@ -127,18 +125,6 @@ services:
     class: Dende\Calendar\Application\Factory\OccurrenceFactory
     arguments:
       - @dende_calendar.id_generator
-
-# validation
-
-  validator.calendar_name:
-    class: Dende\CalendarBundle\Validator\CalendarNameValidator
-    tags:
-      - { name: validator.constraint_validator, alias: validator.calendar_name_validator}
-
-  validator.weekdays_selected:
-    class: Dende\CalendarBundle\Validator\SelectWeekdayForSerialValidator
-    tags:
-      - { name: validator.constraint_validator, alias: validator.weekday_for_serial_validator}
 
 # listeners
 

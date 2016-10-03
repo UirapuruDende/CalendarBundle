@@ -33,6 +33,9 @@ web_profiler:
 twig:
     debug:            true
     strict_variables: true
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
+        # resources: ['bootstrap_3_horizontal_layout.html.twig']
 
 fos_rest:
   param_fetcher_listener: true

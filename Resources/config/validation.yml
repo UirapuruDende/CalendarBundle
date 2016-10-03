@@ -1,21 +1,29 @@
 Dende\Calendar\Application\Command\UpdateEventCommand:
-  constraints:
-    - Dende\CalendarBundle\Validator\CalendarNameConstraint:
-        message: dende_calendar.validation.choose_calendar_or_provide_new_name
-    - Dende\CalendarBundle\Validator\SelectWeekdayForSerialConstraint:
-        message: dende_calendar.validation.choose_at_least_one_day_for_weekly
   properties:
+    newCalendarName:
+      - NotBlank:
+          message: dende_calendar.validation.choose_calendar_or_provide_new_name
+          groups: ["createNewCalendar"]
     title:
       - NotBlank:
           message: dende_calendar.validation.event_title_cant_be_empty
+    repetitionDays:
+      - Count:
+          min: 1
+          minMessage: dende_calendar.validation.choose_at_least_one_day_for_weekly
+          groups: ["weeklyEvent"]
 
 Dende\Calendar\Application\Command\CreateEventCommand:
-  constraints:
-    - Dende\CalendarBundle\Validator\CalendarNameConstraint:
-        message: dende_calendar.validation.choose_calendar_or_provide_new_name
-    - Dende\CalendarBundle\Validator\SelectWeekdayForSerialConstraint:
-        message: dende_calendar.validation.choose_at_least_one_day_for_weekly
   properties:
+    newCalendarName:
+      - NotBlank:
+          message: dende_calendar.validation.choose_calendar_or_provide_new_name
+          groups: ["createNewCalendar"]
     title:
       - NotBlank:
           message: dende_calendar.validation.event_title_cant_be_empty
+    repetitionDays:
+      - Count:
+          min: 1
+          minMessage: dende_calendar.validation.choose_at_least_one_day_for_weekly
+          groups: ["weeklyEvent"]

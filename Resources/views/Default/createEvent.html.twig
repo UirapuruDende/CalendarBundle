@@ -1,1 +1,9 @@
 {% extends 'DendeCalendarBundle:Default:updateEvent.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+
+    <button>{{ 'dende_calendar.form.submit.label'|trans }}</button>
+    {{ form_end(form) }}
+{% endblock content %}
