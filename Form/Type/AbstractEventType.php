@@ -4,6 +4,7 @@ namespace Dende\CalendarBundle\Form\Type;
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Command\EventCommandInterface;
 use Dende\Calendar\Application\Command\UpdateEventCommand;
+use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -28,7 +29,7 @@ abstract class AbstractEventType extends AbstractType
         $builder
             ->add("calendar", EntityType::class, [
                 "required" => false,
-                "class" => "Calendar:Calendar",
+                "class" => Calendar::class,
                 "choice_label" => "name",
                 "em" => $options["model_manager_name"],
                 "label" => "dende_calendar.form.calendar.label",
