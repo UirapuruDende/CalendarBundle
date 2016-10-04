@@ -1,0 +1,14 @@
+<project name="dende/calendar-bundle.properties">
+    <if>
+        <not><isset property="env" /></not>
+        <then>
+            <echo>Setting to default environment (dev)</echo>
+            <property name="env" value="dev" />
+        </then>
+    </if>
+
+    <property name="php_bin" value="/usr/bin/php" />
+    <property name="composer" value="#{php_bin} composer.phar" />
+    <property name="sf" value="${project.basedir}/console.sh" />
+    <property name="default_language" value="pl" />
+</project>

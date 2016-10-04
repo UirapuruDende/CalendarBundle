@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="dende/calendar-bundle" default="default">
+    <import file="${project.basedir}/Resources/phing/properties.xml"/>
+
+    <target name="default" description="The default target used when no arguments have been given.">
+        <exec command="./bin/phing -f ${phing.file} -l" outputProperty="phing_targets" />
+        <echo>Please select a target.</echo>
+        <echo>${phing_targets}</echo>
+    </target>
+
+    <target name="composer:download">
+        <exec executable="sh" passthru="true" checkreturn="true">
+            <arg value="-c 'curl -sS https://getcomposer.org/installer | php'" />
+        </exec>
+    </target>
+
+    <target name="composer:install" depends="composer:download">
+        <exec executable="#{composer}" passthru="true" checkreturn="true">
+            <arg value="install" />
+            <arg value="--env=#{env}" />
+        </exec>
+    </target>
+
+    <target name="reset-db">
+        <echo>dropping db schema:</echo>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:schema:drop" />
+            <arg value="--em=default" />
+            <arg value="--env=${env}" />
+            <arg value="--force" />
+            <arg value="-vvv" />
+        </exec>
+        <echo>creating main schema:</echo>
+        <exec executable="${sf}" checkreturn="true" passthru="true">
+            <arg value="doctrine:schema:create" />
+            <arg value="--em=default" />
+            <arg value="--env=${env}" />
+            <arg value="--no-interaction" />
+            <arg value="-vvv" />
+        </exec>
+        <exec executable="${sf}" checkreturn="true" passthru="true" description="fixtures loading to main schema">
+            <arg value="doctrine:fixtures:load" />
+            <arg value="--em=default" />
+            <arg value="--env=${env}" />
+            <arg value="--no-interaction" />
+            <arg value="-vvv" />
+            <arg value="--fixtures=Tests/DataFixtures/ORM" />
+        </exec>
+    </target>
+</project>
