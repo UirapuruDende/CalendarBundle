@@ -8,6 +8,7 @@ use Dende\CalendarBundle\Tests\DataFixtures\ORM\OccurrencesData;
 use Liip\FunctionalTestBundle\Test\WebTestCase as BaseTest;
 use Exception;
 use Symfony\Component\BrowserKit\Client;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Class BaseFunctionalTest
@@ -20,9 +21,13 @@ abstract class BaseFunctionalTest extends BaseTest
      */
     protected $client;
 
+    /** @var  Container */
+    protected $container;
+
     public function setUp()
     {
-        parent::setUp();
+        $this->client = $this->getClient();
+        $this->container = $this->client->getContainer();
 
         $this->loadFixtures([
             CalendarsData::class,
@@ -46,6 +51,7 @@ abstract class BaseFunctionalTest extends BaseTest
         static::$kernel->boot();
         $client = static::$kernel->getContainer()->get('test.client');
         $client->setServerParameters($server);
+        $client->followRedirects(true);
         return $client;
     }
 

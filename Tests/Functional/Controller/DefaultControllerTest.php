@@ -5,10 +5,8 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\CalendarBundle\Tests\BaseFunctionalTest;
-use Dende\CalendarBundle\Tests\Factory\OccurrenceFactory;
 use Doctrine\ORM\EntityManager;
 use Mockery as m;
-use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Class DefaultControllerTest
@@ -17,9 +15,6 @@ use Symfony\Component\DependencyInjection\Container;
 class DefaultControllerTest extends BaseFunctionalTest
 {
     const FORMAT_DATETIME = "Y-m-d H:i";
-
-    /** @var  Container */
-    protected $container;
 
     /**
      * @var Calendar
@@ -34,8 +29,6 @@ class DefaultControllerTest extends BaseFunctionalTest
     public function setUp()
     {
         parent::setUp();
-        $this->client = $this->getClient();
-        $this->container = $this->client->getContainer();
 
         $this->em = $this->container->get("doctrine.orm.entity_manager");
         $this->calendar = $this->em->getRepository(Calendar::class)->findOneByName('Brazilian Jiu Jitsu');

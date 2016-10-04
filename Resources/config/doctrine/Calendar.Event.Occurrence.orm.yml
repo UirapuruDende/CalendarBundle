@@ -20,7 +20,7 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
 
   embedded:
     duration:
-      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\Duration
+      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration
       columnPrefix: false
 
   manyToOne: # occurrence is the owning side!

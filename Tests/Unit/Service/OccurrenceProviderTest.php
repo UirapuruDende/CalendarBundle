@@ -7,8 +7,7 @@ use Dende\Calendar\Application\Factory\OccurrenceFactory;
 use Dende\Calendar\Application\Generator\InMemory\IdGenerator;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Duration;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence\Duration as OccurrenceDuration;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
 use Dende\CalendarBundle\Service\OccurrencesProvider;
 use Mockery as m;
 
@@ -44,7 +43,7 @@ final class OccurrenceProviderTest extends \PHPUnit_Framework_TestCase
             (new OccurrenceFactory(new IdGenerator()))->createFromArray([
                 "id" => "123",
                 "startDate" => new DateTime("now"),
-                "duration" => new OccurrenceDuration(60),
+                "duration" => 60,
                 "event" => $event
             ])
         ];

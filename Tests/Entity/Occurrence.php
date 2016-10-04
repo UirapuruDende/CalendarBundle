@@ -14,9 +14,5 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Occurrence extends BaseOccurrence
 {
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    public $testField = '123';
+
 }
