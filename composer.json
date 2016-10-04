@@ -35,6 +35,7 @@
         }
     ],
     "autoload": {
+        "files": ["Tests/app/AppKernel.php"],
         "psr-4": { "Dende\\CalendarBundle\\": "" }
     },
     "config": {

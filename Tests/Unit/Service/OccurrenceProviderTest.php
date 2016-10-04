@@ -65,8 +65,8 @@ final class OccurrenceProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(1, $result);
         $this->assertEquals($event["title"], "Event Title");
-        $this->assertEquals($event["start"], (new DateTime())->format("Y-m-d H:i:s"));
-        $this->assertEquals($event["end"], (new DateTime("+1 hour"))->format("Y-m-d H:i:s"));
+        $this->assertEquals($event["start"], (new DateTime())->format("Y-m-d H:i:s"), null, 1);
+        $this->assertEquals($event["end"], (new DateTime("+1 hour"))->format("Y-m-d H:i:s"), null, 1);
         $this->assertEquals($event["url"], "url/to/occurrence");
     }
 }

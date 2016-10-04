@@ -155,6 +155,9 @@ services:
     tags:
       - { name: doctrine.event_subscriber, connection: default }
 
+parameters:
+  translator.class: Dende\CalendarBundle\Tests\Translator\NoTranslator
+
 stof_doctrine_extensions:
     default_locale: en_US
     orm:
