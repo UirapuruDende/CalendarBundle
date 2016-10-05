@@ -3,6 +3,7 @@ namespace Dende\CalendarBundle\Tests\Functional\Controller;
 
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
+use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\CalendarBundle\Tests\BaseFunctionalTest;
 use Doctrine\ORM\EntityManager;
@@ -60,7 +61,7 @@ class DefaultControllerTest extends BaseFunctionalTest
 
         $form->setValues([
             "create_event[calendar]" => $calendar->id(),
-            "create_event[type]" => Calendar\Event\EventType::TYPE_SINGLE,
+            "create_event[type]" => EventType::TYPE_SINGLE,
             "create_event[startDate]" => "2015-11-02 12:00",
             "create_event[endDate]" => "2015-11-02 13:30",
             "create_event[duration]" => 90,
@@ -110,7 +111,7 @@ class DefaultControllerTest extends BaseFunctionalTest
 
         $form->setValues([
             "create_event[calendar]" => $calendar->id(),
-            "create_event[type]" => Calendar\Event\EventType::TYPE_WEEKLY,
+            "create_event[type]" => EventType::TYPE_WEEKLY,
             "create_event[startDate]" => "2015-09-01 12:00",
             "create_event[endDate]" => "2015-09-30 13:30",
             "create_event[duration]" => 90,
@@ -188,7 +189,7 @@ class DefaultControllerTest extends BaseFunctionalTest
         $form->setValues([
             "create_event[calendar]" => $calendar->id(),
             "create_event[newCalendarName]" => 'i am new calendar added',
-            "create_event[type]" => Calendar\Event\EventType::TYPE_WEEKLY,
+            "create_event[type]" => EventType::TYPE_WEEKLY,
             "create_event[startDate]" => "2015-09-01 12:00",
             "create_event[endDate]" => "2015-09-30 13:30",
             "create_event[duration]" => 90,
@@ -233,7 +234,7 @@ class DefaultControllerTest extends BaseFunctionalTest
 
         $form->setValues([
             "update_event[calendar]" => $event->calendar()->id(),
-            "update_event[type]" => Calendar\Event\EventType::TYPE_SINGLE,
+            "update_event[type]" => EventType::TYPE_SINGLE,
             "update_event[startDate]" => "2015-11-05 16:00",
             "update_event[endDate]" => "2015-11-05 17:30",
             "update_event[duration]" => 90,
@@ -282,7 +283,7 @@ class DefaultControllerTest extends BaseFunctionalTest
         $form->setValues([
             "update_event[calendar]" => $event->calendar()->id(),
             "update_event[newCalendarName]" => 'i am some next calendar added',
-            "update_event[type]" => Calendar\Event\EventType::TYPE_SINGLE,
+            "update_event[type]" => EventType::TYPE_SINGLE,
             "update_event[startDate]" => "2015-11-05 16:00",
             "update_event[endDate]" => "2015-11-05 17:30",
             "update_event[duration]" => 90,
@@ -305,6 +306,10 @@ class DefaultControllerTest extends BaseFunctionalTest
      */
     public function updating_single_event_to_weekly_event()
     {
+        // rozdzielić na trzy metody
+        // dodać sprawdzanie, czy dla next utworzono nowy event i czy są połączone
+        $this->markTestSkipped();
+
         /** @var Event $event */
         $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event');
         $this->assertCount(1, $event->occurrences());
@@ -315,7 +320,7 @@ class DefaultControllerTest extends BaseFunctionalTest
 
         $form = $crawler->selectButton('dende_calendar.form.submit_update.label')->form([
             "update_event[calendar]" => $event->calendar()->id(),
-            "update_event[type]" => Calendar\Event\EventType::TYPE_WEEKLY,
+            "update_event[type]" => EventType::TYPE_WEEKLY,
             "update_event[startDate]" => "2015-09-01 16:00",
             "update_event[endDate]" => "2015-09-30 17:00",
             "update_event[duration]" => 60,
