@@ -23,4 +23,17 @@
         <server name="KERNEL_DIR" value="Tests/app/" />
     </php>
 
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./Command</directory>
+            <directory suffix=".php">./Controller</directory>
+            <directory suffix=".php">./DependencyInjection</directory>
+            <directory suffix=".php">./Event</directory>
+            <directory suffix=".php">./Form</directory>
+            <directory suffix=".php">./Listener</directory>
+            <directory suffix=".php">./Repository</directory>
+            <directory suffix=".php">./Service</directory>
+        </whitelist>
+    </filter>
+
 </phpunit>
