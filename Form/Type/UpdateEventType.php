@@ -73,7 +73,8 @@ class UpdateEventType extends AbstractEventType
                     "label" => "dende_calendar.form.method.label",
                     'choices' => array_combine(UpdateEventHandler::$availableModes, array_map(function($mode) {
                         return sprintf('dende_calendar.form.method.choice.%s', $mode);
-                    }, UpdateEventHandler::$availableModes))
+                    }, UpdateEventHandler::$availableModes)),
+                    "data" => UpdateEventHandler::MODE_NEXT_INCLUSIVE
                 ]);
             }
         });

@@ -5,8 +5,10 @@ use AppKernel;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\CalendarsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\EventsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\OccurrencesData;
+use Doctrine\ORM\EntityManager;
 use Liip\FunctionalTestBundle\Test\WebTestCase as BaseTest;
 use Exception;
+use Mockery;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -16,6 +18,8 @@ use Symfony\Component\DependencyInjection\Container;
  */
 abstract class BaseFunctionalTest extends BaseTest
 {
+    const FORMAT_DATETIME = "Y-m-d H:i";
+
     /**
      * @var Client
      */
@@ -23,6 +27,9 @@ abstract class BaseFunctionalTest extends BaseTest
 
     /** @var  Container */
     protected $container;
+
+    /** @var  EntityManager */
+    protected $em;
 
     public function setUp()
     {
@@ -34,6 +41,13 @@ abstract class BaseFunctionalTest extends BaseTest
             EventsData::class,
             OccurrencesData::class
         ], 'default');
+
+        $this->em = $this->container->get("doctrine.orm.entity_manager");
+    }
+
+    public function tearDown()
+    {
+        Mockery::close();
     }
 
     /**
