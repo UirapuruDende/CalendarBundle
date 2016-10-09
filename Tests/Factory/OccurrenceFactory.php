@@ -2,26 +2,28 @@
 namespace Dende\CalendarBundle\Tests\Factory;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\Duration;
-use Dende\CalendarBundle\Tests\Entity\Occurrence;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration;
+use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
+use Dende\Calendar\Application\Factory\OccurrenceFactory as BaseFactory;
 
-class OccurrenceFactory extends \Dende\Calendar\Application\Factory\OccurrenceFactory
+
+class OccurrenceFactory extends BaseFactory
 {
     public function createFromArray($array = [])
     {
         $template = [
             'id'             => $this->idGenerator->generateId(),
             'startDate'      => new DateTime('now'),
-            'duration'       => new Duration(90),
+            'duration'       => new OccurrenceDuration(90),
             'event'          => null,
         ];
 
         $array = array_merge($template, $array);
 
-        return new Occurrence(
+        return new OccurrenceExtended(
             $array['id'],
             $array['startDate'],
-            $array['duration'],
+            new OccurrenceDuration($array['duration']),
             $array['event']
         );
     }

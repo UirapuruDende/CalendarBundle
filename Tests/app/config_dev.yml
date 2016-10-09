@@ -120,9 +120,9 @@ doctrine:
                 alias:      Calendar
                 is_bundle:  true
               Test:
-                type:       annotation
+                type:       yml
                 mapping:    true
-                dir:        "%kernel.root_dir%/../../Tests/Entity"
+                dir:        "%kernel.root_dir%/../../Tests/app/doctrine"
                 prefix:     Dende\CalendarBundle\Tests\Entity
                 alias:      Test
                 is_bundle:  false
@@ -154,6 +154,12 @@ services:
     arguments: [@annotation_reader]
     tags:
       - { name: doctrine.event_subscriber, connection: default }
+
+  dende_calendar.factory.occurrence:
+    class: Dende\CalendarBundle\Tests\Factory\OccurrenceFactory
+    arguments:
+      - @dende_calendar.id_generator
+
 
 stof_doctrine_extensions:
     default_locale: en_US

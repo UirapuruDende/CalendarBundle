@@ -1,0 +1,8 @@
+Dende\CalendarBundle\Tests\Entity\OccurrenceExtended:
+  type: entity
+  table: occurrences
+
+  fields:
+    test:
+      type: string
+      nullable: true

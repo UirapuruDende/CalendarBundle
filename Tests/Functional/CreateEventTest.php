@@ -5,7 +5,7 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\CalendarBundle\Tests\BaseFunctionalTest;
-use Dende\CalendarBundle\Tests\Entity\Occurrence;
+use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Mockery as m;
 
 class CreateEventTest extends BaseFunctionalTest
@@ -44,7 +44,7 @@ class CreateEventTest extends BaseFunctionalTest
 
         /** @var Event $event */
         $event = $calendar->events()->get(1);
-        /** @var Occurrence $occurrence */
+        /** @var OccurrenceExtended $occurrence */
         $occurrence = $event->occurrences()->first();
 
         $this->assertCount(2, $calendar->events());

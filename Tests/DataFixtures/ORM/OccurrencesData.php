@@ -2,7 +2,7 @@
 namespace Dende\CalendarBundle\Tests\DataFixtures\ORM;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended as Occurrence;
 use Dende\CommonBundle\DataFixtures\BaseFixture;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

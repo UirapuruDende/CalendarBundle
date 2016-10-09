@@ -4,7 +4,7 @@ namespace Dende\CalendarBundle\Tests\Functional\Update\Single;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\CalendarBundle\Tests\BaseFunctionalTest;
-use Dende\CalendarBundle\Tests\Entity\Occurrence;
+use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Mockery as m;
 
 class UpdateSingleToSingleTest extends BaseFunctionalTest
@@ -40,7 +40,7 @@ class UpdateSingleToSingleTest extends BaseFunctionalTest
 
         $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event-changed');
 
-        /** @var Occurrence $occurrence */
+        /** @var OccurrenceExtended $occurrence */
         $occurrence = $event->occurrences()->first();
         $this->em->refresh($occurrence);
 
@@ -53,12 +53,13 @@ class UpdateSingleToSingleTest extends BaseFunctionalTest
 
         $this->assertEquals("2015-11-05 16:00", $occurrence->startDate()->format(self::FORMAT_DATETIME));
         $this->assertEquals("2015-11-05 17:30", $occurrence->endDate()->format(self::FORMAT_DATETIME));
-//todo:        $this->assertEquals(90, $occurrence->duration()->minutes());
+
+        $this->assertEquals(90, $occurrence->duration()->minutes());
     }
 
 
     /**
-     * @test
+     * test
      */
     public function updating_single_event_with_calendar_creation()
     {
