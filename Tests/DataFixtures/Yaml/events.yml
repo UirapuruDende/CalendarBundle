@@ -22,7 +22,7 @@ event-003: # events for testing, please leave this or tests will fail - temporar
   id:           ~
   calendar:     calendar-003
   title:        "some-single-test-event"
-  repetitions:  [2]
+  repetitions:  []
   type:         single
   duration:     90
   startDate:    "2015-09-01 12:00:00"

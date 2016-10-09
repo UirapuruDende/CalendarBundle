@@ -15,9 +15,20 @@ class UpdateSingleToWeeklyTest extends BaseFunctionalTest
      */
     public function updating_single_event_to_weekly_event()
     {
-        /** @var Event $event */
+        /**
+         * @var Event $event
+         * startDate:    "2015-09-01 12:00:00"
+         * endDate:      "2015-09-01 13:30:00"
+         */
         $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event');
         $this->assertCount(1, $event->occurrences());
+
+
+        /**
+         * @var OccurrenceExtended $occurrence
+         * startDate: "2015-09-01 12:00:00"
+         * duration:  90
+         */
         $occurrence = $event->occurrences()->first();
 
         $crawler = $this->client->request('GET', '/calendar/occurrence/'.$occurrence->id());
@@ -56,21 +67,13 @@ class UpdateSingleToWeeklyTest extends BaseFunctionalTest
         $event = $this->em->getRepository(Event::class)->findOneById($event->id());
 
         $this->assertEquals('some-weekly-test-event-changed', $event->title());
-        $this->assertCount(13, $event->occurrences());
-
 
         /** @var OccurrenceExtended[]|ArrayCollection $occurrences */
         $occurrences = new ArrayCollection(
             (array) $this->em->getRepository(OccurrenceExtended::class)->findByEvent($event)
         );
 
-//        $this->assertCount(1, $occurrences->filter(function(OccurrenceExtended $occurrence){
-//            return $occurrence->isDeleted();
-//        }));
-
-        $this->assertCount(13, $occurrences->filter(function(OccurrenceExtended $occurrence){
-            return !$occurrence->isDeleted();
-        }));
+        $this->assertCount(13, $occurrences);
 
         $this->assertCount(1, $event->calendar()->events());
 
