@@ -41,8 +41,7 @@ class UpdateSingleToSingleTest extends BaseFunctionalTest
         $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event-changed');
 
         /** @var OccurrenceExtended $occurrence */
-        $occurrence = $event->occurrences()->first();
-        $this->em->refresh($occurrence);
+        $occurrence = $this->em->getRepository(OccurrenceExtended::class)->findOneByEvent($event);
 
         $this->assertCount(1, $event->occurrences());
         $this->assertEquals('some-single-test-event-changed', $event->title());

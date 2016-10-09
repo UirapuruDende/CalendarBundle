@@ -4,6 +4,8 @@ namespace Dende\CalendarBundle\Tests\Functional\Update\Single;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\CalendarBundle\Tests\BaseFunctionalTest;
+use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
+use Doctrine\Common\Collections\ArrayCollection;
 use Mockery as m;
 
 class UpdateSingleToWeeklyTest extends BaseFunctionalTest
@@ -56,11 +58,17 @@ class UpdateSingleToWeeklyTest extends BaseFunctionalTest
         $this->assertEquals('some-weekly-test-event-changed', $event->title());
         $this->assertCount(13, $event->occurrences());
 
-//        $this->assertCount(1, $event->occurrences()->filter(function(Occurrence $occurrence){
+
+        /** @var OccurrenceExtended[]|ArrayCollection $occurrences */
+        $occurrences = new ArrayCollection(
+            (array) $this->em->getRepository(OccurrenceExtended::class)->findByEvent($event)
+        );
+
+//        $this->assertCount(1, $occurrences->filter(function(OccurrenceExtended $occurrence){
 //            return $occurrence->isDeleted();
 //        }));
 
-        $this->assertCount(13, $event->occurrences()->filter(function(Occurrence $occurrence){
+        $this->assertCount(13, $occurrences->filter(function(OccurrenceExtended $occurrence){
             return !$occurrence->isDeleted();
         }));
 
@@ -72,31 +80,31 @@ class UpdateSingleToWeeklyTest extends BaseFunctionalTest
         $this->assertEquals("2015-09-01 16:00", $event->startDate()->format(self::FORMAT_DATETIME));
         $this->assertEquals("2015-09-30 17:00", $event->endDate()->format(self::FORMAT_DATETIME));
 
-        $this->assertEquals("2015-09-02 16:00", $event->occurrences()->get(0)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-02 17:00", $event->occurrences()->get(0)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-04 16:00", $event->occurrences()->get(1)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-04 17:00", $event->occurrences()->get(1)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-07 16:00", $event->occurrences()->get(2)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-07 17:00", $event->occurrences()->get(2)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-09 16:00", $event->occurrences()->get(3)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-09 17:00", $event->occurrences()->get(3)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-11 16:00", $event->occurrences()->get(4)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-11 17:00", $event->occurrences()->get(4)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-14 16:00", $event->occurrences()->get(5)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-14 17:00", $event->occurrences()->get(5)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-16 16:00", $event->occurrences()->get(6)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-16 17:00", $event->occurrences()->get(6)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-18 16:00", $event->occurrences()->get(7)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-18 17:00", $event->occurrences()->get(7)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-21 16:00", $event->occurrences()->get(8)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-21 17:00", $event->occurrences()->get(8)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-23 16:00", $event->occurrences()->get(9)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-23 17:00", $event->occurrences()->get(9)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-25 16:00", $event->occurrences()->get(10)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-25 17:00", $event->occurrences()->get(10)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-28 16:00", $event->occurrences()->get(11)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-28 17:00", $event->occurrences()->get(11)->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-30 16:00", $event->occurrences()->get(12)->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2015-09-30 17:00", $event->occurrences()->get(12)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-02 16:00", $occurrences->get(0)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-02 17:00", $occurrences->get(0)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-04 16:00", $occurrences->get(1)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-04 17:00", $occurrences->get(1)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-07 16:00", $occurrences->get(2)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-07 17:00", $occurrences->get(2)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-09 16:00", $occurrences->get(3)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-09 17:00", $occurrences->get(3)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-11 16:00", $occurrences->get(4)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-11 17:00", $occurrences->get(4)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-14 16:00", $occurrences->get(5)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-14 17:00", $occurrences->get(5)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-16 16:00", $occurrences->get(6)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-16 17:00", $occurrences->get(6)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-18 16:00", $occurrences->get(7)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-18 17:00", $occurrences->get(7)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-21 16:00", $occurrences->get(8)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-21 17:00", $occurrences->get(8)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-23 16:00", $occurrences->get(9)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-23 17:00", $occurrences->get(9)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-25 16:00", $occurrences->get(10)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-25 17:00", $occurrences->get(10)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-28 16:00", $occurrences->get(11)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-28 17:00", $occurrences->get(11)->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-30 16:00", $occurrences->get(12)->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals("2015-09-30 17:00", $occurrences->get(12)->endDate()->format(self::FORMAT_DATETIME));
     }
 }
