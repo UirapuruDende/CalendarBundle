@@ -51,27 +51,10 @@ Dende\Calendar\Domain\Calendar\Event:
 
   oneToMany:
     occurrences:
-      targetEntity: Dende\Calendar\Domain\Calendar\Event\Occurrence
+      targetEntity: Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface
       mappedBy: event
       cascade: [all] # required, must stay here or exception will be thrown
 
-  oneToOne:
-    previousEvent:
-      targetEntity: Dende\Calendar\Domain\Calendar\Event
-      referencedBy: previousEvent
-      cascade: [all]
-      joinColumns:
-        previousEvent:
-          name: previous_event_id
-          referencedColumnName: id
-    nextEvent:
-      targetEntity: Dende\Calendar\Domain\Calendar\Event
-      referencedBy: nextEvent
-      cascade: [all]
-      joinColumns:
-        nextEvent:
-          name: next_event_id
-          referencedColumnName: id
   fields:
     startDate:
       type: datetime

@@ -103,6 +103,8 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         default_entity_manager:   default
+        resolve_target_entities:
+          Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface: Dende\CalendarBundle\Tests\Entity\OccurrenceExtended
 
         entity_managers:
           default:
@@ -127,7 +129,8 @@ doctrine:
                 alias:      Test
                 is_bundle:  false
 
-dende_calendar: ~
+dende_calendar:
+  occurrence_class: 'Dende\CalendarBundle\Tests\Entity\OccurrenceExtended'
 #  model_manager_name:                   'tenant'
 #  backend_type:                         'ORM'
 #  calendar_repository_service_name:     'gyman.calendar.repository'
@@ -159,7 +162,6 @@ services:
     class: Dende\CalendarBundle\Tests\Factory\OccurrenceFactory
     arguments:
       - @dende_calendar.id_generator
-
 
 stof_doctrine_extensions:
     default_locale: en_US

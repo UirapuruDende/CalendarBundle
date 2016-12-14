@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('model_manager_name')->defaultValue('default')->end()
+                ->scalarNode('occurrence_class')->isRequired()->end()
                 ->scalarNode('backend_type')->defaultValue('ORM')->end()
                 ->scalarNode('calendar_repository_service_name')->defaultValue('dende_calendar.calendar_repository')->end()
                 ->scalarNode('calendar_factory_service_name')->defaultValue('dende_calendar.factory.calendar')->end()

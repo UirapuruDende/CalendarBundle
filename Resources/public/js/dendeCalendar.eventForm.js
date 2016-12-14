@@ -7,8 +7,11 @@ $(document).ready(function() {
     var $eventTypeElement = $("select[id$='_type']");
     var $repetitionCheckboxes = $("div[id$='_repetitionDays']").parents('div.form-group');
     var $endDateElement = $("input[id$='_endDate']").parents('div.form-group');
-
     var typeChangeEventName = "change";
+
+    var $calendarElement = $("select[id$='_calendar']");
+    var $newCalendarInput = $("input[id$='_newCalendarName']").parents('div.form-group');
+    var calendarEventName = "change";
 
     // handlers
 
@@ -26,8 +29,23 @@ $(document).ready(function() {
         }
     };
 
+    var noCalendarSelectedHandler = function(event) {
+        var $target = $(event.target);
+        var value = $target.val();
+
+        if(value != '') {
+            $newCalendarInput.hide();
+        } else
+        {
+            $newCalendarInput.show();
+        }
+    };
+
     // events
 
     $eventTypeElement.off(typeChangeEventName).on(typeChangeEventName, eventTypeChangeHandler);
     $eventTypeElement.trigger(typeChangeEventName);
+
+    $calendarElement.off(calendarEventName).on(calendarEventName, noCalendarSelectedHandler);
+    $calendarElement.trigger(calendarEventName);
 });

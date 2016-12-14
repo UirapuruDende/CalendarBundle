@@ -9,8 +9,10 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Dende\CalendarBundle\Form\Type\CreateEventType;
 use Dende\CalendarBundle\Form\Type\UpdateEventType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -120,10 +122,11 @@ class DefaultController extends Controller
      */
     public function updateEventAction(Request $request, $occurrenceId)
     {
-        /** @var Occurrence $occurrence */
-        $occurrence = $this->get(
-            $this->getParameter("dende_calendar.occurrence_repository_service_name")
-        )->find($occurrenceId);
+        /** @var EntityManagerInterface $em */
+        $em = $this->get('doctrine')->getManager($this->getParameter("dende_calendar.model_manager_name"));
+
+        /** @var OccurrenceInterface $occurrence */
+        $occurrence = $em->getRepository($this->getParameter("dende_calendar.occurrence.class"))->find($occurrenceId);
 
         if(!$occurrence) {
             throw new EntityNotFoundException('Occurrence entity not found in database');
@@ -174,7 +177,7 @@ class DefaultController extends Controller
                 }
             } else {
                 $this->get("session")->getFlashBag()->add("error", "dende_calendar.flash.event_update_error");
-                $response->setStatusCode(400);
+                $response->setStatusCode(Response::HTTP_BAD_REQUEST);
             }
         }
 

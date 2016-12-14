@@ -32,6 +32,23 @@ class DefaultControllerTest extends BaseFunctionalTest
     /**
      * @test
      */
+    public function create_event_form_is_rendered_properly() {
+        $startDate = '200710011200';
+        $endDate = '200710011230';
+
+        $crawler = $this->client->request('GET', sprintf('/calendar/occurrence/new?startDate=%s&endDate=%s', $startDate, $endDate));
+        $this->assertResponseCode();
+
+        $form = $crawler->selectButton('dende_calendar.form.submit.label')->form();
+
+        $this->assertEquals("2007-10-01 12:00", $form['create_event[startDate]']->getValue());
+        $this->assertEquals("2008-10-01 12:30", $form['create_event[endDate]']->getValue());
+        $this->assertEquals(30, $form['create_event[duration]']->getValue());
+    }
+
+    /**
+     * @test
+     */
     public function deleting_single_event_with_his_occurrence()
     {
         $this->markTestSkipped();

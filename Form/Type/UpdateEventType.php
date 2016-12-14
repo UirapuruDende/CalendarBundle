@@ -28,6 +28,9 @@ class UpdateEventType extends AbstractEventType
     {
         parent::buildForm($builder, $options);
 
+        $builder->remove('type');
+        $builder->add('type', HiddenType::class);
+
         $builder
             ->add("delete_event", SubmitType::class, [
                 "label" => "dende_calendar.form.delete_event.label",

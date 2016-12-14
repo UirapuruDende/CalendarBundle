@@ -99,6 +99,10 @@ abstract class AbstractEventType extends AbstractType
                     $validationGroups[] = 'weeklyEvent';
                 }
 
+                if(get_class($data) === UpdateEventCommand::class && !$data->occurrence->event()->isType($data->type)) {
+                    $validationGroups[] = 'eventTypeChange';
+                }
+
                 return $validationGroups;
             }
         ]);

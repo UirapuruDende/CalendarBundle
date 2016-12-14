@@ -12,6 +12,10 @@ Dende\Calendar\Application\Command\UpdateEventCommand:
           min: 1
           minMessage: dende_calendar.validation.choose_at_least_one_day_for_weekly
           groups: ["weeklyEvent"]
+    method:
+      - IsNull:
+          message: dende_calendar.validation.cant_convert_type
+          groups: ["eventTypeChange"]
 
 Dende\Calendar\Application\Command\CreateEventCommand:
   properties:

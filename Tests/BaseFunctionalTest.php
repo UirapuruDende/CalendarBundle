@@ -5,6 +5,7 @@ use AppKernel;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\CalendarsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\EventsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\OccurrencesData;
+use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Doctrine\ORM\EntityManager;
 use Liip\FunctionalTestBundle\Test\WebTestCase as BaseTest;
 use Exception;
@@ -31,16 +32,21 @@ abstract class BaseFunctionalTest extends BaseTest
     /** @var  EntityManager */
     protected $em;
 
+    /** @var  ReferenceRepository */
+    protected $fixtures;
+
     public function setUp()
     {
         $this->client = $this->getClient();
         $this->container = $this->client->getContainer();
 
-        $this->loadFixtures([
+        $fixtures = $this->loadFixtures([
             CalendarsData::class,
             EventsData::class,
             OccurrencesData::class
         ], 'default');
+
+        $this->fixtures = $fixtures->getReferenceRepository();
 
         $this->em = $this->container->get("doctrine.orm.entity_manager");
     }
@@ -77,14 +83,14 @@ abstract class BaseFunctionalTest extends BaseTest
         $msg = '';
         $code = $this->client->getResponse()->getStatusCode();
         if($code === 500 && ($paragraph = $this->client->getCrawler()->filter("div.text-exception h1")) && $paragraph->count() > 0) {
-            $msg = $paragraph->text();
+            $msg.= $this->client->getCrawler()->filter("div#traces-text")->text();
         }
         $this->assertEquals($expectedCode, $code, $msg);
     }
 
-    public function assertFormHasNoErrors()
+    public function assertFormHasNoErrors($form)
     {
-        $this->assertCountFormErrors(0);
+        $this->assertCountFormErrors(0, $form);
     }
     /**
      * @param int $expectedCount
@@ -95,20 +101,31 @@ abstract class BaseFunctionalTest extends BaseTest
     {
         if($profiler = $this->client->getProfile()) {
             $data = $profiler->getCollector('form')->getData();
+
             if(!array_key_exists($form, $data['forms'])) {
-                throw new Exception(sprintf('Form "%s" not found in a page.', $form));
+                return;
             }
-            $formErrors = array_column($data['forms'][$form]['errors'], 'message');
-            $formErrorsCount = count($data['forms'][$form]['errors']);
+
+            $formErrors = [];
+            $formErrorsCount = 0;
+
+            if(array_key_exists('errors', $data['forms'][$form])) {
+                $formErrors = array_column($data['forms'][$form]['errors'], 'message');
+                $formErrorsCount = count($data['forms'][$form]['errors']);
+            }
+
             $childrenErrorsCount = array_filter(array_map(function(array $child) {
                 return array_key_exists('errors', $child) ? count($child['errors']) : 0;
             }, $data['forms'][$form]['children']));
+
             $childrenErrorsMessages = array_filter(array_map(function(array $child) {
                 return array_key_exists('errors', $child) ? array_column($child['errors'], 'message') : null;
             }, $data['forms'][$form]['children']));
+
             $errorsMap = array_map(function($fieldErrorMessages, $key){
                 return sprintf('%s: "%s"', $key, implode('", "', $fieldErrorMessages));
             }, $childrenErrorsMessages, array_keys($childrenErrorsMessages));
+
             $erroredFields = array_keys(array_filter($childrenErrorsCount));
             $sum = array_sum($childrenErrorsCount) + $formErrorsCount;
             $childrenErrorsSum = array_sum($childrenErrorsCount);
@@ -122,7 +139,7 @@ abstract class BaseFunctionalTest extends BaseTest
                 $form,
                 $formErrorsCount,
                 implode('", "', $formErrors),
-                implode($errorsMap)
+                implode('', $errorsMap)
             );
             $this->assertEquals($expectedCount, $sum, $msg);
         }

@@ -26,8 +26,7 @@ services:
 
   dende_calendar.event_repository:
     class: %dende_calendar.event_repository.class%
-    factory_service: dende_calendar.entity_manager
-    factory_method: "getRepository"
+    factory: [@dende_calendar.entity_manager, "getRepository"]
     arguments: ["Calendar:Calendar\Event"]
 
   dende_calendar.occurrences_repository:

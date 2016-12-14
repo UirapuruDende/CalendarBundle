@@ -3,4 +3,4 @@ dende_calendar:
     choose_at_least_one_day_for_weekly:  "Dla wydarzenia cotygodniowego musisz zaznaczyć chociaż jeden dzień!"
     choose_calendar_or_provide_new_name: "Wybierz kalendarz lub podaj nazwę, by utworzyć nowy!"
     event_title_cant_be_empty:           "Podaj nazwę wydarzenia!"
-
+    cant_convert_weekly_to_single:       "Nie można zamienić powtarzalnego wydarzenia na pojedyńcze. Wybierz inną metodę"
