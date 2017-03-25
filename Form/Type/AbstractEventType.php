@@ -64,10 +64,6 @@ abstract class AbstractEventType extends AbstractType
                 ],
                 "label" => "dende_calendar.form.end_date.label",
             ])
-            ->add("duration", IntegerType::class, [
-                "label" => "dende_calendar.form.duration.label",
-                "required" => true
-            ])
             ->add("title", TextType::class, [
                 "label" => "dende_calendar.form.title.label"
             ])
