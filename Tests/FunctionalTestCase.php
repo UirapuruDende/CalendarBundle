@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Container;
  * Class BaseFunctionalTest
  * @package Dende\CalendarBundle\Tests
  */
-abstract class BaseFunctionalTest extends BaseTest
+abstract class FunctionalTestCase extends BaseTest
 {
     const FORMAT_DATETIME = "Y-m-d H:i";
 

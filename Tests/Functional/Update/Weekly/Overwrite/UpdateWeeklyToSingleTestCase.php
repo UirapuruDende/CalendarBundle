@@ -12,7 +12,7 @@ use Traversable;
 /**
  * @todo: remove, type convertion!
  */
-class UpdateWeeklyToSingleTest extends BaseFunctionalTest
+class UpdateWeeklyToSingleTestCase extends BaseFunctionalTest
 {
     /**
      * test

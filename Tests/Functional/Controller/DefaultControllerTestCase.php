@@ -13,7 +13,7 @@ use Mockery as m;
  * Class DefaultControllerTest
  * @package Dende\CalendarBundle\Tests\Functional\Controller
  */
-class DefaultControllerTest extends BaseFunctionalTest
+class DefaultControllerTestCase extends BaseFunctionalTest
 {
     const FORMAT_DATETIME = "Y-m-d H:i";
 

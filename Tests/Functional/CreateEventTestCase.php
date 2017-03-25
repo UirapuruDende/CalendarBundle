@@ -8,7 +8,7 @@ use Dende\CalendarBundle\Tests\BaseFunctionalTest;
 use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Mockery as m;
 
-class CreateEventTest extends BaseFunctionalTest
+class CreateEventTestCase extends BaseFunctionalTest
 {
     const FORMAT_DATETIME = "Y-m-d H:i";
 

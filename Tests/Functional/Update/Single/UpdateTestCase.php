@@ -7,7 +7,7 @@ use Dende\CalendarBundle\Tests\BaseFunctionalTest;
 use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Mockery as m;
 
-class UpdateTest extends BaseFunctionalTest
+class UpdateTestCase extends BaseFunctionalTest
 {
     /**
      * @test
