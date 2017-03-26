@@ -24,7 +24,6 @@
         "mockery/mockery": "^0.9.4",
         "friendsofphp/php-cs-fixer": "2.0.*@dev",
         "behat/behat": "^3.0",
-        "phing/phing": "*",
         "twig/extensions": "1.2.*@dev",
         "symfony/monolog-bundle": "2.7.*"
     },
@@ -44,5 +43,16 @@
         "bin-dir": "bin",
         "preferred-install": "source"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "scripts": {
+        "start-application" : [
+            "php ./Tests/app/console.php assets:install Tests/app --symlink --quiet",
+            "php ./Tests/app/console.php cache:clear --env=dev --quiet",
+            "php ./Tests/app/console.php doctrine:schema:drop --force --quiet",
+            "php ./Tests/app/console.php doctrine:schema:create --quiet",
+            "php ./Tests/app/console.php doctrine:fixtures:load -n -vvv --fixtures=./Tests/DataFixtures/ORM --quiet",
+            "php ./Tests/app/console.php server:start localhost:8080 --docroot=Tests/app/ --force --quiet",
+            "echo 'Open in browser http://localhost:8080/web.php/calendar'"
+        ]
+    }
 }
