@@ -5,7 +5,7 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
-use Dende\CalendarBundle\Tests\BaseFunctionalTest;
+use Dende\CalendarBundle\Tests\FunctionalTestCase;
 use Doctrine\ORM\EntityManager;
 use Mockery as m;
 
@@ -13,7 +13,7 @@ use Mockery as m;
  * Class DefaultControllerTest
  * @package Dende\CalendarBundle\Tests\Functional\Controller
  */
-class DefaultControllerTestCase extends BaseFunctionalTest
+class DefaultControllerTest extends FunctionalTestCase
 {
     const FORMAT_DATETIME = "Y-m-d H:i";
 

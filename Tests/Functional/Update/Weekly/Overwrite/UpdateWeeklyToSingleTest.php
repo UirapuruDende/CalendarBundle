@@ -3,7 +3,7 @@ namespace Dende\CalendarBundle\Tests\Functional\Update\Weekly\Overwrite;
 
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
-use Dende\CalendarBundle\Tests\BaseFunctionalTest;
+use Dende\CalendarBundle\Tests\FunctionalTestCase;
 use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Doctrine\Common\Collections\ArrayCollection;
 use Mockery as m;
@@ -12,7 +12,7 @@ use Traversable;
 /**
  * @todo: remove, type convertion!
  */
-class UpdateWeeklyToSingleTestCase extends BaseFunctionalTest
+class UpdateWeeklyToSingleTest extends FunctionalTestCase
 {
     /**
      * test

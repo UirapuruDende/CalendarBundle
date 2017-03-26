@@ -1,10 +1,10 @@
 <?php
 namespace Dende\CalendarBundle\Tests\Functional\Update\Weekly\SingleOccurrence;
 
-use Dende\CalendarBundle\Tests\BaseFunctionalTest;
+use Dende\CalendarBundle\Tests\FunctionalTestCase;
 use Mockery as m;
 
-class RemoveTestCase extends BaseFunctionalTest
+class RemoveTest extends FunctionalTestCase
 {
 
 }

@@ -4,11 +4,11 @@ namespace Dende\CalendarBundle\Tests\Functional;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
-use Dende\CalendarBundle\Tests\BaseFunctionalTest;
+use Dende\CalendarBundle\Tests\FunctionalTestCase;
 use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Mockery as m;
 
-class CreateEventTestCase extends BaseFunctionalTest
+class CreateEventTest extends FunctionalTestCase
 {
     const FORMAT_DATETIME = "Y-m-d H:i";
 

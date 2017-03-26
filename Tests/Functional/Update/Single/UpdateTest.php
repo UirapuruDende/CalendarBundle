@@ -3,11 +3,11 @@ namespace Dende\CalendarBundle\Tests\Functional\Update\Single;
 
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
-use Dende\CalendarBundle\Tests\BaseFunctionalTest;
+use Dende\CalendarBundle\Tests\FunctionalTestCase;
 use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Mockery as m;
 
-class UpdateTestCase extends BaseFunctionalTest
+class UpdateTest extends FunctionalTestCase
 {
     /**
      * @test

@@ -1,23 +1,23 @@
 <?php
 namespace Dende\CalendarBundle\Tests;
 
-use AppKernel;
+use Dende\CalendarBundle\Tests\app\AppKernel;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\CalendarsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\EventsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\OccurrencesData;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Doctrine\ORM\EntityManager;
-use Liip\FunctionalTestBundle\Test\WebTestCase as BaseTest;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Exception;
 use Mockery;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
- * Class BaseFunctionalTest
+ * Class FunctionalTestCase
  * @package Dende\CalendarBundle\Tests
  */
-abstract class FunctionalTestCase extends BaseTest
+abstract class FunctionalTestCase extends WebTestCase
 {
     const FORMAT_DATETIME = "Y-m-d H:i";
 

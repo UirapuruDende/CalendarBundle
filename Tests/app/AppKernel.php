@@ -1,4 +1,6 @@
 <?php
+namespace Dende\CalendarBundle\Tests\app;
+
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -13,22 +15,21 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         return [
-            new Dende\CalendarBundle\DendeCalendarBundle(),
-
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new Liip\FunctionalTestBundle\LiipFunctionalTestBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new \Dende\CalendarBundle\DendeCalendarBundle(),
+            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new \Symfony\Bundle\TwigBundle\TwigBundle(),
+            new \Symfony\Bundle\MonologBundle\MonologBundle(),
+            new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new \Liip\FunctionalTestBundle\LiipFunctionalTestBundle(),
+            new \FOS\RestBundle\FOSRestBundle(),
+            new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new \Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
+            new \FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle(),
+            new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         ];
     }
 
