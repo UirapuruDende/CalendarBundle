@@ -26,11 +26,8 @@ class UpdateTest extends FunctionalTestCase
         $form = $crawler->selectButton('dende_calendar.form.submit_update.label')->form();
 
         $form->setValues([
-            "update_event[calendar]" => $event->calendar()->id(),
-            "update_event[type]" => EventType::TYPE_SINGLE,
             "update_event[startDate]" => "2015-11-05 16:00",
             "update_event[endDate]" => "2015-11-05 17:30",
-            "update_event[duration]" => 90,
             "update_event[title]" => "some-single-test-event-changed",
         ]);
 
@@ -73,11 +70,8 @@ class UpdateTest extends FunctionalTestCase
         $form = $crawler->selectButton('dende_calendar.form.submit_update.label')->form();
 
         $form->setValues([
-            "update_event[calendar]" => $event->calendar()->id(),
-            "update_event[type]" => EventType::TYPE_SINGLE,
             "update_event[startDate]" => "2015-11-05 16:00",
             "update_event[endDate]" => "2015-11-05 17:30",
-            "update_event[duration]" => 90,
             "update_event[title]" => "some-single-test-event-changed",
         ]);
 
@@ -106,7 +100,7 @@ class UpdateTest extends FunctionalTestCase
     /**
      * test
      */
-    public function updating_single_event_with_calendar_creation()
+    public function updating_single_event_occurrence()
     {
         /** @var Event $event */
         $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event');
@@ -120,12 +114,8 @@ class UpdateTest extends FunctionalTestCase
         $form = $crawler->selectButton('dende_calendar.form.submit_update.label')->form();
 
         $form->setValues([
-            "update_event[calendar]" => $event->calendar()->id(),
-            "update_event[newCalendarName]" => 'i am some next calendar added',
-            "update_event[type]" => EventType::TYPE_SINGLE,
             "update_event[startDate]" => "2015-11-05 16:00",
             "update_event[endDate]" => "2015-11-05 17:30",
-            "update_event[duration]" => 90,
             "update_event[title]" => "some-single-test-event-changed",
         ]);
 
@@ -137,6 +127,5 @@ class UpdateTest extends FunctionalTestCase
 
         $this->assertCount(1, $event->occurrences());
         $this->assertEquals('some-single-test-event-changed', $event->title());
-        $this->assertEquals('i am some next calendar added', $event->calendar()->name());
     }
 }

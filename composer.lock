@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8f70e8c0aefe2cc6c0ac7807a88d6d77",
-    "content-hash": "68bcd9829a23db339991f3b264170d4d",
+    "hash": "5398c0fd184cb9e6a5689d3ef2d4968d",
+    "content-hash": "7f612e49c9a57f1f02f79d30f561f360",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -111,16 +111,16 @@
         },
         {
             "name": "dende/calendar",
-            "version": "1.8.4",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "1dee90bc75f9fa9450db395891a94182ba9a4edc"
+                "reference": "3d222fbb8cae91c39a95d2e8cf35d34d639dd36f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/1dee90bc75f9fa9450db395891a94182ba9a4edc",
-                "reference": "1dee90bc75f9fa9450db395891a94182ba9a4edc",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/3d222fbb8cae91c39a95d2e8cf35d34d639dd36f",
+                "reference": "3d222fbb8cae91c39a95d2e8cf35d34d639dd36f",
                 "shasum": ""
             },
             "require": {
@@ -155,75 +155,7 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2016-10-09 22:42:30"
-        },
-        {
-            "name": "dende/common-bundle",
-            "version": "dev-master",
-            "target-dir": "Dende/CommonBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/UirapuruDende/CommonBundle.git",
-                "reference": "e80a4c532d4ff7ed561a6c80a575f2181a6e4319"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/CommonBundle/zipball/e80a4c532d4ff7ed561a6c80a575f2181a6e4319",
-                "reference": "e80a4c532d4ff7ed561a6c80a575f2181a6e4319",
-                "shasum": ""
-            },
-            "require": {
-                "phing/phing": "~2.9",
-                "php": ">=5.4",
-                "raven/raven": "0.8.*@dev"
-            },
-            "require-dev": {
-                "behat/behat": "~3.0",
-                "behat/common-formatters": "~1.2",
-                "behat/mink-browserkit-driver": "~1.2",
-                "behat/mink-extension": "~2.0",
-                "behat/mink-selenium2-driver": "~1.2",
-                "behat/mink-zombie-driver": "~1.2",
-                "behat/symfony2-extension": "2.0.*@dev",
-                "evert/phpdoc-md": "dev-master",
-                "fabpot/php-cs-fixer": "2.0.*@dev",
-                "hasbridge/json-schema-validator": "dev-master",
-                "liip/functional-test-bundle": "~1.2",
-                "mayflower/php-codebrowser": "~1.1",
-                "mockery/mockery": "0.9.*",
-                "pdepend/pdepend": "2.0.*",
-                "phpdocumentor/phpdocumentor": "2.*",
-                "phploc/phploc": "2.1.*@dev",
-                "phpmd/phpmd": "dev-master",
-                "phpunit/phpunit": "*",
-                "sebastian/phpcpd": "2.0.*@dev",
-                "squizlabs/php_codesniffer": "2.0.*@dev",
-                "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
-                "webignition/json-pretty-print": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Dende\\CommonBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Grzegorz 'Uirapuru' Kaszuba",
-                    "email": "uirapuruadg@gmail.com"
-                }
-            ],
-            "description": "Common stuff for various projects",
-            "keywords": [
-                "Symfony2",
-                "bundle",
-                "public"
-            ],
-            "time": "2015-05-20 22:13:02"
+            "time": "2017-03-27 00:55:44"
         },
         {
             "name": "doctrine/annotations",
@@ -2086,99 +2018,6 @@
             "time": "2016-04-03 06:00:07"
         },
         {
-            "name": "phing/phing",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phingofficial/phing.git",
-                "reference": "74af0362988dfd6c53eaf7f6ade823d8e7d40348"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/74af0362988dfd6c53eaf7f6ade823d8e7d40348",
-                "reference": "74af0362988dfd6c53eaf7f6ade823d8e7d40348",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "require-dev": {
-                "ext-pdo_sqlite": "*",
-                "lastcraft/simpletest": "@dev",
-                "mikey179/vfsstream": "^1.6",
-                "pdepend/pdepend": "2.x",
-                "pear/archive_tar": "1.4.x",
-                "pear/http_request2": "dev-trunk",
-                "pear/net_growl": "dev-trunk",
-                "pear/pear-core-minimal": "1.10.1",
-                "pear/versioncontrol_git": "@dev",
-                "pear/versioncontrol_svn": "~0.5",
-                "phpdocumentor/phpdocumentor": "2.x",
-                "phploc/phploc": "~2.0.6",
-                "phpmd/phpmd": "~2.2",
-                "phpunit/phpunit": ">=3.7",
-                "sebastian/git": "~1.0",
-                "sebastian/phpcpd": "2.x",
-                "siad007/versioncontrol_hg": "^1.0",
-                "squizlabs/php_codesniffer": "~2.2",
-                "symfony/yaml": "~2.7"
-            },
-            "suggest": {
-                "pdepend/pdepend": "PHP version of JDepend",
-                "pear/archive_tar": "Tar file management class",
-                "pear/versioncontrol_git": "A library that provides OO interface to handle Git repository",
-                "pear/versioncontrol_svn": "A simple OO-style interface for Subversion, the free/open-source version control system",
-                "phpdocumentor/phpdocumentor": "Documentation Generator for PHP",
-                "phploc/phploc": "A tool for quickly measuring the size of a PHP project",
-                "phpmd/phpmd": "PHP version of PMD tool",
-                "phpunit/php-code-coverage": "Library that provides collection, processing, and rendering functionality for PHP code coverage information",
-                "phpunit/phpunit": "The PHP Unit Testing Framework",
-                "sebastian/phpcpd": "Copy/Paste Detector (CPD) for PHP code",
-                "siad007/versioncontrol_hg": "A library for interfacing with Mercurial repositories.",
-                "tedivm/jshrink": "Javascript Minifier built in PHP"
-            },
-            "bin": [
-                "bin/phing"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.16.x-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "classes/phing/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                "classes"
-            ],
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Michiel Rook",
-                    "email": "mrook@php.net"
-                },
-                {
-                    "name": "Phing Community",
-                    "homepage": "https://www.phing.info/trac/wiki/Development/Contributors"
-                }
-            ],
-            "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
-            "homepage": "https://www.phing.info/",
-            "keywords": [
-                "build",
-                "phing",
-                "task",
-                "tool"
-            ],
-            "time": "2016-10-10 11:51:22"
-        },
-        {
             "name": "phpcollection/phpcollection",
             "version": "0.5.0",
             "source": {
@@ -2916,59 +2755,6 @@
                 "psr-3"
             ],
             "time": "2016-10-10 12:19:37"
-        },
-        {
-            "name": "raven/raven",
-            "version": "0.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/getsentry/raven-php.git",
-                "reference": "d4b741736125f2b892e07903cd40450b53479290"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/raven-php/zipball/d4b741736125f2b892e07903cd40450b53479290",
-                "reference": "d4b741736125f2b892e07903cd40450b53479290",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "bin": [
-                "bin/raven"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.7.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Raven_": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD"
-            ],
-            "authors": [
-                {
-                    "name": "David Cramer",
-                    "email": "dcramer@gmail.com"
-                }
-            ],
-            "description": "A PHP client for Sentry (http://getsentry.com)",
-            "homepage": "http://getsentry.com",
-            "keywords": [
-                "log",
-                "logging"
-            ],
-            "abandoned": "sentry/sentry",
-            "time": "2013-12-03 10:27:59"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -4720,6 +4506,74 @@
             "time": "2016-09-18 12:15:51"
         },
         {
+            "name": "dende/common-bundle",
+            "version": "dev-master",
+            "target-dir": "Dende/CommonBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UirapuruDende/CommonBundle.git",
+                "reference": "e80a4c532d4ff7ed561a6c80a575f2181a6e4319"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UirapuruDende/CommonBundle/zipball/e80a4c532d4ff7ed561a6c80a575f2181a6e4319",
+                "reference": "e80a4c532d4ff7ed561a6c80a575f2181a6e4319",
+                "shasum": ""
+            },
+            "require": {
+                "phing/phing": "~2.9",
+                "php": ">=5.4",
+                "raven/raven": "0.8.*@dev"
+            },
+            "require-dev": {
+                "behat/behat": "~3.0",
+                "behat/common-formatters": "~1.2",
+                "behat/mink-browserkit-driver": "~1.2",
+                "behat/mink-extension": "~2.0",
+                "behat/mink-selenium2-driver": "~1.2",
+                "behat/mink-zombie-driver": "~1.2",
+                "behat/symfony2-extension": "2.0.*@dev",
+                "evert/phpdoc-md": "dev-master",
+                "fabpot/php-cs-fixer": "2.0.*@dev",
+                "hasbridge/json-schema-validator": "dev-master",
+                "liip/functional-test-bundle": "~1.2",
+                "mayflower/php-codebrowser": "~1.1",
+                "mockery/mockery": "0.9.*",
+                "pdepend/pdepend": "2.0.*",
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phploc/phploc": "2.1.*@dev",
+                "phpmd/phpmd": "dev-master",
+                "phpunit/phpunit": "*",
+                "sebastian/phpcpd": "2.0.*@dev",
+                "squizlabs/php_codesniffer": "2.0.*@dev",
+                "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
+                "webignition/json-pretty-print": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Dende\\CommonBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grzegorz 'Uirapuru' Kaszuba",
+                    "email": "uirapuruadg@gmail.com"
+                }
+            ],
+            "description": "Common stuff for various projects",
+            "keywords": [
+                "Symfony2",
+                "bundle",
+                "public"
+            ],
+            "time": "2015-05-20 22:13:02"
+        },
+        {
             "name": "friendsofphp/php-cs-fixer",
             "version": "dev-master",
             "source": {
@@ -5053,6 +4907,152 @@
             "time": "2016-10-03 18:31:30"
         },
         {
+            "name": "phing/phing",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phingofficial/phing.git",
+                "reference": "74af0362988dfd6c53eaf7f6ade823d8e7d40348"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/74af0362988dfd6c53eaf7f6ade823d8e7d40348",
+                "reference": "74af0362988dfd6c53eaf7f6ade823d8e7d40348",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "ext-pdo_sqlite": "*",
+                "lastcraft/simpletest": "@dev",
+                "mikey179/vfsstream": "^1.6",
+                "pdepend/pdepend": "2.x",
+                "pear/archive_tar": "1.4.x",
+                "pear/http_request2": "dev-trunk",
+                "pear/net_growl": "dev-trunk",
+                "pear/pear-core-minimal": "1.10.1",
+                "pear/versioncontrol_git": "@dev",
+                "pear/versioncontrol_svn": "~0.5",
+                "phpdocumentor/phpdocumentor": "2.x",
+                "phploc/phploc": "~2.0.6",
+                "phpmd/phpmd": "~2.2",
+                "phpunit/phpunit": ">=3.7",
+                "sebastian/git": "~1.0",
+                "sebastian/phpcpd": "2.x",
+                "siad007/versioncontrol_hg": "^1.0",
+                "squizlabs/php_codesniffer": "~2.2",
+                "symfony/yaml": "~2.7"
+            },
+            "suggest": {
+                "pdepend/pdepend": "PHP version of JDepend",
+                "pear/archive_tar": "Tar file management class",
+                "pear/versioncontrol_git": "A library that provides OO interface to handle Git repository",
+                "pear/versioncontrol_svn": "A simple OO-style interface for Subversion, the free/open-source version control system",
+                "phpdocumentor/phpdocumentor": "Documentation Generator for PHP",
+                "phploc/phploc": "A tool for quickly measuring the size of a PHP project",
+                "phpmd/phpmd": "PHP version of PMD tool",
+                "phpunit/php-code-coverage": "Library that provides collection, processing, and rendering functionality for PHP code coverage information",
+                "phpunit/phpunit": "The PHP Unit Testing Framework",
+                "sebastian/phpcpd": "Copy/Paste Detector (CPD) for PHP code",
+                "siad007/versioncontrol_hg": "A library for interfacing with Mercurial repositories.",
+                "tedivm/jshrink": "Javascript Minifier built in PHP"
+            },
+            "bin": [
+                "bin/phing"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.16.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "classes/phing/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "classes"
+            ],
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Michiel Rook",
+                    "email": "mrook@php.net"
+                },
+                {
+                    "name": "Phing Community",
+                    "homepage": "https://www.phing.info/trac/wiki/Development/Contributors"
+                }
+            ],
+            "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
+            "homepage": "https://www.phing.info/",
+            "keywords": [
+                "build",
+                "phing",
+                "task",
+                "tool"
+            ],
+            "time": "2016-10-10 11:51:22"
+        },
+        {
+            "name": "raven/raven",
+            "version": "0.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/getsentry/raven-php.git",
+                "reference": "d4b741736125f2b892e07903cd40450b53479290"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/getsentry/raven-php/zipball/d4b741736125f2b892e07903cd40450b53479290",
+                "reference": "d4b741736125f2b892e07903cd40450b53479290",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "bin": [
+                "bin/raven"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Raven_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "David Cramer",
+                    "email": "dcramer@gmail.com"
+                }
+            ],
+            "description": "A PHP client for Sentry (http://getsentry.com)",
+            "homepage": "http://getsentry.com",
+            "keywords": [
+                "log",
+                "logging"
+            ],
+            "abandoned": "sentry/sentry",
+            "time": "2013-12-03 10:27:59"
+        },
+        {
             "name": "symfony/monolog-bundle",
             "version": "v2.7.1",
             "source": {
@@ -5167,7 +5167,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "dende/common-bundle": 20,
         "friendsofphp/php-cs-fixer": 20,
         "twig/extensions": 20
     },

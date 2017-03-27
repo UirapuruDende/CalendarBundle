@@ -1,6 +1,4 @@
 <?php
-namespace Dende\CalendarBundle\Tests\app;
-
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;

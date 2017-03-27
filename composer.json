@@ -6,13 +6,12 @@
         "doctrine/orm": "^2.5",
         "doctrine/data-fixtures": "*",
         "doctrine/doctrine-fixtures-bundle": "*",
-        "dende/calendar" : "^1.8",
+        "dende/calendar" : "^2.0",
         "symfony/http-kernel" : "^2.7.5",
         "jms/serializer-bundle": "^1.0",
         "friendsofsymfony/jsrouting-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^2.0",
         "sensio/framework-extra-bundle": "~3.0",
-        "dende/common-bundle": "dev-master",
         "willdurand/hateoas-bundle": "~1.0",
         "braincrafted/bootstrap-bundle": "1.4.2",
         "gedmo/doctrine-extensions": "^2.4",
@@ -44,5 +43,18 @@
         "bin-dir": "bin",
         "preferred-install": "source"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "scripts": {
+        "start-web" : [
+            "php ./Tests/app/console.php server:start localhost:8080 --docroot=Tests/app/ --force --quiet",
+            "echo 'Open in browser http://localhost:8080/web.php/calendar'"
+        ],
+        "install-app" : [
+            "php ./Tests/app/console.php assets:install Tests/app --symlink --quiet",
+            "php ./Tests/app/console.php cache:clear --env=dev --quiet",
+            "php ./Tests/app/console.php doctrine:schema:drop --force --quiet",
+            "php ./Tests/app/console.php doctrine:schema:create --quiet",
+            "php ./Tests/app/console.php doctrine:fixtures:load -n -vvv --fixtures=./Tests/DataFixtures/ORM --quiet"
+        ]
+    }
 }

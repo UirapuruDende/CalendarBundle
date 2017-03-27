@@ -167,10 +167,6 @@ class DefaultController extends Controller
                     /** @var UpdateEventCommand|CreateEventCommand $command */
                     $command = $form->getData();
 
-                    if($command->newCalendarName) {
-                        $this->get("dende_calendar.new_calendar_creation")->handle($command);
-                    }
-
                     $this->get("dende_calendar.handler.update_event")->handle($command);
                     $this->get("session")->getFlashBag()->add("success", "dende_calendar.flash.event_updated_successfully");
                     return $this->redirectToRoute("dende_calendar_default_index");
@@ -182,7 +178,8 @@ class DefaultController extends Controller
         }
 
         return $this->render("DendeCalendarBundle:Default:updateEvent.html.twig", [
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "occurrence" => $occurrence
         ], $response);
     }
 }

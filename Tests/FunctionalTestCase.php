@@ -1,7 +1,7 @@
 <?php
 namespace Dende\CalendarBundle\Tests;
 
-use Dende\CalendarBundle\Tests\app\AppKernel;
+use AppKernel;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\CalendarsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\EventsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\OccurrencesData;
@@ -34,6 +34,8 @@ abstract class FunctionalTestCase extends WebTestCase
 
     /** @var  ReferenceRepository */
     protected $fixtures;
+
+    protected $kernelDir;
 
     public function setUp()
     {

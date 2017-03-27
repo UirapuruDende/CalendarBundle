@@ -30,7 +30,6 @@ class CreateEventTest extends FunctionalTestCase
             "create_event[type]" => EventType::TYPE_SINGLE,
             "create_event[startDate]" => "2015-11-02 12:00",
             "create_event[endDate]" => "2015-11-02 13:30",
-            "create_event[duration]" => 90,
             "create_event[title]" => "test-event-title",
         ]);
 
@@ -58,7 +57,7 @@ class CreateEventTest extends FunctionalTestCase
         $this->assertEquals("2015-11-02 12:00", $occurrence->startDate()->format(self::FORMAT_DATETIME));
         $this->assertEquals("2015-11-02 13:30", $occurrence->endDate()->format(self::FORMAT_DATETIME));
 
-//todo:        $this->assertEquals(90, $occurrence->duration()->minutes());
+        $this->assertEquals(90, $occurrence->duration()->minutes());
     }
 
     /**
@@ -80,7 +79,6 @@ class CreateEventTest extends FunctionalTestCase
             "create_event[type]" => EventType::TYPE_WEEKLY,
             "create_event[startDate]" => "2015-09-01 12:00",
             "create_event[endDate]" => "2015-09-30 13:30",
-            "create_event[duration]" => 90,
             "create_event[title]" => "Test weekly event 1",
         ]);
 
@@ -158,7 +156,6 @@ class CreateEventTest extends FunctionalTestCase
             "create_event[type]" => EventType::TYPE_WEEKLY,
             "create_event[startDate]" => "2015-09-01 12:00",
             "create_event[endDate]" => "2015-09-30 13:30",
-            "create_event[duration]" => 90,
             "create_event[title]" => "Test weekly event for new calendar",
         ]);
 

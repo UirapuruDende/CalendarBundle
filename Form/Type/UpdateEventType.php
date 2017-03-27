@@ -28,9 +28,6 @@ class UpdateEventType extends AbstractEventType
     {
         parent::buildForm($builder, $options);
 
-        $builder->remove('type');
-        $builder->add('type', HiddenType::class);
-
         $builder
             ->add("delete_event", SubmitType::class, [
                 "label" => "dende_calendar.form.delete_event.label",
@@ -58,20 +55,19 @@ class UpdateEventType extends AbstractEventType
                 throw new \Exception("Event is null!");
             }
 
-            if ($event->isType(EventType::TYPE_WEEKLY)) {
+            if ($event->isSingle()) {
+                $form->add("method", HiddenType::class, [
+                    'data' => 'single'
+                ]);
+                $form->remove("repetitionDays");
+
+            } else if ($event->isWeekly()) {
                 $form->add("delete_occurrence", "submit", [
                     "label" => "dende_calendar.form.delete_occurrence.label",
                     "attr" => [
                         "class" => "pull-right"
                     ]
                 ]);
-            }
-
-            if ($event->isType(EventType::TYPE_SINGLE)) {
-                $form->add("method", HiddenType::class, [
-                    'data' => 'single'
-                ]);
-            } else if ($event->isType(EventType::TYPE_WEEKLY)) {
                 $form->add("method", ChoiceType::class, [
                     "label" => "dende_calendar.form.method.label",
                     'choices' => array_combine(UpdateEventHandler::$availableModes, array_map(function($mode) {

@@ -1,5 +1,5 @@
 {% extends 'DendeCalendarBundle::layout.html.twig' %}
-
+{# @var \Gyman\Domain\Calendar\Event\Occurrence occurrence #}
 {% block content %}
     {{ form_start(form) }}
 
@@ -7,14 +7,21 @@
             {{ form_row(form.method) }}
         {% endif %}
 
-        {{ form_row(form.calendar) }}
-        {{ form_row(form.newCalendarName) }}
-        {{ form_row(form.type) }}
+        <div class="form-group">
+            <label class="control-label required" for="update_event_title">{{ "dende_calendar.form.calendar.label"|trans }}</label>
+            <p><strong>{{ occurrence.event.calendar.name }}</strong></p>
+        </div>
+        <div class="form-group">
+            <label class="control-label required" for="update_event_title">{{ "dende_calendar.form.type.label"|trans }}</label>
+            <p><strong>{{ ("dende_calendar.form.type."~occurrence.event.type.type)|trans }}</strong></p>
+        </div>
+
         {{ form_row(form.startDate) }}
         {{ form_row(form.endDate) }}
-        {{ form_row(form.duration) }}
         {{ form_row(form.title) }}
-        {{ form_row(form.repetitionDays) }}
+        {% if form.repetitionDays is defined %}
+            {{ form_row(form.repetitionDays) }}
+        {% endif %}
         {{ form_row(form.delete_event) }}
 
         {% if form.delete_occurrence is defined %}

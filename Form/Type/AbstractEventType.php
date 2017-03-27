@@ -27,25 +27,6 @@ abstract class AbstractEventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("calendar", EntityType::class, [
-                "required" => false,
-                "class" => Calendar::class,
-                "choice_label" => "name",
-                "em" => $options["model_manager_name"],
-                "label" => "dende_calendar.form.calendar.label",
-                'placeholder' => "dende_calendar.form.calendar.placeholder"
-            ])
-            ->add("newCalendarName", TextType::class, [
-                "required" => false,
-                "label" => "dende_calendar.form.new_calendar_name.label"
-            ])
-            ->add("type", ChoiceType::class, [
-                "choices" => array_combine(
-                    EventType::$availableTypes,
-                    array_map($this->updateNames('type'), EventType::$availableTypes)
-                ),
-                "label" => "dende_calendar.form.type.label"
-            ])
             ->add("startDate", DateTimeType::class, [
                 'widget' => 'single_text',
                 'with_seconds' => false,
@@ -84,19 +65,21 @@ abstract class AbstractEventType extends AbstractType
             'validation_groups' => function(FormInterface $form){
                 $validationGroups = ['Default'];
 
-                /** @var UpdateEventCommand|CreateEventCommand $data */
-                $data = $form->getData();
+                /** @var UpdateEventCommand|CreateEventCommand $command */
+                $command = $form->getData();
 
-                if(is_null($data->calendar) && is_null($data->newCalendarName)) {
-                    $validationGroups[] = 'createNewCalendar';
-                }
+                if(get_class($command) === CreateEventCommand::class) {
+                    if(is_null($command->calendar) && is_null($command->newCalendarName)) {
+                        $validationGroups[] = 'createNewCalendar';
+                    }
 
-                if($data->type === EventType::TYPE_WEEKLY) {
-                    $validationGroups[] = 'weeklyEvent';
-                }
-
-                if(get_class($data) === UpdateEventCommand::class && !$data->occurrence->event()->isType($data->type)) {
-                    $validationGroups[] = 'eventTypeChange';
+                    if($command->type === EventType::TYPE_WEEKLY) {
+                        $validationGroups[] = 'weeklyEvent';
+                    }
+                } elseif(get_class($command) === UpdateEventCommand::class) {
+                    if($command->occurrence->event()->isWeekly()) {
+                        $validationGroups[] = 'weeklyEvent';
+                    }
                 }
 
                 return $validationGroups;
