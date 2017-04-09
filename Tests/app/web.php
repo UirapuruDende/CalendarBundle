@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 

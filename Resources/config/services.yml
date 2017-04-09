@@ -10,7 +10,7 @@ services:
 #model managers
 
   dende_calendar.entity_manager:
-    class: %doctrine.orm.entity_manager.class%
+    class: "%doctrine.orm.entity_manager.class%"
     factory_service: doctrine
     factory_method: getManager
     arguments:
@@ -26,22 +26,22 @@ services:
 
   dende_calendar.event_repository:
     class: %dende_calendar.event_repository.class%
-    factory: [@dende_calendar.entity_manager, "getRepository"]
-    arguments: ["Calendar:Calendar\Event"]
+    factory: ["@dende_calendar.entity_manager", "getRepository"]
+    arguments: ['Calendar:Calendar\Event']
 
   dende_calendar.occurrences_repository:
-    class: %dende_calendar.occurrences_repository.class%
+    class: "%dende_calendar.occurrences_repository.class%"
     factory_service: dende_calendar.entity_manager
     factory_method: "getRepository"
-    arguments: ["Calendar:Calendar\Event\Occurrence"]
+    arguments: ['Calendar:Calendar\Event\Occurrence']
 
 # custom services
 
   dende_calendar.occurrences_provider:
     class: Dende\CalendarBundle\Service\OccurrencesProvider
     arguments:
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
-      - @router.default
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
+      - "@router.default"
       - 'dende_calendar_default_updateevent'
 
   dende_calendar.id_generator:
@@ -78,18 +78,18 @@ services:
   dende_calendar.handler.create_event:
     class: Dende\Calendar\Application\Handler\CreateEventHandler
     arguments:
-      - @=service(parameter('dende_calendar.event_repository_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
-      - @=service(parameter('dende_calendar.event_factory_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
+      - "@=service(parameter('dende_calendar.event_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.event_factory_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_factory_service_name'))"
 
   dende_calendar.handler.update_event:
     class: Dende\Calendar\Application\Handler\UpdateEventHandler
     arguments:
-      - @=service(parameter('dende_calendar.event_repository_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
-      - @=service(parameter('dende_calendar.event_factory_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
+      - "@=service(parameter('dende_calendar.event_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.event_factory_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_factory_service_name'))"
 
 # update strategies
 
@@ -113,17 +113,17 @@ services:
   dende_calendar.factory.calendar:
     class: Dende\Calendar\Application\Factory\CalendarFactory
     arguments:
-      - @dende_calendar.id_generator
+      - "@dende_calendar.id_generator"
 
   dende_calendar.factory.event:
     class: Dende\Calendar\Application\Factory\EventFactory
     arguments:
-      - @dende_calendar.id_generator
+      - "@dende_calendar.id_generator"
 
   dende_calendar.factory.occurrence:
     class: Dende\Calendar\Application\Factory\OccurrenceFactory
     arguments:
-      - @dende_calendar.id_generator
+      - "@dende_calendar.id_generator"
 
 # listeners
 

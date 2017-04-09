@@ -30,8 +30,6 @@ web_profiler:
 twig:
     debug:            true
     strict_variables: true
-    form:
-        resources: ['bootstrap_3_layout.html.twig']
         # resources: ['bootstrap_3_horizontal_layout.html.twig']
 
 fos_rest:
@@ -152,14 +150,14 @@ dende_calendar:
 services:
   gedmo.listener.softdeleteable:
     class: Gedmo\SoftDeleteable\SoftDeleteableListener
-    arguments: [@annotation_reader]
+    arguments: ["@annotation_reader"]
     tags:
       - { name: doctrine.event_subscriber, connection: default }
 
   dende_calendar.factory.occurrence:
     class: Dende\CalendarBundle\Tests\Factory\OccurrenceFactory
     arguments:
-      - @dende_calendar.id_generator
+      - "@dende_calendar.id_generator"
 
 stof_doctrine_extensions:
     default_locale: en_US
