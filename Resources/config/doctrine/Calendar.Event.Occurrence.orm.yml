@@ -2,6 +2,7 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
   type: mappedSuperclass
   table: occurrences
   repositoryClass: Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
+
   gedmo:
     soft_deleteable:
       field_name: deletedAt
@@ -9,19 +10,22 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
 
   id:
     id:
-      type: guid
-      generator: { strategy: UUID }
+      type: integer
+      generator: { strategy: auto }
+
+  embedded:
+    occurrenceData:
+      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceData
+      columnPrefix: false
+    occurrenceId:
+      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId
+      columnPrefix: occurrence_
 
   indexes:
     index_dende_occurrences_dates:
       columns:
         - startDate
         - endDate
-
-  embedded:
-    duration:
-      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration
-      columnPrefix: false
 
   manyToOne: # occurrence is the owning side!
     event:
@@ -34,17 +38,5 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
           referencedColumnName: id
 
   fields:
-    startDate:
-      type: datetime
-      nullable: false
-
-    endDate:
-      type: datetime
-      nullable: false
-
     modified:
       type: boolean
-
-    deletedAt:
-      type: datetime
-      nullable: true

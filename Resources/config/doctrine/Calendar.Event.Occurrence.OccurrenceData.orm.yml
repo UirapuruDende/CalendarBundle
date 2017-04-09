@@ -1,0 +1,15 @@
+Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceData:
+  type:   embeddable
+  embedded:
+    duration:
+      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration
+      columnPrefix: false
+
+  fields:
+    startDate:
+      type: datetime
+      nullable: false
+
+    endDate:
+      type: datetime
+      nullable: false

@@ -6,7 +6,7 @@
         "doctrine/orm": "^2.5",
         "doctrine/data-fixtures": "*",
         "doctrine/doctrine-fixtures-bundle": "*",
-        "dende/calendar" : "^1.8",
+        "dende/calendar" : "^2",
         "symfony/http-kernel" : "^2.7.5",
         "jms/serializer-bundle": "^1.0",
         "friendsofsymfony/jsrouting-bundle": "^1.5",
@@ -45,12 +45,15 @@
     },
     "minimum-stability": "dev",
     "scripts": {
+        "reset-db" : [
+            "php ./Tests/app/console.php doctrine:schema:drop --force --quiet",
+            "php ./Tests/app/console.php doctrine:schema:create --quiet",
+            "php ./Tests/app/console.php doctrine:fixtures:load -n -vvv --fixtures=./Tests/DataFixtures/ORM --quiet"
+        ],
         "start-application" : [
             "php ./Tests/app/console.php assets:install Tests/app --symlink --quiet",
             "php ./Tests/app/console.php cache:clear --env=dev --quiet",
-            "php ./Tests/app/console.php doctrine:schema:drop --force --quiet",
-            "php ./Tests/app/console.php doctrine:schema:create --quiet",
-            "php ./Tests/app/console.php doctrine:fixtures:load -n -vvv --fixtures=./Tests/DataFixtures/ORM --quiet",
+            "@reset-db",
             "php ./Tests/app/console.php server:start localhost:8080 --docroot=Tests/app/ --force --quiet",
             "echo 'Open in browser http://localhost:8080/web.php/calendar'"
         ]

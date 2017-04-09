@@ -1,0 +1,7 @@
+---
+Dende\Calendar\Domain\Calendar\CalendarId:
+  type:   embeddable
+
+  fields:
+    id:
+      type: string

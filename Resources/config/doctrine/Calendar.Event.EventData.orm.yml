@@ -1,0 +1,20 @@
+Dende\Calendar\Domain\Calendar\Event\EventData:
+  type: embeddable
+
+  embedded:
+    repetitions:
+      class: Dende\Calendar\Domain\Calendar\Event\Repetitions
+
+  fields:
+    startDate:
+      type: datetime
+      nullable: false
+
+    endDate:
+      type: datetime
+      nullable: false
+
+    title:
+      type: string
+      nullable: false
+      length: 255

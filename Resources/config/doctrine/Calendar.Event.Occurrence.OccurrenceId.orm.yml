@@ -1,0 +1,7 @@
+---
+Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId:
+  type:   embeddable
+
+  fields:
+    id:
+      type: string

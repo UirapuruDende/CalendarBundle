@@ -16,8 +16,8 @@ Dende\Calendar\Domain\Calendar\Event:
 
   id:
     id:
-      type: guid
-      generator: { strategy: UUID }
+      type: integer
+      generator: { strategy: auto }
 
   indexes:
     index_dende_events_dates:
@@ -30,12 +30,12 @@ Dende\Calendar\Domain\Calendar\Event:
       class: Dende\Calendar\Domain\Calendar\Event\EventType
       columnPrefix: false
 
-    repetitions:
-      class: Dende\Calendar\Domain\Calendar\Event\Repetitions
-      columnPrefix: false
+    eventId:
+      class: Dende\Calendar\Domain\Calendar\Event\EventId
+      columnPrefix: event_
 
-    duration:
-      class: Dende\Calendar\Domain\Calendar\Event\Duration
+    eventData:
+      class: Dende\Calendar\Domain\Calendar\Event\EventData
       columnPrefix: false
 
   manyToOne:  # event is the owning side!
@@ -56,19 +56,6 @@ Dende\Calendar\Domain\Calendar\Event:
       cascade: [all] # required, must stay here or exception will be thrown
 
   fields:
-    startDate:
-      type: datetime
-      nullable: false
-
-    endDate:
-      type: datetime
-      nullable: false
-
-    title:
-      type: string
-      nullable: false
-      length: 255
-
     deletedAt:
       type: datetime
       nullable: true
