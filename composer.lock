@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2bacb82b09da9b4e51d3eefc03088696",
+    "hash": "ff2ef519da8b495a3c21b1c3014e047b",
     "content-hash": "aaad7e594a8f46003de2241d51ba5e1f",
     "packages": [
         {
@@ -107,16 +107,16 @@
         },
         {
             "name": "dende/calendar",
-            "version": "2.1.4",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "31eb06dd8eba14e6be2676074accb2bc4f3ca3a7"
+                "reference": "72370dadd55f66cc5625b5fb661d5715790a6b29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/31eb06dd8eba14e6be2676074accb2bc4f3ca3a7",
-                "reference": "31eb06dd8eba14e6be2676074accb2bc4f3ca3a7",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/72370dadd55f66cc5625b5fb661d5715790a6b29",
+                "reference": "72370dadd55f66cc5625b5fb661d5715790a6b29",
                 "shasum": ""
             },
             "require": {
@@ -153,7 +153,7 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2017-04-09 16:16:56"
+            "time": "2017-04-09 20:24:36"
         },
         {
             "name": "dende/common-bundle",
