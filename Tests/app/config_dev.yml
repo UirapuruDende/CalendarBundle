@@ -14,9 +14,6 @@ framework:
     csrf_protection:
       enabled: true
     session:
-#        cookie_lifetime:  %session_lifetime%
-#        gc_maxlifetime: 1800
-#        handler_id:  ~
         storage_id: session.storage.filesystem
     profiler:
         collect: true
@@ -93,7 +90,8 @@ doctrine:
       default_connection: default
       connections:
         default:
-          driver:   pdo_mysql
+          driver:   pdo_sqlite
+          path:     %kernel.cache_dir%/front.db
           host:     localhost
           dbname:   calendar_bundle_test
           user:     root
