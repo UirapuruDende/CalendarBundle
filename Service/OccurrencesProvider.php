@@ -2,9 +2,9 @@
 namespace Dende\CalendarBundle\Service;
 
 use DateTime;
+use Dende\Calendar\Application\Repository\OccurrenceRepositoryInterface;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
-use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**

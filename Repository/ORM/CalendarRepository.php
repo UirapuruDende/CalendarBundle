@@ -1,12 +1,11 @@
 <?php
 namespace Dende\CalendarBundle\Repository\ORM;
 
+use Dende\Calendar\Application\Repository\CalendarRepositoryInterface;
 use Dende\Calendar\Domain\Calendar;
-use Dende\Calendar\Domain\Calendar\Event;
-use Dende\Calendar\Domain\Repository\CalendarRepositoryInterface;
-use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use Exception;
 
 /**
  * Class CalendarRepository
@@ -34,5 +33,20 @@ class CalendarRepository extends EntityRepository implements CalendarRepositoryI
         $em = $this->getEntityManager();
         $em->remove($calendar);
         $em->flush();
+    }
+
+    public function findAll() : ArrayCollection
+    {
+        return new ArrayCollection(parent::findAll());
+    }
+
+    /**
+     * @param string $calendarId
+     *
+     * @return Calendar|null
+     */
+    public function findOneByCalendarId(string $calendarId): Calendar
+    {
+        throw new Exception("Implement me");
     }
 }

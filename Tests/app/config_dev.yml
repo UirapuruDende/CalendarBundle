@@ -1,3 +1,6 @@
+parameters:
+  resolved_occurrence_class: 'Dende\CalendarBundle\Tests\Entity\OccurrenceExtended'
+
 framework:
     ide: "phpstorm://%%f:%%l"
     secret: "Three can keep a secret, if two of them are dead."
@@ -14,9 +17,6 @@ framework:
     csrf_protection:
       enabled: true
     session:
-#        cookie_lifetime:  %session_lifetime%
-#        gc_maxlifetime: 1800
-#        handler_id:  ~
         storage_id: session.storage.filesystem
     profiler:
         collect: true
@@ -104,7 +104,7 @@ doctrine:
         auto_generate_proxy_classes: %kernel.debug%
         default_entity_manager:   default
         resolve_target_entities:
-          Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface: Dende\CalendarBundle\Tests\Entity\OccurrenceExtended
+          Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface: '%resolved_occurrence_class%'
 
         entity_managers:
           default:
@@ -130,26 +130,7 @@ doctrine:
                 is_bundle:  false
 
 dende_calendar:
-  occurrence_class: 'Dende\CalendarBundle\Tests\Entity\OccurrenceExtended'
-#  model_manager_name:                   'tenant'
-#  backend_type:                         'ORM'
-#  calendar_repository_service_name:     'gyman.calendar.repository'
-#  calendar_factory_service_name:        'gyman.calendar.factory'
-#  event_repository_service_name:        'gyman.event.repository'
-#  event_factory_service_name:           'gyman.event.factory'
-#  occurrence_repository_service_name:   'gyman.occurrence.repository'
-#  occurrence_factory_service_name:      'gyman.occurrence.factory'
-#  mapping:
-#    event:
-#      entity:                             Dende\Calendar\Domain\Calendar\Event
-#      map:
-#        bundle:                           Dende\Calendar\Domain\Calendar\Event
-#        app:                              Gyman\Domain\Calendar\Event
-#    calendar:
-#      entity:                             Dende\Calendar\Domain\Calendar
-#      map:
-#        bundle:                           Dende\Calendar\Domain\Calendar
-#        app:                              Gyman\Domain\Calendar
+  occurrence_class: '%resolved_occurrence_class%'
 
 services:
   gedmo.listener.softdeleteable:

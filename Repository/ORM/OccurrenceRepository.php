@@ -2,13 +2,12 @@
 namespace Dende\CalendarBundle\Repository\ORM;
 
 use DateTime;
+use Dende\Calendar\Application\Repository\OccurrenceRepositoryInterface;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
-use Dende\Calendar\Domain\Repository\OccurrenceRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
-use Traversable;
 
 /**
  * Class OccurrenceRepository
@@ -54,52 +53,28 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
      */
     public function findByPeriod(DateTime $start, DateTime $end)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-        $expr = $queryBuilder->expr();
+        $qb = $this->createQueryBuilder('o');
 
-        $queryBuilder
-            ->innerJoin('o.event', 'e')
-            ->where($expr->andX(
-                $expr->gt("o.startDate", ':start'),
-                $expr->lt("o.endDate", ':end')
-            ))
-            ->andWhere('o.deletedAt is NULL')
-            ->orderBy('o.startDate', 'ASC')
+        $qb
+            ->where('o.data.startDate >= :start')
+            ->andWhere('o.data.endDate <= :end')
+            ->orderBy('o.data.startDate', 'ASC')
             ->setParameters([
                 'start' => $start,
                 'end' => $end,
             ]);
 
-        $query = $queryBuilder->getQuery();
+        $query = $qb->getQuery();
 
         return $query->getResult();
     }
 
-    public function insert($occurrences)
+    public function insert(Occurrence $occurrence)
     {
         $em = $this->getEntityManager();
+        $em->persist($occurrence);
+        $em->flush($occurrence);
 
-        if($occurrences instanceof Occurrence) {
-            $em->persist($occurrences);
-            $em->flush($occurrences);
-
-            return;
-        } elseif(is_array($occurrences) || $occurrences instanceof Traversable) {
-            /** @var Occurrence $occurrence */
-            foreach($occurrences as $occurrence) {
-                $em->persist($occurrence);
-            }
-
-            $em->flush();
-
-            return;
-        }
-
-        throw new \Exception(sprintf(
-            "Argument is unknown type! Should be %s class or collection/array of %s class!",
-            Occurrence::class,
-            Occurrence::class
-        ));
     }
 
     public function insertCollection($occurrenceCollection)
@@ -107,7 +82,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         $this->insert($occurrenceCollection);
     }
 
-    public function findAllByEvent(Event $event)
+    public function findAllByEvent(Event $event) : ArrayCollection
     {
         // TODO: Implement findAllByEvent() method.
     }
@@ -121,31 +96,12 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
      * @param Occurrence|Occurrence[] $occurrences
      * @throws \Exception
      */
-    public function update($occurrences)
+    public function update(Occurrence $occurrence)
     {
         $em = $this->getEntityManager();
 
-        if($occurrences instanceof Occurrence) {
-            $em->merge($occurrences);
-            $em->flush($occurrences);
-
-            return;
-        } elseif(is_array($occurrences) || $occurrences instanceof Traversable) {
-            /** @var Occurrence $occurrence */
-            foreach($occurrences as $occurrence) {
-                $em->merge($occurrence);
-            }
-
-            $em->flush();
-
-            return;
-        }
-
-        throw new \Exception(sprintf(
-            "Argument is unknown type! Should be %s class or collection/array of %s class!",
-            Occurrence::class,
-            Occurrence::class
-        ));
+        $em->merge($occurrence);
+        $em->flush($occurrence);
     }
 
     public function findAllByEventUnmodified(Event $event)
@@ -157,33 +113,11 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
      * @param Occurrence|Occurrence[]|ArrayCollection $occurrences
      * @throws \Exception
      */
-    public function remove($occurrences)
+    public function remove(Occurrence $occurrence)
     {
         $em = $this->getEntityManager();
-
-        if($occurrences instanceof Occurrence) {
-            $occurrences->setDeletedAt(new \DateTime("now"));
-            $em->flush($occurrences);
-
-            return;
-        } elseif(is_array($occurrences) || $occurrences instanceof Traversable) {
-            $date = new \DateTime("now");
-
-            /** @var Occurrence $occurrence */
-            foreach($occurrences as $occurrence) {
-                $occurrence->setDeletedAt($date);
-            }
-
-            $em->flush();
-
-            return;
-        }
-
-        throw new \Exception(sprintf(
-            "Argument is unknown type! Should be %s class or collection/array of %s class!",
-            Occurrence::class,
-            Occurrence::class
-        ));
+        $em->remove($occurrence);
+        $em->flush($occurrence);
 
     }
 
@@ -197,5 +131,20 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
             $em->remove($occurrence);
         }
         $em->flush();
+    }
+
+    public function findByDateAndCalendar(DateTime $date, Calendar $calendar): ArrayCollection
+    {
+        // TODO: Implement findByDateAndCalendar() method.
+    }
+
+    public function findOneById(string $id)
+    {
+        // TODO: Implement findOneById() method.
+    }
+
+    public function findAll() : ArrayCollection
+    {
+        return new ArrayCollection(parent::findAll());
     }
 }

@@ -1,3 +1,4 @@
+---
 Dende\CalendarBundle\Tests\Entity\OccurrenceExtended:
   type: entity
   table: occurrences

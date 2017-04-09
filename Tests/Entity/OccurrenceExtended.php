@@ -6,9 +6,6 @@ use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-/**
- * Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
- */
 class OccurrenceExtended extends Occurrence implements OccurrenceInterface
 {
     /**

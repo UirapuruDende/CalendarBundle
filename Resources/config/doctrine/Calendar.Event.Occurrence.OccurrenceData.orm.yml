@@ -3,7 +3,7 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceData:
   embedded:
     duration:
       class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceDuration
-      columnPrefix: false
+      columnPrefix: duration_
 
   fields:
     startDate:

@@ -38,12 +38,10 @@ class DefaultController extends Controller
     {
         $calendars = $this->get($this->getParameter("dende_calendar.calendar_repository_service_name"))->findAll();
 
-        $calendars = array_map(function (Calendar $calendar) {
-            return $calendar->id();
-        }, $calendars);
-
         return [
-            'calendars' => $calendars
+            'calendars' => $calendars->map(function (Calendar $calendar) {
+                return $calendar->id();
+            })
         ];
     }
 

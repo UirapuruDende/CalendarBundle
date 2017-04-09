@@ -2,8 +2,7 @@
 namespace Dende\CalendarBundle\Tests\DataFixtures\ORM;
 
 use Dende\Calendar\Domain\Calendar;
-use Dende\Calendar\Domain\Calendar\CalendarId;
-use Dende\CommonBundle\DataFixtures\BaseFixture;
+use Dende\CalendarBundle\Tests\DataFixtures\BaseFixture;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

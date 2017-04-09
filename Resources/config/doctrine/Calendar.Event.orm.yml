@@ -9,21 +9,21 @@ Dende\Calendar\Domain\Calendar\Event:
   table: events
   repositoryClass: Dende\CalendarBundle\Repository\ORM\EventRepository
 
-  gedmo:
-    soft_deleteable:
-      field_name: deletedAt
-      time_aware: false
+#  gedmo:
+#    soft_deleteable:
+#      field_name: deletedAt
+#      time_aware: false
 
   id:
     id:
       type: integer
       generator: { strategy: auto }
 
-  indexes:
-    index_dende_events_dates:
-      columns:
-        - startDate
-        - endDate
+#  indexes:
+#    index_dende_events_dates:
+#      columns:
+#        - startDate
+#        - endDate
 
   embedded:
     type:
@@ -53,9 +53,9 @@ Dende\Calendar\Domain\Calendar\Event:
     occurrences:
       targetEntity: Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface
       mappedBy: event
-      cascade: [all] # required, must stay here or exception will be thrown
+      cascade: [all]
 
-  fields:
-    deletedAt:
-      type: datetime
-      nullable: true
+#  fields:
+#    deletedAt:
+#      type: datetime
+#      nullable: true
