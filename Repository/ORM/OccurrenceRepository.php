@@ -56,9 +56,9 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         $qb = $this->createQueryBuilder('o');
 
         $qb
-            ->where('o.data.startDate >= :start')
-            ->andWhere('o.data.endDate <= :end')
-            ->orderBy('o.data.startDate', 'ASC')
+            ->where('o.occurrenceData.startDate >= :start')
+            ->andWhere('o.occurrenceData.endDate <= :end')
+            ->orderBy('o.occurrenceData.startDate', 'ASC')
             ->setParameters([
                 'start' => $start,
                 'end' => $end,

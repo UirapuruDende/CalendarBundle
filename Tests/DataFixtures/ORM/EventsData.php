@@ -6,6 +6,7 @@ use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Dende\CalendarBundle\Tests\DataFixtures\BaseFixture;
+use Dende\CalendarBundle\Tests\Factory\OccurrenceFactory;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -37,6 +38,8 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
      */
     public function insert(array $params = [])
     {
+        Event::$occurrenceFactoryClass = OccurrenceFactory::class;
+
         $array = [
             "calendar" => $this->getReference($params["calendar"]),
             "startDate" => new DateTime($params["startDate"]),

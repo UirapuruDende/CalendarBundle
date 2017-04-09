@@ -1,7 +1,7 @@
----
 Dende\CalendarBundle\Tests\Entity\OccurrenceExtended:
   type: entity
   table: occurrences
+  repositoryClass: Dende\CalendarBundle\Tests\Entity\OccurrenceExtendedRepository
 
   fields:
     test:

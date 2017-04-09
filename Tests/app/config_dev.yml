@@ -1,5 +1,6 @@
 parameters:
   resolved_occurrence_class: 'Dende\CalendarBundle\Tests\Entity\OccurrenceExtended'
+  dende_calendar.occurrences_repository.class:  Dende\CalendarBundle\Tests\Entity\OccurrenceExtendedRepository
 
 framework:
     ide: "phpstorm://%%f:%%l"

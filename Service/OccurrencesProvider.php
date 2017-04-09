@@ -90,13 +90,11 @@ final class OccurrencesProvider
      */
     public function convert(Occurrence $occurrence)
     {
-        $id = $occurrence->event()->id();
-
         $options = [
             "title" => $occurrence->event()->title(),
             "start" => $occurrence->startDate()->format("Y-m-d H:i:s"),
             "end" => $occurrence->endDate()->format("Y-m-d H:i:s"),
-            "backgroundColor" => $this->colors[$id % count($this->colors)],
+            "backgroundColor" => $this->colors[array_rand($this->colors)],
             "textColor" => 'black',
             "editable" => true
         ];

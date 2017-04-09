@@ -1,6 +1,8 @@
 <?php
 namespace Dende\CalendarBundle\DependencyInjection;
 
+use Dende\Calendar\Domain\Calendar\Event;
+use Dende\CalendarBundle\Tests\Factory\OccurrenceFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
@@ -20,6 +22,8 @@ class DendeCalendarExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+
+        Event::$occurrenceFactoryClass = OccurrenceFactory::class;
 
         $container->setParameter("dende_calendar.occurrence.class", $config["occurrence_class"]);
         $container->setParameter("dende_calendar.model_manager_name", $config["model_manager_name"]);
