@@ -91,6 +91,8 @@ liip_functional_test: ~
 
 doctrine:
     dbal:
+      types:
+        weekdays: 'Dende\CalendarBundle\DbalType\Weekdays'
       default_connection: default
       connections:
         default:

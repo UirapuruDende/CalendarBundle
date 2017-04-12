@@ -5,6 +5,8 @@ use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Application\Handler\UpdateEventHandler;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
+use Dende\CalendarBundle\DTO\UpdateData;
+use Exception;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,7 +31,6 @@ class UpdateEventType extends AbstractEventType
         parent::buildForm($builder, $options);
 
         $builder->remove('type');
-        $builder->add('type', HiddenType::class);
 
         $builder
             ->add("delete_event", SubmitType::class, [
@@ -41,24 +42,24 @@ class UpdateEventType extends AbstractEventType
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            /** @var UpdateEventCommand $command */
-            $command = $event->getData();
+            /** @var UpdateData $dto */
+            $dto = $event->getData();
             $form = $event->getForm();
 
-            $occurrence = $command->occurrence;
+            $occurrence = $dto->occurrence();
 
             if (!$occurrence) {
-                throw new \Exception("Occurrence is null!");
+                throw new Exception("Occurrence is null!");
             }
 
             /** @var Event $event */
             $event = $occurrence->event();
 
             if (!$event) {
-                throw new \Exception("Event is null!");
+                throw new Exception("Event is null!");
             }
 
-            if ($event->isType(EventType::TYPE_WEEKLY)) {
+            if ($event->isWeekly()) {
                 $form->add("delete_occurrence", "submit", [
                     "label" => "dende_calendar.form.delete_occurrence.label",
                     "attr" => [
@@ -67,11 +68,7 @@ class UpdateEventType extends AbstractEventType
                 ]);
             }
 
-            if ($event->isType(EventType::TYPE_SINGLE)) {
-                $form->add("method", HiddenType::class, [
-                    'data' => 'single'
-                ]);
-            } else if ($event->isType(EventType::TYPE_WEEKLY)) {
+            if ($event->isType(EventType::TYPE_WEEKLY)) {
                 $form->add("method", ChoiceType::class, [
                     "label" => "dende_calendar.form.method.label",
                     'choices' => array_combine(UpdateEventHandler::$availableModes, array_map(function($mode) {
@@ -91,7 +88,7 @@ class UpdateEventType extends AbstractEventType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'data_class' => UpdateEventCommand::class,
+            'data_class' => UpdateData::class,
         ]);
     }
 

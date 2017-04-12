@@ -9,6 +9,7 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
 use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Dende\CalendarBundle\Form\Type\CreateEventType;
 use Dende\CalendarBundle\Form\Type\UpdateEventType;
@@ -118,7 +119,7 @@ class DefaultController extends Controller
      * @Template("DendeCalendarBundle:Default:updateEvent.html.twig")
      * @return string
      */
-    public function updateEventAction(Request $request, $occurrenceId)
+    public function updateEventAction(Request $request, OccurrenceId $occurrenceId)
     {
         /** @var EntityManagerInterface $em */
         $em = $this->get('doctrine')->getManager($this->getParameter("dende_calendar.model_manager_name"));

@@ -16,6 +16,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreateEventType extends AbstractEventType
 {
+    use UpdateNameTrait;
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+
+        $builder->add("type", ChoiceType::class, [
+            "choices" => array_combine(
+                EventType::$availableTypes,
+                array_map($this->updateNames('type'), EventType::$availableTypes)
+            ),
+            "label" => "dende_calendar.form.type.label"
+        ]);
+
+    }
+
+
     /**
      * @param OptionsResolver $resolver
      */

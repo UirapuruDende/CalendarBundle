@@ -7,6 +7,7 @@ use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Dende\CalendarBundle\DTO\UpdateData;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -39,13 +40,6 @@ abstract class AbstractEventType extends AbstractType
                 "required" => false,
                 "label" => "dende_calendar.form.new_calendar_name.label"
             ])
-            ->add("type", ChoiceType::class, [
-                "choices" => array_combine(
-                    EventType::$availableTypes,
-                    array_map($this->updateNames('type'), EventType::$availableTypes)
-                ),
-                "label" => "dende_calendar.form.type.label"
-            ])
             ->add("startDate", DateTimeType::class, [
                 'widget' => 'single_text',
                 'with_seconds' => false,
@@ -64,14 +58,10 @@ abstract class AbstractEventType extends AbstractType
                 ],
                 "label" => "dende_calendar.form.end_date.label",
             ])
-            ->add("duration", IntegerType::class, [
-                "label" => "dende_calendar.form.duration.label",
-                "required" => true
-            ])
             ->add("title", TextType::class, [
                 "label" => "dende_calendar.form.title.label"
             ])
-            ->add("repetitionDays", ChoiceType::class, [
+            ->add("repetitions", ChoiceType::class, [
                 "choices" => array_map($this->updateNames('repetition_days'), Repetitions::$availableWeekdays),
                 "multiple" => true,
                 "expanded" => true,
@@ -83,23 +73,23 @@ abstract class AbstractEventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => EventCommandInterface::class,
+            'data_class' => UpdateData::class,
             'model_manager_name' => 'default',
             'validation_groups' => function(FormInterface $form){
                 $validationGroups = ['Default'];
 
-                /** @var UpdateEventCommand|CreateEventCommand $data */
+                /** @var UpdateData $data */
                 $data = $form->getData();
 
-                if(is_null($data->calendar) && is_null($data->newCalendarName)) {
+                if(is_null($data->calendar()) && is_null($data->newCalendarName())) {
                     $validationGroups[] = 'createNewCalendar';
                 }
 
-                if($data->type === EventType::TYPE_WEEKLY) {
+                if($data->type() === EventType::TYPE_WEEKLY) {
                     $validationGroups[] = 'weeklyEvent';
                 }
 
-                if(get_class($data) === UpdateEventCommand::class && !$data->occurrence->event()->isType($data->type)) {
+                if(get_class($data) === UpdateEventCommand::class && !$data->occurrence()->event()->type()->isType($data->type())) {
                     $validationGroups[] = 'eventTypeChange';
                 }
 
