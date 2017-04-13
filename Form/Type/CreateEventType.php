@@ -4,8 +4,10 @@ namespace Dende\CalendarBundle\Form\Type;
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Dende\CalendarBundle\DTO\CreateFormData;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -30,6 +32,14 @@ class CreateEventType extends AbstractEventType
             "label" => "dende_calendar.form.type.label"
         ]);
 
+        $builder->get('type')->addModelTransformer(new CallbackTransformer(
+            function(EventType $type) {
+                return $type->type();
+            }, function (string $type) {
+            return new EventType($type);
+        }
+        ));
+
     }
 
 
@@ -41,7 +51,7 @@ class CreateEventType extends AbstractEventType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'data_class' => CreateEventCommand::class,
+            'data_class' => CreateFormData::class,
         ]);
     }
 

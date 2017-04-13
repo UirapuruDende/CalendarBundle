@@ -11,6 +11,8 @@ use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
 use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
+use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Dende\CalendarBundle\DTO\CreateFormData;
 use Dende\CalendarBundle\Form\Type\CreateEventType;
 use Dende\CalendarBundle\Form\Type\UpdateEventType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,19 +73,23 @@ class DefaultController extends Controller
     public function createEventAction(Request $request)
     {
         $response = new Response();
-        $command = new CreateEventCommand();
 
         if ($request->isMethod("GET") && !is_null($request->get('startDate')) && !is_null($request->get('endDate'))) {
-            $command->startDate = Carbon::createFromFormat("YmdHi", $request->get('startDate'));
-            $command->endDate = Carbon::createFromFormat("YmdHi", $request->get('endDate'));
-            $command->duration = $command->startDate->diffInMinutes($command->endDate);
-            $command->endDate->addYear();
-            $command->repetitionDays = [
-                intval($command->startDate->format("N"))
-            ];
+
+            $formData = new CreateFormData(
+                $this->get("dende_calendar.calendar_repository")->findOneBy([]),
+                EventType::single(),
+                '',
+                Carbon::createFromFormat("YmdHi", $request->get('startDate')),
+                Carbon::createFromFormat("YmdHi", $request->get('endDate'))->addYear(),
+                '',
+                new Repetitions([
+                    Carbon::createFromFormat("YmdHi", $request->get('startDate'))->format("N")
+                ])
+            );
         }
 
-        $form = $this->createForm(CreateEventType::class, $command, [
+        $form = $this->createForm(CreateEventType::class, $formData, [
             "model_manager_name" => $this->getParameter("dende_calendar.model_manager_name")
         ]);
 
@@ -92,14 +98,14 @@ class DefaultController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                /** @var UpdateEventCommand|CreateEventCommand $command */
-                $command = $form->getData();
+                /** @var UpdateEventCommand|CreateEventCommand $formData */
+                $formData = $form->getData();
 
-                if($command->newCalendarName) {
-                    $this->get("dende_calendar.new_calendar_creation")->handle($command);
+                if($formData->newCalendarName) {
+                    $this->get("dende_calendar.new_calendar_creation")->handle($formData);
                 }
 
-                $this->get("dende_calendar.handler.create_event")->handle($command);
+                $this->get("dende_calendar.handler.create_event")->handle($formData);
                 $this->get("session")->getFlashBag()->add("success", "dende_calendar.flash.event_created_successfully");
                 return $this->redirectToRoute("dende_calendar_default_index");
             } else {

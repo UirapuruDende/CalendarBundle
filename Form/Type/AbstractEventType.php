@@ -7,9 +7,10 @@ use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
-use Dende\CalendarBundle\DTO\UpdateData;
+use Dende\CalendarBundle\DTO\UpdateFormData;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -31,7 +32,7 @@ abstract class AbstractEventType extends AbstractType
             ->add("calendar", EntityType::class, [
                 "required" => false,
                 "class" => Calendar::class,
-                "choice_label" => "name",
+                "choice_label" => "title",
                 "em" => $options["model_manager_name"],
                 "label" => "dende_calendar.form.calendar.label",
                 'placeholder' => "dende_calendar.form.calendar.placeholder"
@@ -68,17 +69,25 @@ abstract class AbstractEventType extends AbstractType
                 "label" => "dende_calendar.form.repetition_days.label"
             ])
         ;
+
+        $builder->get('repetitions')->addModelTransformer(new CallbackTransformer(
+            function(Repetitions $repetitions) {
+                return $repetitions->getArray();
+            }, function (array $repetitions = []) {
+                return new Repetitions($repetitions);
+            }
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UpdateData::class,
+            'data_class' => UpdateFormData::class,
             'model_manager_name' => 'default',
             'validation_groups' => function(FormInterface $form){
                 $validationGroups = ['Default'];
 
-                /** @var UpdateData $data */
+                /** @var UpdateFormData $data */
                 $data = $form->getData();
 
                 if(is_null($data->calendar()) && is_null($data->newCalendarName())) {

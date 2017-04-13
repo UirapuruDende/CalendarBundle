@@ -5,7 +5,7 @@ use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Application\Handler\UpdateEventHandler;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
-use Dende\CalendarBundle\DTO\UpdateData;
+use Dende\CalendarBundle\DTO\UpdateFormData;
 use Exception;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -42,7 +42,7 @@ class UpdateEventType extends AbstractEventType
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            /** @var UpdateData $dto */
+            /** @var UpdateFormData $dto */
             $dto = $event->getData();
             $form = $event->getForm();
 
@@ -88,7 +88,7 @@ class UpdateEventType extends AbstractEventType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'data_class' => UpdateData::class,
+            'data_class' => UpdateFormData::class,
         ]);
     }
 

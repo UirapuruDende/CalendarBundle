@@ -6,50 +6,45 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 
-class UpdateData
+class UpdateFormData
 {
     /**
      * @var Calendar
      */
-    protected $calendar;
+    public $calendar;
 
     /**
      * @var string
      */
-    protected $newCalendarName;
+    public $newCalendarName;
 
     /**
      * @var OccurrenceInterface
      */
-    protected $occurrence;
+    public $occurrence;
 
     /**
      * @var string
      */
-    protected $title;
+    public $title;
 
     /**
      * @var DateTime
      */
-    protected $startDate;
+    public $startDate;
 
     /**
      * @var DateTime
      */
-    protected $endDate;
+    public $endDate;
 
     /**
      * @var Repetitions
      */
-    protected $repetitions;
+    public $repetitions;
 
     /**
      * @var string
      */
-    protected $method;
-
-    public function occurrence() : OccurrenceInterface
-    {
-        return $this->occurrence;
-    }
+    public $method;
 }
