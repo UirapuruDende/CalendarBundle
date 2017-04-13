@@ -29,22 +29,10 @@ abstract class AbstractEventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("calendar", EntityType::class, [
-                "required" => false,
-                "class" => Calendar::class,
-                "choice_label" => "title",
-                "em" => $options["model_manager_name"],
-                "label" => "dende_calendar.form.calendar.label",
-                'placeholder' => "dende_calendar.form.calendar.placeholder"
-            ])
-            ->add("newCalendarName", TextType::class, [
-                "required" => false,
-                "label" => "dende_calendar.form.new_calendar_name.label"
-            ])
             ->add("startDate", DateTimeType::class, [
                 'widget' => 'single_text',
                 'with_seconds' => false,
-                'format' => 'Y-M-dd HH:mm',
+                'format' => 'Y-MM-dd HH:mm',
                 'attr' => [
                     'class' => 'form_datetime'
                 ],
@@ -53,7 +41,7 @@ abstract class AbstractEventType extends AbstractType
             ->add("endDate", DateTimeType::class, [
                 'widget' => 'single_text',
                 'with_seconds' => false,
-                'format' => 'Y-M-dd HH:mm',
+                'format' => 'Y-MM-dd HH:mm',
                 'attr' => [
                     'class' => 'form_datetime'
                 ],

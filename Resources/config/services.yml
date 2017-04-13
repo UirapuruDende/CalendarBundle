@@ -91,6 +91,13 @@ services:
       - @=service(parameter('dende_calendar.event_factory_service_name'))
       - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
 
+  dende_calendar.handler.create_calendar:
+    class: Dende\Calendar\Application\Handler\CreateCalendarHandler
+    arguments:
+      - @dende_calendar.factory.calendar
+      - @dende_calendar.calendar_repository
+      - @event_dispatcher
+
 # update strategies
 
   dende_calendar.update_strategy.single:

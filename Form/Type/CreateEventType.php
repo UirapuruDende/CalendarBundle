@@ -2,6 +2,7 @@
 namespace Dende\CalendarBundle\Form\Type;
 
 use Dende\Calendar\Application\Command\CreateEventCommand;
+use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Dende\CalendarBundle\DTO\CreateFormData;
@@ -24,7 +25,19 @@ class CreateEventType extends AbstractEventType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add("type", ChoiceType::class, [
+        $builder->add("calendar", EntityType::class, [
+            "required" => false,
+            "class" => Calendar::class,
+            "choice_label" => "title",
+            "em" => $options["model_manager_name"],
+            "label" => "dende_calendar.form.calendar.label",
+            'placeholder' => "dende_calendar.form.calendar.placeholder"
+        ])
+        ->add("newCalendarName", TextType::class, [
+            "required" => false,
+            "label" => "dende_calendar.form.new_calendar_name.label"
+        ])
+        ->add("type", ChoiceType::class, [
             "choices" => array_combine(
                 EventType::$availableTypes,
                 array_map($this->updateNames('type'), EventType::$availableTypes)
@@ -36,8 +49,8 @@ class CreateEventType extends AbstractEventType
             function(EventType $type) {
                 return $type->type();
             }, function (string $type) {
-            return new EventType($type);
-        }
+                return new EventType($type);
+            }
         ));
 
     }

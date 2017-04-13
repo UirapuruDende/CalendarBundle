@@ -5,8 +5,7 @@ $(document).ready(function() {
     var TYPE_WEEKLY = "weekly";
 
     var $eventTypeElement = $("select[id$='_type']");
-    var $repetitionCheckboxes = $("div[id$='_repetitionDays']").parents('div.form-group');
-    var $endDateElement = $("input[id$='_endDate']").parents('div.form-group');
+    var $repetitionCheckboxes = $("div[id$='_repetitions']").parents('div.form-group');
     var typeChangeEventName = "change";
 
     var $calendarElement = $("select[id$='_calendar']");
@@ -21,11 +20,8 @@ $(document).ready(function() {
 
         if(value === TYPE_SINGLE) {
             $repetitionCheckboxes.hide();
-            $endDateElement.hide();
-        } else if (value === TYPE_WEEKLY)
-        {
+        } else if (value === TYPE_WEEKLY) {
             $repetitionCheckboxes.show();
-            $endDateElement.show();
         }
     };
 

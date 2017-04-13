@@ -9,42 +9,32 @@ use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 class UpdateFormData
 {
     /**
-     * @var Calendar
-     */
-    public $calendar;
-
-    /**
-     * @var string
-     */
-    public $newCalendarName;
-
-    /**
      * @var OccurrenceInterface
      */
-    public $occurrence;
+    protected $occurrence;
 
     /**
      * @var string
      */
-    public $title;
+    protected $title;
 
     /**
      * @var DateTime
      */
-    public $startDate;
+    protected $startDate;
 
     /**
      * @var DateTime
      */
-    public $endDate;
+    protected $endDate;
 
     /**
      * @var Repetitions
      */
-    public $repetitions;
+    protected $repetitions;
 
     /**
      * @var string
      */
-    public $method;
+    protected $method;
 }
