@@ -107,16 +107,16 @@
         },
         {
             "name": "dende/calendar",
-            "version": "2.1.5",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "72370dadd55f66cc5625b5fb661d5715790a6b29"
+                "reference": "6716645b218efbdc50809aa7bff73fa1590883c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/72370dadd55f66cc5625b5fb661d5715790a6b29",
-                "reference": "72370dadd55f66cc5625b5fb661d5715790a6b29",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/6716645b218efbdc50809aa7bff73fa1590883c6",
+                "reference": "6716645b218efbdc50809aa7bff73fa1590883c6",
                 "shasum": ""
             },
             "require": {
@@ -153,7 +153,7 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2017-04-09 20:24:36"
+            "time": "2017-04-16 00:07:54"
         },
         {
             "name": "dende/common-bundle",
@@ -3569,12 +3569,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/humbug.git",
+                "url": "https://github.com/humbug/humbug.git",
                 "reference": "06b1c059e432dab8c22c36bc8b6e1ffc7e587c07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/humbug/zipball/06b1c059e432dab8c22c36bc8b6e1ffc7e587c07",
+                "url": "https://api.github.com/repos/humbug/humbug/zipball/06b1c059e432dab8c22c36bc8b6e1ffc7e587c07",
                 "reference": "06b1c059e432dab8c22c36bc8b6e1ffc7e587c07",
                 "shasum": ""
             },
@@ -3711,12 +3711,12 @@
             "version": "0.9.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "483c43d92b6581ea7f8c330231d2dabf8b1ec51f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/483c43d92b6581ea7f8c330231d2dabf8b1ec51f",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/483c43d92b6581ea7f8c330231d2dabf8b1ec51f",
                 "reference": "483c43d92b6581ea7f8c330231d2dabf8b1ec51f",
                 "shasum": ""
             },
@@ -3896,12 +3896,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/file_get_contents.git",
+                "url": "https://github.com/humbug/file_get_contents.git",
                 "reference": "1bfe28c32ad08093917a527114150d0a155c319b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/file_get_contents/zipball/1bfe28c32ad08093917a527114150d0a155c319b",
+                "url": "https://api.github.com/repos/humbug/file_get_contents/zipball/1bfe28c32ad08093917a527114150d0a155c319b",
                 "reference": "1bfe28c32ad08093917a527114150d0a155c319b",
                 "shasum": ""
             },
@@ -3953,12 +3953,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/phar-updater.git",
+                "url": "https://github.com/humbug/phar-updater.git",
                 "reference": "c17eeb3887dc4269d1b4837dc875d39e9f8149a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/phar-updater/zipball/c17eeb3887dc4269d1b4837dc875d39e9f8149a8",
+                "url": "https://api.github.com/repos/humbug/phar-updater/zipball/c17eeb3887dc4269d1b4837dc875d39e9f8149a8",
                 "reference": "c17eeb3887dc4269d1b4837dc875d39e9f8149a8",
                 "shasum": ""
             },
@@ -4059,12 +4059,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/phpunit-extensions.git",
+                "url": "https://github.com/humbug/phpunit-extensions.git",
                 "reference": "a6942fa3ada5487e1b9a409c235013a677c2689b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/phpunit-extensions/zipball/a6942fa3ada5487e1b9a409c235013a677c2689b",
+                "url": "https://api.github.com/repos/humbug/phpunit-extensions/zipball/a6942fa3ada5487e1b9a409c235013a677c2689b",
                 "reference": "a6942fa3ada5487e1b9a409c235013a677c2689b",
                 "shasum": ""
             },

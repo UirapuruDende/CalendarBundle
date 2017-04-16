@@ -104,12 +104,12 @@ class DefaultController extends Controller
 
                 if($formData->calendar() === null && $formData->newCalendarName() !== null) {
                     $calendarId = CalendarId::create();
-                    $this->get('tactician')->handle(new CreateCalendarCommand($calendarId, $formData->newCalendarName()));
+                    $this->get('tactician.commandbus')->handle(new CreateCalendarCommand($calendarId, $formData->newCalendarName()));
                     $calendar = $this->get('dende_calendar.calendar_repository')->findOneByCalendarId($calendarId);
                     $formData->setCalendar($calendar);
                 }
 
-                $this->get("tactician")->handle(new CreateEventCommand(
+                $this->get("tactician.commandbus")->handle(new CreateEventCommand(
                     $formData->calendar()->id(),
                     $formData->type()->type(),
                     $formData->startDate(),

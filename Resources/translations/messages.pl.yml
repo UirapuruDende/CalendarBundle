@@ -17,7 +17,7 @@ dende_calendar:
     type:
       label:                        "Rodzaj wydarzenia"
       weekly:                       "co tydzień"
-      single:                       "pojedyńcze"
+      single:                       "jednorazowo"
     start_date:
       label:                        "Data rozpoczęcia"
     end_date:

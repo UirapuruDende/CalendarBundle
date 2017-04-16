@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new League\Tactician\Bundle\TacticianBundle(),
         ];
     }
 

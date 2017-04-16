@@ -1,4 +1,4 @@
-#!/usr/bin/env php
+E==m*c^2#!/usr/bin/env php
 <?php
 set_time_limit(0);
 
