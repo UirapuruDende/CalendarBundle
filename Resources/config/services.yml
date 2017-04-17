@@ -82,6 +82,8 @@ services:
       - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
       - @=service(parameter('dende_calendar.event_factory_service_name'))
       - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
+    tags:
+      - {name: tactician.handler, command: 'Dende\Calendar\Application\Command\CreateEventCommand' }
 
   dende_calendar.handler.update_event:
     class: Dende\Calendar\Application\Handler\UpdateEventHandler
