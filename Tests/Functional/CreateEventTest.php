@@ -141,9 +141,6 @@ class CreateEventTest extends BaseFunctionalTest
      */
     public function adding_new_weekly_event_to_a_new_calendar()
     {
-        /** @var Calendar $calendar */
-        $calendar = $this->em->getRepository(Calendar::class)->findOneByTitle('Brazilian Jiu Jitsu');
-
         $crawler = $this->client->request('GET', '/calendar/occurrence/new');
 
         $this->assertResponseCode();
@@ -151,7 +148,7 @@ class CreateEventTest extends BaseFunctionalTest
         $form = $crawler->selectButton('dende_calendar.form.submit.label')->form();
 
         $form->setValues([
-            "create_event[calendar]" => $calendar->id(),
+            "create_event[calendar]" => null,
             "create_event[newCalendarName]" => 'i am new calendar added',
             "create_event[type]" => EventType::TYPE_WEEKLY,
             "create_event[startDate]" => "2015-09-01 12:00",
@@ -166,8 +163,6 @@ class CreateEventTest extends BaseFunctionalTest
         $this->client->submit($form);
         $this->assertResponseCode();
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
-
-        $calendar = $this->em->getRepository(Calendar::class)->findOneByCalendarId($calendar->id());
 
         /** @var Event $event */
         $event = $this->em->getRepository(Event::class)->findOneBy(['eventData.title' => 'Test weekly event for new calendar']);

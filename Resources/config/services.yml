@@ -100,6 +100,8 @@ services:
       - @dende_calendar.factory.calendar
       - @dende_calendar.calendar_repository
       - @event_dispatcher
+    tags:
+      - {name: tactician.handler, command: 'Dende\Calendar\Application\Command\CreateCalendarCommand' }
 
 # update strategies
 
