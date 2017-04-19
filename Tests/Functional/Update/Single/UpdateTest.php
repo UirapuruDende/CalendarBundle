@@ -64,6 +64,8 @@ class UpdateTest extends BaseFunctionalTest
         /** @var Event $event */
         $event = $this->em->getRepository(Event::class)->findOneBy(['eventData.title' => 'Test event number 01']);
 
+        die(var_dump($event->dumpOccurrencesDatesAsString()));
+
         $this->assertCount(13, $event->occurrences());
         $occurrence = $event->occurrences()->first();
 
