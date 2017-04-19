@@ -18,7 +18,7 @@ class CreateEventTest extends BaseFunctionalTest
     public function adding_new_single_event()
     {
         /** @var Calendar $calendar */
-        $calendar = $this->em->getRepository(Calendar::class)->findOneByTitle('Brazilian Jiu Jitsu');
+        $calendar = $this->em->getRepository(Calendar::class)->findOneBy(['title' => 'Brazilian Jiu Jitsu']);
 
         $crawler = $this->client->request('GET', '/calendar/occurrence/new');
         $this->assertResponseCode();
@@ -39,7 +39,7 @@ class CreateEventTest extends BaseFunctionalTest
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
         /** @var Calendar $calendar */
-        $calendar = $this->em->getRepository(Calendar::class)->find($calendar->id());
+        $calendar = $this->em->getRepository(Calendar::class)->findOneByCalendarId($calendar->id());
 
         /** @var Event $event */
         $event = $calendar->events()->get(1);
@@ -66,7 +66,7 @@ class CreateEventTest extends BaseFunctionalTest
     public function adding_new_weekly_event()
     {
         /** @var Calendar $calendar */
-        $calendar = $this->em->getRepository(Calendar::class)->findOneByTitle('Brazilian Jiu Jitsu');
+        $calendar = $this->em->getRepository(Calendar::class)->findOneBy(['title' => 'Brazilian Jiu Jitsu']);
 
         $crawler = $this->client->request('GET', '/calendar/occurrence/new');
 
@@ -94,7 +94,7 @@ class CreateEventTest extends BaseFunctionalTest
         $calendar = $this->em->getRepository(Calendar::class)->findOneByCalendarId($calendar->id());
 
         /** @var Event $event */
-        $event = $this->em->getRepository(Event::class)->findOneByTitle('Test weekly event 1');
+        $event = $this->em->getRepository(Event::class)->findOneBy(['eventData.title' => 'Test weekly event 1']);
 
         $this->assertCount(2, $calendar->events());
         $this->assertCount(13, $event->occurrences());
@@ -167,15 +167,15 @@ class CreateEventTest extends BaseFunctionalTest
         $this->assertResponseCode();
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
-        $calendar = $this->em->getRepository(Calendar::class)->find($calendar->id());
+        $calendar = $this->em->getRepository(Calendar::class)->findOneByCalendarId($calendar->id());
 
         /** @var Event $event */
-        $event = $this->em->getRepository(Event::class)->findOneByTitle('Test weekly event for new calendar');
+        $event = $this->em->getRepository(Event::class)->findOneBy(['eventData.title' => 'Test weekly event for new calendar']);
 
         $this->assertCount(13, $event->occurrences());
         $this->assertEquals("2015-09-01 12:00", $event->startDate()->format(self::FORMAT_DATETIME));
         $this->assertEquals("2015-09-30 13:30", $event->endDate()->format(self::FORMAT_DATETIME));
 
-        $this->assertEquals('i am new calendar added', $event->calendar()->name());
+        $this->assertEquals('i am new calendar added', $event->calendar()->title());
     }
 }

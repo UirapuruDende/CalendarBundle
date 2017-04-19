@@ -38,7 +38,7 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
      */
     public function insert(array $params = [])
     {
-        Event::$occurrenceFactoryClass = OccurrenceFactory::class;
+        Event::setFactoryClass(OccurrenceFactory::class);
 
         $array = [
             "calendar" => $this->getReference($params["calendar"]),
