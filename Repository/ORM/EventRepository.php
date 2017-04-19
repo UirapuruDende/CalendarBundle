@@ -1,11 +1,11 @@
 <?php
 namespace Dende\CalendarBundle\Repository\ORM;
 
-use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
-use Dende\Calendar\Domain\Repository\EventRepositoryInterface;
-use Doctrine\Common\Collections\ArrayCollection;
+use Dende\Calendar\Application\Repository\EventRepositoryInterface;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * Class OccurrenceRepository
@@ -38,5 +38,24 @@ class EventRepository extends EntityRepository implements EventRepositoryInterfa
         $event->setDeletedAt(new \DateTime("now"));
         $em = $this->getEntityManager();
         $em->flush($event);
+    }
+
+    /**
+     * It's not that stupid as it seems. Classes retrieved by relation are not always the same as overloaded types.
+     * @param Occurrence $occurrence
+     * @return Event|null
+     * @throws NonUniqueResultException
+     */
+    public function findOneByOccurrence(Occurrence $occurrence)
+    {
+        $qb = $this->createQueryBuilder("e");
+
+        $result = $qb
+            ->where("e.eventId = :eventId")
+            ->setParameter("eventId", $occurrence->event()->id())
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $result;
     }
 }

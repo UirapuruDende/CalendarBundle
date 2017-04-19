@@ -18,7 +18,7 @@ class CreateEventTest extends BaseFunctionalTest
     public function adding_new_single_event()
     {
         /** @var Calendar $calendar */
-        $calendar = $this->em->getRepository(Calendar::class)->findOneByName('Brazilian Jiu Jitsu');
+        $calendar = $this->em->getRepository(Calendar::class)->findOneByTitle('Brazilian Jiu Jitsu');
 
         $crawler = $this->client->request('GET', '/calendar/occurrence/new');
         $this->assertResponseCode();
@@ -30,7 +30,6 @@ class CreateEventTest extends BaseFunctionalTest
             "create_event[type]" => EventType::TYPE_SINGLE,
             "create_event[startDate]" => "2015-11-02 12:00",
             "create_event[endDate]" => "2015-11-02 13:30",
-            "create_event[duration]" => 90,
             "create_event[title]" => "test-event-title",
         ]);
 
@@ -67,7 +66,7 @@ class CreateEventTest extends BaseFunctionalTest
     public function adding_new_weekly_event()
     {
         /** @var Calendar $calendar */
-        $calendar = $this->em->getRepository(Calendar::class)->findOneByName('Brazilian Jiu Jitsu');
+        $calendar = $this->em->getRepository(Calendar::class)->findOneByTitle('Brazilian Jiu Jitsu');
 
         $crawler = $this->client->request('GET', '/calendar/occurrence/new');
 
@@ -80,20 +79,19 @@ class CreateEventTest extends BaseFunctionalTest
             "create_event[type]" => EventType::TYPE_WEEKLY,
             "create_event[startDate]" => "2015-09-01 12:00",
             "create_event[endDate]" => "2015-09-30 13:30",
-            "create_event[duration]" => 90,
             "create_event[title]" => "Test weekly event 1",
         ]);
 
-        $form["create_event[repetitionDays]"][0]->tick();
-        $form["create_event[repetitionDays]"][2]->tick();
-        $form["create_event[repetitionDays]"][4]->tick();
+        $form["create_event[repetitions]"][0]->tick();
+        $form["create_event[repetitions]"][2]->tick();
+        $form["create_event[repetitions]"][4]->tick();
 
         $this->client->submit($form);
         $this->assertResponseCode();
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
         /** @var Calendar $calendar */
-        $calendar = $this->em->getRepository(Calendar::class)->find($calendar->id());
+        $calendar = $this->em->getRepository(Calendar::class)->findOneByCalendarId($calendar->id());
 
         /** @var Event $event */
         $event = $this->em->getRepository(Event::class)->findOneByTitle('Test weekly event 1');
@@ -144,7 +142,7 @@ class CreateEventTest extends BaseFunctionalTest
     public function adding_new_weekly_event_to_a_new_calendar()
     {
         /** @var Calendar $calendar */
-        $calendar = $this->em->getRepository(Calendar::class)->findOneByName('Brazilian Jiu Jitsu');
+        $calendar = $this->em->getRepository(Calendar::class)->findOneByTitle('Brazilian Jiu Jitsu');
 
         $crawler = $this->client->request('GET', '/calendar/occurrence/new');
 
@@ -158,13 +156,12 @@ class CreateEventTest extends BaseFunctionalTest
             "create_event[type]" => EventType::TYPE_WEEKLY,
             "create_event[startDate]" => "2015-09-01 12:00",
             "create_event[endDate]" => "2015-09-30 13:30",
-            "create_event[duration]" => 90,
             "create_event[title]" => "Test weekly event for new calendar",
         ]);
 
-        $form["create_event[repetitionDays]"][0]->tick();
-        $form["create_event[repetitionDays]"][2]->tick();
-        $form["create_event[repetitionDays]"][4]->tick();
+        $form["create_event[repetitions]"][0]->tick();
+        $form["create_event[repetitions]"][2]->tick();
+        $form["create_event[repetitions]"][4]->tick();
 
         $this->client->submit($form);
         $this->assertResponseCode();

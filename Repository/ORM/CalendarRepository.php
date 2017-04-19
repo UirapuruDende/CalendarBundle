@@ -47,6 +47,6 @@ class CalendarRepository extends EntityRepository implements CalendarRepositoryI
      */
     public function findOneByCalendarId(string $calendarId): Calendar
     {
-        throw new Exception("Implement me");
+        return $this->findOneBy(["calendarId.id" => $calendarId]);
     }
 }

@@ -2,6 +2,7 @@
 namespace Dende\CalendarBundle\Form\Type;
 
 use Dende\Calendar\Application\Command\CreateEventCommand;
+use Dende\Calendar\Application\Repository\CalendarRepositoryInterface;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
@@ -29,6 +30,7 @@ class CreateEventType extends AbstractEventType
             "required" => false,
             "class" => Calendar::class,
             "choice_label" => "title",
+            "choice_value" => "id",
             "em" => $options["model_manager_name"],
             "label" => "dende_calendar.form.calendar.label",
             'placeholder' => "dende_calendar.form.calendar.placeholder"

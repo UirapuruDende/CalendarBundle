@@ -43,7 +43,6 @@ abstract class BaseFunctionalTest extends BaseTest
         $fixtures = $this->loadFixtures([
             CalendarsData::class,
             EventsData::class,
-            OccurrencesData::class
         ], 'default');
 
         $this->fixtures = $fixtures->getReferenceRepository();

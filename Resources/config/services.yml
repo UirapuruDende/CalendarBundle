@@ -78,6 +78,7 @@ services:
   dende_calendar.handler.create_event:
     class: Dende\Calendar\Application\Handler\CreateEventHandler
     arguments:
+      - @dende_calendar.calendar_repository
       - @=service(parameter('dende_calendar.event_repository_service_name'))
       - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
       - @=service(parameter('dende_calendar.event_factory_service_name'))
