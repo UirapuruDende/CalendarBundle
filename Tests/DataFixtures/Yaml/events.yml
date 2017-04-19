@@ -42,3 +42,12 @@ event-006:
   type:         weekly
   startDate:    "2015-09-15 12:00:00"
   endDate:      "2015-09-30 13:30:00"
+
+event-007:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000006
+  calendar:     calendar-001
+  title:        "some-weekly-test-event"
+  repetitions:  [1, 3, 5]
+  type:         weekly
+  startDate:    "first day of this month 12:00:00"
+  endDate:      "last day of this month 13:30:00"

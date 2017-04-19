@@ -7,6 +7,7 @@ use Dende\Calendar\Application\Command\CreateCalendarCommand;
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Application\Handler\UpdateEventHandler;
+use Dende\Calendar\Application\Handler\UpdateStrategy\Single;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\CalendarId;
 use Dende\Calendar\Domain\Calendar\Event;
@@ -133,43 +134,42 @@ class DefaultController extends Controller
 
     /**
      * @Route("/occurrence/{occurrenceId}", options={"expose"=true})
+     * @ParamConverter("occurrence", class="Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface")
      * @Method({"GET", "POST"})
      * @Template("DendeCalendarBundle:Default:updateEvent.html.twig")
+     * @param Request $request
+     * @param OccurrenceInterface $occurrence
      * @return string
+     * @throws EntityNotFoundException
      */
-    public function updateEventAction(Request $request, OccurrenceId $occurrenceId)
+    public function updateEventAction(Request $request, string $occurrenceId)
     {
         /** @var EntityManagerInterface $em */
         $em = $this->get('doctrine')->getManager($this->getParameter("dende_calendar.model_manager_name"));
 
         /** @var OccurrenceInterface $occurrence */
-        $occurrence = $em->getRepository($this->getParameter("dende_calendar.occurrence.class"))->find($occurrenceId);
+        $occurrence = $em->getRepository($this->getParameter("dende_calendar.occurrence.class"))->findOneBy(['occurrenceId.id' => $occurrenceId]);
 
         if(!$occurrence) {
             throw new EntityNotFoundException('Occurrence entity not found in database');
         }
 
         $response = new Response();
-        $command = new UpdateEventCommand();
-        $command->occurrence = $occurrence;
+
+        $formData = new UpdateFormData();
+        $formData->occurrence = $occurrence;
 
         if ($request->isMethod("GET")) {
-
-            $formData = new UpdateFormData();
-
-
-            /** @var Event $event */
             $event = $occurrence->event();
-            $command->calendar = $event->calendar();
-            $command->startDate = $occurrence->startDate();
-            $command->endDate = $event->endDate();
-            $command->duration = $event->duration()->minutes();
-            $command->title = $event->title();
-            $command->repetitionDays = $event->repetitions()->weekdays();
-            $command->type = $event->type()->type();
+
+            $formData->title = $event->title();
+            $formData->startDate = $event->startDate();
+            $formData->endDate = $event->endDate();
+            $formData->repetitions = $event->repetitions()->getArray();
+            $formData->method = UpdateEventHandler::MODE_SINGLE;
         }
 
-        $form = $this->createForm(UpdateEventType::class, $command, [
+        $form = $this->createForm(UpdateEventType::class, $formData, [
             "model_manager_name" => $this->getParameter("dende_calendar.model_manager_name")
         ]);
 
