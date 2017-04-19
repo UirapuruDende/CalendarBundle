@@ -15,7 +15,7 @@ class UpdateTest extends BaseFunctionalTest
     public function updating_single_event()
     {
         /** @var Event $event */
-        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event');
+        $event = $this->em->getRepository(Event::class)->findOneBy(['eventData.title' => 'some-single-test-event']);
         $this->assertCount(1, $event->occurrences());
         $occurrence = $event->occurrences()->first();
 
@@ -62,7 +62,8 @@ class UpdateTest extends BaseFunctionalTest
     public function updating_single_occurrence_of_weekly_event()
     {
         /** @var Event $event */
-        $event = $this->em->getRepository(Event::class)->findOneByTitle('Test event number 01');
+        $event = $this->em->getRepository(Event::class)->findOneBy(['eventData.title' => 'Test event number 01']);
+
         $this->assertCount(13, $event->occurrences());
         $occurrence = $event->occurrences()->first();
 
@@ -85,7 +86,7 @@ class UpdateTest extends BaseFunctionalTest
         $this->assertResponseCode();
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
-        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event-changed');
+        $event = $this->em->getRepository(Event::class)->findOneBy(['eventData.title' => 'some-single-test-event-changed']);
 
         /** @var OccurrenceExtended $occurrence */
         $occurrence = $this->em->getRepository(OccurrenceExtended::class)->findOneByEvent($event);
@@ -109,7 +110,7 @@ class UpdateTest extends BaseFunctionalTest
     public function updating_single_event_with_calendar_creation()
     {
         /** @var Event $event */
-        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event');
+        $event = $this->em->getRepository(Event::class)->findOneBy(['eventData.title' => 'some-single-test-event']);
         $this->assertCount(1, $event->occurrences());
         $occurrence = $event->occurrences()->first();
 
@@ -133,10 +134,10 @@ class UpdateTest extends BaseFunctionalTest
         $this->assertResponseCode();
         $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
 
-        $event = $this->em->getRepository(Event::class)->findOneByTitle('some-single-test-event-changed');
+        $event = $this->em->getRepository(Event::class)->findOneBy(['eventData.title' => 'some-single-test-event-changed']);
 
         $this->assertCount(1, $event->occurrences());
         $this->assertEquals('some-single-test-event-changed', $event->title());
-        $this->assertEquals('i am some next calendar added', $event->calendar()->name());
+        $this->assertEquals('i am some next calendar added', $event->calendar()->title());
     }
 }

@@ -3,10 +3,12 @@ namespace Dende\CalendarBundle\Tests\DataFixtures\ORM;
 
 use DateTime;
 use Dende\Calendar\Domain\Calendar\Event;
+use Dende\Calendar\Domain\Calendar\Event\EventId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Dende\CalendarBundle\Tests\DataFixtures\BaseFixture;
 use Dende\CalendarBundle\Tests\Factory\OccurrenceFactory;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -41,6 +43,7 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
         Event::setFactoryClass(OccurrenceFactory::class);
 
         $array = [
+            "eventId" => EventId::create(Uuid::fromString($params["eventId"])),
             "calendar" => $this->getReference($params["calendar"]),
             "startDate" => new DateTime($params["startDate"]),
             "endDate" => new DateTime($params["endDate"]),

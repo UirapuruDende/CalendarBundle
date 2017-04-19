@@ -4,12 +4,10 @@ namespace Dende\CalendarBundle\Tests;
 use AppKernel;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\CalendarsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\EventsData;
-use Dende\CalendarBundle\Tests\DataFixtures\ORM\OccurrencesData;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Doctrine\ORM\EntityManager;
 use Liip\FunctionalTestBundle\Test\WebTestCase as BaseTest;
 use Exception;
-use Mockery;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -48,11 +46,6 @@ abstract class BaseFunctionalTest extends BaseTest
         $this->fixtures = $fixtures->getReferenceRepository();
 
         $this->em = $this->container->get("doctrine.orm.entity_manager");
-    }
-
-    public function tearDown()
-    {
-        Mockery::close();
     }
 
     /**
