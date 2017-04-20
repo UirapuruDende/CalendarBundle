@@ -25,6 +25,7 @@ class UpdateEventType extends AbstractEventType
 
     /**
      * @inheritDoc
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -60,15 +61,14 @@ class UpdateEventType extends AbstractEventType
             }
 
             if ($event->isWeekly()) {
-                $form->add("delete_occurrence", "submit", [
-                    "label" => "dende_calendar.form.delete_occurrence.label",
+                $form->add(
+                    'delete_occurrence', 'submit', [
+                    "label" => 'dende_calendar.form.delete_occurrence.label',
                     "attr" => [
                         "class" => "pull-right"
                     ]
                 ]);
-            }
 
-            if ($event->isWeekly()) {
                 $form->add("method", ChoiceType::class, [
                     "label" => "dende_calendar.form.method.label",
                     'choices' => array_combine(UpdateEventHandler::$availableModes, array_map(function($mode) {
@@ -76,6 +76,8 @@ class UpdateEventType extends AbstractEventType
                     }, UpdateEventHandler::$availableModes)),
                     "data" => UpdateEventHandler::MODE_NEXT_INCLUSIVE
                 ]);
+            } else {
+                $form->remove('repetitions');
             }
         });
     }

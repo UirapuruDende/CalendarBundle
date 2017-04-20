@@ -2,8 +2,10 @@
 namespace Dende\CalendarBundle\DTO;
 
 use DateTime;
+use Dende\Calendar\Application\Handler\UpdateEventHandler;
 use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Symfony\Component\HttpFoundation\Request;
 
 class UpdateFormData
 {
@@ -56,6 +58,18 @@ class UpdateFormData
         $this->method = $method;
     }
 
+    public static function fromRequest(Request $request)
+    {
+        return new self(
+            $request->get('occurrence'),
+            $request->get('title', ''),
+            new DateTime($request->get('startDate')),
+            new DateTime($request->get('endDate')),
+            new Repetitions($request->get('repetitions', [])),
+            $request->get('method', UpdateEventHandler::MODE_SINGLE)
+        );
+    }
+
     /**
      * @return OccurrenceInterface
      */
@@ -102,5 +116,53 @@ class UpdateFormData
     public function method(): string
     {
         return $this->method;
+    }
+
+    /**
+     * @param OccurrenceInterface $occurrence
+     */
+    public function setOccurrence(OccurrenceInterface $occurrence)
+    {
+        $this->occurrence = $occurrence;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @param DateTime $startDate
+     */
+    public function setStartDate(DateTime $startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @param DateTime $endDate
+     */
+    public function setEndDate(DateTime $endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
+    /**
+     * @param Repetitions $repetitions
+     */
+    public function setRepetitions(Repetitions $repetitions)
+    {
+        $this->repetitions = $repetitions;
+    }
+
+    /**
+     * @param string $method
+     */
+    public function setMethod(string $method)
+    {
+        $this->method = $method;
     }
 }

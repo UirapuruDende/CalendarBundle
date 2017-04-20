@@ -70,28 +70,7 @@ abstract class AbstractEventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UpdateFormData::class,
             'model_manager_name' => 'default',
-            'validation_groups' => function(FormInterface $form){
-                $validationGroups = ['Default'];
-
-                /** @var UpdateFormData $data */
-                $data = $form->getData();
-
-                if(is_null($data->calendar()) && is_null($data->newCalendarName())) {
-                    $validationGroups[] = 'createNewCalendar';
-                }
-
-                if($data->type() === EventType::TYPE_WEEKLY) {
-                    $validationGroups[] = 'weeklyEvent';
-                }
-
-                if(get_class($data) === UpdateEventCommand::class && !$data->occurrence()->event()->type()->isType($data->type())) {
-                    $validationGroups[] = 'eventTypeChange';
-                }
-
-                return $validationGroups;
-            }
         ]);
 
         $resolver->setAllowedTypes([

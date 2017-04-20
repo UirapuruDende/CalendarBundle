@@ -167,6 +167,9 @@ class DefaultController extends Controller
                 $event->repetitions(),
                 UpdateEventHandler::MODE_SINGLE
             );
+        } elseif ($request->isMethod("POST")) {
+            $request->attributes->add(['occurrence' => $occurrence]);
+            $formData = UpdateFormData::fromRequest($request);
         }
 
         $form = $this->createForm(UpdateEventType::class, $formData, [
@@ -180,16 +183,12 @@ class DefaultController extends Controller
                 if ($form->get("delete_event")->isClicked()) {
                     $this->get('dende_calendar.handler.remove_event')->remove($occurrence->event());
                     return $this->redirectToRoute("dende_calendar_default_index");
-                } elseif ($occurrence->event()->isType(EventType::TYPE_WEEKLY) && $form->get("delete_occurrence")->isClicked()) {
+                } elseif ($occurrence->event()->isWeekly() && $form->get("delete_occurrence")->isClicked()) {
                     $this->get('dende_calendar.handler.remove_occurrence')->remove($occurrence);
                     return $this->redirectToRoute("dende_calendar_default_index");
                 } else {
                     /** @var UpdateEventCommand|CreateEventCommand $command */
                     $command = $form->getData();
-
-                    if($command->newCalendarName) {
-                        $this->get("dende_calendar.new_calendar_creation")->handle($command);
-                    }
 
                     $this->get("dende_calendar.handler.update_event")->handle($command);
                     $this->addFlash("success", "dende_calendar.flash.event_updated_successfully");

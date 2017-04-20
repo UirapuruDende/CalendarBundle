@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreateEventType extends AbstractEventType
@@ -60,6 +61,7 @@ class CreateEventType extends AbstractEventType
 
     /**
      * @param OptionsResolver $resolver
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -67,7 +69,23 @@ class CreateEventType extends AbstractEventType
 
         $resolver->setDefaults([
             'data_class' => CreateFormData::class,
-        ]);
+           'validation_groups' => function(FormInterface $form){
+               $validationGroups = ['Default'];
+
+               /** @var CreateFormData $data */
+               $data = $form->getData();
+
+               if(is_null($data->calendar()) && is_null($data->newCalendarName())) {
+                   $validationGroups[] = 'createNewCalendar';
+               }
+
+               if($data->type() === EventType::TYPE_WEEKLY) {
+                   $validationGroups[] = 'weeklyEvent';
+               }
+
+               return $validationGroups;
+           }
+       ]);
     }
 
     /**
