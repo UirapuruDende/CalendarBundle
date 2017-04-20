@@ -189,7 +189,14 @@ class DefaultController extends Controller
 
                     return $this->redirectToRoute("dende_calendar_default_index");
                 } else {
-                    $this->get('tactician.commandbus')->handle(new UpdateEventCommand());
+                    $this->get('tactician.commandbus')->handle(new UpdateEventCommand(
+                        $formData->occurrence()->id()->id(),
+                        $formData->method(),
+                        $formData->startDate(),
+                        $formData->endDate(),
+                        $formData->title(),
+                        $formData->repetitions()->getArray()
+                   ));
 
                     $this->addFlash("success", "dende_calendar.flash.event_updated_successfully");
                     return $this->redirectToRoute("dende_calendar_default_index");

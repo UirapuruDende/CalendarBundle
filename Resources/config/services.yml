@@ -93,6 +93,8 @@ services:
       - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
       - @=service(parameter('dende_calendar.event_factory_service_name'))
       - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
+    tags:
+      - {name: tactician.handler, command: 'Dende\Calendar\Application\Command\UpdateEventCommand' }
 
   dende_calendar.handler.create_calendar:
     class: Dende\Calendar\Application\Handler\CreateCalendarHandler
@@ -110,15 +112,15 @@ services:
     tags:
       - {name: dende_calendar.update_strategy }
 
-  dende_calendar.update_strategy.overwrite:
-    class: Dende\Calendar\Application\Handler\UpdateStrategy\Overwrite
-    tags:
-      - {name: dende_calendar.update_strategy }
+#  dende_calendar.update_strategy.overwrite:
+#    class: Dende\Calendar\Application\Handler\UpdateStrategy\Overwrite
+#    tags:
+#      - {name: dende_calendar.update_strategy }
 
-  dende_calendar.update_strategy.next_inclusive:
-    class: Dende\Calendar\Application\Handler\UpdateStrategy\NextInclusive
-    tags:
-      - {name: dende_calendar.update_strategy }
+#  dende_calendar.update_strategy.next_inclusive:
+#    class: Dende\Calendar\Application\Handler\UpdateStrategy\NextInclusive
+#    tags:
+#      - {name: dende_calendar.update_strategy }
 
 # factories
 
