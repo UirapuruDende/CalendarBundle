@@ -156,17 +156,17 @@ class DefaultController extends Controller
 
         $response = new Response();
 
-        $formData = new UpdateFormData();
-        $formData->occurrence = $occurrence;
-
         if ($request->isMethod("GET")) {
             $event = $occurrence->event();
 
-            $formData->title = $event->title();
-            $formData->startDate = $event->startDate();
-            $formData->endDate = $event->endDate();
-            $formData->repetitions = $event->repetitions()->getArray();
-            $formData->method = UpdateEventHandler::MODE_SINGLE;
+            $formData = new UpdateFormData(
+                $occurrence,
+                $event->title(),
+                $event->startDate(),
+                $event->endDate(),
+                $event->repetitions(),
+                UpdateEventHandler::MODE_SINGLE
+            );
         }
 
         $form = $this->createForm(UpdateEventType::class, $formData, [

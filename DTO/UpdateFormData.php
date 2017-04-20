@@ -59,7 +59,7 @@ class UpdateFormData
     /**
      * @return OccurrenceInterface
      */
-    public function cccurrence(): OccurrenceInterface
+    public function occurrence(): OccurrenceInterface
     {
         return $this->occurrence;
     }

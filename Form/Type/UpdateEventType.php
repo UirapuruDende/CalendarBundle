@@ -68,7 +68,7 @@ class UpdateEventType extends AbstractEventType
                 ]);
             }
 
-            if ($event->isType(EventType::TYPE_WEEKLY)) {
+            if ($event->isWeekly()) {
                 $form->add("method", ChoiceType::class, [
                     "label" => "dende_calendar.form.method.label",
                     'choices' => array_combine(UpdateEventHandler::$availableModes, array_map(function($mode) {
