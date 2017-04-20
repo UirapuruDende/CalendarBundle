@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use DateTime;
 use Dende\Calendar\Application\Command\CreateCalendarCommand;
 use Dende\Calendar\Application\Command\CreateEventCommand;
+use Dende\Calendar\Application\Command\RemoveEventCommand;
 use Dende\Calendar\Application\Command\UpdateEventCommand;
 use Dende\Calendar\Application\Handler\UpdateEventHandler;
 use Dende\Calendar\Application\Handler\UpdateStrategy\Single;
@@ -134,11 +135,10 @@ class DefaultController extends Controller
 
     /**
      * @Route("/occurrence/{occurrenceId}", options={"expose"=true})
-     * @ParamConverter("occurrence", class="Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface")
      * @Method({"GET", "POST"})
      * @Template("DendeCalendarBundle:Default:updateEvent.html.twig")
      * @param Request $request
-     * @param OccurrenceInterface $occurrence
+     * @param string $occurrenceId
      * @return string
      * @throws EntityNotFoundException
      */
@@ -181,16 +181,16 @@ class DefaultController extends Controller
 
             if ($form->isValid()) {
                 if ($form->get("delete_event")->isClicked()) {
-                    $this->get('dende_calendar.handler.remove_event')->remove($occurrence->event());
+                    $this->get('tactician.commandbus')->handle(new RemoveEventCommand());
+
                     return $this->redirectToRoute("dende_calendar_default_index");
                 } elseif ($occurrence->event()->isWeekly() && $form->get("delete_occurrence")->isClicked()) {
-                    $this->get('dende_calendar.handler.remove_occurrence')->remove($occurrence);
+                    $this->get('tactician.commandbus')->handle(new RemoveOccurrenceCommand());
+
                     return $this->redirectToRoute("dende_calendar_default_index");
                 } else {
-                    /** @var UpdateEventCommand|CreateEventCommand $command */
-                    $command = $form->getData();
+                    $this->get('tactician.commandbus')->handle(new UpdateEventCommand());
 
-                    $this->get("dende_calendar.handler.update_event")->handle($command);
                     $this->addFlash("success", "dende_calendar.flash.event_updated_successfully");
                     return $this->redirectToRoute("dende_calendar_default_index");
                 }
