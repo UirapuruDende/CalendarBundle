@@ -12,6 +12,11 @@ $(document).ready(function() {
     var $newCalendarInput = $("input[id$='_newCalendarName']").parents('div.form-group');
     var calendarEventName = "change";
 
+    var $selectMethod = $("select#update_event_method");
+    var $eventDates = $("#update_event_eventDates").parents("div.form-group");
+    var $occurrenceDates = $("#update_event_occurrenceDates").parents("div.form-group");
+    var methodEventName = "change";
+
     // handlers
 
     var eventTypeChangeHandler = function(event) {
@@ -37,6 +42,19 @@ $(document).ready(function() {
         }
     };
 
+    var switchDatesHandler = function(event) {
+        var $target = $(event.target);
+        var value = $target.val();
+
+        if(value === single) {
+            $eventDates.hide();
+            $occurrenceDates.show();
+        } else {
+            $eventDates.show();
+            $occurrenceDates.hide();
+        }
+    }
+
     // events
 
     $eventTypeElement.off(typeChangeEventName).on(typeChangeEventName, eventTypeChangeHandler);
@@ -44,4 +62,7 @@ $(document).ready(function() {
 
     $calendarElement.off(calendarEventName).on(calendarEventName, noCalendarSelectedHandler);
     $calendarElement.trigger(calendarEventName);
+
+    $selectMethod.off(methodEventName).on(calendarEventName, switchDatesHandler);
+    $selectMethod.trigger(methodEventName);
 });
