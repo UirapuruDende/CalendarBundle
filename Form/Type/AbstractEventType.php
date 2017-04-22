@@ -8,6 +8,7 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Dende\CalendarBundle\DTO\UpdateFormData;
+use Dende\CalendarBundle\Form\Type\UpdateEventType\RangeDates;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -29,23 +30,11 @@ abstract class AbstractEventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("startDate", DateTimeType::class, [
-                'widget' => 'single_text',
-                'with_seconds' => false,
-                'format' => 'Y-MM-dd HH:mm',
-                'attr' => [
-                    'class' => 'form_datetime'
-                ],
-                "label" => "dende_calendar.form.start_date.label"
+            ->add("eventDates", RangeDates::class, [
+                "label" => "dende_calendar.form.event.dates"
             ])
-            ->add("endDate", DateTimeType::class, [
-                'widget' => 'single_text',
-                'with_seconds' => false,
-                'format' => 'Y-MM-dd HH:mm',
-                'attr' => [
-                    'class' => 'form_datetime'
-                ],
-                "label" => "dende_calendar.form.end_date.label",
+            ->add("occurrenceDates", RangeDates::class, [
+                "label" => "dende_calendar.form.event.dates"
             ])
             ->add("title", TextType::class, [
                 "label" => "dende_calendar.form.title.label"
@@ -65,16 +54,5 @@ abstract class AbstractEventType extends AbstractType
                 return new Repetitions($repetitions);
             }
         ));
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'model_manager_name' => 'default',
-        ]);
-
-        $resolver->setAllowedTypes([
-            'model_manager_name' => 'string',
-        ]);
     }
 }

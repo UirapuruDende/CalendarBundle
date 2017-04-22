@@ -164,6 +164,8 @@ class DefaultController extends Controller
                 $event->title(),
                 $event->startDate(),
                 $event->endDate(),
+                $occurrence->startDate(),
+                $occurrence->endDate(),
                 $event->repetitions(),
                 UpdateEventHandler::MODE_SINGLE
             );
@@ -172,9 +174,7 @@ class DefaultController extends Controller
             $formData = UpdateFormData::fromRequest($request);
         }
 
-        $form = $this->createForm(UpdateEventType::class, $formData, [
-            "model_manager_name" => $this->getParameter("dende_calendar.model_manager_name")
-        ]);
+        $form = $this->createForm(UpdateEventType::class, $formData);
 
         if ($request->isMethod("POST")) {
             $form->handleRequest($request);
@@ -192,8 +192,8 @@ class DefaultController extends Controller
                     $this->get('tactician.commandbus')->handle(new UpdateEventCommand(
                         $formData->occurrence()->id()->id(),
                         $formData->method(),
-                        $formData->startDate(),
-                        $formData->endDate(),
+                        $formData->getEventDates()["startDate"],
+                        $formData->getEventDates()["endDate"],
                         $formData->title(),
                         $formData->repetitions()->getArray()
                    ));

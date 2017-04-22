@@ -20,14 +20,14 @@ class UpdateFormData
     protected $title;
 
     /**
-     * @var DateTime
+     * @var DateTime[]|array
      */
-    protected $startDate;
+    protected $eventDates;
 
     /**
-     * @var DateTime
+     * @var DateTime[]|array
      */
-    protected $endDate;
+    protected $occurrenceDates;
 
     /**
      * @var Repetitions
@@ -48,12 +48,12 @@ class UpdateFormData
      * @param Repetitions $repetitions
      * @param string $method
      */
-    public function __construct(OccurrenceInterface $occurrence, string $title, DateTime $startDate, DateTime $endDate, Repetitions $repetitions, string $method)
+    public function __construct(OccurrenceInterface $occurrence, string $title, DateTime $eventStartDate, DateTime $eventEndDate, DateTime $occurrenceStartDate, DateTime $occurrenceEndDate, Repetitions $repetitions, string $method)
     {
         $this->occurrence = $occurrence;
         $this->title = $title;
-        $this->startDate = $startDate;
-        $this->endDate = $endDate;
+        $this->eventDates = ['startDate' => $eventStartDate, 'endDate' => $eventEndDate];
+        $this->occurrenceDates = ['startDate' => $occurrenceStartDate, 'endDate' => $occurrenceEndDate];
         $this->repetitions = $repetitions;
         $this->method = $method;
     }
@@ -63,8 +63,10 @@ class UpdateFormData
         return new self(
             $request->get('occurrence'),
             $request->get('title', ''),
-            new DateTime($request->get('startDate')),
-            new DateTime($request->get('endDate')),
+            new DateTime($request->get('eventDate.startDate')),
+            new DateTime($request->get('eventDate.endDate')),
+            new DateTime($request->get('occurrenceDate.startDate')),
+            new DateTime($request->get('occurrenceDate.endDate')),
             new Repetitions($request->get('repetitions', [])),
             $request->get('method', UpdateEventHandler::MODE_SINGLE)
         );
@@ -84,22 +86,6 @@ class UpdateFormData
     public function title(): string
     {
         return $this->title;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function startDate(): DateTime
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function endDate(): DateTime
-    {
-        return $this->endDate;
     }
 
     /**
@@ -135,22 +121,6 @@ class UpdateFormData
     }
 
     /**
-     * @param DateTime $startDate
-     */
-    public function setStartDate(DateTime $startDate)
-    {
-        $this->startDate = $startDate;
-    }
-
-    /**
-     * @param DateTime $endDate
-     */
-    public function setEndDate(DateTime $endDate)
-    {
-        $this->endDate = $endDate;
-    }
-
-    /**
      * @param Repetitions $repetitions
      */
     public function setRepetitions(Repetitions $repetitions)
@@ -164,5 +134,37 @@ class UpdateFormData
     public function setMethod(string $method)
     {
         $this->method = $method;
+    }
+
+    /**
+     * @return array|DateTime[]
+     */
+    public function getEventDates()
+    {
+        return $this->eventDates;
+    }
+
+    /**
+     * @param array|DateTime[] $eventDates
+     */
+    public function setEventDates($eventDates)
+    {
+        $this->eventDates = $eventDates;
+    }
+
+    /**
+     * @return array|DateTime[]
+     */
+    public function getOccurrenceDates()
+    {
+        return $this->occurrenceDates;
+    }
+
+    /**
+     * @param array|DateTime[] $occurrenceDates
+     */
+    public function setOccurrenceDates($occurrenceDates)
+    {
+        $this->occurrenceDates = $occurrenceDates;
     }
 }

@@ -57,6 +57,7 @@ services:
       - "@event_dispatcher"
 
 #forms
+
   dende_calendar.form_type.abstract_event:
     class: Dende\CalendarBundle\Form\Type\AbstractEventType
     abstract: true
@@ -72,6 +73,11 @@ services:
     parent: dende_calendar.form_type.abstract_event
     tags:
       - {name: form.type, alias: update_event}
+
+  dende_calendar.form_type.range_dates:
+    class: Dende\CalendarBundle\Form\Type\UpdateEventType\RangeDates
+    tags:
+      - {name: form.type, alias: range_dates}
 
 # handlers
 

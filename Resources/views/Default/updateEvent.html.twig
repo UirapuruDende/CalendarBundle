@@ -4,8 +4,8 @@
     {{ form_start(form) }}
 
         {% if form.method is defined %}{{ form_row(form.method) }}{% endif %}
-        {{ form_row(form.startDate) }}
-        {{ form_row(form.endDate) }}
+        {{ form_row(form.eventDates) }}
+        {{ form_row(form.occurrenceDates) }}
         {{ form_row(form.title) }}
         {% if form.repetitions is defined %}{{ form_row(form.repetitions) }}{% endif %}
         {{ form_row(form.delete_event) }}
