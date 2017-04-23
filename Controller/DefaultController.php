@@ -7,6 +7,7 @@ use Dende\Calendar\Application\Command\CreateCalendarCommand;
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Command\RemoveEventCommand;
 use Dende\Calendar\Application\Command\UpdateEventCommand;
+use Dende\Calendar\Application\Command\UpdateOccurrenceCommand;
 use Dende\Calendar\Application\Handler\UpdateEventHandler;
 use Dende\Calendar\Application\Handler\UpdateStrategy\Single;
 use Dende\Calendar\Domain\Calendar;
@@ -80,12 +81,15 @@ class DefaultController extends Controller
     {
         $response = new Response();
 
+
         $formData = new CreateFormData(
             $this->get("dende_calendar.calendar_repository")->findOneBy([]),
             EventType::single(),
             '',
-            Carbon::createFromFormat("YmdHi", $request->get('startDate', (new DateTime('now'))->format("YmdHi"))),
-            Carbon::createFromFormat("YmdHi", $request->get('endDate', (new DateTime('+1 hour'))->format("YmdHi"))),
+            [
+                "startDate" => Carbon::createFromFormat("YmdHi", $request->get('startDate', (new DateTime('now'))->format("YmdHi"))),
+                "endDate" => Carbon::createFromFormat("YmdHi", $request->get('endDate', (new DateTime('+1 hour'))->format("YmdHi"))),
+            ],
             '',
             new Repetitions([
                 Carbon::createFromFormat("YmdHi", $request->get('startDate', (new DateTime('now'))->format("YmdHi")))->format("N")
@@ -188,6 +192,12 @@ class DefaultController extends Controller
                     $this->get('tactician.commandbus')->handle(new RemoveOccurrenceCommand());
 
                     return $this->redirectToRoute("dende_calendar_default_index");
+                } elseif ($occurrence->event()->isWeekly() && $formData->method() === 'single') {
+                    $this->get('tactician.commandbus')->handle(new UpdateOccurrenceCommand(
+                       $formData->occurrence()->id()->id(),
+                       $formData->getOccurrenceDates()["startDate"],
+                       $formData->getOccurrenceDates()["endDate"]
+                    ));
                 } else {
                     $this->get('tactician.commandbus')->handle(new UpdateEventCommand(
                         $formData->occurrence()->id()->id(),

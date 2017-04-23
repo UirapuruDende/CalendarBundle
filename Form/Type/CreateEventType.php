@@ -69,7 +69,8 @@ class CreateEventType extends AbstractEventType
 
         $resolver->setDefaults([
             'data_class' => CreateFormData::class,
-           'validation_groups' => function(FormInterface $form){
+            'model_manager_name' =>  'default',
+            'validation_groups' => function(FormInterface $form){
                $validationGroups = ['Default'];
 
                /** @var CreateFormData $data */
@@ -86,6 +87,10 @@ class CreateEventType extends AbstractEventType
                return $validationGroups;
            }
        ]);
+
+        $resolver->setAllowedTypes([
+            'model_manager_name' => 'string',
+        ]);
     }
 
     /**

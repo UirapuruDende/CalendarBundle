@@ -31,10 +31,7 @@ abstract class AbstractEventType extends AbstractType
     {
         $builder
             ->add("eventDates", RangeDates::class, [
-                "label" => "dende_calendar.form.event.dates"
-            ])
-            ->add("occurrenceDates", RangeDates::class, [
-                "label" => "dende_calendar.form.event.dates"
+                "label" => false
             ])
             ->add("title", TextType::class, [
                 "label" => "dende_calendar.form.title.label"

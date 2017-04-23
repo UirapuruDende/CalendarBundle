@@ -5,7 +5,8 @@ $(document).ready(function() {
     var TYPE_WEEKLY = "weekly";
 
     var $eventTypeElement = $("select[id$='_type']");
-    var $repetitionCheckboxes = $("div[id$='_repetitions']").parents('div.form-group');
+    var $repetitionCheckboxesDiv = $("div[id$='_repetitions']").parents('div.form-group');
+    var $repetitionCheckboxesInputs = $("input:checkbox[id*=_repetitions]");
     var typeChangeEventName = "change";
 
     var $calendarElement = $("select[id$='_calendar']");
@@ -24,9 +25,9 @@ $(document).ready(function() {
         var value = $target.val();
 
         if(value === TYPE_SINGLE) {
-            $repetitionCheckboxes.hide();
+            $repetitionCheckboxesDiv.hide();
         } else if (value === TYPE_WEEKLY) {
-            $repetitionCheckboxes.show();
+            $repetitionCheckboxesDiv.show();
         }
     };
 
@@ -34,7 +35,7 @@ $(document).ready(function() {
         var $target = $(event.target);
         var value = $target.val();
 
-        if(value != '') {
+        if(value !== '') {
             $newCalendarInput.hide();
         } else
         {
@@ -46,14 +47,18 @@ $(document).ready(function() {
         var $target = $(event.target);
         var value = $target.val();
 
-        if(value === single) {
+        console.log(value);
+
+        if(value === 'single') {
             $eventDates.hide();
             $occurrenceDates.show();
+            $repetitionCheckboxesInputs.attr("readonly", "READONLY").attr("disabled", "DISABLED");
         } else {
             $eventDates.show();
             $occurrenceDates.hide();
+            $repetitionCheckboxesInputs.removeAttr("readonly").removeAttr("disabled");
         }
-    }
+    };
 
     // events
 
