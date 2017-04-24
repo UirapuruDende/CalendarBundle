@@ -1,12 +1,13 @@
 <?php
 namespace Dende\CalendarBundle\Form\Type\UpdateEventType;
 
+use Dende\CalendarBundle\DTO\RangeDatesFormData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RangeDates extends AbstractType
+class RangeDatesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -51,13 +52,14 @@ class RangeDates extends AbstractType
 
     /**
      * @param OptionsResolver $resolver
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'data_class' => null,
+            'data_class' => RangeDatesFormData::class,
         ]);
     }
 }

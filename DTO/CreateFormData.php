@@ -18,7 +18,7 @@ class CreateFormData
     /** @var string */
     protected $newCalendarName;
 
-    /** @var  DateTime[]|array */
+    /** @var  RangeDatesFormData */
     protected $eventDates;
 
     /** @var string */
@@ -27,7 +27,7 @@ class CreateFormData
     /** @var Repetitions */
     protected $repetitions;
 
-    public function __construct(Calendar $calendar = null, EventType $type, string $newCalendarName = '', array $eventDates = [], string $title, Repetitions $repetitions)
+    public function __construct(Calendar $calendar = null, EventType $type, string $newCalendarName = '', RangeDatesFormData $eventDates, string $title, Repetitions $repetitions)
     {
         $this->calendar = $calendar ?: new Calendar(CalendarId::create(), '');
         $this->type = $type;
@@ -67,9 +67,9 @@ class CreateFormData
         $this->newCalendarName = $newCalendarName;
     }
 
-    public function eventDates() : array
+    public function eventDates() : RangeDatesFormData
     {
-        return $this->eventDates();
+        return $this->eventDates;
     }
 
     public function title() : string
@@ -92,18 +92,7 @@ class CreateFormData
         $this->repetitions = $repetitions;
     }
 
-    /**
-     * @return array|DateTime[]
-     */
-    public function getEventDates() : array
-    {
-        return $this->eventDates;
-    }
-
-    /**
-     * @param array|DateTime[] $eventDates
-     */
-    public function setEventDates(array $eventDates = [])
+    public function setEventDates(RangeDatesFormData $eventDates)
     {
         $this->eventDates = $eventDates;
     }

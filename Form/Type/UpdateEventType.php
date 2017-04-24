@@ -6,7 +6,7 @@ use Dende\Calendar\Application\Handler\UpdateEventHandler;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\CalendarBundle\DTO\UpdateFormData;
-use Dende\CalendarBundle\Form\Type\UpdateEventType\RangeDates;
+use Dende\CalendarBundle\Form\Type\UpdateEventType\RangeDatesType;
 use Exception;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -43,7 +43,7 @@ class UpdateEventType extends AbstractEventType
             ])
         ;
 
-        $builder->add("occurrenceDates", RangeDates::class, [
+        $builder->add("occurrenceDates", RangeDatesType::class, [
             "label" => false
         ]);
 

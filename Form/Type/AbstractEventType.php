@@ -8,7 +8,7 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Dende\CalendarBundle\DTO\UpdateFormData;
-use Dende\CalendarBundle\Form\Type\UpdateEventType\RangeDates;
+use Dende\CalendarBundle\Form\Type\UpdateEventType\RangeDatesType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -30,7 +30,7 @@ abstract class AbstractEventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("eventDates", RangeDates::class, [
+            ->add("eventDates", RangeDatesType::class, [
                 "label" => false
             ])
             ->add("title", TextType::class, [

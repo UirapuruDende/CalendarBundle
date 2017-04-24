@@ -20,12 +20,12 @@ class UpdateFormData
     protected $title;
 
     /**
-     * @var DateTime[]|array
+     * @var RangeDatesFormData
      */
     protected $eventDates;
 
     /**
-     * @var DateTime[]|array
+     * @var RangeDatesFormData
      */
     protected $occurrenceDates;
 
@@ -52,8 +52,8 @@ class UpdateFormData
     {
         $this->occurrence = $occurrence;
         $this->title = $title;
-        $this->eventDates = ['startDate' => $eventStartDate, 'endDate' => $eventEndDate];
-        $this->occurrenceDates = ['startDate' => $occurrenceStartDate, 'endDate' => $occurrenceEndDate];
+        $this->eventDates = new RangeDatesFormData($eventStartDate, $eventEndDate);
+        $this->occurrenceDates = new RangeDatesFormData($occurrenceStartDate, $occurrenceEndDate);
         $this->repetitions = $repetitions;
         $this->method = $method;
     }
@@ -136,34 +136,22 @@ class UpdateFormData
         $this->method = $method;
     }
 
-    /**
-     * @return array|DateTime[]
-     */
-    public function getEventDates()
+    public function eventDates() : RangeDatesFormData
     {
         return $this->eventDates;
     }
 
-    /**
-     * @param array|DateTime[] $eventDates
-     */
-    public function setEventDates($eventDates)
+    public function setEventDates(RangeDatesFormData $eventDates)
     {
         $this->eventDates = $eventDates;
     }
 
-    /**
-     * @return array|DateTime[]
-     */
-    public function getOccurrenceDates()
+    public function occurrenceDates() : RangeDatesFormData
     {
         return $this->occurrenceDates;
     }
 
-    /**
-     * @param array|DateTime[] $occurrenceDates
-     */
-    public function setOccurrenceDates($occurrenceDates)
+    public function setOccurrenceDates(RangeDatesFormData $occurrenceDates)
     {
         $this->occurrenceDates = $occurrenceDates;
     }

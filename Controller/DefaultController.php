@@ -19,6 +19,7 @@ use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
 use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Dende\CalendarBundle\DTO\CreateFormData;
+use Dende\CalendarBundle\DTO\RangeDatesFormData;
 use Dende\CalendarBundle\DTO\UpdateFormData;
 use Dende\CalendarBundle\Form\Type\CreateEventType;
 use Dende\CalendarBundle\Form\Type\UpdateEventType;
@@ -86,10 +87,10 @@ class DefaultController extends Controller
             $this->get("dende_calendar.calendar_repository")->findOneBy([]),
             EventType::single(),
             '',
-            [
-                "startDate" => Carbon::createFromFormat("YmdHi", $request->get('startDate', (new DateTime('now'))->format("YmdHi"))),
-                "endDate" => Carbon::createFromFormat("YmdHi", $request->get('endDate', (new DateTime('+1 hour'))->format("YmdHi"))),
-            ],
+            new RangeDatesFormData(
+                Carbon::createFromFormat("YmdHi", $request->get('startDate', (new DateTime('now'))->format("YmdHi"))),
+                Carbon::createFromFormat("YmdHi", $request->get('endDate', (new DateTime('+1 hour'))->format("YmdHi")))
+            ),
             '',
             new Repetitions([
                 Carbon::createFromFormat("YmdHi", $request->get('startDate', (new DateTime('now'))->format("YmdHi")))->format("N")
@@ -118,8 +119,8 @@ class DefaultController extends Controller
                 $this->get("tactician.commandbus")->handle(new CreateEventCommand(
                     $formData->calendar()->id(),
                     $formData->type()->type(),
-                    $formData->startDate(),
-                    $formData->endDate(),
+                    $formData->eventDates()->startDate(),
+                    $formData->eventDates()->endDate(),
                     $formData->title(),
                     $formData->repetitions()->getArray()
                 ));
@@ -185,25 +186,24 @@ class DefaultController extends Controller
 
             if ($form->isValid()) {
                 if ($form->get("delete_event")->isClicked()) {
-                    $this->get('tactician.commandbus')->handle(new RemoveEventCommand());
-
+                    $this->get('tactician.commandbus')->handle(new RemoveEventCommand($event->id()->id()));
                     return $this->redirectToRoute("dende_calendar_default_index");
                 } elseif ($occurrence->event()->isWeekly() && $form->get("delete_occurrence")->isClicked()) {
-                    $this->get('tactician.commandbus')->handle(new RemoveOccurrenceCommand());
+                    $this->get('tactician.commandbus')->handle(new RemoveOccurrenceCommand($occurrenceId));
 
                     return $this->redirectToRoute("dende_calendar_default_index");
                 } elseif ($occurrence->event()->isWeekly() && $formData->method() === 'single') {
                     $this->get('tactician.commandbus')->handle(new UpdateOccurrenceCommand(
                        $formData->occurrence()->id()->id(),
-                       $formData->getOccurrenceDates()["startDate"],
-                       $formData->getOccurrenceDates()["endDate"]
+                       $formData->occurrenceDates()->startDate(),
+                       $formData->occurrenceDates()->endDate()
                     ));
                 } else {
                     $this->get('tactician.commandbus')->handle(new UpdateEventCommand(
                         $formData->occurrence()->id()->id(),
                         $formData->method(),
-                        $formData->getEventDates()["startDate"],
-                        $formData->getEventDates()["endDate"],
+                        $formData->eventDates()->startDate(),
+                        $formData->eventDates()->endDate(),
                         $formData->title(),
                         $formData->repetitions()->getArray()
                    ));

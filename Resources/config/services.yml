@@ -75,7 +75,7 @@ services:
       - {name: form.type, alias: update_event}
 
   dende_calendar.form_type.range_dates:
-    class: Dende\CalendarBundle\Form\Type\UpdateEventType\RangeDates
+    class: Dende\CalendarBundle\Form\Type\UpdateEventType\RangeDatesType
     tags:
       - {name: form.type, alias: range_dates}
 
@@ -101,6 +101,13 @@ services:
       - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
     tags:
       - {name: tactician.handler, command: 'Dende\Calendar\Application\Command\UpdateEventCommand' }
+
+  dende_calendar.handler.update_occurrence:
+    class: Dende\Calendar\Application\Handler\UpdateOccurrenceHandler
+    arguments:
+      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
+    tags:
+      - {name: tactician.handler, command: 'Dende\Calendar\Application\Command\UpdateOccurrenceCommand' }
 
   dende_calendar.handler.create_calendar:
     class: Dende\Calendar\Application\Handler\CreateCalendarHandler
