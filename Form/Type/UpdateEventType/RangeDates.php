@@ -2,6 +2,7 @@
 namespace Dende\CalendarBundle\Form\Type\UpdateEventType;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,7 +12,7 @@ class RangeDates extends AbstractType
     {
         $builder
             ->add(
-                "startDate", 'datetime', [
+                "startDate", DateTimeType::class, [
                 'widget'       => 'single_text',
                 'with_seconds' => false,
                 'format'       => 'Y-MM-dd HH:mm',
@@ -21,8 +22,7 @@ class RangeDates extends AbstractType
                 "label"        => "dende_calendar.form.start_date.label"
             ]
             )
-            ->add(
-                "endDate", 'datetime', [
+            ->add("endDate", DateTimeType::class, [
                 'widget'       => 'single_text',
                 'with_seconds' => false,
                 'format'       => 'Y-MM-dd HH:mm',
@@ -30,8 +30,7 @@ class RangeDates extends AbstractType
                     'class' => 'form_datetime'
                 ],
                 "label"        => "dende_calendar.form.end_date.label",
-            ]
-            );
+            ]);
     }
 
     /**
@@ -52,7 +51,6 @@ class RangeDates extends AbstractType
 
     /**
      * @param OptionsResolver $resolver
-     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */
     public function configureOptions(OptionsResolver $resolver)
     {

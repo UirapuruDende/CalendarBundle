@@ -27,7 +27,8 @@ class CreateEventType extends AbstractEventType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add("calendar", EntityType::class, [
+        $builder
+        ->add("calendar", EntityType::class, [
             "required" => false,
             "class" => Calendar::class,
             "choice_label" => "title",
@@ -55,9 +56,7 @@ class CreateEventType extends AbstractEventType
                 return new EventType($type);
             }
         ));
-
     }
-
 
     /**
      * @param OptionsResolver $resolver
