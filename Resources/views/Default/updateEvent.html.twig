@@ -4,10 +4,23 @@
     {{ form_start(form) }}
 
         {% if form.method is defined %}{{ form_row(form.method) }}{% endif %}
-        {{ form_row(form.eventDates) }}
-        {{ form_row(form.occurrenceDates) }}
-        {{ form_row(form.title) }}
-        {% if form.repetitions is defined %}{{ form_row(form.repetitions) }}{% endif %}
+
+        <fieldset>
+            <legend>Szczegóły wydarzenia</legend>
+
+            <div class="well">
+                {{ form_row(form.eventDates) }}
+                {{ form_row(form.occurrenceDates) }}
+                {{ form_row(form.title) }}
+                {% if form.repetitions is defined %}{{ form_row(form.repetitions) }}{% endif %}
+            </div>
+        </fieldset>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn">Cancel</button>
+        </div>
+
         {{ form_row(form.delete_event) }}
         {% if form.delete_occurrence is defined %}{{ form_row(form.delete_event) }}{% endif %}
 

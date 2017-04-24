@@ -18,6 +18,8 @@ $(document).ready(function() {
     var $occurrenceDates = $("#update_event_occurrenceDates").parents("div.form-group");
     var methodEventName = "change";
 
+    var $titleInput = $("input[id$='_title']");
+
     // handlers
 
     var eventTypeChangeHandler = function(event) {
@@ -43,11 +45,9 @@ $(document).ready(function() {
         }
     };
 
-    var switchDatesHandler = function(event) {
+    var switchMethodHandler = function(event) {
         var $target = $(event.target);
         var value = $target.val();
-
-        console.log(value);
 
         if(value === 'single') {
             $eventDates.hide();
@@ -57,6 +57,12 @@ $(document).ready(function() {
             $eventDates.show();
             $occurrenceDates.hide();
             $repetitionCheckboxesInputs.removeAttr("readonly").removeAttr("disabled");
+        }
+
+        if(value === 'allinclusive') {
+            $titleInput.removeAttr("readonly").removeAttr("disabled");
+        } else {
+            $titleInput.attr("readonly", "READONLY").attr("disabled", "DISABLED");
         }
     };
 
@@ -68,6 +74,6 @@ $(document).ready(function() {
     $calendarElement.off(calendarEventName).on(calendarEventName, noCalendarSelectedHandler);
     $calendarElement.trigger(calendarEventName);
 
-    $selectMethod.off(methodEventName).on(calendarEventName, switchDatesHandler);
+    $selectMethod.off(methodEventName).on(calendarEventName, switchMethodHandler);
     $selectMethod.trigger(methodEventName);
 });

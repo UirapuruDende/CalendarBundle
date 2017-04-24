@@ -27,6 +27,8 @@ class UpdateEventType extends AbstractEventType
     /**
      * @inheritDoc
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -76,9 +78,14 @@ class UpdateEventType extends AbstractEventType
 
                 $form->add("method", ChoiceType::class, [
                     "label" => "dende_calendar.form.method.label",
-                    'choices' => array_combine(UpdateEventHandler::$availableModes, array_map(function($mode) {
-                        return sprintf('dende_calendar.form.method.choice.%s', $mode);
-                    }, UpdateEventHandler::$availableModes)),
+//                    'choices' => array_combine(UpdateEventHandler::$availableModes, array_map(function($mode) {
+//                        return sprintf('dende_calendar.form.method.choice.%s', $mode);
+//                    }, UpdateEventHandler::$availableModes)),
+                    'choices' => [
+                        UpdateEventHandler::MODE_SINGLE => 'dende_calendar.form.method.choice.single',
+                        UpdateEventHandler::MODE_ALL_INCLUSIVE => 'dende_calendar.form.method.choice.allinclusive',
+                        UpdateEventHandler::MODE_NEXT_INCLUSIVE => 'dende_calendar.form.method.choice.nextinclusive',
+                    ],
                     "data" => UpdateEventHandler::MODE_NEXT_INCLUSIVE
                 ]);
             } else {
