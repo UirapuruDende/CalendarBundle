@@ -52,17 +52,17 @@ $(document).ready(function() {
         if(value === 'single') {
             $eventDates.hide();
             $occurrenceDates.show();
-            $repetitionCheckboxesInputs.attr("readonly", "READONLY").attr("disabled", "DISABLED");
+            $repetitionCheckboxesInputs.attr("readonly", "READONLY"); //.attr("disabled", "DISABLED");
         } else {
             $eventDates.show();
             $occurrenceDates.hide();
-            $repetitionCheckboxesInputs.removeAttr("readonly").removeAttr("disabled");
+            $repetitionCheckboxesInputs.removeAttr("readonly"); //.removeAttr("disabled");
         }
 
         if(value === 'allinclusive') {
-            $titleInput.removeAttr("readonly").removeAttr("disabled");
+            $titleInput.removeAttr("readonly"); //.removeAttr("disabled");
         } else {
-            $titleInput.attr("readonly", "READONLY").attr("disabled", "DISABLED");
+            $titleInput.attr("readonly", "READONLY"); //.attr("disabled", "DISABLED");
         }
     };
 

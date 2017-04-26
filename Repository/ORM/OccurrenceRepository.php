@@ -6,6 +6,7 @@ use Dende\Calendar\Application\Repository\OccurrenceRepositoryInterface;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
@@ -69,7 +70,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         return $query->getResult();
     }
 
-    public function insert(Occurrence $occurrence)
+    public function insert(OccurrenceInterface $occurrence)
     {
         $em = $this->getEntityManager();
         $em->persist($occurrence);
@@ -93,10 +94,10 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
     }
 
     /**
-     * @param Occurrence|Occurrence[] $occurrences
+     * @param OccurrenceInterface $occurrences
      * @throws \Exception
      */
-    public function update(Occurrence $occurrence)
+    public function update(OccurrenceInterface $occurrence)
     {
         $em = $this->getEntityManager();
 
@@ -110,15 +111,14 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
     }
 
     /**
-     * @param Occurrence|Occurrence[]|ArrayCollection $occurrences
+     * @param OccurrenceInterface $occurrence
      * @throws \Exception
      */
-    public function remove(Occurrence $occurrence)
+    public function remove(OccurrenceInterface $occurrence)
     {
         $em = $this->getEntityManager();
         $em->remove($occurrence);
         $em->flush($occurrence);
-
     }
 
     /**

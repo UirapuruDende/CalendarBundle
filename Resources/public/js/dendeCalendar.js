@@ -18,6 +18,14 @@ $(document).ready(function() {
         }
     };
 
+    var resizeHandler = function(event) {
+        console.log(event.occurrenceId);
+    };
+
+    var dragHandler = function(event) {
+        alert("OK");
+    };
+
     $('#calendar').fullCalendar({
         defaultView: 'agendaWeek',
         allDaySlot: false,
@@ -29,6 +37,9 @@ $(document).ready(function() {
         snapDuration: '00:15:00',
         selectable: true,
         select: newSelectionHandler,
+        // eventDrag: dragHandler,
+        eventDrag: dragHandler,
+        eventResize: resizeHandler,
         lang: dende_calendar_lang,
         eventClick: eventClickHandler,
         events: Routing.generate('dende_calendar_default_getevents'),

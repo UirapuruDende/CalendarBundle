@@ -5,6 +5,7 @@ use DateTime;
 use Dende\Calendar\Application\Repository\OccurrenceRepositoryInterface;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
@@ -88,7 +89,7 @@ final class OccurrencesProvider
      * @param Occurrence $occurrence
      * @return array
      */
-    public function convert(Occurrence $occurrence)
+    public function convert(OccurrenceInterface $occurrence)
     {
         $options = [
             "title" => $occurrence->event()->title(),
@@ -96,7 +97,8 @@ final class OccurrencesProvider
             "end" => $occurrence->endDate()->format("Y-m-d H:i:s"),
             "backgroundColor" => $this->colors[array_rand($this->colors)],
             "textColor" => 'black',
-            "editable" => true
+            "editable" => true,
+            'occurrenceId' => $occurrence->id()->id()
         ];
 
         if ($this->generateRoutes) {
