@@ -38,10 +38,7 @@ class UpdateEventType extends AbstractEventType
 
         $builder
             ->add("delete_event", SubmitType::class, [
-                "label" => "dende_calendar.form.delete_event.label",
-                "attr" => [
-                    "class" => "pull-right"
-                ]
+                "label" => "dende_calendar.form.delete_event.label"
             ])
         ;
 
@@ -70,10 +67,7 @@ class UpdateEventType extends AbstractEventType
             if ($event->isWeekly()) {
                 $form->add(
                     'delete_occurrence', 'submit', [
-                    "label" => 'dende_calendar.form.delete_occurrence.label',
-                    "attr" => [
-                        "class" => "pull-right"
-                    ]
+                    "label" => 'dende_calendar.form.delete_occurrence.label'
                 ]);
 
                 $form->add("method", ChoiceType::class, [

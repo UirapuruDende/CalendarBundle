@@ -17,16 +17,16 @@
         </fieldset>
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">{{ 'dende_calendar.form.submit_update.label'|trans }}</button>
             <button type="button" class="btn">Cancel</button>
-        </div>
 
-        {{ form_row(form.delete_event) }}
-        {% if form.delete_occurrence is defined %}{{ form_row(form.delete_event) }}{% endif %}
+            {{ form_widget(form.delete_event, {attr: {class: "pull-right btn-danger", style: "margin-left: 5px"}}) }}
+            {% if form.delete_occurrence is defined %}{{ form_widget(form.delete_occurrence, {attr: {class: "pull-right btn-danger"}}) }}{% endif %}
+        </div>
 
         {{ form_rest(form) }}
 
-        <button>{{ 'dende_calendar.form.submit_update.label'|trans }}</button>
+
     {{ form_end(form) }}
 {% endblock content %}
 
