@@ -3,7 +3,7 @@ namespace Dende\CalendarBundle\Form\Type;
 
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Command\EventCommandInterface;
-use Dende\Calendar\Application\Command\UpdateEventCommand;
+use Dende\Calendar\Application\Command\UpdateCommand;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;

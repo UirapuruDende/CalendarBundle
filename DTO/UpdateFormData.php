@@ -2,7 +2,7 @@
 namespace Dende\CalendarBundle\DTO;
 
 use DateTime;
-use Dende\Calendar\Application\Handler\UpdateEventHandler;
+use Dende\Calendar\Application\Handler\UpdateManager;
 use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,7 +68,7 @@ class UpdateFormData
             new DateTime($request->get('occurrenceDate.startDate')),
             new DateTime($request->get('occurrenceDate.endDate')),
             new Repetitions($request->get('repetitions', [])),
-            $request->get('method', UpdateEventHandler::MODE_SINGLE)
+            $request->get('method', UpdateManager::MODE_SINGLE)
         );
     }
 

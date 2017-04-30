@@ -58,4 +58,9 @@ class EventRepository extends EntityRepository implements EventRepositoryInterfa
 
         return $result;
     }
+
+    public function findOneById(string $id)
+    {
+        return $this->findOneBy(['eventId' => $id]);
+    }
 }
