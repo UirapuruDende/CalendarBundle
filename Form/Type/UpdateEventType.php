@@ -2,7 +2,7 @@
 namespace Dende\CalendarBundle\Form\Type;
 
 use Dende\Calendar\Application\Command\UpdateCommand;
-use Dende\Calendar\Application\Handler\UpdateManager;
+use Dende\Calendar\Application\Handler\OccurrenceUpdateManager;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\CalendarBundle\DTO\UpdateFormData;
@@ -76,11 +76,11 @@ class UpdateEventType extends AbstractEventType
 //                        return sprintf('dende_calendar.form.method.choice.%s', $mode);
 //                    }, UpdateEventHandler::$availableModes)),
                     'choices' => [
-                        UpdateManager::MODE_SINGLE         => 'dende_calendar.form.method.choice.single',
-                        UpdateManager::MODE_ALL_INCLUSIVE  => 'dende_calendar.form.method.choice.allinclusive',
-                        UpdateManager::MODE_NEXT_INCLUSIVE => 'dende_calendar.form.method.choice.nextinclusive',
+                        OccurrenceUpdateManager::MODE_SINGLE         => 'dende_calendar.form.method.choice.single',
+                        OccurrenceUpdateManager::MODE_ALL_INCLUSIVE  => 'dende_calendar.form.method.choice.allinclusive',
+                        OccurrenceUpdateManager::MODE_NEXT_INCLUSIVE => 'dende_calendar.form.method.choice.nextinclusive',
                     ],
-                    "data" => UpdateManager::MODE_NEXT_INCLUSIVE
+                    "data" => OccurrenceUpdateManager::MODE_NEXT_INCLUSIVE
                 ]);
             } else {
                 $form->remove('repetitions');

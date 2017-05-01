@@ -138,9 +138,9 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         // TODO: Implement findByDateAndCalendar() method.
     }
 
-    public function findOneById(string $id)
+    public function findOneById(string $id) : OccurrenceInterface
     {
-        // TODO: Implement findOneById() method.
+        return $this->findOneBy(['occurrenceId.id' => $id]);
     }
 
     public function findAll() : ArrayCollection
