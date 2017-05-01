@@ -6,7 +6,7 @@ use DateTime;
 use Dende\Calendar\Application\Command\CreateCalendarCommand;
 use Dende\Calendar\Application\Command\CreateEventCommand;
 use Dende\Calendar\Application\Command\RemoveEventCommand;
-use Dende\Calendar\Application\Command\UpdateCommand;
+use Dende\Calendar\Application\Command\UpdateOccurrenceCommand;
 use Dende\Calendar\Application\Command\UpdateOccurrenceCommand;
 use Dende\Calendar\Application\Handler\OccurrenceUpdateManager;
 use Dende\Calendar\Application\Handler\UpdateStrategy\Single;
@@ -199,7 +199,7 @@ class DefaultController extends Controller
                        $formData->occurrenceDates()->endDate()
                     ));
                 } else {
-                    $this->get('tactician.commandbus')->handle(new UpdateCommand(
+                    $this->get('tactician.commandbus')->handle(new UpdateOccurrenceCommand(
                         $formData->occurrence()->id()->id(),
                         $formData->method(),
                         $formData->eventDates()->startDate(),

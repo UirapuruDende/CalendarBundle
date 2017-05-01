@@ -1,7 +1,7 @@
 <?php
 namespace Dende\CalendarBundle\Form\Type;
 
-use Dende\Calendar\Application\Command\UpdateCommand;
+use Dende\Calendar\Application\Command\UpdateOccurrenceCommand;
 use Dende\Calendar\Application\Handler\OccurrenceUpdateManager;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
