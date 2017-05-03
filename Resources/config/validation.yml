@@ -8,6 +8,9 @@ Dende\CalendarBundle\DTO\UpdateFormData:
           min: 1
           minMessage: dende_calendar.validation.choose_at_least_one_day_for_weekly
           groups: ["weeklyEvent"]
+    occurrenceDates:
+      - Callback:
+          callback: isSameDay
 
 Dende\CalendarBundle\DTO\CreateFormData:
   properties:

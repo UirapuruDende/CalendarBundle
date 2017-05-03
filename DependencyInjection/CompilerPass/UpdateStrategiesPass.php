@@ -16,11 +16,11 @@ class UpdateStrategiesPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('dende_calendar.handler.update_event')) {
+        if (!$container->has('dende_calendar.manager.update_occurrence')) {
             return;
         }
 
-        $definition = $container->findDefinition('dende_calendar.handler.update_event');
+        $definition = $container->findDefinition('dende_calendar.manager.update_occurrence');
 
         $taggedServices = $container->findTaggedServiceIds('dende_calendar.update_strategy');
 

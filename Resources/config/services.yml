@@ -122,7 +122,7 @@ services:
 # update strategies
 
   dende_calendar.update_strategy.single:
-    class: Dende\Calendar\Application\Handler\UpdateStrategy\Single
+    class: Dende\Calendar\Application\Service\UpdateStrategy\Single
     tags:
       - {name: dende_calendar.update_strategy }
 

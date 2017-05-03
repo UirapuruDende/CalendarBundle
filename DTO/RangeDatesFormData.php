@@ -58,4 +58,9 @@ class RangeDatesFormData
     {
         $this->endDate = $endDate;
     }
+
+    public function isSameDay() : bool
+    {
+        return $this->startDate()->format("Ymd") === $this->endDate()->format("Ymd");
+    }
 }
