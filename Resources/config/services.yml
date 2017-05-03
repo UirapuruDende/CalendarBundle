@@ -1,9 +1,10 @@
 ---
 parameters:
-  dende_calendar.id_generator.class:            Dende\Calendar\Application\Generator\Doctrine\IdGenerator
-  dende_calendar.calendar_repository.class:     Dende\CalendarBundle\Repository\ORM\CalendarRepository
-  dende_calendar.event_repository.class:        Dende\CalendarBundle\Repository\ORM\EventRepository
-  dende_calendar.occurrences_repository.class:  Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
+  dende_calendar.id_generator.class:                Dende\Calendar\Application\Generator\Doctrine\IdGenerator
+  dende_calendar.calendar_repository.class:         Dende\CalendarBundle\Repository\ORM\CalendarRepository
+  dende_calendar.event_repository.class:            Dende\CalendarBundle\Repository\ORM\EventRepository
+  dende_calendar.occurrences_repository.class:      Dende\CalendarBundle\Repository\ORM\OccurrenceRepository
+  dende_calendar.update_occurrences_manager.class:  Dende\Calendar\Application\Service\OccurrenceUpdateManager
 
 services:
 
@@ -105,7 +106,7 @@ services:
   dende_calendar.handler.update_occurrence:
     class: Dende\Calendar\Application\Handler\UpdateOccurrenceHandler
     arguments:
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
+      - "@dende_calendar.manager.update_occurrence"
     tags:
       - {name: tactician.handler, command: 'Dende\Calendar\Application\Command\UpdateOccurrenceCommand' }
 
@@ -159,3 +160,11 @@ services:
     arguments: ['%dende_calendar.mapping%']
     tags:
       - { name: doctrine.event_listener, event: loadClassMetadata, em: '%dende_calendar.model_manager_name%' }
+
+# manager
+
+  dende_calendar.manager.update_occurrence:
+    class: "%dende_calendar.update_occurrences_manager.class%"
+    arguments:
+      - @=service(parameter('dende_calendar.event_repository_service_name'))
+      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))

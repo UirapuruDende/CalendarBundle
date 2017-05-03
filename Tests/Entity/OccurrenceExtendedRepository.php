@@ -5,5 +5,4 @@ use Dende\CalendarBundle\Repository\ORM\OccurrenceRepository;
 
 class OccurrenceExtendedRepository extends OccurrenceRepository
 {
-
 }

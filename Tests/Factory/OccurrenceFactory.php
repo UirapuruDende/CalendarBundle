@@ -2,11 +2,10 @@
 namespace Dende\CalendarBundle\Tests\Factory;
 
 use DateTime;
-use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
-use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Dende\Calendar\Application\Factory\OccurrenceFactory as BaseFactory;
+use Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId;
 use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
-
+use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 
 class OccurrenceFactory extends BaseFactory
 {

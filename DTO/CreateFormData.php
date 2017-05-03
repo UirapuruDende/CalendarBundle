@@ -1,7 +1,6 @@
 <?php
 namespace Dende\CalendarBundle\DTO;
 
-use DateTime;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\CalendarId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
@@ -18,7 +17,7 @@ class CreateFormData
     /** @var string */
     protected $newCalendarName;
 
-    /** @var  RangeDatesFormData */
+    /** @var RangeDatesFormData */
     protected $eventDates;
 
     /** @var string */
@@ -27,7 +26,7 @@ class CreateFormData
     /** @var Repetitions */
     protected $repetitions;
 
-    public function __construct(Calendar $calendar = null, EventType $type, string $newCalendarName = '', RangeDatesFormData $eventDates, string $title, Repetitions $repetitions)
+    public function __construct(Calendar $calendar = null, EventType $type, string $newCalendarName, RangeDatesFormData $eventDates, string $title, Repetitions $repetitions)
     {
         $this->calendar = $calendar ?: new Calendar(CalendarId::create(), '');
         $this->type = $type;

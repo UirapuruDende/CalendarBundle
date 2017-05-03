@@ -17,6 +17,7 @@ class RangeDatesFormData
 
     /**
      * RangeDates constructor.
+     *
      * @param DateTime $startDate
      * @param DateTime $endDate
      */

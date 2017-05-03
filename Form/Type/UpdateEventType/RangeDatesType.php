@@ -13,24 +13,24 @@ class RangeDatesType extends AbstractType
     {
         $builder
             ->add(
-                "startDate", DateTimeType::class, [
+                'startDate', DateTimeType::class, [
                 'widget'       => 'single_text',
                 'with_seconds' => false,
                 'format'       => 'Y-MM-dd HH:mm',
                 'attr'         => [
-                    'class' => 'form_datetime'
+                    'class' => 'form_datetime',
                 ],
-                "label"        => "dende_calendar.form.start_date.label"
+                'label' => 'dende_calendar.form.start_date.label',
             ]
             )
-            ->add("endDate", DateTimeType::class, [
+            ->add('endDate', DateTimeType::class, [
                 'widget'       => 'single_text',
                 'with_seconds' => false,
                 'format'       => 'Y-MM-dd HH:mm',
                 'attr'         => [
-                    'class' => 'form_datetime'
+                    'class' => 'form_datetime',
                 ],
-                "label"        => "dende_calendar.form.end_date.label",
+                'label' => 'dende_calendar.form.end_date.label',
             ]);
     }
 
@@ -52,6 +52,7 @@ class RangeDatesType extends AbstractType
 
     /**
      * @param OptionsResolver $resolver
+     *
      * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
      */
     public function configureOptions(OptionsResolver $resolver)

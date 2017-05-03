@@ -2,7 +2,7 @@
 namespace Dende\CalendarBundle\DTO;
 
 use DateTime;
-use Dende\Calendar\Application\Handler\OccurrenceUpdateManager;
+use Dende\Calendar\Application\Service\OccurrenceUpdateManager;
 use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,12 +41,13 @@ class UpdateFormData
 
     /**
      * UpdateFormData constructor.
+     *
      * @param OccurrenceInterface $occurrence
-     * @param string $title
-     * @param DateTime $startDate
-     * @param DateTime $endDate
-     * @param Repetitions $repetitions
-     * @param string $method
+     * @param string              $title
+     * @param DateTime            $startDate
+     * @param DateTime            $endDate
+     * @param Repetitions         $repetitions
+     * @param string              $method
      */
     public function __construct(OccurrenceInterface $occurrence, string $title, DateTime $eventStartDate, DateTime $eventEndDate, DateTime $occurrenceStartDate, DateTime $occurrenceEndDate, Repetitions $repetitions, string $method)
     {

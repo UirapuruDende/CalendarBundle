@@ -23,7 +23,7 @@ abstract class BaseFixture extends AbstractFixture implements OrderedFixtureInte
         $class_info = new \ReflectionClass($this);
         $dir = dirname($class_info->getFileName());
 
-        $value = Yaml::parse(file_get_contents($dir . "/../Yaml/" . $file));
+        $value = Yaml::parse(file_get_contents($dir . '/../Yaml/' . $file));
 
         foreach ($value as $key => $params) {
             $object = $this->insert($params);
@@ -41,9 +41,9 @@ abstract class BaseFixture extends AbstractFixture implements OrderedFixtureInte
 
     public function translateClassToFilename($object)
     {
-        $classnameArray = explode("\\", get_class($object));
-        $class          = array_pop($classnameArray);
-        $filename       = strtolower(substr($class, 0, strpos($class, 'Data'))).'.yml';
+        $classnameArray = explode('\\', get_class($object));
+        $class = array_pop($classnameArray);
+        $filename = strtolower(substr($class, 0, strpos($class, 'Data'))) . '.yml';
 
         return $filename;
     }

@@ -1,6 +1,7 @@
 <?php
 namespace Dende\CalendarBundle\Tests\DataFixtures\ORM;
 
-interface FixtureInterface {
+interface FixtureInterface
+{
     public function insert(array $params = []);
 }

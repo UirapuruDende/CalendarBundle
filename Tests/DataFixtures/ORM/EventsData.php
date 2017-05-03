@@ -13,8 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class EventsData
- * @package Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM
+ * Class EventsData.
  */
 final class EventsData extends BaseFixture implements ContainerAwareInterface
 {
@@ -36,6 +35,7 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
 
     /**
      * @param $params
+     *
      * @return Event
      */
     public function insert(array $params = [])
@@ -43,13 +43,13 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
         Event::setFactoryClass(OccurrenceFactory::class);
 
         $array = [
-            "eventId" => EventId::create(Uuid::fromString($params["eventId"])),
-            "calendar" => $this->getReference($params["calendar"]),
-            "startDate" => new DateTime($params["startDate"]),
-            "endDate" => new DateTime($params["endDate"]),
-            "repetitions" => new Repetitions($params["repetitions"]),
-            "title" => $params["title"],
-            "type" => new EventType($params["type"]),
+            'eventId'     => EventId::create(Uuid::fromString($params['eventId'])),
+            'calendar'    => $this->getReference($params['calendar']),
+            'startDate'   => new DateTime($params['startDate']),
+            'endDate'     => new DateTime($params['endDate']),
+            'repetitions' => new Repetitions($params['repetitions']),
+            'title'       => $params['title'],
+            'type'        => new EventType($params['type']),
         ];
 
         /** @var Event $event */

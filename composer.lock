@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bee554664f68fa895f539e18178f7ccb",
-    "content-hash": "ab55a946a118240d48caa72132c9232e",
+    "hash": "77e53fec383b44ce1587452fc0bc0561",
+    "content-hash": "e21af218aa6951f83c1d800d5508de03",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3455,16 +3455,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.0.1",
+            "version": "1.13.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "863ad254da1e44904c8bf8fbcc9f5624834fc71a"
+                "reference": "0ea4f7ed06ca55da1d8fc45da26ff87f261c4088"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/863ad254da1e44904c8bf8fbcc9f5624834fc71a",
-                "reference": "863ad254da1e44904c8bf8fbcc9f5624834fc71a",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/0ea4f7ed06ca55da1d8fc45da26ff87f261c4088",
+                "reference": "0ea4f7ed06ca55da1d8fc45da26ff87f261c4088",
                 "shasum": ""
             },
             "require": {
@@ -3473,9 +3473,8 @@
                 "sebastian/diff": "^1.1",
                 "symfony/console": "^2.3 || ^3.0",
                 "symfony/event-dispatcher": "^2.1 || ^3.0",
-                "symfony/filesystem": "^2.4 || ^3.0",
-                "symfony/finder": "^2.2 || ^3.0",
-                "symfony/polyfill-php54": "^1.0",
+                "symfony/filesystem": "^2.1 || ^3.0",
+                "symfony/finder": "^2.1 || ^3.0",
                 "symfony/process": "^2.3 || ^3.0",
                 "symfony/stopwatch": "^2.5 || ^3.0"
             },
@@ -3483,7 +3482,6 @@
                 "hhvm": "<3.9"
             },
             "require-dev": {
-                "gecko-packages/gecko-php-unit": "^2.0",
                 "phpunit/phpunit": "^4.5|^5",
                 "satooshi/php-coveralls": "^1.0"
             },
@@ -3493,7 +3491,7 @@
             "type": "application",
             "autoload": {
                 "psr-4": {
-                    "PhpCsFixer\\": "src/"
+                    "Symfony\\CS\\": "Symfony/CS/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3511,7 +3509,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2017-02-08 22:45:53"
+            "time": "2016-12-01 00:05:05"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -5152,7 +5150,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "dende/common-bundle": 20,
-        "friendsofphp/php-cs-fixer": 20,
         "twig/extensions": 20
     },
     "prefer-stable": false,

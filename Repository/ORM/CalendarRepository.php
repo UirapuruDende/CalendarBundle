@@ -5,11 +5,9 @@ use Dende\Calendar\Application\Repository\CalendarRepositoryInterface;
 use Dende\Calendar\Domain\Calendar;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
-use Exception;
 
 /**
- * Class CalendarRepository
- * @package Dende\CalendarBundle\Repository\ORM
+ * Class CalendarRepository.
  */
 class CalendarRepository extends EntityRepository implements CalendarRepositoryInterface
 {
@@ -47,6 +45,6 @@ class CalendarRepository extends EntityRepository implements CalendarRepositoryI
      */
     public function findOneByCalendarId(string $calendarId): Calendar
     {
-        return $this->findOneBy(["calendarId.id" => $calendarId]);
+        return $this->findOneBy(['calendarId.id' => $calendarId]);
     }
 }

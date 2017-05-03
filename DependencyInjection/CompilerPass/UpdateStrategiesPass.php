@@ -7,8 +7,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class UpdateStrategiesPass
- * @package Dende\CalendarBundle\DependencyInjection\CompilerPass
+ * Class UpdateStrategiesPass.
  */
 class UpdateStrategiesPass implements CompilerPassInterface
 {
