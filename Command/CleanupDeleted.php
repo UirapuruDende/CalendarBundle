@@ -21,14 +21,12 @@ class CleanupDeleted extends Command implements ContainerAwareInterface
     {
         $this
             ->setName('calendar:cleanup')
-            ->setDescription('Removes deleted items')
-        ;
+            ->setDescription('Removes deleted items');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $qb = $this->container->get("dende_calendar.occurrences_repository")->createQueryBuilder("o");
-        $qb->where("o.deletedAt is not NULL");
+        $qb = $this->container->get('dende_calendar.occurrences_repository')->createQueryBuilder('o');
+        $qb->where('o.deletedAt is not NULL');
     }
-
 }

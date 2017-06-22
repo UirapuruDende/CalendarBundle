@@ -1,32 +1,29 @@
-Dende\Calendar\Application\Command\UpdateEventCommand:
+Dende\CalendarBundle\DTO\UpdateFormData:
   properties:
-    newCalendarName:
-      - NotBlank:
-          message: dende_calendar.validation.choose_calendar_or_provide_new_name
-          groups: ["createNewCalendar"]
     title:
       - NotBlank:
           message: dende_calendar.validation.event_title_cant_be_empty
-    repetitionDays:
+    repetitions:
       - Count:
           min: 1
           minMessage: dende_calendar.validation.choose_at_least_one_day_for_weekly
           groups: ["weeklyEvent"]
-    method:
-      - IsNull:
-          message: dende_calendar.validation.cant_convert_type
-          groups: ["eventTypeChange"]
+    occurrenceDates:
+      - Callback:
+          callback: isSameDay
 
-Dende\Calendar\Application\Command\CreateEventCommand:
+Dende\CalendarBundle\DTO\CreateFormData:
   properties:
     newCalendarName:
       - NotBlank:
           message: dende_calendar.validation.choose_calendar_or_provide_new_name
           groups: ["createNewCalendar"]
+
     title:
       - NotBlank:
           message: dende_calendar.validation.event_title_cant_be_empty
-    repetitionDays:
+
+    repetitions:
       - Count:
           min: 1
           minMessage: dende_calendar.validation.choose_at_least_one_day_for_weekly

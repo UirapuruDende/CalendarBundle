@@ -1,8 +1,8 @@
 <?php
 namespace Dende\CalendarBundle\Listener;
 
-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 
 class DoctrineEventListener
 {
@@ -27,15 +27,15 @@ class DoctrineEventListener
 
         foreach ($this->mapping as $entityName => $map) {
             if ($class->getName() == $map['entity']) {
-                $reader = new AnnotationReader;
-                $discriminatorMap = array();
+                $reader = new AnnotationReader();
+                $discriminatorMap = [];
 
                 if (null !== $discriminatorMapAnnotation = $reader->getClassAnnotation($class, 'Doctrine\ORM\Mapping\DiscriminatorMap')) {
                     $discriminatorMap = $discriminatorMapAnnotation->value;
                 }
 
                 $discriminatorMap = array_merge($discriminatorMap, $map['map']);
-                $discriminatorMap = array_merge($discriminatorMap, array($entityName => $map['entity']));
+                $discriminatorMap = array_merge($discriminatorMap, [$entityName => $map['entity']]);
 
                 $metadata->setDiscriminatorMap($discriminatorMap);
             }

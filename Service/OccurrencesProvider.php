@@ -5,11 +5,11 @@ use DateTime;
 use Dende\Calendar\Application\Repository\OccurrenceRepositoryInterface;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
- * Class OccurrenceProvider
- * @package Dende\CalendarBundle\Service
+ * Class OccurrenceProvider.
  */
 final class OccurrencesProvider
 {
@@ -19,7 +19,7 @@ final class OccurrencesProvider
         'green',
         'orange',
         'yellow',
-        'light-blue'
+        'light-blue',
     ];
 
     /**
@@ -44,8 +44,9 @@ final class OccurrencesProvider
 
     /**
      * OccurrenceProvider constructor.
+     *
      * @param OccurrenceRepositoryInterface $occurrenceRepository
-     * @param Router $router
+     * @param Router                        $router
      * @param $routeName
      */
     public function __construct(OccurrenceRepositoryInterface $occurrenceRepository, Router $router, $routeName)
@@ -86,21 +87,23 @@ final class OccurrencesProvider
 
     /**
      * @param Occurrence $occurrence
+     *
      * @return array
      */
-    public function convert(Occurrence $occurrence)
+    public function convert(OccurrenceInterface $occurrence)
     {
         $options = [
-            "title" => $occurrence->event()->title(),
-            "start" => $occurrence->startDate()->format("Y-m-d H:i:s"),
-            "end" => $occurrence->endDate()->format("Y-m-d H:i:s"),
-            "backgroundColor" => $this->colors[array_rand($this->colors)],
-            "textColor" => 'black',
-            "editable" => true
+            'title'           => $occurrence->event()->title(),
+            'start'           => $occurrence->startDate()->format('Y-m-d H:i:s'),
+            'end'             => $occurrence->endDate()->format('Y-m-d H:i:s'),
+            'backgroundColor' => $this->colors[array_rand($this->colors)],
+            'textColor'       => 'black',
+            'editable'        => true,
+            'occurrenceId'    => $occurrence->id()->id(),
         ];
 
         if ($this->generateRoutes) {
-            $options["url"] = $this->router->generate($this->eventEditRoute, ['occurrenceId' => $occurrence->id()]);
+            $options['url'] = $this->router->generate($this->eventEditRoute, ['occurrenceId' => $occurrence->id()]);
         }
 
         return $options;

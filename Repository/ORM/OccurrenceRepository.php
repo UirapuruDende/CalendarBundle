@@ -6,12 +6,12 @@ use Dende\Calendar\Application\Repository\OccurrenceRepositoryInterface;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
+use Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class OccurrenceRepository
- * @package Dende\CommonBundle\Repository\ORM
+ * Class OccurrenceRepository.
  */
 class OccurrenceRepository extends EntityRepository implements OccurrenceRepositoryInterface
 {
@@ -19,6 +19,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
      * @param Calendar $calendar
      * @param DateTime $start
      * @param DateTime $end
+     *
      * @return array|ArrayCollection|Occurrence[]
      */
     public function findByCalendar(Calendar $calendar, DateTime $start, DateTime $end)
@@ -29,16 +30,16 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         $queryBuilder
             ->innerJoin('o.event', 'e')
             ->where($expr->andX(
-                $expr->gt("o.startDate", ':start'),
-                $expr->lt("o.endDate", ':end'),
+                $expr->gt('o.startDate', ':start'),
+                $expr->lt('o.endDate', ':end'),
                 $expr->eq('e.calendar', ':calendar')
             ))
             ->andWhere('o.deletedAt is NULL')
-            ->orderBy("o.startDate", "ASC")
+            ->orderBy('o.startDate', 'ASC')
             ->setParameters([
                 'calendar' => $calendar,
-                'start' => $start,
-                'end' => $end,
+                'start'    => $start,
+                'end'      => $end,
             ]);
 
         $query = $queryBuilder->getQuery();
@@ -49,6 +50,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
     /**
      * @param DateTime $start
      * @param DateTime $end
+     *
      * @return array|ArrayCollection|Occurrence[]
      */
     public function findByPeriod(DateTime $start, DateTime $end)
@@ -61,7 +63,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
             ->orderBy('o.occurrenceData.startDate', 'ASC')
             ->setParameters([
                 'start' => $start,
-                'end' => $end,
+                'end'   => $end,
             ]);
 
         $query = $qb->getQuery();
@@ -69,12 +71,11 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         return $query->getResult();
     }
 
-    public function insert(Occurrence $occurrence)
+    public function insert(OccurrenceInterface $occurrence)
     {
         $em = $this->getEntityManager();
         $em->persist($occurrence);
         $em->flush($occurrence);
-
     }
 
     public function insertCollection($occurrenceCollection)
@@ -93,10 +94,11 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
     }
 
     /**
-     * @param Occurrence|Occurrence[] $occurrences
+     * @param OccurrenceInterface $occurrences
+     *
      * @throws \Exception
      */
-    public function update(Occurrence $occurrence)
+    public function update(OccurrenceInterface $occurrence)
     {
         $em = $this->getEntityManager();
 
@@ -110,15 +112,15 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
     }
 
     /**
-     * @param Occurrence|Occurrence[]|ArrayCollection $occurrences
+     * @param OccurrenceInterface $occurrence
+     *
      * @throws \Exception
      */
-    public function remove(Occurrence $occurrence)
+    public function remove(OccurrenceInterface $occurrence)
     {
         $em = $this->getEntityManager();
         $em->remove($occurrence);
         $em->flush($occurrence);
-
     }
 
     /**
@@ -127,7 +129,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
     public function removeAllForEvent(Event $event)
     {
         $em = $this->getEntityManager();
-        foreach($event->occurrences() as $occurrence) {
+        foreach ($event->occurrences() as $occurrence) {
             $em->remove($occurrence);
         }
         $em->flush();
@@ -138,9 +140,9 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
         // TODO: Implement findByDateAndCalendar() method.
     }
 
-    public function findOneById(string $id)
+    public function findOneById(string $id) : OccurrenceInterface
     {
-        // TODO: Implement findOneById() method.
+        return $this->findOneBy(['occurrenceId.id' => $id]);
     }
 
     public function findAll() : ArrayCollection

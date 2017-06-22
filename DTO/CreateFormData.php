@@ -1,7 +1,6 @@
 <?php
 namespace Dende\CalendarBundle\DTO;
 
-use DateTime;
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\CalendarId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
@@ -18,11 +17,8 @@ class CreateFormData
     /** @var string */
     protected $newCalendarName;
 
-    /** @var DateTime */
-    protected $startDate;
-
-    /** @var DateTime */
-    protected $endDate;
+    /** @var RangeDatesFormData */
+    protected $eventDates;
 
     /** @var string */
     protected $title;
@@ -30,13 +26,12 @@ class CreateFormData
     /** @var Repetitions */
     protected $repetitions;
 
-    public function __construct(Calendar $calendar = null, EventType $type, string $newCalendarName = '', DateTime $startDate, DateTime $endDate, string $title, Repetitions $repetitions)
+    public function __construct(Calendar $calendar = null, EventType $type, string $newCalendarName, RangeDatesFormData $eventDates, string $title, Repetitions $repetitions)
     {
         $this->calendar = $calendar ?: new Calendar(CalendarId::create(), '');
         $this->type = $type;
         $this->newCalendarName = $newCalendarName;
-        $this->startDate = $startDate;
-        $this->endDate = $endDate;
+        $this->eventDates = $eventDates;
         $this->title = $title;
         $this->repetitions = $repetitions;
     }
@@ -71,24 +66,9 @@ class CreateFormData
         $this->newCalendarName = $newCalendarName;
     }
 
-    public function startDate() : DateTime
+    public function eventDates() : RangeDatesFormData
     {
-        return $this->startDate;
-    }
-
-    public function setStartDate(DateTime $startDate)
-    {
-        $this->startDate = $startDate;
-    }
-
-    public function endDate() : DateTime
-    {
-        return $this->endDate;
-    }
-
-    public function setEndDate(DateTime $endDate)
-    {
-        $this->endDate = $endDate;
+        return $this->eventDates;
     }
 
     public function title() : string
@@ -109,5 +89,10 @@ class CreateFormData
     public function setRepetitions(Repetitions $repetitions)
     {
         $this->repetitions = $repetitions;
+    }
+
+    public function setEventDates(RangeDatesFormData $eventDates)
+    {
+        $this->eventDates = $eventDates;
     }
 }

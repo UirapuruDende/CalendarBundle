@@ -3,27 +3,24 @@ namespace Dende\CalendarBundle\Tests\Functional\Controller;
 
 use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\Event;
-use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Occurrence;
 use Dende\CalendarBundle\Tests\BaseFunctionalTest;
-use Doctrine\ORM\EntityManager;
 use Mockery as m;
 
 /**
- * Class DefaultControllerTest
- * @package Dende\CalendarBundle\Tests\Functional\Controller
+ * Class DefaultControllerTest.
  */
 class DefaultControllerTest extends BaseFunctionalTest
 {
-    const FORMAT_DATETIME = "Y-m-d H:i";
+    const FORMAT_DATETIME = 'Y-m-d H:i';
 
     /**
      * @test
      */
     public function test_main_page()
     {
-        $headers = array('CONTENT_TYPE' => 'text/html');
-        $content = array('parameter' => 'value');
+        $headers = ['CONTENT_TYPE' => 'text/html'];
+        $content = ['parameter' => 'value'];
 
         $crawler = $this->client->request('GET', '/calendar/', [], [], $headers, $content);
         $this->assertResponseCode();
@@ -32,7 +29,8 @@ class DefaultControllerTest extends BaseFunctionalTest
     /**
      * @test
      */
-    public function create_event_form_is_rendered_properly() {
+    public function create_event_form_is_rendered_properly()
+    {
         $startDate = '200710011200';
         $endDate = '200710011230';
 
@@ -41,8 +39,8 @@ class DefaultControllerTest extends BaseFunctionalTest
 
         $form = $crawler->selectButton('dende_calendar.form.submit.label')->form();
 
-        $this->assertEquals("2007-10-01 12:00", $form['create_event[startDate]']->getValue());
-        $this->assertEquals("2008-10-01 12:30", $form['create_event[endDate]']->getValue());
+        $this->assertEquals('2007-10-01 12:00', $form['create_event[startDate]']->getValue());
+        $this->assertEquals('2007-10-01 12:30', $form['create_event[endDate]']->getValue());
         $this->assertEquals(30, $form['create_event[duration]']->getValue());
     }
 
@@ -62,7 +60,7 @@ class DefaultControllerTest extends BaseFunctionalTest
         $eventId = $event->id();
         $occurrenceId = $occurrence->id();
 
-        $crawler = $this->client->request('GET', '/calendar/occurrence/'.$occurrenceId);
+        $crawler = $this->client->request('GET', '/calendar/occurrence/' . $occurrenceId);
         $this->assertResponseCode();
 
         $formElement = $crawler->filter('form[name="update_event"]')->first();
@@ -71,7 +69,7 @@ class DefaultControllerTest extends BaseFunctionalTest
         $form = $crawler->selectButton('update_event[delete_event]')->form();
         $this->client->submit($form);
         $this->assertResponseCode();
-        $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
+        $this->assertEquals('/calendar/', $this->client->getRequest()->getRequestUri());
 
         $this->assertInstanceOf(Calendar::class, $this->em->getRepository(Calendar::class)->findOneById($calendarId));
         $this->assertNull($this->em->getRepository(Event::class)->findOneById($eventId));
@@ -94,7 +92,7 @@ class DefaultControllerTest extends BaseFunctionalTest
         $eventId = $event->id();
         $occurrenceId = $occurrence->id();
 
-        $crawler = $this->client->request('GET', '/calendar/occurrence/'.$occurrenceId);
+        $crawler = $this->client->request('GET', '/calendar/occurrence/' . $occurrenceId);
         $this->assertResponseCode();
 
         $formElement = $crawler->filter('form[name="update_event"]')->first();
@@ -103,7 +101,7 @@ class DefaultControllerTest extends BaseFunctionalTest
         $form = $crawler->selectButton('update_event[delete_event]')->form();
         $this->client->submit($form);
         $this->assertResponseCode();
-        $this->assertEquals("/calendar/", $this->client->getRequest()->getRequestUri());
+        $this->assertEquals('/calendar/', $this->client->getRequest()->getRequestUri());
 
         $this->assertNotNull(Calendar::class, $this->em->getRepository(Calendar::class)->findOneById($calendarId));
 

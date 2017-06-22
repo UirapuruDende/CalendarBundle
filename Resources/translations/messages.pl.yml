@@ -47,5 +47,5 @@ dende_calendar:
       label:                        "Metoda aktualizacji wydarzenia"
       choice:
         overwrite:                  "Nadpisz całość"
-        nextinclusive:              "Zaktualizuj tylko następne wystąpienia"
+        nextinclusive:              "Zaktualizuj to i następne wystąpienia"
         single:                     "Zaktualizuj tylko to wystąpienie"

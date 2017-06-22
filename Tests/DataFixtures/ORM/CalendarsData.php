@@ -7,8 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class CalendarsData
- * @package Dende\CalendarBundle\Tests\DataFixtures\Standard\ORM
+ * Class CalendarsData.
  */
 final class CalendarsData extends BaseFixture implements ContainerAwareInterface
 {
@@ -17,7 +16,7 @@ final class CalendarsData extends BaseFixture implements ContainerAwareInterface
      */
     protected $container;
 
-    /** @var string  */
+    /** @var string */
     protected $dir = __DIR__;
 
     /**
@@ -38,13 +37,14 @@ final class CalendarsData extends BaseFixture implements ContainerAwareInterface
 
     /**
      * @param $params
+     *
      * @return Calendar
      */
     public function insert($params)
     {
-        return $this->container->get("dende_calendar.factory.calendar")->createFromArray([
-            "id" => $params["id"],
-            "title" => $params["name"]
+        return $this->container->get('dende_calendar.factory.calendar')->createFromArray([
+            'id'    => $params['id'],
+            'title' => $params['name'],
         ]);
     }
 }

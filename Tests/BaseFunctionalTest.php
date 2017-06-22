@@ -4,35 +4,32 @@ namespace Dende\CalendarBundle\Tests;
 use AppKernel;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\CalendarsData;
 use Dende\CalendarBundle\Tests\DataFixtures\ORM\EventsData;
-use Dende\CalendarBundle\Tests\DataFixtures\ORM\OccurrencesData;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Doctrine\ORM\EntityManager;
-use Liip\FunctionalTestBundle\Test\WebTestCase as BaseTest;
 use Exception;
-use Mockery;
+use Liip\FunctionalTestBundle\Test\WebTestCase as BaseTest;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
- * Class BaseFunctionalTest
- * @package Dende\CalendarBundle\Tests
+ * Class BaseFunctionalTest.
  */
 abstract class BaseFunctionalTest extends BaseTest
 {
-    const FORMAT_DATETIME = "Y-m-d H:i";
+    const FORMAT_DATETIME = 'Y-m-d H:i';
 
     /**
      * @var Client
      */
     protected $client;
 
-    /** @var  Container */
+    /** @var Container */
     protected $container;
 
-    /** @var  EntityManager */
+    /** @var EntityManager */
     protected $em;
 
-    /** @var  ReferenceRepository */
+    /** @var ReferenceRepository */
     protected $fixtures;
 
     public function setUp()
@@ -43,26 +40,20 @@ abstract class BaseFunctionalTest extends BaseTest
         $fixtures = $this->loadFixtures([
             CalendarsData::class,
             EventsData::class,
-            OccurrencesData::class
         ], 'default');
 
         $this->fixtures = $fixtures->getReferenceRepository();
 
-        $this->em = $this->container->get("doctrine.orm.entity_manager");
-    }
-
-    public function tearDown()
-    {
-        Mockery::close();
+        $this->em = $this->container->get('doctrine.orm.entity_manager');
     }
 
     /**
-     * @param  array $options
-     * @param  array $server
+     * @param array $options
+     * @param array $server
      *
      * @return \Symfony\Bundle\FrameworkBundle\Client
      */
-    public function getClient(array $options = array(), array $server = array())
+    public function getClient(array $options = [], array $server = [])
     {
         static::$kernel = new AppKernel(
             isset($options['environment']) ? $options['environment'] : 'test',
@@ -72,6 +63,7 @@ abstract class BaseFunctionalTest extends BaseTest
         $client = static::$kernel->getContainer()->get('test.client');
         $client->setServerParameters($server);
         $client->followRedirects(true);
+
         return $client;
     }
 
@@ -82,8 +74,8 @@ abstract class BaseFunctionalTest extends BaseTest
     {
         $msg = '';
         $code = $this->client->getResponse()->getStatusCode();
-        if($code === 500 && ($paragraph = $this->client->getCrawler()->filter("div.text-exception h1")) && $paragraph->count() > 0) {
-            $msg.= $this->client->getCrawler()->filter("div#traces-text")->text();
+        if ($code === 500 && ($paragraph = $this->client->getCrawler()->filter('div.text-exception h1')) && $paragraph->count() > 0) {
+            $msg .= $this->client->getCrawler()->filter('div#traces-text')->text();
         }
         $this->assertEquals($expectedCode, $code, $msg);
     }
@@ -93,36 +85,37 @@ abstract class BaseFunctionalTest extends BaseTest
         $this->assertCountFormErrors(0, $form);
     }
     /**
-     * @param int $expectedCount
+     * @param int    $expectedCount
      * @param string $form
+     *
      * @throws Exception
      */
-    public function assertCountFormErrors($expectedCount = 1, $form)
+    public function assertCountFormErrors($expectedCount, $form)
     {
-        if($profiler = $this->client->getProfile()) {
+        if ($profiler = $this->client->getProfile()) {
             $data = $profiler->getCollector('form')->getData();
 
-            if(!array_key_exists($form, $data['forms'])) {
+            if (!array_key_exists($form, $data['forms'])) {
                 return;
             }
 
             $formErrors = [];
             $formErrorsCount = 0;
 
-            if(array_key_exists('errors', $data['forms'][$form])) {
+            if (array_key_exists('errors', $data['forms'][$form])) {
                 $formErrors = array_column($data['forms'][$form]['errors'], 'message');
                 $formErrorsCount = count($data['forms'][$form]['errors']);
             }
 
-            $childrenErrorsCount = array_filter(array_map(function(array $child) {
+            $childrenErrorsCount = array_filter(array_map(function (array $child) {
                 return array_key_exists('errors', $child) ? count($child['errors']) : 0;
             }, $data['forms'][$form]['children']));
 
-            $childrenErrorsMessages = array_filter(array_map(function(array $child) {
+            $childrenErrorsMessages = array_filter(array_map(function (array $child) {
                 return array_key_exists('errors', $child) ? array_column($child['errors'], 'message') : null;
             }, $data['forms'][$form]['children']));
 
-            $errorsMap = array_map(function($fieldErrorMessages, $key){
+            $errorsMap = array_map(function ($fieldErrorMessages, $key) {
                 return sprintf('%s: "%s"', $key, implode('", "', $fieldErrorMessages));
             }, $childrenErrorsMessages, array_keys($childrenErrorsMessages));
 
@@ -147,15 +140,15 @@ abstract class BaseFunctionalTest extends BaseTest
     /**
      * @param array $messages
      */
-    public function assertValidationMessage(array $messages = [], $form)
+    public function assertValidationMessage(array $messages, $form)
     {
-        if($profiler = $this->client->getProfile()) {
+        if ($profiler = $this->client->getProfile()) {
             $data = $profiler->getCollector('form')->getData();
-            foreach($messages as $fieldMessagePair) {
+            foreach ($messages as $fieldMessagePair) {
                 list($field, $message, $iShouldSeeValidationMessage) = $fieldMessagePair;
                 $errors = $data['forms'][$form]['children'][$field]['errors'];
                 $errorMessages = array_column($errors, 'message');
-                if($iShouldSeeValidationMessage) {
+                if ($iShouldSeeValidationMessage) {
                     $assertError = sprintf("Validation error '%s' was not found for field '%s'. Only errors found: '%s'", $message, $field, implode(', ', $errorMessages));
                     $this->assertTrue(in_array($message, $errorMessages, true), $assertError);
                 } else {

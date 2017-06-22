@@ -1,12 +1,14 @@
 event-001:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000001
   calendar:     calendar-001
   title:        Test event number 01
   repetitions:  [1, 2, 3]
   type:         weekly
-  startDate:    "first day of this month 12:00:00"
-  endDate:      "last day of this month 13:30:00"
+  startDate:    "2015-09-01 12:00:00"
+  endDate:      "2015-09-30 13:30:00"
 
 event-002:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000002
   calendar:     calendar-001
   title:        Test event number 02
   repetitions:  [1, 2, 3]
@@ -14,7 +16,8 @@ event-002:
   startDate:    "2015-09-01 12:00:00"
   endDate:      "2015-09-30 13:30:00"
 
-event-003: # events for testing, please leave this or tests will fail - temporary
+event-003:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000003
   calendar:     calendar-003
   title:        "some-single-test-event"
   repetitions:  []
@@ -23,6 +26,7 @@ event-003: # events for testing, please leave this or tests will fail - temporar
   endDate:      "2015-09-01 13:30:00"
 
 event-005:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000004
   calendar:     calendar-004
   title:        "some-weekly-test-event"
   repetitions:  [1,3,5]
@@ -31,9 +35,19 @@ event-005:
   endDate:      "2015-09-15 13:30:00"
 
 event-006:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000005
   calendar:     calendar-004
   title:        "some-weekly-test-event"
   repetitions:  [2,4]
   type:         weekly
   startDate:    "2015-09-15 12:00:00"
   endDate:      "2015-09-30 13:30:00"
+
+event-007:
+  eventId:      ffffffff-ffff-ffff-ffff-000000000006
+  calendar:     calendar-001
+  title:        "some-weekly-test-event"
+  repetitions:  [1, 3, 5]
+  type:         weekly
+  startDate:    "first day of this month 12:00:00"
+  endDate:      "last day of this month 13:30:00"

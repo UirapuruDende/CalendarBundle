@@ -95,9 +95,9 @@ return Symfony\CS\Config\Config::create()
     ])
     ->setUsingCache(true)
     ->finder(
-        Symfony\CS\Finder\DefaultFinder::create()->in(__DIR__."/")->exclude([
-            __DIR__."/vendor",
-            __DIR__."/Tests/app/cache",
-            __DIR__."/Tests/app/logs",
-        ])
+        Symfony\CS\Finder\DefaultFinder::create()
+            ->in(__DIR__."/")
+            ->exclude("/vendor")
+            ->exclude("Tests/app/cache")
+            ->exclude("Tests/app/logs")
     );

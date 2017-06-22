@@ -6,7 +6,6 @@ use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\CalendarBundle\Tests\BaseFunctionalTest;
 use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Doctrine\Common\Collections\ArrayCollection;
-use Mockery as m;
 use Traversable;
 
 /**
@@ -15,7 +14,7 @@ use Traversable;
 class UpdateWeeklyToSingleTest extends BaseFunctionalTest
 {
     /**
-     * test
+     * test.
      */
     public function testUpdate()
     {
@@ -31,13 +30,13 @@ class UpdateWeeklyToSingleTest extends BaseFunctionalTest
         $md5Title = md5(microtime());
 
         $form = $button->form([
-            "update_event[calendar]" => $occurrence->event()->calendar()->id(),
-            "update_event[type]" => EventType::TYPE_SINGLE,
-            "update_event[startDate]" => "2017-09-01 16:00",
-            "update_event[endDate]" => "2017-09-01 16:45",
-            "update_event[method]" => "overwrite",
-            "update_event[duration]" => 45,
-            "update_event[title]" => $md5Title,
+            'update_event[calendar]'  => $occurrence->event()->calendar()->id(),
+            'update_event[type]'      => EventType::TYPE_SINGLE,
+            'update_event[startDate]' => '2017-09-01 16:00',
+            'update_event[endDate]'   => '2017-09-01 16:45',
+            'update_event[method]'    => 'overwrite',
+            'update_event[duration]'  => 45,
+            'update_event[title]'     => $md5Title,
         ]);
 
         $this->client->submit($form);
@@ -51,15 +50,15 @@ class UpdateWeeklyToSingleTest extends BaseFunctionalTest
         $occurrences = $this->em->getRepository(OccurrenceExtended::class)->findByEvent($event);
         $this->assertCount(1, $occurrences);
         $this->assertCount(1, $event->occurrences());
-        $this->assertCount(1, $event->occurrences()->filter(function(OccurrenceExtended $occurrence){
+        $this->assertCount(1, $event->occurrences()->filter(function (OccurrenceExtended $occurrence) {
             return !$occurrence->isDeleted();
         }));
 
         $occurrence = array_pop($occurrences);
 
-        $this->assertEquals("2017-09-01 16:00", $event->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2017-09-01 16:45", $event->endDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2017-09-01 16:00", $occurrence->startDate()->format(self::FORMAT_DATETIME));
-        $this->assertEquals("2017-09-01 16:45", $occurrence->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals('2017-09-01 16:00', $event->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals('2017-09-01 16:45', $event->endDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals('2017-09-01 16:00', $occurrence->startDate()->format(self::FORMAT_DATETIME));
+        $this->assertEquals('2017-09-01 16:45', $occurrence->endDate()->format(self::FORMAT_DATETIME));
     }
 }

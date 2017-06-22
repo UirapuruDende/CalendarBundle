@@ -1,13 +1,22 @@
 <?php
 namespace Dende\CalendarBundle;
 
+use Dende\Calendar\Domain\Calendar\Event;
 use Dende\CalendarBundle\DependencyInjection\CompilerPass\UpdateStrategiesPass;
+use Dende\CalendarBundle\Tests\Factory\OccurrenceFactory;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class DendeCalendarBundle extends Bundle
 {
+    public function boot()
+    {
+        parent::boot();
+
+        Event::setFactoryClass(OccurrenceFactory::class);
+    }
+
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

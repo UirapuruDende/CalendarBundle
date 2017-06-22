@@ -1,6 +1,6 @@
 parameters:
   resolved_occurrence_class: 'Dende\CalendarBundle\Tests\Entity\OccurrenceExtended'
-  dende_calendar.occurrences_repository.class:  Dende\CalendarBundle\Tests\Entity\OccurrenceExtendedRepository
+  dende_calendar.occurrences_repository.class:  'Dende\CalendarBundle\Tests\Entity\OccurrenceExtendedRepository'
 
 framework:
     ide: "phpstorm://%%f:%%l"
@@ -76,11 +76,13 @@ bazinga_hateoas:
       dir:              %kernel.cache_dir%/hateoas
 
 monolog:
+  use_microseconds: false
   handlers:
     main:
       type: stream
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: DEBUG
+
     doctrine:
       type: stream
       path: "%kernel.logs_dir%/doctrine.log"
@@ -144,8 +146,6 @@ services:
 
   dende_calendar.factory.occurrence:
     class: Dende\CalendarBundle\Tests\Factory\OccurrenceFactory
-    arguments:
-      - @dende_calendar.id_generator
 
 stof_doctrine_extensions:
     default_locale: en_US
