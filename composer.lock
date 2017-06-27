@@ -106,16 +106,16 @@
         },
         {
             "name": "dende/calendar",
-            "version": "2.1.18",
+            "version": "2.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UirapuruDende/Calendar.git",
-                "reference": "c1cf0534e8905f9f62e343ef75e489e115b31cc7"
+                "reference": "d93e8a4dd62f4df3887ab1e1c6bf78c952b51bb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/c1cf0534e8905f9f62e343ef75e489e115b31cc7",
-                "reference": "c1cf0534e8905f9f62e343ef75e489e115b31cc7",
+                "url": "https://api.github.com/repos/UirapuruDende/Calendar/zipball/d93e8a4dd62f4df3887ab1e1c6bf78c952b51bb4",
+                "reference": "d93e8a4dd62f4df3887ab1e1c6bf78c952b51bb4",
                 "shasum": ""
             },
             "require": {
@@ -128,7 +128,6 @@
             "require-dev": {
                 "behat/behat": "^3.0",
                 "friendsofphp/php-cs-fixer": "^1.12",
-                "humbug/humbug": "~1.0@dev",
                 "phpmd/phpmd": "^2.6",
                 "phpunit/phpunit": "^5"
             },
@@ -152,7 +151,7 @@
                 }
             ],
             "description": "PHP Calendar component",
-            "time": "2017-05-03T21:40:55+00:00"
+            "time": "2017-06-27T00:25:50+00:00"
         },
         {
             "name": "dende/common-bundle",
@@ -3508,7 +3507,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2016-12-01T00:05:05+00:00"
+            "time": "2016-12-01 00:05:05"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -3777,7 +3776,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-04-10T07:58:43+00:00"
+            "time": "2017-04-10 07:58:43"
         },
         {
             "name": "myclabs/deep-copy",
@@ -5040,7 +5039,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2017-05-18T08:23:53+00:00"
+            "time": "2017-05-18 08:23:53"
         },
         {
             "name": "twig/extensions",
