@@ -25,7 +25,7 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
 
   manyToOne: # occurrence is the owning side!
     event:
-      targetEntity: Dende\Calendar\Domain\Calendar\Event
+      targetEntity: Dende\Calendar\Domain\Calendar\EventInterface
       inversedBy: occurrences
       cascade: [all]
       joinColumns:
