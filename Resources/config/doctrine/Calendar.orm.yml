@@ -6,6 +6,7 @@ Dende\Calendar\Domain\Calendar:
     type: string
   discriminatorMap:
     bundle: Dende\Calendar\Domain\Calendar
+    gyman:  Gyman\Domain\Calendar
 
   table: calendars
   repositoryClass: Dende\CalendarBundle\Repository\ORM\CalendarRepository

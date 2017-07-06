@@ -27,6 +27,7 @@ abstract class BaseFixture extends AbstractFixture implements OrderedFixtureInte
 
         foreach ($value as $key => $params) {
             $object = $this->insert($params);
+
             $this->addReference($key, $object);
             $this->manager->persist($object);
         }
