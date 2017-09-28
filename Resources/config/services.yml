@@ -27,8 +27,8 @@ services:
 
   dende_calendar.event_repository:
     class: %dende_calendar.event_repository.class%
-    factory: [@dende_calendar.entity_manager, "getRepository"]
-    arguments: ["Calendar:Calendar\Event"]
+    factory: ['@dende_calendar.entity_manager', "getRepository"]
+    arguments: ['Calendar:Calendar\Event']
 
   dende_calendar.occurrences_repository:
     class: %dende_calendar.occurrences_repository.class%
@@ -41,8 +41,8 @@ services:
   dende_calendar.occurrences_provider:
     class: Dende\CalendarBundle\Service\OccurrencesProvider
     arguments:
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
-      - @router.default
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
+      - '@router.default'
       - 'dende_calendar_default_updateevent'
 
   dende_calendar.id_generator:
@@ -85,21 +85,21 @@ services:
   dende_calendar.handler.create_event:
     class: Dende\Calendar\Application\Handler\CreateEventHandler
     arguments:
-      - @dende_calendar.calendar_repository
-      - @=service(parameter('dende_calendar.event_repository_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
-      - @=service(parameter('dende_calendar.event_factory_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
+      - '@dende_calendar.calendar_repository'
+      - "@=service(parameter('dende_calendar.event_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.event_factory_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_factory_service_name'))"
     tags:
       - {name: tactician.handler, command: 'Dende\Calendar\Application\Command\CreateEventCommand' }
 
   dende_calendar.handler.update_event:
     class: Dende\Calendar\Application\Handler\UpdateEventHandler
     arguments:
-      - @=service(parameter('dende_calendar.event_repository_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
-      - @=service(parameter('dende_calendar.event_factory_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_factory_service_name'))
+      - "@=service(parameter('dende_calendar.event_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.event_factory_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_factory_service_name'))"
     tags:
       - {name: tactician.handler, command: 'Dende\Calendar\Application\Command\UpdateEventCommand' }
 
@@ -113,9 +113,9 @@ services:
   dende_calendar.handler.create_calendar:
     class: Dende\Calendar\Application\Handler\CreateCalendarHandler
     arguments:
-      - @dende_calendar.factory.calendar
-      - @dende_calendar.calendar_repository
-      - @event_dispatcher
+      - '@dende_calendar.factory.calendar'
+      - '@dende_calendar.calendar_repository'
+      - '@event_dispatcher'
     tags:
       - {name: tactician.handler, command: 'Dende\Calendar\Application\Command\CreateCalendarCommand' }
 
@@ -141,17 +141,17 @@ services:
   dende_calendar.factory.calendar:
     class: Dende\Calendar\Application\Factory\CalendarFactory
     arguments:
-      - @dende_calendar.id_generator
+      - '@dende_calendar.id_generator'
 
   dende_calendar.factory.event:
     class: Dende\Calendar\Application\Factory\EventFactory
     arguments:
-      - @dende_calendar.id_generator
+      - '@dende_calendar.id_generator'
 
   dende_calendar.factory.occurrence:
     class: Dende\Calendar\Application\Factory\OccurrenceFactory
     arguments:
-      - @dende_calendar.id_generator
+      - '@dende_calendar.id_generator'
 
 # listeners
 
@@ -166,5 +166,5 @@ services:
   dende_calendar.manager.update_occurrence:
     class: "%dende_calendar.update_occurrences_manager.class%"
     arguments:
-      - @=service(parameter('dende_calendar.event_repository_service_name'))
-      - @=service(parameter('dende_calendar.occurrence_repository_service_name'))
+      - "@=service(parameter('dende_calendar.event_repository_service_name'))"
+      - "@=service(parameter('dende_calendar.occurrence_repository_service_name'))"
