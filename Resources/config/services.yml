@@ -11,9 +11,8 @@ services:
 #model managers
 
   dende_calendar.entity_manager:
-    class: %doctrine.orm.entity_manager.class%
-    factory_service: doctrine
-    factory_method: getManager
+    class:      %doctrine.orm.entity_manager.class%
+    factory:    ['@doctrine', 'getManager']
     arguments:
      - '%dende_calendar.model_manager_name%'
 
@@ -21,8 +20,7 @@ services:
 
   dende_calendar.calendar_repository:
     class: %dende_calendar.calendar_repository.class%
-    factory_service: dende_calendar.entity_manager
-    factory_method: "getRepository"
+    factory: ['@dende_calendar.entity_manager', 'getRepository']
     arguments: ["Calendar:Calendar"]
 
   dende_calendar.event_repository:
@@ -32,8 +30,7 @@ services:
 
   dende_calendar.occurrences_repository:
     class: %dende_calendar.occurrences_repository.class%
-    factory_service: dende_calendar.entity_manager
-    factory_method: "getRepository"
+    factory: ['@dende_calendar.entity_manager', 'getRepository']ry"
     arguments: ["%resolved_occurrence_class%"]
 
 # custom services
