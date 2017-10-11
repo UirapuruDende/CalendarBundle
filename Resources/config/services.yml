@@ -30,7 +30,7 @@ services:
 
   dende_calendar.occurrences_repository:
     class: %dende_calendar.occurrences_repository.class%
-    factory: ['@dende_calendar.entity_manager', 'getRepository']ry"
+    factory: ['@dende_calendar.entity_manager', 'getRepository']
     arguments: ["%resolved_occurrence_class%"]
 
 # custom services
