@@ -5,17 +5,16 @@ Dende\Calendar\Domain\Calendar\Event\Occurrence:
 
   id:
     id:
-      type: integer
-      generator: { strategy: auto }
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
 
   embedded:
     occurrenceData:
       class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceData
       columnPrefix: false
-
-    occurrenceId:
-      class: Dende\Calendar\Domain\Calendar\Event\Occurrence\OccurrenceId
-      columnPrefix: occurrence_
 
   indexes:
     index_dende_occurrences_dates:

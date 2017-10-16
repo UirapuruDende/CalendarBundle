@@ -12,7 +12,8 @@
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "sensio/framework-extra-bundle": "~3.0",
         "braincrafted/bootstrap-bundle": "1.4.2",
-        "league/tactician-bundle": "^1"
+        "league/tactician-bundle": "^1",
+        "ramsey/uuid-doctrine": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^6",

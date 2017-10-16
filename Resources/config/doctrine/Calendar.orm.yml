@@ -18,13 +18,11 @@ Dende\Calendar\Domain\Calendar:
 
   id:
     id:
-      type: integer
-      generator: { strategy: auto }
-
-  embedded:
-    calendarId:
-      class: Dende\Calendar\Domain\Calendar\CalendarId
-      columnPrefix: calendar_
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
 
   fields:
     title:

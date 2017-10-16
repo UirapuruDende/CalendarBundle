@@ -99,7 +99,7 @@ final class OccurrencesProvider
             'backgroundColor' => $this->colors[array_rand($this->colors)],
             'textColor'       => 'black',
             'editable'        => true,
-            'occurrenceId'    => $occurrence->id()->id(),
+            'occurrenceId'    => $occurrence->id(),
         ];
 
         if ($this->generateRoutes) {

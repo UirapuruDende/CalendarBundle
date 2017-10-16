@@ -142,7 +142,7 @@ class OccurrenceRepository extends EntityRepository implements OccurrenceReposit
 
     public function findOneById(string $id) : OccurrenceInterface
     {
-        return $this->findOneBy(['occurrenceId.id' => $id]);
+        return $this->findOneBy(['id' => $id]);
     }
 
     public function findAll() : ArrayCollection

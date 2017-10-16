@@ -16,8 +16,11 @@ Dende\Calendar\Domain\Calendar\Event:
 
   id:
     id:
-      type: integer
-      generator: { strategy: auto }
+      type: uuid
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
 
   indexes:
     index_dende_events_dates:
@@ -29,10 +32,6 @@ Dende\Calendar\Domain\Calendar\Event:
     type:
       class: Dende\Calendar\Domain\Calendar\Event\EventType
       columnPrefix: false
-
-    eventId:
-      class: Dende\Calendar\Domain\Calendar\Event\EventId
-      columnPrefix: event_
 
     eventData:
       class: Dende\Calendar\Domain\Calendar\Event\EventData
