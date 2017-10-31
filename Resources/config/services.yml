@@ -20,7 +20,11 @@ services:
 
   dende_calendar.calendar_repository:
     class: %dende_calendar.calendar_repository.class%
+<<<<<<< Updated upstream
     factory: ['@dende_calendar.entity_manager', 'getRepository']
+=======
+    factory: ["@dende_calendar.entity_manager", "getRepository"]
+>>>>>>> Stashed changes
     arguments: ["Calendar:Calendar"]
 
   dende_calendar.event_repository:
@@ -30,7 +34,11 @@ services:
 
   dende_calendar.occurrences_repository:
     class: %dende_calendar.occurrences_repository.class%
+<<<<<<< Updated upstream
     factory: ['@dende_calendar.entity_manager', 'getRepository']
+=======
+    factory: ["@dende_calendar.entity_manager", "getRepository"]
+>>>>>>> Stashed changes
     arguments: ["%resolved_occurrence_class%"]
 
 # custom services
