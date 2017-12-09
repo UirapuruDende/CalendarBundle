@@ -7,9 +7,6 @@ parameters:
   dende_calendar.update_occurrences_manager.class:  Dende\Calendar\Application\Service\OccurrenceUpdateManager
 
 services:
-
-#model managers
-
   dende_calendar.entity_manager:
     class:      %doctrine.orm.entity_manager.class%
     factory:    ['@doctrine', 'getManager']
