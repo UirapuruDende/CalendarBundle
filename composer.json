@@ -1,7 +1,7 @@
 {
     "name": "dende/calendar-bundle",
     "require": {
-        "symfony/symfony": "^3.3",
+        "symfony/symfony": "^3",
         "doctrine/doctrine-bundle": "^1.7",
         "doctrine/orm": "^2.5",
         "doctrine/data-fixtures": "*",
