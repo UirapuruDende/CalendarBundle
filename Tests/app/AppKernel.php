@@ -23,13 +23,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Liip\FunctionalTestBundle\LiipFunctionalTestBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
+//            new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new League\Tactician\Bundle\TacticianBundle(),
         ];
     }

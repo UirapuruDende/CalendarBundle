@@ -107,7 +107,6 @@ services:
   dende_calendar.handler.create_calendar:
     class: Dende\Calendar\Application\Handler\CreateCalendarHandler
     arguments:
-      - '@dende_calendar.factory.calendar'
       - '@dende_calendar.calendar_repository'
       - '@event_dispatcher'
     tags:
@@ -129,23 +128,6 @@ services:
 #    class: Dende\Calendar\Application\Handler\UpdateStrategy\NextInclusive
 #    tags:
 #      - {name: dende_calendar.update_strategy }
-
-# factories
-
-  dende_calendar.factory.calendar:
-    class: Dende\Calendar\Application\Factory\CalendarFactory
-    arguments:
-      - '@dende_calendar.id_generator'
-
-  dende_calendar.factory.event:
-    class: Dende\Calendar\Application\Factory\EventFactory
-    arguments:
-      - '@dende_calendar.id_generator'
-
-  dende_calendar.factory.occurrence:
-    class: Dende\Calendar\Application\Factory\OccurrenceFactory
-    arguments:
-      - '@dende_calendar.id_generator'
 
 # listeners
 

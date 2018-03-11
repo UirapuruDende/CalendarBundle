@@ -39,9 +39,8 @@ class DefaultControllerTest extends BaseFunctionalTest
 
         $form = $crawler->selectButton('dende_calendar.form.submit.label')->form();
 
-        $this->assertEquals('2007-10-01 12:00', $form['create_event[startDate]']->getValue());
-        $this->assertEquals('2007-10-01 12:30', $form['create_event[endDate]']->getValue());
-        $this->assertEquals(30, $form['create_event[duration]']->getValue());
+        $this->assertEquals('2007-10-01 12:00', $form['create_event[eventDates][startDate]']->getValue());
+        $this->assertEquals('2007-10-01 12:30', $form['create_event[eventDates][endDate]']->getValue());
     }
 
     /**

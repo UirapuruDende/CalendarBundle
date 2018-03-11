@@ -20,6 +20,7 @@ use Dende\CalendarBundle\Form\Type\CreateEventType;
 use Dende\CalendarBundle\Form\Type\UpdateEventType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -105,7 +106,7 @@ class DefaultController extends Controller
                 $formData = $form->getData();
 
                 if ($formData->calendar() === null && $formData->newCalendarName() !== null) {
-                    $calendarId = CalendarId::create();
+                    $calendarId = Uuid::uuid4();
                     $this->get('tactician.commandbus')->handle(new CreateCalendarCommand($calendarId, $formData->newCalendarName()));
                     $calendar = $this->get('dende_calendar.calendar_repository')->findOneByCalendarId($calendarId);
                     $formData->setCalendar($calendar);

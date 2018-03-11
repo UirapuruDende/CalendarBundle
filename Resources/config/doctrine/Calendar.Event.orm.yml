@@ -9,11 +9,6 @@ Dende\Calendar\Domain\Calendar\Event:
   table: events
   repositoryClass: Dende\CalendarBundle\Repository\ORM\EventRepository
 
-  gedmo:
-    soft_deleteable:
-      field_name: deletedAt
-      time_aware: false
-
   id:
     id:
       type: uuid

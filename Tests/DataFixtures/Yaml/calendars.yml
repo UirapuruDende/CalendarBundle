@@ -1,12 +1,12 @@
 calendar-001:
-  id: calendar-001
+  id: 00000000-0000-0000-0000-000000000001
   name: MMA
 calendar-002:
-  id: ~
+  id: 00000000-0000-0000-0000-000000000002
   name: Capoeira
 calendar-003:
-  id: ~
+  id: 00000000-0000-0000-0000-000000000003
   name: Brazilian Jiu Jitsu
 calendar-004:
-  id: ~
+  id: 00000000-0000-0000-0000-000000000004
   name: Muay Thai

@@ -3,6 +3,7 @@ namespace Dende\CalendarBundle\Tests\DataFixtures\ORM;
 
 use Dende\Calendar\Domain\Calendar;
 use Dende\CalendarBundle\Tests\DataFixtures\BaseFixture;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -42,9 +43,6 @@ final class CalendarsData extends BaseFixture implements ContainerAwareInterface
      */
     public function insert($params)
     {
-        return $this->container->get('dende_calendar.factory.calendar')->createFromArray([
-            'id'    => $params['id'],
-            'title' => $params['name'],
-        ]);
+        return new Calendar(Uuid::fromString($params['id']), $params['name']);
     }
 }

@@ -5,6 +5,7 @@ use Dende\Calendar\Domain\Calendar;
 use Dende\Calendar\Domain\Calendar\CalendarId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
+use Ramsey\Uuid\Uuid;
 
 class CreateFormData
 {
@@ -28,7 +29,7 @@ class CreateFormData
 
     public function __construct(Calendar $calendar = null, EventType $type, string $newCalendarName, RangeDatesFormData $eventDates, string $title, Repetitions $repetitions)
     {
-        $this->calendar = $calendar ?: new Calendar(CalendarId::create(), '');
+        $this->calendar = $calendar ?: new Calendar(Uuid::uuid4(), '');
         $this->type = $type;
         $this->newCalendarName = $newCalendarName;
         $this->eventDates = $eventDates;

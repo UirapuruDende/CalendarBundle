@@ -36,8 +36,8 @@ class CreateEventType extends AbstractEventType
         ])
         ->add('type', ChoiceType::class, [
             'choices' => array_combine(
-                EventType::$availableTypes,
-                array_map($this->updateNames('type'), EventType::$availableTypes)
+                array_map($this->updateNames('type'), EventType::$availableTypes),
+                EventType::$availableTypes
             ),
             'label' => 'dende_calendar.form.type.label',
         ]);
@@ -81,10 +81,14 @@ class CreateEventType extends AbstractEventType
             },
        ]);
 
-        $resolver->setAllowedTypes([
-            'model_manager_name' => 'string',
-        ]);
+        $resolver->setAllowedTypes('model_manager_name', 'string');
     }
+
+    public function getBlockPrefix()
+    {
+        return $this->getName();
+    }
+
 
     /**
      * {@inheritdoc}

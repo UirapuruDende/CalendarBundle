@@ -16,5 +16,9 @@ doctrine:
 liip_functional_test:
     cache_sqlite_db: true
 
+framework:
+  translator:
+    enabled: false
+
 parameters:
   translator.class: Dende\CalendarBundle\Tests\Translator\NoTranslator

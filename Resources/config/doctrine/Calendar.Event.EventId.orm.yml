@@ -1,7 +1,0 @@
----
-Dende\Calendar\Domain\Calendar\Event\EventId:
-  type:   embeddable
-
-  fields:
-    id:
-      type: string

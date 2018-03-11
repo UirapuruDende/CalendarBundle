@@ -1,12 +1,13 @@
 parameters:
   resolved_occurrence_class: 'Dende\CalendarBundle\Tests\Entity\OccurrenceExtended'
+  resolved_event_class: 'Dende\Calendar\Domain\Calendar\Event'
   dende_calendar.occurrences_repository.class:  'Dende\CalendarBundle\Tests\Entity\OccurrenceExtendedRepository'
 
 framework:
     ide: "phpstorm://%%f:%%l"
     secret: "Three can keep a secret, if two of them are dead."
-    translator:
-      fallback: pl
+#    translator:
+#      fallback: pl
     test: ~
     form:
       enabled: true
@@ -34,20 +35,8 @@ web_profiler:
 twig:
     debug:            true
     strict_variables: true
-    form:
-        resources: ['bootstrap_3_layout.html.twig']
-        # resources: ['bootstrap_3_horizontal_layout.html.twig']
-
-fos_rest:
-  param_fetcher_listener: true
-  body_listener:
-    decoders:
-      json: fos_rest.decoder.jsontoform
-  format_listener: true
-  view:
-    view_response_listener: force
-    serialize_null: true
-    failed_validation: 422
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
 
 sensio_framework_extra:
     router:      { annotations: true }
@@ -69,12 +58,6 @@ jms_serializer:
         namespace_prefix: "Dende\\Calendar\\Domain"
         path: "%kernel.root_dir%/../../Resources/config/serializer/"
 
-bazinga_hateoas:
-  metadata:
-    cache:                file
-    file_cache:
-      dir:              %kernel.cache_dir%/hateoas
-
 monolog:
   use_microseconds: false
   handlers:
@@ -94,7 +77,8 @@ liip_functional_test: ~
 doctrine:
     dbal:
       types:
-        weekdays: 'Dende\CalendarBundle\DbalType\Weekdays'
+        weekdays: Dende\CalendarBundle\DbalType\Weekdays
+        uuid:     Ramsey\Uuid\Doctrine\UuidType
       default_connection: default
       connections:
         default:
@@ -106,19 +90,16 @@ doctrine:
           charset:  UTF8
           server_version: "5.6"
     orm:
-        auto_generate_proxy_classes: %kernel.debug%
+        auto_generate_proxy_classes: "%kernel.debug%"
         default_entity_manager:   default
         resolve_target_entities:
           Dende\Calendar\Domain\Calendar\Event\OccurrenceInterface: '%resolved_occurrence_class%'
+          Dende\Calendar\Domain\Calendar\EventInterface: '%resolved_event_class%'
 
         entity_managers:
           default:
             auto_mapping: false
             connection: default
-            filters:
-              soft_deleteable:
-                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
-                enabled: true
             mappings:
               DendeCalendarBundle:
                 mapping:    true
@@ -137,18 +118,3 @@ doctrine:
 dende_calendar:
   occurrence_class: '%resolved_occurrence_class%'
 
-services:
-  gedmo.listener.softdeleteable:
-    class: Gedmo\SoftDeleteable\SoftDeleteableListener
-    arguments: [@annotation_reader]
-    tags:
-      - { name: doctrine.event_subscriber, connection: default }
-
-  dende_calendar.factory.occurrence:
-    class: Dende\CalendarBundle\Tests\Factory\OccurrenceFactory
-
-stof_doctrine_extensions:
-    default_locale: en_US
-    orm:
-        default:
-          softdeleteable: true

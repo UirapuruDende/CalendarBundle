@@ -1,17 +1,17 @@
 {
     "name": "dende/calendar-bundle",
     "require": {
-        "symfony/symfony": "^3",
+        "php": ">=7.1",
+        "symfony/symfony": "^3.4",
         "doctrine/doctrine-bundle": "^1.7",
         "doctrine/orm": "^2.5",
         "doctrine/data-fixtures": "*",
         "doctrine/doctrine-fixtures-bundle": "*",
-        "dende/calendar" : "^2",
-        "symfony/http-kernel" : "^2|^3",
+        "dende/calendar" : ">=2.1.30",
+        "symfony/http-kernel" : "^3",
         "jms/serializer-bundle": "^1.0",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
-        "sensio/framework-extra-bundle": ">3",
-        "braincrafted/bootstrap-bundle": "1.4.2",
+        "sensio/framework-extra-bundle": "~3",
         "league/tactician-bundle": "^1",
         "ramsey/uuid-doctrine": "*"
     },
@@ -19,7 +19,6 @@
         "phpunit/phpunit": "^6",
         "liip/functional-test-bundle": "^1",
         "friendsofphp/php-cs-fixer": "2.0.*@dev",
-        "twig/extensions": "1.5",
         "symfony/monolog-bundle": "^3"
     },
     "authors": [

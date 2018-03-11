@@ -28,8 +28,8 @@ class CreateEventTest extends BaseFunctionalTest
         $form->setValues([
             'create_event[calendar]'  => $calendar->id(),
             'create_event[type]'      => EventType::TYPE_SINGLE,
-            'create_event[startDate]' => '2015-11-02 12:00',
-            'create_event[endDate]'   => '2015-11-02 13:30',
+            'create_event[eventDates][startDate]' => '2015-11-02 12:00',
+            'create_event[eventDates][endDate]'   => '2015-11-02 13:30',
             'create_event[title]'     => 'test-event-title',
         ]);
 
@@ -77,8 +77,8 @@ class CreateEventTest extends BaseFunctionalTest
         $form->setValues([
             'create_event[calendar]'  => $calendar->id(),
             'create_event[type]'      => EventType::TYPE_WEEKLY,
-            'create_event[startDate]' => '2015-09-01 12:00',
-            'create_event[endDate]'   => '2015-09-30 13:30',
+            'create_event[eventDates][startDate]' => '2015-09-01 12:00',
+            'create_event[eventDates][endDate]'   => '2015-09-30 13:30',
             'create_event[title]'     => 'Test weekly event 1',
         ]);
 
@@ -151,8 +151,8 @@ class CreateEventTest extends BaseFunctionalTest
             'create_event[calendar]'        => null,
             'create_event[newCalendarName]' => 'i am new calendar added',
             'create_event[type]'            => EventType::TYPE_WEEKLY,
-            'create_event[startDate]'       => '2015-09-01 12:00',
-            'create_event[endDate]'         => '2015-09-30 13:30',
+            'create_event[eventDates][startDate]'       => '2015-09-01 12:00',
+            'create_event[eventDates][endDate]'         => '2015-09-30 13:30',
             'create_event[title]'           => 'Test weekly event for new calendar',
         ]);
 

@@ -7,6 +7,7 @@ use Dende\Calendar\Domain\Calendar\Event\EventId;
 use Dende\Calendar\Domain\Calendar\Event\EventType;
 use Dende\Calendar\Domain\Calendar\Event\Repetitions;
 use Dende\CalendarBundle\Tests\DataFixtures\BaseFixture;
+use Dende\CalendarBundle\Tests\Entity\OccurrenceExtended;
 use Dende\CalendarBundle\Tests\Factory\OccurrenceFactory;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -33,29 +34,19 @@ final class EventsData extends BaseFixture implements ContainerAwareInterface
         return 10;
     }
 
-    /**
-     * @param $params
-     *
-     * @return Event
-     */
     public function insert(array $params = [])
     {
-        Event::setFactoryClass(OccurrenceFactory::class);
+        Event::setOccurrenceClass(OccurrenceExtended::class);
 
-        $array = [
-            'eventId'     => EventId::create(Uuid::fromString($params['eventId'])),
-            'calendar'    => $this->getReference($params['calendar']),
-            'startDate'   => new DateTime($params['startDate']),
-            'endDate'     => new DateTime($params['endDate']),
-            'repetitions' => new Repetitions($params['repetitions']),
-            'title'       => $params['title'],
-            'type'        => new EventType($params['type']),
-        ];
-
-        /** @var Event $event */
-        $event = $this->getContainer()->get('dende_calendar.factory.event')->createFromArray($array);
-
-        return $event;
+        return Event::create(
+            Uuid::fromString($params['eventId']),
+            $params['title'],
+            new DateTime($params['startDate']),
+            new DateTime($params['endDate']),
+            new EventType($params['type']),
+            new Repetitions($params['repetitions']),
+            $this->getReference($params['calendar'])
+        );
     }
 
     /**

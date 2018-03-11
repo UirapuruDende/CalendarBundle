@@ -6,15 +6,10 @@ Dende\Calendar\Domain\Calendar:
     type: string
   discriminatorMap:
     bundle: Dende\Calendar\Domain\Calendar
-    gyman:  Gyman\Domain\Calendar
+#    gyman:  Gyman\Domain\Calendar
 
   table: calendars
   repositoryClass: Dende\CalendarBundle\Repository\ORM\CalendarRepository
-
-  gedmo:
-    soft_deleteable:
-      field_name: deletedAt
-      time_aware: false
 
   id:
     id:
@@ -36,6 +31,6 @@ Dende\Calendar\Domain\Calendar:
 
   oneToMany:
     events:
-      targetEntity: Dende\Calendar\Domain\Calendar\Event
+      targetEntity: Dende\Calendar\Domain\Calendar\EventInterface
       mappedBy: calendar
       cascade: [all]
